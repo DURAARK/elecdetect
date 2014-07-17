@@ -7,6 +7,8 @@
 
 #include "CAnnotation.h"
 
+static void onMouse(int event, int x, int y, int flag, void* gui_ptr_arg);
+
 CAnnotation::CAnnotation(string img_filename) : img_filename_(img_filename), exit_annotation_(false), waiting_for_key_(false)
 {
 
@@ -16,7 +18,7 @@ CAnnotation::~CAnnotation() {
 
 }
 
-CAnnotation::CAnnotation(const CAnnotation& other)
+CAnnotation::CAnnotation(const CAnnotation& other) : exit_annotation_(false), waiting_for_key_(false)
 {
 	this->cur_annotation_ = other.cur_annotation_;
 	this->exit_annotation_ = other.exit_annotation_;

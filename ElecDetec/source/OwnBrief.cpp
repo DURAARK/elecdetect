@@ -30,7 +30,6 @@ void COwnBrief::initTestPairs()
 		Point2f pt2(static_cast<float>(rand()) / static_cast<float>(RAND_MAX),
 					static_cast<float>(rand()) / static_cast<float>(RAND_MAX));
 
-
 		test_pair pt_pair(pt1, pt2);
 		rel_test_pairs_.push_back(pt_pair);
 	}

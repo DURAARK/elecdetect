@@ -17,7 +17,7 @@
 #include "Mat.h"
 #include "Vector.h"
 
-#define DEFAULT_FEATURE_LENGTH 1024
+#define DEFAULT_FEATURE_LENGTH 512
 
 #define CONFIG_NAME_TESTPAIRS         "brief-testpairs"
 

@@ -160,7 +160,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 
 	// some fiixed parameters for post-processing
 	const float ms_kernel_radius = (float)SWIN_SIZE/10.0;
-	const float max_object_overlap = 0.2;
+	const float max_object_overlap = 0.1;
 
 	// copy input for editing
 	Mat labels = labels0.clone();
@@ -421,8 +421,12 @@ void CPipelineController::train(const CommandParams& params)
 			for (std::vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); (*mod_it)->getType() != MOD_TYPE_CLASSIFIER; ++mod_it)
 			{
 				(*mod_it)->exec(v_data);
-				//v_data.back()->show();
-				//waitKey(0);
+//				v_data.back()->show();
+//				waitKey(0);
+//				if((*mod_it)->getType() == MOD_TYPE_PREPROC)
+//				{
+//					imwrite("out.png", reinterpret_cast<CMat*>(v_data.back())->mat_*4);
+//				}
 			}
 			// feature is now at the end of v_data and was created with new
 			// create temporary matrix header with the feature vector data (without copying)

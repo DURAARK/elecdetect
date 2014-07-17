@@ -2,10 +2,11 @@
 //
 
 
-// TODO idea list:
+// TODO list:
 /*
  * also save and load configuration of vision modules (HoG-parameters, ...)
  * check config-file by CRC checksum
+ * test and add the correct exceptions
  */
 
 

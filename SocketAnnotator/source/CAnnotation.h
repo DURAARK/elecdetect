@@ -16,7 +16,7 @@
 using namespace std;
 using namespace cv;
 
-static void onMouse(int event, int x, int y, int flag, void* gui_ptr_arg);
+
 
 class CAnnotation {
 private:

@@ -25,10 +25,10 @@ CRandomForest::CRandomForest()
 	int termcrit_type = CV_TERMCRIT_ITER + CV_TERMCRIT_EPS;
 
 	// own configuration:
-	max_depth = 10;
-	min_sample_cnt = 2;
-	max_num_of_trees_in_the_forest = 100;
-	termcrit_type = CV_TERMCRIT_ITER;
+	max_depth = 8;
+	min_sample_cnt = 3;
+	max_num_of_trees_in_the_forest = 80;
+	termcrit_type = CV_TERMCRIT_ITER;// | CV_TERMCRIT_EPS;
 
 	rf_params_ = new CvRTParams(max_depth, min_sample_cnt, regression_arruracy, use_surrogates,
 			                    max_categories, priors, calc_var_importance, nactive_vars,
