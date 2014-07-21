@@ -190,6 +190,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 			closed_mask_float.copyTo(probability_map, closed_mask); // aware that higher labels may replace lower labels
 		}
 
+#ifdef VERBOSE
 		Mat vis_img;
 
 		vis_img = Mat::zeros(labels0.size(), CV_8UC3);
@@ -211,6 +212,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 		prop_map_vis.convertTo(vis_img, CV_8UC3, 255.0);
 		imshow("Probabilities of Labels", vis_img);
 		// ----------------------------------------
+#endif
 
 	}
 
@@ -312,7 +314,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 //	}
 
 
-
+#ifdef VERBOSE
 	// visualize probability
 	Mat prop_map_vis_fc1 = Mat::zeros(probability_map.size(), CV_32FC1);
 	normalize(probability_map, prop_map_vis_fc1, 0, 1.0, NORM_MINMAX);
@@ -343,7 +345,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 
 	imshow("detect-result", vis_img);
 	imwrite("detect-result.png", vis_img);
-
+#endif // VERBOSE
 
 
 	// analyze overlapping rectangles: sort by their weights and start with the highest rated
@@ -532,7 +534,7 @@ void CPipelineController::load(const string& filename)
 	}
 	fs.release();
 
-	cout << "Pipeline loaded." << endl;
+	//cout << "Pipeline loaded." << endl;
 }
 
 
@@ -568,6 +570,6 @@ void CPipelineController::save(const string& filename)
 
 	fs.release();
 
-	cout << "Pipeline saved." << endl;
+	//cout << "Pipeline saved." << endl;
 }
 

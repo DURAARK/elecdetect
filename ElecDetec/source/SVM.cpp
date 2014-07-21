@@ -77,14 +77,13 @@ void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw
 
 //	cout << flush;
 
-	cout << "Training SVM. Please be patient..." << endl << flush;
+	cout << "Training SVM. Please be patient..." << flush;
 
 	//svm_->train(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_);
 	svm_->train_auto(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_, 5);
 
+	cout << " done. Support Vectors: " << svm_->get_support_vector_count() << endl << flush;
 
-
-	cout << "SVM training completed! Support Vectors: " << svm_->get_support_vector_count() << endl << flush;
 }
 
 void CSVM::save(FileStorage& fs) const

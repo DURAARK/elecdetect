@@ -7,8 +7,8 @@
  * also save and load configuration of vision modules (HoG-parameters, ...)
  * check config-file by CRC checksum
  * test and add the correct exceptions
+ * verbose mode?
  */
-
 
 #include <stdio.h>
 #include <iostream>
@@ -21,6 +21,7 @@
 #include "PipelineController.h"
 #include "Utils.h"
 #include "tinyxml2.h"
+
 
 #define RESULT_DIR_NAME    "results" // without "/" !!!
 
@@ -55,7 +56,7 @@ int main(int argc, char* argv[])
 	{
 		if(exec_mode ==  TESTING) // on testing, read pipeline configuration from configfile
 		{
-			cout << "Perform TESTING" << endl;
+			cout << "Executing TESTING mode" << endl << flush;
 			// initialize/load pipe from config file
 			pipe->load(params.str_configfile_);
 
@@ -78,9 +79,9 @@ int main(int argc, char* argv[])
 				cout << "Found " << obj_cnt << " objects." << endl;
 
 				// show and export results
-				tinyxml2::XMLDocument doc;
-				doc.InsertEndChild(doc.NewDeclaration(NULL));
-				tinyxml2::XMLElement* xml_image = doc.NewElement("Image");
+				tinyxml2::XMLDocument xml_doc;
+				xml_doc.InsertEndChild(xml_doc.NewDeclaration(NULL));
+				tinyxml2::XMLElement* xml_image = xml_doc.NewElement("Image");
 				xml_image->SetAttribute("file", f_it->c_str());
 				vector<vector<Scalar> > colors = getColors(2);
 				for(vector<vector<Rect> >::const_iterator class_it = bb_results.begin(); class_it != bb_results.end(); ++class_it)
@@ -90,10 +91,10 @@ int main(int argc, char* argv[])
 						obj_type = "sockets";
 					if(class_it - bb_results.begin() == 1)
 						obj_type = "switches";
-					tinyxml2::XMLElement* xml_object = doc.NewElement(obj_type.c_str());
+					tinyxml2::XMLElement* xml_object = xml_doc.NewElement(obj_type.c_str());
 					for(vector<Rect>::const_iterator rect_it = class_it->begin(); rect_it != class_it->end(); ++rect_it)
 					{
-						tinyxml2::XMLElement* bounding_box = doc.NewElement("bounding-box");
+						tinyxml2::XMLElement* bounding_box = xml_doc.NewElement("bounding-box");
 						stringstream str_x; str_x << rect_it->x;
 						stringstream str_y; str_y << rect_it->y;
 						stringstream str_w; str_w << rect_it->width;
@@ -111,7 +112,9 @@ int main(int argc, char* argv[])
 					}
 					xml_image->InsertEndChild(xml_object);
 				}
+#ifdef VERBOSE
 				imshow("RESULT", image);
+#endif
 				// get filename prefix
 				std::size_t extention_pos = f_it->find(".png"); // TODO: also make this work for .jpg files
 				string str_filename_prefix = f_it->substr(0, extention_pos);
@@ -120,20 +123,22 @@ int main(int argc, char* argv[])
 				string img_filename = params.str_imgset_ + RESULT_DIR_NAME + FOLDER_CHAR + str_filename_prefix + FILENAME_RESULT_POSTFIX + ".png";
 
 				// write detection results to XML file
-				doc.InsertEndChild(xml_image);
-				doc.SaveFile(xml_filename.c_str());
+				xml_doc.InsertEndChild(xml_image);
+				xml_doc.SaveFile(xml_filename.c_str());
 
 				// save output image
 				imwrite(img_filename.c_str(), image);
 
-				waitKey(10);
+#ifdef VERBOSE
+				waitKey(0);
+#endif
 			}
 
 		}
 
 		if(exec_mode ==  TRAINING) // TRAINING mode
 		{
-			cout << "Perform TRAINING" << endl;
+			cout << "Executing TRAINING mode" << endl << flush;
 			// initialize new pipe and train it
 			pipe->train(params);
 
@@ -151,8 +156,9 @@ int main(int argc, char* argv[])
 	}
 
 	// cleanup
-	//cv::waitKey(0);
+#ifdef VERBOSE
 	cv::destroyAllWindows();
+#endif
 
 	delete pipe; pipe = NULL;
 

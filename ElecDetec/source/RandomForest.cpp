@@ -83,11 +83,11 @@ void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labe
 	const Mat& varType = Mat(); // vector: for regression
 	const Mat& missingDataMask = Mat(); // vector: identifies missing labels of train data
 
-	cout << "Training RandomForest. Please be patient..." << endl;
+	cout << "Training RandomForest. Please be patient..." << flush;
 	srand(time(NULL)); // to be sure
 	rf_->train(train_data_mat, CV_ROW_SAMPLE, train_labels_mat, varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
 
-	cout << "RandomForest training completed! " << rf_->get_tree_count() << " trees trained." << endl;
+	cout << " done. " << rf_->get_tree_count() << " trees trained." << endl << flush;
 }
 
 void CRandomForest::save(FileStorage& fs) const
