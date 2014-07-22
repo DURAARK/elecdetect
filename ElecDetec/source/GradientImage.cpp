@@ -5,7 +5,7 @@
  *      Author: test
  */
 
-#include <GradientImage.h>
+#include "GradientImage.h"
 
 CGradientImage::CGradientImage()
 {

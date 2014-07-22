@@ -14,6 +14,7 @@
 #include <vector>
 #include <dirent.h>
 
+
 #include "tclap/CmdLine.h"
 #include "Exceptions.h"
 #include "PipelineController.h"
@@ -64,14 +65,14 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 {
 	try {
 		// Command Line
-		TCLAP::CmdLine cmd("Usage: [-1 id -2 id -3 id] -d folder -o filename. For training set 1,2,3 - testing is performed otherwise", ' ', "1.0");
+		TCLAP::CmdLine cmd("Usage: [-1 id -2 id -3 id] -d directory -c filename. For training set -3, testing is performed otherwise", ' ', "1.0");
 
 		// Command Arguments
 		TCLAP::ValueArg<std::string> vpArg("1","preproc","ID of the preprocessing vision module(s)",false,"","string");
-		TCLAP::ValueArg<std::string> vfArg("2","feature","ID of the feature vision module(s)",false,"","string");
+		TCLAP::ValueArg<std::string> vfArg("2","feature","ID of the feature-extractor vision module",false,"","string");
 		TCLAP::ValueArg<std::string> vcArg("3","classifier","ID of the classifier vision module",false,"","string");
-		TCLAP::ValueArg<std::string> dArg("d","dir","data directory of training respectively test-data",true,"","string");
-		TCLAP::ValueArg<std::string> cArg("c","config","file whether the trained pipeline is stored to or loaded from",true,"","string");
+		TCLAP::ValueArg<std::string> dArg("d","dir","Data directory of training- or test-data",true,"","string");
+		TCLAP::ValueArg<std::string> cArg("c","config","Configuration file whether the trained pipeline is stored to or loaded from",true,"","string");
 		cmd.add( vpArg );
 		cmd.add( vfArg );
 		cmd.add( vcArg );

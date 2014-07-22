@@ -5,7 +5,7 @@
  *      Author: test
  */
 
-#include <SVM.h>
+#include "SVM.h"
 
 CSVM::CSVM()
 {

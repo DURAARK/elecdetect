@@ -38,9 +38,6 @@ void CDistanceTransform::exec(std::vector<CVisionData*>& data) throw(VisionDataT
 	distanceTransform(255-temp, out_img->mat_, CV_DIST_L2, 3);
 	out_img->mat_.convertTo(out_img->mat_, CV_8UC1, 2, 0);
 
-	imshow("test", out_img->mat_);
-	waitKey(0);
-
 	data.push_back(out_img);
 }
 
