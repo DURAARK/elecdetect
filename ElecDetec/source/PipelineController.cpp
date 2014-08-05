@@ -62,11 +62,28 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 			f_ptr = new CDummyFeature();
 		}
 
+		// TODO later: setup multiple feature-vectors
+
 		feature_length_ += f_ptr->getFeatureLength();
 		v_modules_.push_back(f_ptr);
 	}
 
-	// TODO later: setup multiple feature-vectors
+
+	// subspace methods
+	for(mod_id_it = params_.vec_feature_.begin(); mod_id_it != params_.vec_feature_.end(); ++mod_id_it)
+	{
+		CSubspaceModule* s_ptr = NULL;
+
+		if(!s_ptr)
+		{
+			// no feature extractor -> use whole image as feature
+			cout << "no feature subspace method specified. using feature as it is." << endl;
+		}
+		else
+		{
+			v_modules_.push_back(s_ptr);
+		}
+	}
 
 
 	// Add classifier to pipeline
@@ -103,6 +120,7 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 		cout << setfill('0');
 		cout << setw(5) << setiosflags(ios::fixed) << setprecision(2) << progress << "%" << flush;
 
+//#pragma omp parallel for
 		for(win_roi.x = 0; win_roi.x < input_img.cols-SWIN_SIZE; win_roi.x += 1)
 		{
 			CVisionData* window = new CMat();
@@ -402,46 +420,48 @@ void CPipelineController::train(const CommandParams& params)
 	vector<string> filelist;
 	if(getFileList(params.str_imgset_, filelist))
 	{
-		// Allocate Space for Training Data
-		CMat train_data;
-		train_data.mat_ = Mat(filelist.size(), feature_length_, CV_32FC1);
+		// Allocate Space for resulting parallel data (Set of all samples); one sample is stored in one ROW
+		CMat* parallel_data_mat_ptr = new CMat();
+		parallel_data_mat_ptr->mat_ = Mat(filelist.size(), feature_length_, CV_32FC1);
 		//cout << "Feature Size: " << train_data.mat_.rows << " x " << train_data.mat_.cols << endl << flush;
 
+		// Sequential processing of training samples (up to subspace or classifier module)
 		CVector<int> train_labels;
 		int sample_cnt = 0;
 		sort(filelist.begin(), filelist.end());
+		std::vector<CVisionModule*>::const_iterator mod_it;
 		vector<string>::const_iterator file_it;
 		for(file_it = filelist.begin(); file_it != filelist.end(); ++file_it)
 		{
 			CMat* training_sample_ptr = new CMat();
 			training_sample_ptr->mat_ = cv::imread(params.str_imgset_ + *file_it);
 			//training_sample_ptr->show();
-			std::vector<CVisionData*> v_data;
-			v_data.push_back(training_sample_ptr);
+			vector<CVisionData*> v_seq_data;
+			v_seq_data.push_back(training_sample_ptr);
 
-			// Execute Pipeline exclusive classifier
-			for (std::vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); (*mod_it)->getType() != MOD_TYPE_CLASSIFIER; ++mod_it)
+			// Execute Pipeline exclusive classifier and subspace
+			for (mod_it = v_modules_.begin(); (*mod_it)->getType() & (MOD_TYPE_PREPROC | MOD_TYPE_FEATURE); ++mod_it)
 			{
-				(*mod_it)->exec(v_data);
+				(*mod_it)->exec(v_seq_data);
 //				v_data.back()->show();
 //				waitKey(0);
 //				if((*mod_it)->getType() == MOD_TYPE_PREPROC)
 //				{
-//					imwrite("out.png", reinterpret_cast<CMat*>(v_data.back())->mat_*4);
+//					imwrite("out.png", reinterpret_cast<CMat*>(v_seq_data.back())->mat_*4);
 //				}
 			}
-			// feature is now at the end of v_data and was created with new
+			// feature is now at the end of v_seq_data and was created with new
 			// create temporary matrix header with the feature vector data (without copying)
-			Mat temp(((CVector<float>*)v_data.back())->vec_, false);
+			Mat temp(((CVector<float>*)v_seq_data.back())->vec_, false);
 			// reshape to row-vector and add feature vector to all samples (with copying data)
-			temp.reshape(0,1).copyTo(train_data.mat_.row(sample_cnt));
+			temp.reshape(0,1).copyTo(parallel_data_mat_ptr->mat_.row(sample_cnt));
 
 			// clean up data of current sample
-			for (std::vector<CVisionData*>::const_iterator data_it = v_data.begin(); data_it != v_data.end(); ++data_it)
+			for (std::vector<CVisionData*>::const_iterator data_it = v_seq_data.begin(); data_it != v_seq_data.end(); ++data_it)
 			{
 				delete *data_it;
 			}
-			v_data.clear();
+			v_seq_data.clear();
 
 			// collect class label
 			stringstream ss_feature(*file_it);
@@ -452,20 +472,50 @@ void CPipelineController::train(const CommandParams& params)
 			ss_label << *(str_label.begin());
 			ss_label >> train_label;
 			train_labels.vec_.push_back(train_label);
-			//cout << *file_it << " : " << train_label << endl << flush; // TODO: check if labels are extarcted correctly
+			//cout << *file_it << " : " << train_label << endl << flush; // TODO: check if labels are extracted correctly
 			// waitKey(0);
 
 			sample_cnt++;
 		}
 
-		//cout << train_data.mat_ << endl << "<- Train Data" << endl;
-		// Select classifier TODO: test for classifier type
-		CClassifierModule* classifier = reinterpret_cast<CClassifierModule*>(v_modules_.back());
+		// mod_it should now be pointing at a subspace or classifier module.
+		// nevertheless, finish training with samples in parallel
+		for (; mod_it != v_modules_.end(); ++mod_it)
+		{
+			switch ((*mod_it)->getType())
+			{
+			case MOD_TYPE_SUBSPACE:
+			{
+				CSubspaceModule* subspace_ptr = reinterpret_cast<CSubspaceModule*>(*mod_it);
 
-		// Perform Training
-		classifier->train(train_data, train_labels);
+				subspace_ptr->train(*parallel_data_mat_ptr, train_labels);
 
-		// get number of different classes
+				CMat* new_parallel_data_mat_ptr = new CMat();
+				// TODO: execute subspace projection and pass it to the classifier
+				// EXECUTE(parallel_data_mat -> new_parallel_data_mat)
+
+				delete parallel_data_mat_ptr;
+				parallel_data_mat_ptr = new_parallel_data_mat_ptr;
+			}
+				break;
+
+			case MOD_TYPE_CLASSIFIER:
+			{
+				CClassifierModule* classifier = reinterpret_cast<CClassifierModule*>(*mod_it);
+
+				// Perform Training of classifier
+				classifier->train(*parallel_data_mat_ptr, train_labels);
+			}
+				break;
+
+			default:
+				// TODO: check vision module types
+				throw(PipeConfigExecption());
+
+			}
+		}
+
+		// get number of different classes; train_labels is not needed anymore
 		vector<int>::iterator t_it;
 		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
 		train_labels.vec_.resize(distance(train_labels.vec_.begin(), t_it));
@@ -473,11 +523,7 @@ void CPipelineController::train(const CommandParams& params)
 		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
 		n_object_classes_ = distance(train_labels.vec_.begin(), t_it) - 1; // subtract background class
 
-//		for(vector<int>::iterator temp_it = train_labels.vec_.begin(); temp_it != train_labels.vec_.end(); ++temp_it)
-//			cout << "unique label: " << *temp_it << endl;
-
 		cout << "Number of different object classes: " << n_object_classes_ << endl;
-
 	}
 }
 

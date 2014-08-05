@@ -57,9 +57,11 @@ void CSVM::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
 }
 
 
-void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataTypeException)
+void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException)
 {
 	// train_data contains for each sample a row
+	if(train_data.mat_.rows != static_cast<int>(train_labels.vec_.size()))
+		throw(VisionDataSizeException(train_labels.vec_.size(), train_data.mat_.rows));
 
 	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels

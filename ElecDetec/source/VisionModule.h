@@ -11,7 +11,8 @@
 
 #define  MOD_TYPE_PREPROC       1 << 0
 #define  MOD_TYPE_FEATURE       1 << 1
-#define  MOD_TYPE_CLASSIFIER    1 << 2
+#define  MOD_TYPE_SUBSPACE      1 << 2
+#define  MOD_TYPE_CLASSIFIER    1 << 3
 
 using namespace std;
 using namespace cv;

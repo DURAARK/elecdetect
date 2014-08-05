@@ -31,7 +31,7 @@ public:
 	virtual void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
 
 	// train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-	virtual void train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataTypeException);
+	virtual void train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException);
 
 	virtual void save(FileStorage& fs) const;
 

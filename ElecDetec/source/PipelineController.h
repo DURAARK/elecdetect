@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
+//#include <omp.h>
 
 #include "VisionModule.h"
 #include "VectorArray.h"
@@ -22,6 +23,7 @@
 #include "Hog.h"
 #include "OwnBrief.h"
 #include "DummyFeature.h"
+#include "PCA.h"
 #include "SVM.h"
 #include "RandomForest.h"
 #include "Utils.h"
@@ -83,9 +85,9 @@ public:
 
 private:
 
-	std::vector<CVisionModule*> v_modules_;
+	vector<CVisionModule*> v_modules_;
 	Params params_;
-	int feature_length_;
+	int feature_length_; // holds training data sizes of modules with require all samples at once for training
 	int n_object_classes_;
 
 	// initializes new untrained pipeline according to params_

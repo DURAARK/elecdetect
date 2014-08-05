@@ -65,6 +65,27 @@ public:
 	}
 };
 
+// is thrown if Vision Module cant hande type of last Data object
+class VisionDataSizeException : public exception
+{
+private:
+	VisionDataSizeException() : is_size_(0), should_size_(0) { }
+	int is_size_, should_size_;
+
+public:
+	VisionDataSizeException(int is_type, int should_type) : is_size_(is_type), should_size_(should_type)
+	{
+		//cout << "New TypeExeption created: is:" << is_size_ << " should:" << should_size_ << endl;
+	}
+
+	virtual const char* what() const throw()
+	{
+		stringstream msg;
+		msg << "Size exception happened! Wrong size is: " << is_size_ << " but should be: " << should_size_ << endl;
+		return msg.str().c_str();
+	}
+};
+
 
 
 #endif /* EXCEPTIONS_H_ */
