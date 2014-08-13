@@ -30,7 +30,7 @@ public:
 	}
 };
 
-// if thrown if something went wrong on pipeline setup
+// is thrown if something went wrong on pipeline setup
 class PipeConfigExecption : public exception
 {
 public:
@@ -44,7 +44,24 @@ public:
 	}
 };
 
-// is thrown if Vision Module cant hande type of last Data object
+// is thrown if VisionModule is executed before training
+class NotTrainedExecption : public exception
+{
+private:
+	const char* reason_;
+public:
+	//ParamExecption(){ /*reason_ = "no reason";*/ };
+	NotTrainedExecption(const char* reason) : reason_(reason) { };
+
+	virtual const char* what() const throw()
+	{
+		stringstream msg;
+		msg << "NotTrained exception happened! Reason: " << reason_ << endl;
+		return msg.str().c_str();
+	}
+};
+
+// is thrown if Vision Module can't handle type of last Data object
 class VisionDataTypeException : public exception
 {
 private:
@@ -65,7 +82,7 @@ public:
 	}
 };
 
-// is thrown if Vision Module cant hande type of last Data object
+// is thrown if the size of last Data object if faulty
 class VisionDataSizeException : public exception
 {
 private:

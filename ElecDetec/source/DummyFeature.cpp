@@ -11,7 +11,7 @@ CDummyFeature::CDummyFeature()
 {
 	module_name_ = "Dummy";
 
-	canonical_size_ = Size(150,150);
+	canonical_size_ = Size(100,100);
 	feature_length_ = canonical_size_.area();
 }
 
@@ -42,6 +42,7 @@ void CDummyFeature::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeEx
 	CVector<float>* features = new CVector<float>();
 	Mat img_gray_f;
 	img_gray.convertTo(img_gray_f, CV_32FC1, 1/255.0);
+	//normalize(img_gray_f, img_gray_f, 0.0, 1.0);
 	//cout << img_gray_f.rows << " x " << img_gray_f.cols << endl;
 	//cout << CMat(img_gray_f).type2str() << endl;
 	features->vec_.assign((float*)img_gray_f.datastart, (float*)img_gray_f.dataend);

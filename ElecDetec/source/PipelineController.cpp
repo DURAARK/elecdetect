@@ -74,6 +74,9 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 	{
 		CSubspaceModule* s_ptr = NULL;
 
+		if(*mod_id_it == ID_PCA)
+			s_ptr = new CPCA();
+
 		if(!s_ptr)
 		{
 			// no feature extractor -> use whole image as feature
@@ -480,6 +483,8 @@ void CPipelineController::train(const CommandParams& params)
 
 		// mod_it should now be pointing at a subspace or classifier module.
 		// nevertheless, finish training with samples in parallel
+		vector<CVisionData*> v_par_data;
+		v_par_data.push_back(parallel_data_mat_ptr);
 		for (; mod_it != v_modules_.end(); ++mod_it)
 		{
 			switch ((*mod_it)->getType())
@@ -490,23 +495,31 @@ void CPipelineController::train(const CommandParams& params)
 
 				subspace_ptr->train(*parallel_data_mat_ptr, train_labels);
 
-				CMat* new_parallel_data_mat_ptr = new CMat();
-				// TODO: execute subspace projection and pass it to the classifier
-				// EXECUTE(parallel_data_mat -> new_parallel_data_mat)
+				// execute subspace projection to pass it to the classifier
+				subspace_ptr->exec(v_par_data);
 
-				delete parallel_data_mat_ptr;
-				parallel_data_mat_ptr = new_parallel_data_mat_ptr;
-			}
+				// delete previous data to free space
+				// clean up data of current sample
+				for (vector<CVisionData*>::const_iterator data_it = v_par_data.begin(); data_it != v_par_data.end()-1; ++data_it)
+				{
+					delete *data_it;
+				}
+				CVisionData* last_data = v_par_data.back();
+				v_par_data.clear();
+				v_par_data.push_back(last_data);
+
 				break;
+			}
 
 			case MOD_TYPE_CLASSIFIER:
 			{
 				CClassifierModule* classifier = reinterpret_cast<CClassifierModule*>(*mod_it);
 
 				// Perform Training of classifier
-				classifier->train(*parallel_data_mat_ptr, train_labels);
-			}
+				classifier->train(*reinterpret_cast<const CMat*>(v_par_data.back()), train_labels);
+
 				break;
+			}
 
 			default:
 				// TODO: check vision module types
@@ -543,6 +556,8 @@ void CPipelineController::printConfig()
 				cout << "Preprocessing:" << endl;
 			if((*mod_it)->getType() == MOD_TYPE_FEATURE)
 				cout << "Feature Descriptor:" << endl;
+			if((*mod_it)->getType() == MOD_TYPE_SUBSPACE)
+				cout << "Subspace Method:" << endl;
 			if((*mod_it)->getType() == MOD_TYPE_CLASSIFIER)
 				cout << "Classifier:" << endl;
 

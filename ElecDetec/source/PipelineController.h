@@ -40,6 +40,7 @@
 #define ID_DISTTR    "dist"
 #define ID_HOG       "hog"
 #define ID_BRIEF     "brief"
+#define ID_PCA       "pca"
 #define ID_SVM       "svm"
 #define ID_RF        "rf"
 

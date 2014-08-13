@@ -24,7 +24,8 @@ CSVM::CSVM()
 
 	// own config:
 	//svm_type = CvSVM::NU_SVC;
-	//nu = 0.5;
+	//nu = 0.8;
+	//Cvalue = 0.4;
 	//test
 
 	svm_params_ = new SVMParams(svm_type, kernel_type, degree, gamma, coef0, Cvalue, nu, p, class_weights, term_crit);
@@ -66,8 +67,13 @@ void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw
 	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
 
-	//cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
-	//cout << train_data_mat.at<float>(0,0) << endl;
+	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
+	cout << "first value" << train_data_mat.at<float>(0,0) << endl;
+
+	double min, max;
+	minMaxLoc(train_data_mat, &min, &max);
+	cout << "min-max: " << min << " - " << max << endl << flush;
+
 //	// constructor for matrix headers pointing to user-allocated data
 //    Mat(int _rows, int _cols, int _type, void* _data, size_t _step=AUTO_STEP);
 //    Mat(Size _size, int _type, void* _data, size_t _step=AUTO_STEP);

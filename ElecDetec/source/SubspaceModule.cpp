@@ -9,8 +9,7 @@
 
 CSubspaceModule::CSubspaceModule()
 {
-	// TODO Auto-generated constructor stub
-
+	module_type_ = MOD_TYPE_SUBSPACE;
 }
 
 CSubspaceModule::~CSubspaceModule()
