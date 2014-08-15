@@ -9,7 +9,8 @@
 
 CSVM::CSVM()
 {
-	module_name_ = "SVM";
+	module_print_name_ = "SVM";
+	needs_training_ = true;
 
 	// SVM Params
 	// int svm_type, int kernel_type, double degree, double gamma, double coef0, double Cvalue, double nu, double p, CvMat* class_weights, CvTermCriteria term_crit
@@ -58,11 +59,10 @@ void CSVM::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
 }
 
 
-void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException)
+void CSVM::train(const CMat& train_data, const CVector<int>& train_labels)
 {
 	// train_data contains for each sample a row
-	if(train_data.mat_.rows != static_cast<int>(train_labels.vec_.size()))
-		throw(VisionDataSizeException(train_labels.vec_.size(), train_data.mat_.rows));
+	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()));
 
 	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -97,7 +97,9 @@ void CSVM::train(const CMat& train_data, const CVector<int>& train_labels) throw
 void CSVM::save(FileStorage& fs) const
 {
 //	cout << "saving SVM..." << endl << flush;
-	svm_->write(*fs, CONFIG_NAME_SVM);
+	stringstream config_name;
+	config_name << CONFIG_NAME_SVM << "-" << module_id_;
+	svm_->write(*fs, config_name.str().c_str());
 //	cout << "SVM saved." << endl;
 }
 
@@ -105,7 +107,9 @@ void CSVM::load(FileStorage& fs)
 {
 	if(svm_)
 	{
+		stringstream config_name;
+		config_name << CONFIG_NAME_SVM << "-" << module_id_;
 		svm_->clear();
-		svm_->read(*fs, cvGetFileNodeByName(*fs, NULL, CONFIG_NAME_SVM));
+		svm_->read(*fs, cvGetFileNodeByName(*fs, NULL, config_name.str().c_str()));
 	}
 }

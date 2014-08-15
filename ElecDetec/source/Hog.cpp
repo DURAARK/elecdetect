@@ -3,7 +3,7 @@
 
 CHog::CHog()
 {
-	module_name_ = "HoG";
+	module_print_name_ = "HoG";
 
 	win_size_ = cv::Size(80, 80); //(128,128)winSize
 	cell_size_ = cv::Size(8, 8); //cellSize,

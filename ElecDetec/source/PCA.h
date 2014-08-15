@@ -27,19 +27,13 @@ private:
 	int n_eigenvectors_;
 	PCA* opencv_pca_ptr_;
 
-
 public:
 	CPCA();
-
 	virtual ~CPCA();
 
 	void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
-
-	// train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-	void train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException);
-
+	void train(const CMat& train_data, const CVector<int>& train_labels);
 	void save(FileStorage& fs) const;
-
 	void load(FileStorage& fs);
 };
 

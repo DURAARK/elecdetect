@@ -9,7 +9,7 @@
 
 CDummyFeature::CDummyFeature()
 {
-	module_name_ = "Dummy";
+	module_print_name_ = "Dummy";
 
 	canonical_size_ = Size(100,100);
 	feature_length_ = canonical_size_.area();

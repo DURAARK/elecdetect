@@ -57,7 +57,7 @@ inline vector<vector<Scalar> > getColors(const int& nclasses)
 
 struct CommandParams
 {
-	vector<string> vec_preproc_, vec_feature_;
+	vector<vector<string> > vec_vec_channels_;
 	string str_classifier_, str_imgset_, str_configfile_;
 };
 
@@ -65,17 +65,24 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 {
 	try {
 		// Command Line
-		TCLAP::CmdLine cmd("Usage: [-1 id -2 id -3 id] -d directory -c filename. For training set -3, testing is performed otherwise", ' ', "1.0");
+		TCLAP::CmdLine cmd("Usage: [-1 IDs [-2 IDs .. -5 IDs]] -f final_classifier -d directory -c filename. For training mode -f must be specified, testing is performed otherwise", ' ', "1.0");
 
 		// Command Arguments
-		TCLAP::ValueArg<std::string> vpArg("1","preproc","ID of the preprocessing vision module(s)",false,"","string");
-		TCLAP::ValueArg<std::string> vfArg("2","feature","ID of the feature-extractor vision module",false,"","string");
-		TCLAP::ValueArg<std::string> vcArg("3","classifier","ID of the classifier vision module",false,"","string");
+		vector<TCLAP::ValueArg<std::string>*> v_ch_args;
+		TCLAP::ValueArg<std::string> c1Arg("1","channel1","IDs of the vision module(s) for the 1st feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> c2Arg("2","channel2","IDs of the vision module(s) for the 2nd feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> c3Arg("3","channel3","IDs of the vision module(s) for the 3rd feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> c4Arg("4","channel4","IDs of the vision module(s) for the 4th feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> c5Arg("5","channel5","IDs of the vision module(s) for the 4th feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> fArg("f","final","ID of the final classifier vision module",false,"","string");
 		TCLAP::ValueArg<std::string> dArg("d","dir","Data directory of training- or test-data",true,"","string");
 		TCLAP::ValueArg<std::string> cArg("c","config","Configuration file whether the trained pipeline is stored to or loaded from",true,"","string");
-		cmd.add( vpArg );
-		cmd.add( vfArg );
-		cmd.add( vcArg );
+		cmd.add( c1Arg ); v_ch_args.push_back( &c1Arg );
+		cmd.add( c2Arg ); v_ch_args.push_back( &c2Arg );
+		cmd.add( c3Arg ); v_ch_args.push_back( &c3Arg );
+		cmd.add( c4Arg ); v_ch_args.push_back( &c4Arg );
+		cmd.add( c5Arg ); v_ch_args.push_back( &c5Arg );
+		cmd.add( fArg );
 		cmd.add( dArg );
 		cmd.add( cArg );
 
@@ -86,15 +93,26 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 		cmd.parse( argc, argv );
 
 		// Get the values parsed by each arg.
-		string item;
-		stringstream ss_preproc(vpArg.getValue());
-		while(getline(ss_preproc, item, ','))
-			params.vec_preproc_.push_back(item);
-		stringstream ss_feature(vfArg.getValue());
-		while(getline(ss_feature, item, ','))
-			params.vec_feature_.push_back(item);
 
-		params.str_classifier_ = vcArg.getValue();
+		// for each feature channel
+		vector<TCLAP::ValueArg<std::string>*>::iterator ch_arg_ptr_it;
+		for(ch_arg_ptr_it = v_ch_args.begin(); ch_arg_ptr_it != v_ch_args.end(); ++ ch_arg_ptr_it)
+		{
+			TCLAP::ValueArg<std::string>* cur_ch_arg = *ch_arg_ptr_it;
+			stringstream ss_args(cur_ch_arg->getValue());
+
+			if(!ss_args.str().empty())
+			{
+				vector<string> vec_cur_ch_str;
+				string item;
+				while(getline(ss_args, item, ','))
+					vec_cur_ch_str.push_back(item);
+
+				params.vec_vec_channels_.push_back(vec_cur_ch_str);
+			}
+		}
+
+		params.str_classifier_ = fArg.getValue();
 		params.str_imgset_     = dArg.getValue();
 		params.str_configfile_ = cArg.getValue();
 
@@ -108,12 +126,18 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 
 		//train_switch = trainSwitch.getValue();
 		std::cout << "Command line:" << endl <<
-				     "-------------" << endl <<
-				" preproc: " << ss_preproc.str() << endl <<
-				" feature: " << ss_feature.str() << endl <<
-				" classifier: " << params.str_classifier_ << endl <<
-				" data-folder: " << params.str_imgset_ << endl <<
-				" config-file: " << params.str_configfile_ << endl << endl;
+				     "-------------" << endl;
+
+		for(ch_arg_ptr_it = v_ch_args.begin(); ch_arg_ptr_it != v_ch_args.end(); ++ ch_arg_ptr_it)
+		{
+			TCLAP::ValueArg<std::string>* cur_ch_arg = *ch_arg_ptr_it;
+			if(!cur_ch_arg->getValue().empty())
+				cout << " channel " << distance(v_ch_args.begin(), ch_arg_ptr_it) << ": " << cur_ch_arg->getValue() << endl;
+		}
+		cout <<
+				    " final-classifier: " << params.str_classifier_ << endl <<
+				    " data-folder:      " << params.str_imgset_ << endl <<
+				    " config-file:      " << params.str_configfile_ << endl << endl;
 	}
 	catch (TCLAP::ArgException &e)  // catch any exceptions
 	{

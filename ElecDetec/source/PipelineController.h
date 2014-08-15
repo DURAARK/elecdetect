@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
+#include <strstream>
 //#include <omp.h>
 
 #include "VisionModule.h"
@@ -28,8 +29,8 @@
 #include "RandomForest.h"
 #include "Utils.h"
 
-#define CONFIG_NAME_PREPROC              "preprocessing-module"
-#define CONFIG_NAME_FEATURE              "feature-module"
+#define CONFIG_NAME_CHANNELS             "feature-channels"
+#define CONFIG_NAME_CHANNEL_LENGTHS      "feature-channel-lengths"
 #define CONFIG_NAME_CLASSIFIER           "classifier-module"
 #define CONFIG_NAME_NUM_CLASSES          "number-of-classes"
 
@@ -73,26 +74,37 @@ public:
 	}
 };
 
+
+
 inline bool greaterLabeledWeightedRect (const CLabeledWeightedRect& i,const CLabeledWeightedRect& j) { return (i.weight_ > j.weight_); }
 
+
+/* -------------------------
+ * PIPELINE Controller Class
+ * -------------------------
+ */
 class CPipelineController
 {
 public:
 	struct Params
 	{
-		vector<string> vec_preproc_, vec_feature_;
+		vector<vector<string> > vec_vec_channels_;
 		string str_classifier_;
 	};
 
 private:
 
-	vector<CVisionModule*> v_modules_;
+	vector<vector<CVisionModule*> > v_v_modules_;
+	CClassifierModule* final_classifier_;
 	Params params_;
-	int feature_length_; // holds training data sizes of modules with require all samples at once for training
+	vector<int> channel_end_data_lengths_; // holds training data sizes of modules which require all samples at once for training per feature channel
 	int n_object_classes_;
 
 	// initializes new untrained pipeline according to params_
 	void initializeFromParameters() throw (PipeConfigExecption);
+	// check initialized pipe for consistency
+	void checkAndFinishModules() throw (PipeConfigExecption);
+	// clear pipe module instances
 	void deletePipe();
 
 	void postProcessResults(const Mat& labels, const Mat& probability, vector<vector<Rect> >& results);

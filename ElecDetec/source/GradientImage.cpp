@@ -9,7 +9,7 @@
 
 CGradientImage::CGradientImage()
 {
-	module_name_ = "Gradient";
+	module_print_name_ = "Gradient";
 
 	scale_ = 3;
 	delta_ = 0;

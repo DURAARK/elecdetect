@@ -9,8 +9,8 @@
 
 CPCA::CPCA() : n_eigenvectors_(DEFAULT_NUMBER_OF_EIGENVECTORS), opencv_pca_ptr_(NULL)
 {
-	module_name_ = "Principal Component Analysis";
-
+	module_print_name_ = "Principal Component Analysis";
+	needs_training_ = true;
 }
 
 CPCA::~CPCA()
@@ -39,7 +39,7 @@ void CPCA::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
 		const CVector<float>* in_data = (CVector<float>*)data.back();
 		CVector<float>* pca_representation = new CVector<float>();
 
-		pca_representation->vec_ = opencv_pca_ptr_->project(in_data->vec_);
+		opencv_pca_ptr_->project(in_data->vec_, pca_representation->vec_);
 
 		data.push_back(pca_representation);
 	}
@@ -69,11 +69,9 @@ void CPCA::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
 }
 
 // train_data contains for each sample one Row and must be already NORMALIZED (value range from 0 to 1)
-void CPCA::train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException)
+void CPCA::train(const CMat& train_data, const CVector<int>& train_labels)
 {
-	if(train_data.mat_.rows != static_cast<int>(train_labels.vec_.size()))
-		throw(VisionDataSizeException(train_labels.vec_.size(), train_data.mat_.rows));
-
+	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()))
 	assert(train_data.mat_.type() == CV_32FC1);
 
 	vector<int> non_bg_indices;
@@ -89,7 +87,7 @@ void CPCA::train(const CMat& train_data, const CVector<int>& train_labels) throw
 		//normalize(train_data_non_bg.row(cur_row), train_data_non_bg.row(cur_row), 0.0, 1.0, NORM_MINMAX);
 	}
 
-	normalize(train_data_non_bg, train_data_non_bg, -1.0, 1.0, NORM_MINMAX);
+	normalize(train_data_non_bg, train_data_non_bg, 0.0, 1.0, NORM_MINMAX);
 	double min, max;
 	minMaxLoc(train_data_non_bg, &min, &max);
 	cout << "min-max of PCA training data: " << min << " - " << max << endl << flush;
@@ -161,24 +159,36 @@ void CPCA::train(const CMat& train_data, const CVector<int>& train_labels) throw
 
 void CPCA::save(FileStorage& fs) const
 {
-	fs << CONFIG_NAME_PCA_N_EIGENVECTORS << n_eigenvectors_;
+	stringstream config_name_n_eigenvectors;
+	config_name_n_eigenvectors << CONFIG_NAME_PCA_N_EIGENVECTORS << "-" << module_id_;
+	fs << config_name_n_eigenvectors.str().c_str() << n_eigenvectors_;
 
 	if(opencv_pca_ptr_)
 	{
-		fs << CONFIG_NAME_PCA_EIGENVECTORS << opencv_pca_ptr_->eigenvectors;
-		fs << CONFIG_NAME_PCA_EIGENVALUES  << opencv_pca_ptr_->eigenvalues;
-		fs << CONFIG_NAME_PCA_MEANS << opencv_pca_ptr_->mean;
+		stringstream config_name_vectors, config_name_values, config_name_means;
+		config_name_vectors << CONFIG_NAME_PCA_EIGENVECTORS << "-" << module_id_;
+		config_name_values << CONFIG_NAME_PCA_EIGENVALUES << "-" << module_id_;
+		config_name_means << CONFIG_NAME_PCA_MEANS << "-" << module_id_;
+		fs << config_name_vectors.str().c_str() << opencv_pca_ptr_->eigenvectors;
+		fs << config_name_values.str().c_str()  << opencv_pca_ptr_->eigenvalues;
+		fs << config_name_means.str().c_str() << opencv_pca_ptr_->mean;
 	}
 }
 
 void CPCA::load(FileStorage& fs)
 {
-	fs[CONFIG_NAME_PCA_N_EIGENVECTORS] >> n_eigenvectors_;
+	stringstream config_name_n_eigenvectors, config_name_vectors, config_name_values, config_name_means;
+	config_name_n_eigenvectors << CONFIG_NAME_PCA_N_EIGENVECTORS << "-" << module_id_;
+	config_name_vectors << CONFIG_NAME_PCA_EIGENVECTORS << "-" << module_id_;
+	config_name_values << CONFIG_NAME_PCA_EIGENVALUES << "-" << module_id_;
+	config_name_means << CONFIG_NAME_PCA_MEANS << "-" << module_id_;
+
+	fs[config_name_n_eigenvectors.str().c_str()] >> n_eigenvectors_;
 	if(opencv_pca_ptr_)
 		delete opencv_pca_ptr_;
 
 	opencv_pca_ptr_ = new PCA();
-	fs[CONFIG_NAME_PCA_EIGENVECTORS] >> opencv_pca_ptr_->eigenvectors;
-	fs[CONFIG_NAME_PCA_EIGENVALUES] >> opencv_pca_ptr_->eigenvalues;
-	fs[CONFIG_NAME_PCA_MEANS] >> opencv_pca_ptr_->mean;
+	fs[config_name_vectors.str().c_str()] >> opencv_pca_ptr_->eigenvectors;
+	fs[config_name_values.str().c_str()] >> opencv_pca_ptr_->eigenvalues;
+	fs[config_name_means.str().c_str()] >> opencv_pca_ptr_->mean;
 }

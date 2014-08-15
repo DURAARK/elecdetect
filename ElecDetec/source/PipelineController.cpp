@@ -8,7 +8,7 @@
 #include "PipelineController.h"
 
 
-CPipelineController::CPipelineController() : feature_length_(0), n_object_classes_(0)
+CPipelineController::CPipelineController() : final_classifier_(NULL), n_object_classes_(0)
 {
 }
 
@@ -22,11 +22,14 @@ CPipelineController::~CPipelineController()
 void CPipelineController::deletePipe()
 {
 	// clean up modules
-	for (vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); mod_it != v_modules_.end(); ++mod_it)
+	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
 	{
-		delete *mod_it;
+		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			delete *mod_it;
+		}
 	}
-	v_modules_.clear();
+	v_v_modules_.clear();
 }
 
 
@@ -34,75 +37,128 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 {
 	deletePipe(); // delete Pipe if already set up
 
-	// Set up Preprocessing
-	vector<string>::const_iterator mod_id_it;
-	for(mod_id_it = params_.vec_preproc_.begin(); mod_id_it != params_.vec_preproc_.end(); ++mod_id_it)
+	// Set up Feature Channels
+	vector<vector<string> >::const_iterator ch_str_it;
+	for(ch_str_it = params_.vec_vec_channels_.begin(); ch_str_it != params_.vec_vec_channels_.end(); ++ch_str_it)
 	{
-		if(*mod_id_it == ID_CANNY)
-			v_modules_.push_back(new CBinaryContours());
-		if(*mod_id_it == ID_GRADIENT)
-			v_modules_.push_back(new CGradientImage());
-		if(*mod_id_it == ID_DISTTR)
-			v_modules_.push_back(new CDistanceTransform());
+		CVisionModule* cur_mod = NULL;
+		vector<CVisionModule*> cur_ch_modules;
+		vector<string>::const_iterator mod_id_it;
+		for(mod_id_it = ch_str_it->begin(); mod_id_it != ch_str_it->end(); ++mod_id_it)
+		{
+			// Pre-processing Methods
+			if(*mod_id_it == ID_CANNY)
+				cur_mod = new CBinaryContours();
+			if(*mod_id_it == ID_GRADIENT)
+				cur_mod = new CGradientImage();
+			if(*mod_id_it == ID_DISTTR)
+				cur_mod = new CDistanceTransform();
+
+			// Feature Extractor Methods
+			if(*mod_id_it == ID_HOG)
+				cur_mod = new CHog();
+			if(*mod_id_it == ID_BRIEF)
+				cur_mod = new COwnBrief();
+
+			// Subspace methods
+			if(*mod_id_it == ID_PCA)
+				cur_mod = new CPCA();
+
+			// Classifiers: TODO: re-implementation of classifiers needed (not just class label as output)
+			if(*mod_id_it == ID_SVM)
+				cur_mod = new CSVM();
+			if(*mod_id_it == ID_RF)
+				cur_mod = new CRandomForest();
+
+			cur_ch_modules.push_back(cur_mod);
+		}
+		v_v_modules_.push_back(cur_ch_modules);
 	}
 
-	// for now: just use one feature extractor                                      !!!!!!!!!
-	for(mod_id_it = params_.vec_feature_.begin(); mod_id_it != params_.vec_feature_.begin()+1; ++mod_id_it)
-	{
-		CFeatureExtractorModule* f_ptr = NULL;
-		if(*mod_id_it == ID_HOG)
-			f_ptr = new CHog();
-		if(*mod_id_it == ID_BRIEF)
-			f_ptr = new COwnBrief();
-
-		if(!f_ptr)
-		{
-			// no feature extractor -> use whole image as feature
-			cout << "no feature method specified. using whole image as feature vector" << endl;
-			f_ptr = new CDummyFeature();
-		}
-
-		// TODO later: setup multiple feature-vectors
-
-		feature_length_ += f_ptr->getFeatureLength();
-		v_modules_.push_back(f_ptr);
-	}
-
-
-	// subspace methods
-	for(mod_id_it = params_.vec_feature_.begin(); mod_id_it != params_.vec_feature_.end(); ++mod_id_it)
-	{
-		CSubspaceModule* s_ptr = NULL;
-
-		if(*mod_id_it == ID_PCA)
-			s_ptr = new CPCA();
-
-		if(!s_ptr)
-		{
-			// no feature extractor -> use whole image as feature
-			cout << "no feature subspace method specified. using feature as it is." << endl;
-		}
-		else
-		{
-			v_modules_.push_back(s_ptr);
-		}
-	}
-
-
-	// Add classifier to pipeline
-	CClassifierModule* c_ptr = NULL;
+	// Create final classifier
 	if(params_.str_classifier_ == ID_SVM)
-		c_ptr = new CSVM();
+		final_classifier_ = new CSVM();
 	if(params_.str_classifier_ == ID_RF)
-		c_ptr = new CRandomForest();
+		final_classifier_ = new CRandomForest();
 
-	if(!c_ptr)
-		throw(PipeConfigExecption());
-
-	v_modules_.push_back(c_ptr);
+	// Check and finish Channels (add Dummy Modules if necessary and check consistency)
+	checkAndFinishModules();
 
 	printConfig();
 
+}
+
+void CPipelineController::checkAndFinishModules() throw(PipeConfigExecption)
+{
+	if(!final_classifier_)
+		throw(PipeConfigExecption()); // unknown ID given!!!
+
+	// check each feature channel
+	for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	{
+		// special case: if no module is inserted in current channel
+		if(ch_it->empty())
+			ch_it->push_back(new CDummyFeature());
+
+		int valid_mod_types = MOD_TYPE_PREPROC | MOD_TYPE_FEATURE;
+
+		for (vector<CVisionModule*>::iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			// If identifier was not found
+			if(!(*mod_it))
+				throw(PipeConfigExecption()); // unknown ID given!!!
+
+			int cur_mod_type = (*mod_it)->getType();
+
+			// if non of the next valid module types match the current module type
+			if(!(valid_mod_types & cur_mod_type))
+			{
+				// special case: if no feature specified between preprocessing and (subspace or classifier): insert dummy feature module
+				if(  (valid_mod_types & MOD_TYPE_FEATURE) &&
+					 (cur_mod_type  & (MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER))  )
+				{
+					// save current position in vector to reset iterator afterwards
+					int cur_module_pos = distance(ch_it->begin(), mod_it);
+					// insert Dummy Feature and set iterator at its position
+					ch_it->insert(mod_it, new CDummyFeature());
+					// reset iterator in case the vector was copied to somewhere else
+					mod_it = ch_it->begin()+cur_module_pos;
+					cur_mod_type = (*mod_it)->getType(); // is now MOD_TYPE_FEATURE
+				}
+				else // otherwise something went wrong
+				{
+					throw(PipeConfigExecption());
+				}
+			}
+
+			// refresh next valid module type according to current module type
+			switch (cur_mod_type)
+			{
+			case MOD_TYPE_PREPROC:
+				valid_mod_types = MOD_TYPE_PREPROC | MOD_TYPE_FEATURE;
+				break;
+			case MOD_TYPE_FEATURE:
+				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
+				break;
+			case MOD_TYPE_SUBSPACE:
+				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
+				break;
+			case MOD_TYPE_CLASSIFIER:
+				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
+				break;
+			}
+		}
+	}
+
+	// set ID for each module (required for identifying in configuration file)
+	int module_id = 0;
+	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	{
+		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			(*mod_it)->setModuleID(module_id++);
+		}
+	}
 
 }
 
@@ -113,6 +169,9 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 	Mat mat_detect_prop = Mat::zeros(input_img.size(), CV_32FC1);   // probability map of the detection results
 	cout << "Analyzing image...        " << flush;
 	float progress = 0.0;
+	int result_vector_length = 0;
+	for(vector<int>::const_iterator len_it = channel_end_data_lengths_.begin(); len_it != channel_end_data_lengths_.end(); ++len_it)
+		result_vector_length += *len_it;
 	// Sliding window
 	Rect win_roi(0, 0, SWIN_SIZE, SWIN_SIZE);
 	for(win_roi.y = 0; win_roi.y < input_img.rows-SWIN_SIZE; win_roi.y += 1)
@@ -128,25 +187,41 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 		{
 			CVisionData* window = new CMat();
 			((CMat*)window)->mat_ = input_img(win_roi);
-//			window->show();
-//			waitKey(3);
-			std::vector<CVisionData*> v_data;
-			v_data.push_back(window);
+			//			window->show();
+			//			waitKey(3);
 
-			// Execute Pipeline
+			CVisionData* result_vector = new CVector<float>();
+			reinterpret_cast<CVector<float>*>(result_vector)->vec_.reserve(result_vector_length);
+			// Execute each Pipeline and concatenate results
 			try
 			{
-				for (std::vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); mod_it != v_modules_.end(); ++mod_it)
+				for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
 				{
-					(*mod_it)->exec(v_data);
+					std::vector<CVisionData*> v_data;
+					v_data.push_back(window);
+					for (std::vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+					{
+						(*mod_it)->exec(v_data);
+					}
+					// Cleanup data
+					for (std::vector<CVisionData*>::const_iterator data_it = v_data.begin(); data_it != v_data.end(); ++data_it)
+					{
+						delete *data_it;
+					}
+					v_data.clear();
 				}
 			}
 			catch (VisionDataTypeException& e)
 			{
 				cout << e.what();
+				exit(-1);
 			}
 
-			CWeightedScalar<int>* result = reinterpret_cast<CWeightedScalar<int>* >(v_data.back());
+			// Classify with final classifier
+			std::vector<CVisionData*> v_result_data;
+			v_result_data.push_back(result_vector);
+			final_classifier_->exec(v_result_data);
+			CWeightedScalar<int>* result = reinterpret_cast<CWeightedScalar<int>* >(v_result_data.back());
 
 			if(result->val_)
 			{
@@ -155,12 +230,6 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 				mat_detect_prop.at<float>(win_center) = result->weight_;
 			}
 
-			// Cleanup data
-			for (std::vector<CVisionData*>::const_iterator data_it = v_data.begin(); data_it != v_data.end(); ++data_it)
-			{
-				delete *data_it;
-			}
-			v_data.clear();
 		}
 	}
 
@@ -415,21 +484,103 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 void CPipelineController::train(const CommandParams& params)
 {
 	// initialize untrained pipe
-	params_.str_classifier_ = params.str_classifier_;
-	params_.vec_feature_ = params.vec_feature_;
-	params_.vec_preproc_ = params.vec_preproc_;
+	params_.str_classifier_   = params.str_classifier_;
+	params_.vec_vec_channels_ = params.vec_vec_channels_;
 	initializeFromParameters();
 
 	vector<string> filelist;
 	if(getFileList(params.str_imgset_, filelist))
 	{
+		//TODO: collect end data lengths of channels
+		sort(filelist.begin(), filelist.end());
+		vector<CMat*> all_final_data;
+		CVector<int> train_labels;
+
+		// for each feature channel
+		for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+		{
+			CMat* train_data;
+			vector<CVisionModule*>::iterator mod_it;
+			// for each file
+			for(vector<string>::iterator file_it = filelist.begin(); file_it != filelist.end(); ++file_it)
+			{
+				CMat* training_sample_ptr = new CMat();
+				training_sample_ptr->mat_ = cv::imread(params.str_imgset_ + *file_it);
+				//training_sample_ptr->show();
+				vector<CVisionData*> v_seq_data;
+				v_seq_data.push_back(training_sample_ptr);
+
+				// for each module that needs no training
+				for (mod_it = ch_it->begin(); mod_it != ch_it->end() && !(*mod_it)->needsTraining(); ++mod_it)
+				{
+					(*mod_it)->exec(v_seq_data);
+				}
+				// feature is now at the end of v_seq_data and was created with new
+				// create temporary matrix header with the feature vector data (without copying)
+				Mat latest_feature(((CVector<float>*)v_seq_data.back())->vec_, false);
+				if(train_data->mat_.empty())
+				{
+					// reserve space for the feature vectors for all training samples (one sample per ROW)
+					train_data->mat_ = Mat::zeros(filelist.size(), latest_feature.size().area(), CV_32FC1);
+				}
+				// reshape to row-vector and add feature vector to all samples (with copying data)
+				latest_feature.reshape(0,1).copyTo(train_data->mat_.row(distance(filelist.begin(), file_it)));
+
+				// clean up data of current sample
+				for (std::vector<CVisionData*>::const_iterator data_it = v_seq_data.begin(); data_it != v_seq_data.end(); ++data_it)
+				{
+					delete *data_it;
+				}
+				v_seq_data.clear();
+
+				// collect class label
+				if(train_labels.vec_.size() != filelist.size())
+				{
+					stringstream ss_feature(*file_it);
+					string str_label;
+					getline(ss_feature, str_label, '_');
+					int train_label;
+					stringstream ss_label;
+					ss_label << *(str_label.begin());
+					ss_label >> train_label;
+					train_labels.vec_.push_back(train_label);
+				}
+			}
+
+
+			// for each module that is left in the current channel
+			for (; mod_it != ch_it->end(); ++mod_it)
+			{
+				if((*mod_it)->needsTraining())
+				{
+					(*mod_it)->train(*train_data, train_labels);
+				}
+
+			}
+
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
 		// Allocate Space for resulting parallel data (Set of all samples); one sample is stored in one ROW
 		CMat* parallel_data_mat_ptr = new CMat();
 		parallel_data_mat_ptr->mat_ = Mat(filelist.size(), feature_length_, CV_32FC1);
 		//cout << "Feature Size: " << train_data.mat_.rows << " x " << train_data.mat_.cols << endl << flush;
 
 		// Sequential processing of training samples (up to subspace or classifier module)
-		CVector<int> train_labels;
+
 		int sample_cnt = 0;
 		sort(filelist.begin(), filelist.end());
 		std::vector<CVisionModule*>::const_iterator mod_it;
@@ -548,23 +699,28 @@ void CPipelineController::printConfig()
 	cout << "------------------------------" << endl;
 
 	int mod_type = 0;
-	for (vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); mod_it != v_modules_.end(); ++mod_it)
+	for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
 	{
-		if(mod_type != (*mod_it)->getType())
+		cout << "-Feature Channel " << distance(ch_it, v_v_modules_.begin()) << ": " << endl;
+		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
 		{
-			if((*mod_it)->getType() == MOD_TYPE_PREPROC)
-				cout << "Preprocessing:" << endl;
-			if((*mod_it)->getType() == MOD_TYPE_FEATURE)
-				cout << "Feature Descriptor:" << endl;
-			if((*mod_it)->getType() == MOD_TYPE_SUBSPACE)
-				cout << "Subspace Method:" << endl;
-			if((*mod_it)->getType() == MOD_TYPE_CLASSIFIER)
-				cout << "Classifier:" << endl;
+			if(mod_type != (*mod_it)->getType())
+			{
+				if((*mod_it)->getType() == MOD_TYPE_PREPROC)
+					cout << " -Preprocessing:" << endl;
+				if((*mod_it)->getType() == MOD_TYPE_FEATURE)
+					cout << " -Feature Descriptor:" << endl;
+				if((*mod_it)->getType() == MOD_TYPE_SUBSPACE)
+					cout << " -Subspace Method:" << endl;
+				if((*mod_it)->getType() == MOD_TYPE_CLASSIFIER)
+					cout << " -Classifier:" << endl;
 
-			mod_type = (*mod_it)->getType();
+				mod_type = (*mod_it)->getType();
+			}
+			cout << "   -" << (*mod_it)->getPrintName() << endl;
 		}
-		cout << " -" << (*mod_it)->getName() << endl;
 	}
+	cout << "Final Classifier: " << final_classifier_->getPrintName() << endl;
 	cout << endl;
 
 }
@@ -581,18 +737,22 @@ void CPipelineController::load(const string& filename)
 		exit(-1);
 	}
 
-	fs[CONFIG_NAME_PREPROC] >> params_.vec_preproc_;
-	fs[CONFIG_NAME_FEATURE] >> params_.vec_feature_;
+	fs[CONFIG_NAME_CHANNELS] >> params_.vec_vec_channels_;
+	fs[CONFIG_NAME_CHANNEL_LENGTHS] >> channel_end_data_lengths_;
 	fs[CONFIG_NAME_CLASSIFIER] >> params_.str_classifier_;
 
 	initializeFromParameters();
 
 	fs[CONFIG_NAME_NUM_CLASSES] >> n_object_classes_;
 
-	for (vector<CVisionModule*>::iterator mod_it = v_modules_.begin(); mod_it != v_modules_.end(); ++mod_it)
+	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
 	{
-		(*mod_it)->load(fs);
+		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			(*mod_it)->load(fs);
+		}
 	}
+
 	fs.release();
 
 	//cout << "Pipeline loaded." << endl;
@@ -601,12 +761,6 @@ void CPipelineController::load(const string& filename)
 
 void CPipelineController::save(const string& filename)
 {
-	// generate classifier config filename
-//	std::size_t xmlpos = params_.str_configfile_.find(".xml");
-//	string str_classifier_configfile = params_.str_configfile_.substr(0, xmlpos);
-//	str_classifier_configfile += FILENAME_CLASSIFIER_POSTFIX;
-//	str_classifier_configfile += ".xml";
-
 	FileStorage fs;
 	// open config file
 	fs.open(filename, FileStorage::WRITE);
@@ -618,15 +772,18 @@ void CPipelineController::save(const string& filename)
 
 	// Save Pipeline configuration
 
-	fs << CONFIG_NAME_PREPROC << params_.vec_preproc_;
-	fs << CONFIG_NAME_FEATURE << params_.vec_feature_;
+	fs << CONFIG_NAME_CHANNELS << params_.vec_vec_channels_;
+	fs << CONFIG_NAME_CHANNEL_LENGTHS << channel_end_data_lengths_;
 	fs << CONFIG_NAME_CLASSIFIER << params_.str_classifier_;
 
 	fs << CONFIG_NAME_NUM_CLASSES << n_object_classes_;
 
-	for (vector<CVisionModule*>::const_iterator mod_it = v_modules_.begin(); mod_it != v_modules_.end(); ++mod_it)
+	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
 	{
-		(*mod_it)->save(fs);
+		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			(*mod_it)->save(fs);
+		}
 	}
 
 	fs.release();

@@ -9,7 +9,7 @@
 
 CDistanceTransform::CDistanceTransform()
 {
-	module_name_ = "DistTr";
+	module_print_name_ = "DistTr";
 
 }
 

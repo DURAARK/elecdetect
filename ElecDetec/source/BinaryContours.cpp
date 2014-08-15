@@ -2,7 +2,7 @@
 
 CBinaryContours::CBinaryContours()
 {
-	module_name_ = "Canny";
+	module_print_name_ = "Canny";
 }
 
 

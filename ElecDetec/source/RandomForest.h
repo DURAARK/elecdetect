@@ -28,14 +28,10 @@ public:
 	CRandomForest();
 	virtual ~CRandomForest();
 
-	virtual void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
-
-	// train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-	virtual void train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException);
-
-	virtual void save(FileStorage& fs) const;
-
-	virtual void load(FileStorage& fs);
+	void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
+	void train(const CMat& train_data, const CVector<int>& train_labels);
+	void save(FileStorage& fs) const;
+	void load(FileStorage& fs);
 };
 
 #endif /* RANDOMFOREST_H_ */

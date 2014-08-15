@@ -9,7 +9,8 @@
 
 CRandomForest::CRandomForest()
 {
-	module_name_ = "RandomForest";
+	module_print_name_ = "RandomForest";
+	needs_training_ = true;
 
 	//Default values:
 	int max_depth = 5;
@@ -63,11 +64,10 @@ void CRandomForest::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeEx
 }
 
 // train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException)
+void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labels)
 {
 	// train_data contains for each sample a row
-	if(train_data.mat_.rows != static_cast<int>(train_labels.vec_.size()))
-		throw(VisionDataSizeException(train_labels.vec_.size(), train_data.mat_.rows));
+	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()));
 
 	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -96,7 +96,9 @@ void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labe
 void CRandomForest::save(FileStorage& fs) const
 {
 //	cout << "saving RandomForest..." << endl << flush;
-	rf_->write(*fs, CONFIG_NAME_RF);
+	stringstream config_name;
+	config_name << CONFIG_NAME_RF << "-" << module_id_;
+	rf_->write(*fs, config_name.str().c_str());
 //	cout << "RandomForest saved." << endl;
 }
 
@@ -105,6 +107,8 @@ void CRandomForest::load(FileStorage& fs)
 	if(rf_)
 	{
 		rf_->clear();
-		rf_->read(*fs, cvGetFileNodeByName(*fs, NULL, CONFIG_NAME_RF));
+		stringstream config_name;
+		config_name << CONFIG_NAME_RF << "-" << module_id_;
+		rf_->read(*fs, cvGetFileNodeByName(*fs, NULL, config_name.str().c_str()));
 	}
 }

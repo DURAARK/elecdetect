@@ -30,10 +30,10 @@ public:
 	CSVM();
 	virtual ~CSVM();
 
-	virtual void exec(vector<CVisionData*>& data) throw(VisionDataTypeException);
-	virtual void train(const CMat& train_data, const CVector<int>& train_labels) throw(VisionDataSizeException);
-	virtual void save(FileStorage& fs) const;
-	virtual void load(FileStorage& fs);
+	void exec(vector<CVisionData*>& data) throw(VisionDataTypeException);
+	void train(const CMat& train_data, const CVector<int>& train_labels);
+	void save(FileStorage& fs) const;
+	void load(FileStorage& fs);
 };
 
 #endif /* SVM_H_ */

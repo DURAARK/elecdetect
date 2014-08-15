@@ -9,7 +9,7 @@
 
 COwnBrief::COwnBrief() : feature_length_(DEFAULT_FEATURE_LENGTH)
 {
-	module_name_ = "Brief";
+	module_print_name_ = "Brief";
 
 	initTestPairs();
 }
@@ -47,7 +47,7 @@ void COwnBrief::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeExcept
 	if(data.back()->getType() != TYPE_MAT)
 			throw(VisionDataTypeException(data.back()->getType(), TYPE_MAT));
 
-	const Mat img0 = (((CMat*)data.back())->mat_);
+	const Mat img0 = ((CMat*)data.back())->mat_;
 
 	CVector<float>* brief_features = new CVector<float>();
 
@@ -77,8 +77,10 @@ void COwnBrief::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeExcept
 
 void COwnBrief::save(FileStorage& fs) const
 {
+	stringstream config_name;
+	config_name << CONFIG_NAME_TESTPAIRS << "-" << module_id_;
 	//fs << CONFIG_NAME_TESTPAIRS << rel_test_pairs_;
-    fs << CONFIG_NAME_TESTPAIRS << "[";
+    fs << config_name.str().c_str() << "[";
 	vector<test_pair>::const_iterator t_it;
 	for(t_it = rel_test_pairs_.begin(); t_it != rel_test_pairs_.end(); ++ t_it)
     {
@@ -91,7 +93,10 @@ void COwnBrief::save(FileStorage& fs) const
 void COwnBrief::load(FileStorage& fs)
 {
 	rel_test_pairs_.clear();
-	FileNode config_tests = fs[CONFIG_NAME_TESTPAIRS];
+	stringstream config_name;
+	config_name << CONFIG_NAME_TESTPAIRS << "-" << module_id_;
+
+	FileNode config_tests = fs[config_name.str().c_str()];
 	for(FileNodeIterator t_it = config_tests.begin(); t_it != config_tests.end(); ++t_it)
 	{
 		Point2f pt1; (*t_it)["pt1"] >> pt1;
