@@ -7,10 +7,16 @@
 
 #include "DistanceTransform.h"
 
-CDistanceTransform::CDistanceTransform()
+CDistanceTransform::CDistanceTransform(int inchain_input_signature)
 {
-	module_print_name_ = "DistTr";
+	module_print_name_ = "Distance Transform";
+	required_input_signature_mask_ = DATA_TYPE_IMAGE | CV_8UC1; // takes single channel (binary) image as input only
+	output_type_ = DATA_TYPE_IMAGE | CV_32FC1;
 
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 }
 
 CDistanceTransform::~CDistanceTransform()
@@ -18,27 +24,31 @@ CDistanceTransform::~CDistanceTransform()
 
 }
 
-void CDistanceTransform::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CDistanceTransform::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	CMat* img0_ptr = (CMat*)data.back();
-	CMat* out_img = new CMat();
-
-	Mat temp = img0_ptr->mat_;
-
-	// check if iamge is binary, otherwise apply threshold
-	bool is_binary = countNonZero(temp ==255) + countNonZero(temp == 0) == temp.cols * temp.rows;
-	if(!is_binary)
+	CVisionData working_data(input_data.data(), input_data.getType());
+	if(data_converter_)
 	{
-		if(temp.channels() != 1)
-			cvtColor(temp, temp, CV_BGR2GRAY);
-//		threshold(temp, temp, 100, 255, CV_THRESH_BINARY);
-		adaptiveThreshold(temp, temp, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 101, -50);
+		data_converter_->convert(working_data);
 	}
 
-	distanceTransform(255-temp, out_img->mat_, CV_DIST_L2, 3);
-	out_img->mat_.convertTo(out_img->mat_, CV_8UC1, 2, 0);
+	assert(working_data.getSignature == required_input_signature_mask_);
 
-	data.push_back(out_img);
+	Mat working_img = working_data.data();
+
+	// check if image is binary, otherwise apply threshold
+	bool is_binary = countNonZero(working_img == 255) + countNonZero(working_img == 0) == working_img.cols * working_img.rows;
+	if(!is_binary)
+	{
+		if(working_img.channels() != 1)
+			cvtColor(working_img, working_img, CV_BGR2GRAY);
+//		threshold(temp, temp, 100, 255, CV_THRESH_BINARY);
+		adaptiveThreshold(working_img, working_img, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 101, -50);
+	}
+
+	distanceTransform(255-working_img, working_img, CV_DIST_L2, 3);
+	output_data.assignData(working_img, DATA_TYPE_IMAGE);
+	//output_data.mat_.convertTo(output_data.mat_, CV_8UC1, 2, 0);
 }
 
 void CDistanceTransform::save(FileStorage& fs) const

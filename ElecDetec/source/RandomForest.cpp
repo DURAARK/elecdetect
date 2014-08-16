@@ -7,10 +7,18 @@
 
 #include "RandomForest.h"
 
-CRandomForest::CRandomForest()
+CRandomForest::CRandomForest(int inchain_input_signature)
 {
 	module_print_name_ = "RandomForest";
 	needs_training_ = true;
+
+	required_input_signature_mask_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
+	output_type_ = DATA_TYPE_SCALAR | CV_32SC1;
+
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 
 	//Default values:
 	int max_depth = 5;
@@ -49,28 +57,33 @@ CRandomForest::~CRandomForest()
 	rf_params_ = NULL;
 }
 
-void CRandomForest::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CRandomForest::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	if(data.back()->getType() != TYPE_VECTOR)
-		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
+//	if(data.back()->getType() != TYPE_VECTOR)
+//		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
+	CVisionData working_data(input_data.data(), input_data.getType());
+	if(data_converter_)
+	{
+		data_converter_->convert(working_data);
+	}
 
-	const vector<float> in_vec = (((CVector<float>*)data.back())->vec_);
+	Mat result_scalar = Mat::zeros(1,1,CV_32SC1);
+	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data.data()));
 
-	CWeightedScalar<int>* class_result = new CWeightedScalar<int>(static_cast<int>(rf_->predict(Mat(in_vec))));
 	//if(class_result->val_ != 0)
 	//cout << "prediction result is: " << class_result->val_ << endl;
 
-	data.push_back(class_result);
+	output_data.assignData(result_scalar, DATA_TYPE_SCALAR);
 }
 
 // train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labels)
+void CRandomForest::train(const CVisionData& train_data, const CVisionData& train_labels)
 {
 	// train_data contains for each sample a row
-	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()));
+	assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
 
-	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
-	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
+//	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
+//	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
 
 //	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
 //	cout << train_data_mat.at<float>(0,0) << endl;
@@ -88,7 +101,7 @@ void CRandomForest::train(const CMat& train_data, const CVector<int>& train_labe
 
 	cout << "Training RandomForest. Please be patient..." << flush;
 	srand(time(NULL)); // to be sure
-	rf_->train(train_data_mat, CV_ROW_SAMPLE, train_labels_mat, varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
+	rf_->train(train_data.data(), CV_ROW_SAMPLE, train_labels.data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
 
 	cout << " done. " << rf_->get_tree_count() << " trees trained." << endl << flush;
 }

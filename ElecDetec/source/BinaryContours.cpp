@@ -1,8 +1,15 @@
 #include "BinaryContours.h"
 
-CBinaryContours::CBinaryContours()
+CBinaryContours::CBinaryContours(int inchain_input_signature)
 {
 	module_print_name_ = "Canny";
+	required_input_signature_mask_ = DATA_TYPE_IMAGE | CV_8UC1; // takes single channel grayscale image as input only
+	output_type_ = DATA_TYPE_IMAGE | CV_8UC1;
+
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 }
 
 
@@ -10,14 +17,19 @@ CBinaryContours::~CBinaryContours()
 {
 }
 
-void CBinaryContours::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CBinaryContours::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	CMat* img0_ptr = (CMat*)data.back();
-	CMat* out_img = new CMat();
+	output_data.assignData(input_data.data(), input_data.getType());
+	if(data_converter_)
+	{
+		data_converter_->convert(output_data);
+	}
 
+	assert(output_data.getSignature == required_input_signature_mask_);
 
-
-	cv::Canny(img0_ptr->mat_, out_img->mat_, 20.0, 160.0);
+	Mat working_image;
+	cv::Canny(output_data.data(), working_image, 20.0, 160.0);
+	output_data.assignData(working_image, DATA_TYPE_IMAGE);
 
 //	Mat rot;
 //	// 90 deg
@@ -40,9 +52,6 @@ void CBinaryContours::exec(std::vector<CVisionData*>& data) throw(VisionDataType
 //	out_img->mat_.convertTo(out_img->mat_, CV_8UC1);
 //	out_img->mat_ = 5*out_img->mat_;
 //	GaussianBlur(out_img->mat_, out_img->mat_, Size(21,21), 5.4, 5.4, BORDER_REFLECT);
-
-
-	data.push_back(out_img);
 
 	
 }

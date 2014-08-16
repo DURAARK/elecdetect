@@ -1,9 +1,17 @@
 #include "Hog.h"
 
 
-CHog::CHog()
+CHog::CHog(int inchain_input_signature)
 {
 	module_print_name_ = "HoG";
+
+	required_input_signature_mask_ = DATA_TYPE_IMAGE | CV_8UC1; // needs grayscale image as input
+	output_type_ = DATA_TYPE_VECTOR | CV_32FC1;
+
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 
 	win_size_ = cv::Size(80, 80); //(128,128)winSize
 	cell_size_ = cv::Size(8, 8); //cellSize,
@@ -30,43 +38,39 @@ CHog::~CHog()
 	hogy_ = NULL;
 }
 
-void CHog::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CHog::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	if(data.back()->getType() != TYPE_MAT)
-		throw(VisionDataTypeException(data.back()->getType(), TYPE_MAT));
+	output_data.assignData(input_data.data(), input_data.getType());
+	if(data_converter_)
+	{
+		data_converter_->convert(output_data);
+	}
 
-	const cv::Mat img0 = (((CMat*)data.back())->mat_);
+	vector<float> hog_features;
+	Mat img_gray;
+	cv::resize(output_data.data(), img_gray, win_size_ );
 
-	CVector<float>* hog_features = new CVector<float>();
-
-	cv::Mat img_gray;
-	if (img0.channels() != 1)
-		cv::cvtColor(img0, img_gray, cv::COLOR_BGR2GRAY);
-	else
-		img_gray = img0;
-	cv::resize(img_gray, img_gray, win_size_ );
-
-	hogy_->compute(img_gray, hog_features->vec_);
+	hogy_->compute(img_gray, hog_features);
 
 	//visualize(img_gray, hog_features->vec_);
 
-	data.push_back(hog_features);
-
+	output_data.assignData(Mat(hog_features), DATA_TYPE_VECTOR);
 }
 
 void CHog::save(FileStorage& fs) const
 {
 
 }
+
 void CHog::load(FileStorage& fs)
 {
 
 }
 
-int CHog::getFeatureLength()
-{
-	return hogy_->getDescriptorSize();
-}
+//int CHog::getFeatureLength()
+//{
+//	return hogy_->getDescriptorSize();
+//}
 
 void CHog::visualize(cv::Mat& origImg, std::vector<float>& descriptorValues)
 {

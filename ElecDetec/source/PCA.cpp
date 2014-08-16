@@ -7,10 +7,17 @@
 
 #include "PCA.h"
 
-CPCA::CPCA() : n_eigenvectors_(DEFAULT_NUMBER_OF_EIGENVECTORS), opencv_pca_ptr_(NULL)
+CPCA::CPCA(int inchain_input_signature) : n_eigenvectors_(DEFAULT_NUMBER_OF_EIGENVECTORS), opencv_pca_ptr_(NULL)
 {
 	module_print_name_ = "Principal Component Analysis";
 	needs_training_ = true;
+	required_input_signature_mask_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
+	output_type_ = DATA_TYPE_VECTOR | CV_32FC1;
+
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 }
 
 CPCA::~CPCA()
@@ -22,10 +29,13 @@ CPCA::~CPCA()
 }
 
 // takes CVector and CMat objects. In case of CMat, the samples are ordered as rows
-void CPCA::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CPCA::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	if(!(data.back()->getType() & (TYPE_VECTOR | TYPE_MAT) ) )
-		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR | TYPE_MAT));
+	CVisionData working_data(input_data.data(), input_data.getType());
+	if(data_converter_)
+	{
+		data_converter_->convert(working_data);
+	}
 
 	if(!opencv_pca_ptr_)
 	{
@@ -34,50 +44,21 @@ void CPCA::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
 		exit(-1);
 	}
 
-	if(data.back()->getType() & TYPE_VECTOR) // Project just a single Vector into the Eigenspace
-	{
-		const CVector<float>* in_data = (CVector<float>*)data.back();
-		CVector<float>* pca_representation = new CVector<float>();
-
-		opencv_pca_ptr_->project(in_data->vec_, pca_representation->vec_);
-
-		data.push_back(pca_representation);
-	}
-	else // Data to perform PCA on is a Matrix. Is used for training the pipeline. The Matrix has to be normalized already.
-	{
-		const CMat* in_data = (CMat*)data.back();
-		CMat* pca_representation = new CMat();
-		pca_representation->mat_ = Mat::zeros(in_data->mat_.rows, n_eigenvectors_, in_data->mat_.type());
-
-		opencv_pca_ptr_->project(in_data->mat_, pca_representation->mat_);
-
-//		cout << "   Matrix col(0): (are " << pca_representation->mat_.rows <<  " rows)" << endl << pca_representation->mat_.col(0) << endl;
-//
-//		cout << "   Matrix row(0): (are " << pca_representation->mat_.cols <<  " cols)" << endl << pca_representation->mat_.row(0) << endl;
-
-		data.push_back(pca_representation);
-
-//		for(int sample_cnt = 0; sample_cnt < in_data->mat_.rows; ++sample_cnt)
-//		{
-//			pca_representation->mat_.row(sample_cnt) = opencv_pca_ptr_->project(in_data->mat_.row(sample_cnt));
-//			cout << " -Iteration: " << sample_cnt << endl;
-//			cout << "   Matrix: " << endl << pca_representation->mat_.col(0) << endl;
-//			cout << flush;
-//		}
-	}
+	Mat output;
+	opencv_pca_ptr_->project(working_data.data(), output);
+	output_data.assignData(output, DATA_TYPE_VECTOR);
 
 }
 
 // train_data contains for each sample one Row and must be already NORMALIZED (value range from 0 to 1)
-void CPCA::train(const CMat& train_data, const CVector<int>& train_labels)
+void CPCA::train(const CVisionData& train_data, const CVisionData& train_labels)
 {
-	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()))
-	assert(train_data.mat_.type() == CV_32FC1);
+	assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
 
 	vector<int> non_bg_indices;
-	for(vector<int>::const_iterator label_it = train_labels.vec_.begin(); label_it != train_labels.vec_.end(); ++label_it)
-		if(*label_it)
-			non_bg_indices.push_back(distance(train_labels.vec_.begin(), label_it));
+	for(int row_cnt = 0; row_cnt < train_labels.data().rows; ++row_cnt)
+		if(train_labels.data().at<int>(row_cnt, 0))
+			non_bg_indices.push_back(row_cnt);
 
 	Mat train_data_non_bg = Mat::zeros(non_bg_indices.size(), train_data.mat_.cols, train_data.mat_.type());
 	int cur_row = 0;

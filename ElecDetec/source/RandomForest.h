@@ -18,18 +18,19 @@
 using namespace std;
 using namespace cv;
 
-class CRandomForest: public CClassifierModule
+class CRandomForest: public CVisionModule
 {
 private:
 	CvRTrees* rf_;
 	CvRTParams* rf_params_;
+	CRandomForest();
 
 public:
-	CRandomForest();
+	CRandomForest(int inchain_input_signature);
 	virtual ~CRandomForest();
 
-	void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
-	void train(const CMat& train_data, const CVector<int>& train_labels);
+	void exec(const CVisionData& input_data, CVisionData& output_data);
+	void train(const CVisionData& train_data, const CVisionData& train_labels);
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 };

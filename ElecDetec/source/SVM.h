@@ -9,7 +9,6 @@
 #define SVM_H_
 
 #include "VisionModule.h"
-#include "ClassifierModule.h"
 #include "VisionData.h"
 #include "Scalar.h"
 #include "Vector.h"
@@ -20,18 +19,19 @@
 using namespace std;
 using namespace cv;
 
-class CSVM: public CClassifierModule
+class CSVM: public CVisionModule
 {
 private:
 	CvSVM* svm_;
 	CvSVMParams* svm_params_;
+	CSVM();
 
 public:
-	CSVM();
+	CSVM(int inchain_input_signature);
 	virtual ~CSVM();
 
-	void exec(vector<CVisionData*>& data) throw(VisionDataTypeException);
-	void train(const CMat& train_data, const CVector<int>& train_labels);
+	void exec(const CVisionData& input_data, CVisionData& output_data);
+	void train(const CVisionData& train_data, const CVisionData& train_labels);
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 };

@@ -32,14 +32,16 @@ private:
 	int feature_length_;
 	vector<test_pair> rel_test_pairs_;
 
+	COwnBrief();
+
 	float compare(const Mat& img0, const Point2i& pt1, const Point2i& pt2) const;
 	void initTestPairs();
 
 public:
-	COwnBrief();
+	COwnBrief(int inchain_input_signature);
 	virtual ~COwnBrief();
 
-	virtual void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
+	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 

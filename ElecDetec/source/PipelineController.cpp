@@ -35,41 +35,46 @@ void CPipelineController::deletePipe()
 
 void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 {
-	deletePipe(); // delete Pipe if already set up
+	deletePipe(); // delete Pipe if it's already set up
 
 	// Set up Feature Channels
 	vector<vector<string> >::const_iterator ch_str_it;
 	for(ch_str_it = params_.vec_vec_channels_.begin(); ch_str_it != params_.vec_vec_channels_.end(); ++ch_str_it)
 	{
-		CVisionModule* cur_mod = NULL;
+		int passed_data_signature = DATA_TYPE_IMAGE | CV_8UC3; // start a channel with a color image
 		vector<CVisionModule*> cur_ch_modules;
 		vector<string>::const_iterator mod_id_it;
 		for(mod_id_it = ch_str_it->begin(); mod_id_it != ch_str_it->end(); ++mod_id_it)
 		{
+			CVisionModule* cur_mod = NULL;
 			// Pre-processing Methods
 			if(*mod_id_it == ID_CANNY)
-				cur_mod = new CBinaryContours();
+				cur_mod = new CBinaryContours(passed_data_signature);
 			if(*mod_id_it == ID_GRADIENT)
-				cur_mod = new CGradientImage();
+				cur_mod = new CGradientImage(passed_data_signature);
 			if(*mod_id_it == ID_DISTTR)
-				cur_mod = new CDistanceTransform();
+				cur_mod = new CDistanceTransform(passed_data_signature);
 
 			// Feature Extractor Methods
 			if(*mod_id_it == ID_HOG)
-				cur_mod = new CHog();
+				cur_mod = new CHog(passed_data_signature);
 			if(*mod_id_it == ID_BRIEF)
-				cur_mod = new COwnBrief();
+				cur_mod = new COwnBrief(passed_data_signature);
 
 			// Subspace methods
 			if(*mod_id_it == ID_PCA)
-				cur_mod = new CPCA();
+				cur_mod = new CPCA(passed_data_signature);
 
 			// Classifiers: TODO: re-implementation of classifiers needed (not just class label as output)
 			if(*mod_id_it == ID_SVM)
-				cur_mod = new CSVM();
+				cur_mod = new CSVM(passed_data_signature);
 			if(*mod_id_it == ID_RF)
-				cur_mod = new CRandomForest();
+				cur_mod = new CRandomForest(passed_data_signature);
 
+			if(!cur_mod)
+				throw(PipeConfigExecption()); // unknown ID given!!!
+
+			passed_data_signature = cur_mod->outputSignature();
 			cur_ch_modules.push_back(cur_mod);
 		}
 		v_v_modules_.push_back(cur_ch_modules);
@@ -81,74 +86,8 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 	if(params_.str_classifier_ == ID_RF)
 		final_classifier_ = new CRandomForest();
 
-	// Check and finish Channels (add Dummy Modules if necessary and check consistency)
-	checkAndFinishModules();
-
-	printConfig();
-
-}
-
-void CPipelineController::checkAndFinishModules() throw(PipeConfigExecption)
-{
 	if(!final_classifier_)
 		throw(PipeConfigExecption()); // unknown ID given!!!
-
-	// check each feature channel
-	for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
-	{
-		// special case: if no module is inserted in current channel
-		if(ch_it->empty())
-			ch_it->push_back(new CDummyFeature());
-
-		int valid_mod_types = MOD_TYPE_PREPROC | MOD_TYPE_FEATURE;
-
-		for (vector<CVisionModule*>::iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			// If identifier was not found
-			if(!(*mod_it))
-				throw(PipeConfigExecption()); // unknown ID given!!!
-
-			int cur_mod_type = (*mod_it)->getType();
-
-			// if non of the next valid module types match the current module type
-			if(!(valid_mod_types & cur_mod_type))
-			{
-				// special case: if no feature specified between preprocessing and (subspace or classifier): insert dummy feature module
-				if(  (valid_mod_types & MOD_TYPE_FEATURE) &&
-					 (cur_mod_type  & (MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER))  )
-				{
-					// save current position in vector to reset iterator afterwards
-					int cur_module_pos = distance(ch_it->begin(), mod_it);
-					// insert Dummy Feature and set iterator at its position
-					ch_it->insert(mod_it, new CDummyFeature());
-					// reset iterator in case the vector was copied to somewhere else
-					mod_it = ch_it->begin()+cur_module_pos;
-					cur_mod_type = (*mod_it)->getType(); // is now MOD_TYPE_FEATURE
-				}
-				else // otherwise something went wrong
-				{
-					throw(PipeConfigExecption());
-				}
-			}
-
-			// refresh next valid module type according to current module type
-			switch (cur_mod_type)
-			{
-			case MOD_TYPE_PREPROC:
-				valid_mod_types = MOD_TYPE_PREPROC | MOD_TYPE_FEATURE;
-				break;
-			case MOD_TYPE_FEATURE:
-				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
-				break;
-			case MOD_TYPE_SUBSPACE:
-				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
-				break;
-			case MOD_TYPE_CLASSIFIER:
-				valid_mod_types = MOD_TYPE_SUBSPACE | MOD_TYPE_CLASSIFIER;
-				break;
-			}
-		}
-	}
 
 	// set ID for each module (required for identifying in configuration file)
 	int module_id = 0;
@@ -160,8 +99,10 @@ void CPipelineController::checkAndFinishModules() throw(PipeConfigExecption)
 		}
 	}
 
-}
+	final_classifier_->setModuleID(module_id++);
 
+	printConfig();
+}
 
 void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_results)
 {

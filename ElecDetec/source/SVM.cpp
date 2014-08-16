@@ -7,10 +7,18 @@
 
 #include "SVM.h"
 
-CSVM::CSVM()
+CSVM::CSVM(int inchain_input_signature)
 {
 	module_print_name_ = "SVM";
 	needs_training_ = true;
+
+	required_input_signature_mask_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
+	output_type_ = DATA_TYPE_SCALAR | CV_32SC1;
+
+	if(inchain_input_signature != required_input_signature_mask_)
+	{
+		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
+	}
 
 	// SVM Params
 	// int svm_type, int kernel_type, double degree, double gamma, double coef0, double Cvalue, double nu, double p, CvMat* class_weights, CvTermCriteria term_crit
@@ -44,34 +52,36 @@ CSVM::~CSVM()
 	svm_params_ = NULL;
 }
 
-void CSVM::exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException)
+void CSVM::exec(const CVisionData& input_data, CVisionData& output_data)
 {
-	if(data.back()->getType() != TYPE_VECTOR)
-		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
+	CVisionData working_data(input_data.data(), input_data.getType());
+	if(data_converter_)
+	{
+		data_converter_->convert(working_data);
+	}
 
-	const vector<float> in_vec = (((CVector<float>*)data.back())->vec_);
-
-	CWeightedScalar<int>* class_result = new CWeightedScalar<int>(static_cast<int>(svm_->predict(Mat(in_vec))));
+	Mat result_scalar = Mat::zeros(1,1,CV_32SC1);
+	result_scalar.at<int>(0,0) = static_cast<int>(svm_->predict(working_data.data()));
 	//if(class_result->val_ != 0)
 	//	cout << "prediction result is: " << class_result->val_ << endl;
 
-	data.push_back(class_result);
+	output_data.assignData(result_scalar, DATA_TYPE_SCALAR);
 }
 
 
-void CSVM::train(const CMat& train_data, const CVector<int>& train_labels)
+void CSVM::train(const CVisionData& train_data, const CVisionData& train_labels)
 {
 	// train_data contains for each sample a row
-	assert(train_data.mat_.rows == static_cast<int>(train_labels.vec_.size()));
+	assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
 
-	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
-	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
+	//cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
+	//cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
 
-	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
-	cout << "first value" << train_data_mat.at<float>(0,0) << endl;
+//	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
+//	cout << "first value" << train_data_mat.at<float>(0,0) << endl;
 
 	double min, max;
-	minMaxLoc(train_data_mat, &min, &max);
+	minMaxLoc(train_data.data(), &min, &max);
 	cout << "min-max: " << min << " - " << max << endl << flush;
 
 //	// constructor for matrix headers pointing to user-allocated data
@@ -88,7 +98,7 @@ void CSVM::train(const CMat& train_data, const CVector<int>& train_labels)
 	cout << "Training SVM. Please be patient..." << flush;
 
 	//svm_->train(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_);
-	svm_->train_auto(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_, 5);
+	svm_->train_auto(train_data.data(), train_labels.data(), Mat(), Mat(), *svm_params_, 5);
 
 	cout << " done. Support Vectors: " << svm_->get_support_vector_count() << endl << flush;
 

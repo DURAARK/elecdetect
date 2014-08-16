@@ -102,8 +102,6 @@ private:
 
 	// initializes new untrained pipeline according to params_
 	void initializeFromParameters() throw (PipeConfigExecption);
-	// check initialized pipe for consistency
-	void checkAndFinishModules() throw (PipeConfigExecption);
 	// clear pipe module instances
 	void deletePipe();
 

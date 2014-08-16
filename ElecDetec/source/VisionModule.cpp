@@ -1,7 +1,7 @@
 #include "VisionModule.h"
 
 
-CVisionModule::CVisionModule() : module_type_(MOD_TYPE_UNKNOWN), needs_training_(false)
+CVisionModule::CVisionModule() : needs_training_(false), output_type_(0), required_input_signature_mask_(0), data_converter_(NULL)
 {
 }
 
@@ -10,7 +10,7 @@ CVisionModule::~CVisionModule()
 {
 }
 
-void CVisionModule::train(const CMat& train_data, const CVector<int>& train_labels)
+void CVisionModule::train(const CVisionData& train_data, const CVisionData& train_labels)
 {
 	cout << "nothing to train here... have you made an mistake?" << endl;
 }

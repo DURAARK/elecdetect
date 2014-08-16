@@ -8,24 +8,26 @@
 #ifndef GRADIENTIMAGE_H_
 #define GRADIENTIMAGE_H_
 
-#include "PreprocessingModule.h"
+#include "VisionModule.h"
 #include "Mat.h"
 
 using namespace std;
 using namespace cv;
 
-class CGradientImage: public CPreprocessingModule
+class CGradientImage: public CVisionModule
 {
 private:
+	CGradientImage();
+
 	int scale_;
 	int delta_;
 	int ddepth_;
 
 public:
-	CGradientImage();
+	CGradientImage(int inchain_input_signature);
 	virtual ~CGradientImage();
 
-	virtual void exec(std::vector<CVisionData*>& data) throw(VisionDataTypeException);
+	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 };
