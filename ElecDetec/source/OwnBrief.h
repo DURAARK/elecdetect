@@ -11,11 +11,9 @@
 #include <time.h>
 #include <opencv2/opencv.hpp>
 
-#include "FeatureExtractorModule.h"
+#include "VisionModule.h"
 #include "VisionData.h"
 #include "Exceptions.h"
-#include "Mat.h"
-#include "Vector.h"
 
 #define DEFAULT_FEATURE_LENGTH 512
 
@@ -26,7 +24,7 @@ using namespace cv;
 
 typedef pair<Point2f, Point2f> test_pair;
 
-class COwnBrief: public CFeatureExtractorModule
+class COwnBrief: public CVisionModule
 {
 private:
 	int feature_length_;
@@ -38,17 +36,13 @@ private:
 	void initTestPairs();
 
 public:
-	COwnBrief(int inchain_input_signature);
+	COwnBrief(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~COwnBrief();
 
-	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
+	virtual CVisionData* exec();
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 
-	inline int getFeatureLength()
-	{
-		return feature_length_;
-	}
 };
 
 #endif /* OWNBRIEF_H_ */

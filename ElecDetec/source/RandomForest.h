@@ -11,7 +11,7 @@
 #include <opencv2/opencv.hpp>
 #include <time.h>
 
-#include "ClassifierModule.h"
+#include "VisionModule.h"
 
 #define CONFIG_NAME_RF  "RandomForest"
 
@@ -26,11 +26,11 @@ private:
 	CRandomForest();
 
 public:
-	CRandomForest(int inchain_input_signature);
+	CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~CRandomForest();
 
-	void exec(const CVisionData& input_data, CVisionData& output_data);
-	void train(const CVisionData& train_data, const CVisionData& train_labels);
+	CVisionData* exec();
+	void train();
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 };

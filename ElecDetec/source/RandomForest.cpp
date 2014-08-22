@@ -7,18 +7,16 @@
 
 #include "RandomForest.h"
 
-CRandomForest::CRandomForest(int inchain_input_signature)
+CRandomForest::CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE)
 {
 	module_print_name_ = "RandomForest";
-	needs_training_ = true;
+	is_trained_ = false;
 
-	required_input_signature_mask_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
-	output_type_ = DATA_TYPE_SCALAR | CV_32SC1;
+	required_input_signature_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
+	output_signature_ = DATA_TYPE_SCALAR | CV_32SC1;
 
-	if(inchain_input_signature != required_input_signature_mask_)
-	{
-		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
-	}
+	if(is_root)
+		setAsRoot();
 
 	//Default values:
 	int max_depth = 5;
@@ -57,30 +55,26 @@ CRandomForest::~CRandomForest()
 	rf_params_ = NULL;
 }
 
-void CRandomForest::exec(const CVisionData& input_data, CVisionData& output_data)
+CVisionData* CRandomForest::exec()
 {
 //	if(data.back()->getType() != TYPE_VECTOR)
 //		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
-	CVisionData working_data(input_data.data(), input_data.getType());
-	if(data_converter_)
-	{
-		data_converter_->convert(working_data);
-	}
+	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
 
 	Mat result_scalar = Mat::zeros(1,1,CV_32SC1);
-	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data.data()));
+	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data->data()));
 
 	//if(class_result->val_ != 0)
 	//cout << "prediction result is: " << class_result->val_ << endl;
 
-	output_data.assignData(result_scalar, DATA_TYPE_SCALAR);
+	return new CVisionData(result_scalar, DATA_TYPE_SCALAR);
 }
 
 // train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-void CRandomForest::train(const CVisionData& train_data, const CVisionData& train_labels)
+void CRandomForest::train()
 {
 	// train_data contains for each sample a row
-	assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
+	CVisionData* train_data = getConcatenatedDataAndClearBuffer();
 
 //	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 //	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -101,7 +95,7 @@ void CRandomForest::train(const CVisionData& train_data, const CVisionData& trai
 
 	cout << "Training RandomForest. Please be patient..." << flush;
 	srand(time(NULL)); // to be sure
-	rf_->train(train_data.data(), CV_ROW_SAMPLE, train_labels.data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
+	rf_->train(train_data->data(), CV_ROW_SAMPLE, data_labels_->data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
 
 	cout << " done. " << rf_->get_tree_count() << " trees trained." << endl << flush;
 }

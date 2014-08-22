@@ -27,11 +27,11 @@ private:
 	CSVM();
 
 public:
-	CSVM(int inchain_input_signature);
+	CSVM(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~CSVM();
 
-	void exec(const CVisionData& input_data, CVisionData& output_data);
-	void train(const CVisionData& train_data, const CVisionData& train_labels);
+	CVisionData* exec();
+	void train();
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 };

@@ -1,17 +1,16 @@
 #include "Hog.h"
 
 
-CHog::CHog(int inchain_input_signature)
+CHog::CHog(MODULE_CONSTRUCTOR_SIGNATURE)
 {
 	module_print_name_ = "HoG";
 
-	required_input_signature_mask_ = DATA_TYPE_IMAGE | CV_8UC1; // needs grayscale image as input
-	output_type_ = DATA_TYPE_VECTOR | CV_32FC1;
+	required_input_signature_ = DATA_TYPE_IMAGE | CV_8UC1; // needs grayscale image as input
+	output_signature_ = DATA_TYPE_VECTOR | CV_32FC1;
 
-	if(inchain_input_signature != required_input_signature_mask_)
-	{
-		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
-	}
+	if(is_root)
+		setAsRoot();
+
 
 	win_size_ = cv::Size(80, 80); //(128,128)winSize
 	cell_size_ = cv::Size(8, 8); //cellSize,
@@ -38,23 +37,19 @@ CHog::~CHog()
 	hogy_ = NULL;
 }
 
-void CHog::exec(const CVisionData& input_data, CVisionData& output_data)
+CVisionData* CHog::exec()
 {
-	output_data.assignData(input_data.data(), input_data.getType());
-	if(data_converter_)
-	{
-		data_converter_->convert(output_data);
-	}
+	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
 
 	vector<float> hog_features;
 	Mat img_gray;
-	cv::resize(output_data.data(), img_gray, win_size_ );
+	cv::resize(working_data->data(), img_gray, win_size_ );
 
 	hogy_->compute(img_gray, hog_features);
 
-	//visualize(img_gray, hog_features->vec_);
+	//visualize(img_gray, hog_features);
 
-	output_data.assignData(Mat(hog_features), DATA_TYPE_VECTOR);
+	return new CVisionData(Mat(hog_features).reshape(0,1).clone(), DATA_TYPE_VECTOR);
 }
 
 void CHog::save(FileStorage& fs) const

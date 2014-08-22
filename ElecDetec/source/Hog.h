@@ -22,10 +22,10 @@ private:
 	int nbins_;
 
 public:
-	CHog(int inchain_input_signature);
+	CHog(MODULE_CONSTRUCTOR_SIGNATURE);
 	~CHog();
 
-	void exec(const CVisionData& input_data, CVisionData& output_data);
+	CVisionData* exec();
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 //	virtual int getFeatureLength();

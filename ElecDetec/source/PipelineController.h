@@ -12,7 +12,8 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
-#include <strstream>
+#include <sstream>
+#include <bitset>
 //#include <omp.h>
 
 #include "VisionModule.h"
@@ -29,7 +30,7 @@
 #include "RandomForest.h"
 #include "Utils.h"
 
-#define CONFIG_NAME_CHANNELS             "feature-channels"
+#define CONFIG_NAME_CHANNEL             "feature-channel"
 #define CONFIG_NAME_CHANNEL_LENGTHS      "feature-channel-lengths"
 #define CONFIG_NAME_CLASSIFIER           "classifier-module"
 #define CONFIG_NAME_NUM_CLASSES          "number-of-classes"
@@ -94,10 +95,9 @@ public:
 
 private:
 
-	vector<vector<CVisionModule*> > v_v_modules_;
-	CClassifierModule* final_classifier_;
+	vector<CVisionModule*> all_modules_;
 	Params params_;
-	vector<int> channel_end_data_lengths_; // holds training data sizes of modules which require all samples at once for training per feature channel
+	//vector<int> channel_end_data_lengths_; // holds training data sizes of modules which require all samples at once for training per feature channel
 	int n_object_classes_;
 
 	// initializes new untrained pipeline according to params_
@@ -106,6 +106,8 @@ private:
 	void deletePipe();
 
 	void postProcessResults(const Mat& labels, const Mat& probability, vector<vector<Rect> >& results);
+
+	CVisionData* createNewVisionDataObjectFromImageFile(const string& filename);
 
 public:
 	CPipelineController();

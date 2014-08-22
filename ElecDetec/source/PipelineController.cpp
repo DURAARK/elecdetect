@@ -8,7 +8,7 @@
 #include "PipelineController.h"
 
 
-CPipelineController::CPipelineController() : final_classifier_(NULL), n_object_classes_(0)
+CPipelineController::CPipelineController() : n_object_classes_(0)
 {
 }
 
@@ -22,14 +22,11 @@ CPipelineController::~CPipelineController()
 void CPipelineController::deletePipe()
 {
 	// clean up modules
-	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	for (vector<CVisionModule*>::const_iterator mod_it = all_modules_.begin(); mod_it != all_modules_.end(); ++mod_it)
 	{
-		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			delete *mod_it;
-		}
+		delete *mod_it;
 	}
-	v_v_modules_.clear();
+	all_modules_.clear();
 }
 
 
@@ -37,69 +34,90 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 {
 	deletePipe(); // delete Pipe if it's already set up
 
-	// Set up Feature Channels
+	bitset<16> x1(CV_8UC1), x2(CV_8UC3), x3(CV_32FC1), x4(CV_32FC2), x5(CV_32SC1), x6(CV_32SC2);
+	cout << "CV_8UC1: " << CV_8UC1 << "    is: " << x1 << endl;
+	cout << "CV_8UC3: " << CV_8UC3 << "   is: " << x2 << endl;
+	cout << "CV_32FC1: " << CV_32FC1 << "   is: " << x3 << endl;
+	cout << "CV_32FC2: " << CV_32FC3 << "  is: " << x4 << endl;
+	cout << "CV_32SC1: " << CV_32SC1 << "   is: " << x5 << endl;
+	cout << "CV_32SC2: " << CV_32SC3 << "  is: " << x6 << endl;
+
+	// Set up Feature Channels for the simple structure
+	bool is_root = true;
+	vector<CVisionModule*> end_modules_of_channels;
 	vector<vector<string> >::const_iterator ch_str_it;
 	for(ch_str_it = params_.vec_vec_channels_.begin(); ch_str_it != params_.vec_vec_channels_.end(); ++ch_str_it)
 	{
-		int passed_data_signature = DATA_TYPE_IMAGE | CV_8UC3; // start a channel with a color image
-		vector<CVisionModule*> cur_ch_modules;
+		is_root = true;
+		CVisionModule* ancestor_mod = NULL;
 		vector<string>::const_iterator mod_id_it;
 		for(mod_id_it = ch_str_it->begin(); mod_id_it != ch_str_it->end(); ++mod_id_it)
 		{
 			CVisionModule* cur_mod = NULL;
 			// Pre-processing Methods
 			if(*mod_id_it == ID_CANNY)
-				cur_mod = new CBinaryContours(passed_data_signature);
+				cur_mod = new CBinaryContours(is_root);
 			if(*mod_id_it == ID_GRADIENT)
-				cur_mod = new CGradientImage(passed_data_signature);
+				cur_mod = new CGradientImage(is_root);
 			if(*mod_id_it == ID_DISTTR)
-				cur_mod = new CDistanceTransform(passed_data_signature);
+				cur_mod = new CDistanceTransform(is_root);
 
 			// Feature Extractor Methods
 			if(*mod_id_it == ID_HOG)
-				cur_mod = new CHog(passed_data_signature);
+				cur_mod = new CHog(is_root);
 			if(*mod_id_it == ID_BRIEF)
-				cur_mod = new COwnBrief(passed_data_signature);
+				cur_mod = new COwnBrief(is_root);
 
 			// Subspace methods
 			if(*mod_id_it == ID_PCA)
-				cur_mod = new CPCA(passed_data_signature);
+				cur_mod = new CPCA(is_root);
 
 			// Classifiers: TODO: re-implementation of classifiers needed (not just class label as output)
 			if(*mod_id_it == ID_SVM)
-				cur_mod = new CSVM(passed_data_signature);
+				cur_mod = new CSVM(is_root);
 			if(*mod_id_it == ID_RF)
-				cur_mod = new CRandomForest(passed_data_signature);
+				cur_mod = new CRandomForest(is_root);
 
 			if(!cur_mod)
 				throw(PipeConfigExecption()); // unknown ID given!!!
 
-			passed_data_signature = cur_mod->outputSignature();
-			cur_ch_modules.push_back(cur_mod);
+			if(ancestor_mod)
+				ancestor_mod->setSuccessor(cur_mod);
+
+			is_root = false;
+			ancestor_mod = cur_mod;
+
+			all_modules_.push_back(cur_mod);
 		}
-		v_v_modules_.push_back(cur_ch_modules);
+		end_modules_of_channels.push_back(ancestor_mod);
 	}
 
 	// Create final classifier
-	if(params_.str_classifier_ == ID_SVM)
-		final_classifier_ = new CSVM();
-	if(params_.str_classifier_ == ID_RF)
-		final_classifier_ = new CRandomForest();
+	CVisionModule* final_classifier = NULL;
 
-	if(!final_classifier_)
+	if(params_.str_classifier_ == ID_SVM)
+		final_classifier = new CSVM(is_root);
+	if(params_.str_classifier_ == ID_RF)
+		final_classifier = new CRandomForest(is_root);
+
+	if(!final_classifier)
 		throw(PipeConfigExecption()); // unknown ID given!!!
+
+	// set successor of the last modules of the channels
+	for (vector<CVisionModule*>::const_iterator mod_it = end_modules_of_channels.begin(); mod_it != end_modules_of_channels.end(); ++mod_it)
+	{
+		(*mod_it)->setSuccessor(final_classifier);
+	}
+
+	all_modules_.push_back(final_classifier);
 
 	// set ID for each module (required for identifying in configuration file)
 	int module_id = 0;
-	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	for (vector<CVisionModule*>::const_iterator mod_it = all_modules_.begin(); mod_it != all_modules_.end(); ++mod_it)
 	{
-		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			(*mod_it)->setModuleID(module_id++);
-		}
+		(*mod_it)->setModuleID(module_id++);
 	}
 
-	final_classifier_->setModuleID(module_id++);
 
 	printConfig();
 }
@@ -110,9 +128,7 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 	Mat mat_detect_prop = Mat::zeros(input_img.size(), CV_32FC1);   // probability map of the detection results
 	cout << "Analyzing image...        " << flush;
 	float progress = 0.0;
-	int result_vector_length = 0;
-	for(vector<int>::const_iterator len_it = channel_end_data_lengths_.begin(); len_it != channel_end_data_lengths_.end(); ++len_it)
-		result_vector_length += *len_it;
+
 	// Sliding window
 	Rect win_roi(0, 0, SWIN_SIZE, SWIN_SIZE);
 	for(win_roi.y = 0; win_roi.y < input_img.rows-SWIN_SIZE; win_roi.y += 1)
@@ -126,49 +142,63 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 //#pragma omp parallel for
 		for(win_roi.x = 0; win_roi.x < input_img.cols-SWIN_SIZE; win_roi.x += 1)
 		{
-			CVisionData* window = new CMat();
-			((CMat*)window)->mat_ = input_img(win_roi);
+			//CVisionData window(input_img(win_roi), DATA_TYPE_IMAGE);
 			//			window->show();
 			//			waitKey(3);
 
-			CVisionData* result_vector = new CVector<float>();
-			reinterpret_cast<CVector<float>*>(result_vector)->vec_.reserve(result_vector_length);
 			// Execute each Pipeline and concatenate results
-			try
+			CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
+			CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
+			CVisionData* current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
+			while(cmp)
 			{
-				for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+				cmp->bufferData(current_data_ptr, lmp);
+				delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
+				current_data_ptr = NULL;
+				if(cmp->isTrained())
 				{
-					std::vector<CVisionData*> v_data;
-					v_data.push_back(window);
-					for (std::vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+					CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+					if(!missing_ancestor)
 					{
-						(*mod_it)->exec(v_data);
+						current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
+						lmp = cmp;
+						cmp = cmp->getSuccessor();
+
+						continue;
 					}
-					// Cleanup data
-					for (std::vector<CVisionData*>::const_iterator data_it = v_data.begin(); data_it != v_data.end(); ++data_it)
+					else // if there is data missing: crawl the structure upwards the path to get data
 					{
-						delete *data_it;
+						while(missing_ancestor)
+						{
+							cmp = missing_ancestor;
+							missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+							lmp = missing_ancestor; // is NULL when reached a root module
+						}
+						delete current_data_ptr;
+						current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
+						continue;
 					}
-					v_data.clear();
 				}
-			}
-			catch (VisionDataTypeException& e)
-			{
-				cout << e.what();
-				exit(-1);
+				else
+				{
+					cerr << "Testing untrained modules?" << endl;
+					exit(-1);
+				}
 			}
 
 			// Classify with final classifier
-			std::vector<CVisionData*> v_result_data;
-			v_result_data.push_back(result_vector);
-			final_classifier_->exec(v_result_data);
-			CWeightedScalar<int>* result = reinterpret_cast<CWeightedScalar<int>* >(v_result_data.back());
+			if(!SIGNATURE_IS_WSCALAR(current_data_ptr->getSignature()))
+			{
+				cerr << "Final Module has produced a not weighed scalar as result" << endl;
+				exit(-1);
+			}
 
-			if(result->val_)
+			uchar result_class = static_cast<uchar>(current_data_ptr->data().at<float>(0,0));
+			if(result_class)
 			{
 				Point2i win_center(win_roi.x + win_roi.width/2, win_roi.y + win_roi.height/2);
-				mat_detect_labels.at<uchar>(win_center) = result->val_;
-				mat_detect_prop.at<float>(win_center) = result->weight_;
+				mat_detect_labels.at<uchar>(win_center) = result_class;
+				mat_detect_prop.at<float>(win_center) = current_data_ptr->data().at<float>(0,1);
 			}
 
 		}
@@ -432,204 +462,127 @@ void CPipelineController::train(const CommandParams& params)
 	vector<string> filelist;
 	if(getFileList(params.str_imgset_, filelist))
 	{
-		//TODO: collect end data lengths of channels
 		sort(filelist.begin(), filelist.end());
-		vector<CMat*> all_final_data;
-		CVector<int> train_labels;
 
-		// for each feature channel
-		for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+		CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
+		CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
+		vector<string>::const_iterator filename_it = filelist.begin();
+		CVisionModule* current_path_root = cmp;
+		//CVisionData* origin_sample = new CVisionData(imread(params.str_imgset_ + *filename_it), DATA_TYPE_IMAGE);
+		CVisionData* current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+		vector<int> data_labels;
+
+		bool finishedTraining = false;
+		while(!finishedTraining)
 		{
-			CMat* train_data;
-			vector<CVisionModule*>::iterator mod_it;
-			// for each file
-			for(vector<string>::iterator file_it = filelist.begin(); file_it != filelist.end(); ++file_it)
+			cmp->bufferData(current_data_ptr, lmp);
+			delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
+			current_data_ptr = NULL;
+			if(cmp->isTrained())
 			{
-				CMat* training_sample_ptr = new CMat();
-				training_sample_ptr->mat_ = cv::imread(params.str_imgset_ + *file_it);
-				//training_sample_ptr->show();
-				vector<CVisionData*> v_seq_data;
-				v_seq_data.push_back(training_sample_ptr);
+				CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+				if(!missing_ancestor)
+				{
+					current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
+					lmp = cmp;
+					cmp = cmp->getSuccessor();
 
-				// for each module that needs no training
-				for (mod_it = ch_it->begin(); mod_it != ch_it->end() && !(*mod_it)->needsTraining(); ++mod_it)
-				{
-					(*mod_it)->exec(v_seq_data);
-				}
-				// feature is now at the end of v_seq_data and was created with new
-				// create temporary matrix header with the feature vector data (without copying)
-				Mat latest_feature(((CVector<float>*)v_seq_data.back())->vec_, false);
-				if(train_data->mat_.empty())
-				{
-					// reserve space for the feature vectors for all training samples (one sample per ROW)
-					train_data->mat_ = Mat::zeros(filelist.size(), latest_feature.size().area(), CV_32FC1);
-				}
-				// reshape to row-vector and add feature vector to all samples (with copying data)
-				latest_feature.reshape(0,1).copyTo(train_data->mat_.row(distance(filelist.begin(), file_it)));
+					if(cmp == NULL) // reached the final module
+						finishedTraining = true;
 
-				// clean up data of current sample
-				for (std::vector<CVisionData*>::const_iterator data_it = v_seq_data.begin(); data_it != v_seq_data.end(); ++data_it)
-				{
-					delete *data_it;
+					continue;
 				}
-				v_seq_data.clear();
-
-				// collect class label
-				if(train_labels.vec_.size() != filelist.size())
+				else // if there is data missing: crawl the structure upwards the path to get data
 				{
-					stringstream ss_feature(*file_it);
+					while(missing_ancestor)
+					{
+						cmp = missing_ancestor;
+						missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+						lmp = missing_ancestor; // is NULL when reached a root module
+					}
+					current_path_root = cmp;
+					delete current_data_ptr;
+					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+					continue;
+				}
+			}
+			else // reached a module that needs training: redo the same last path with each training sample
+			{
+				// first: collect the class label during the first iteration through the training data
+				if(data_labels.size() != filelist.size())
+				{
+					stringstream ss_feature(*filename_it);
 					string str_label;
 					getline(ss_feature, str_label, '_');
 					int train_label;
 					stringstream ss_label;
 					ss_label << *(str_label.begin());
 					ss_label >> train_label;
-					train_labels.vec_.push_back(train_label);
+					data_labels.push_back(train_label);
 				}
-			}
 
-
-			// for each module that is left in the current channel
-			for (; mod_it != ch_it->end(); ++mod_it)
-			{
-				if((*mod_it)->needsTraining())
+				++filename_it;
+				if(filename_it != filelist.end()) // the last there are training samples left
 				{
-					(*mod_it)->train(*train_data, train_labels);
+					// load the next sample and go the same path
+					delete current_data_ptr;
+					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+					cmp = current_path_root; // (will alternate if the path contains merging modules)
+					lmp = NULL;
+					continue;
 				}
-
-			}
-
-
-
-
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-		// Allocate Space for resulting parallel data (Set of all samples); one sample is stored in one ROW
-		CMat* parallel_data_mat_ptr = new CMat();
-		parallel_data_mat_ptr->mat_ = Mat(filelist.size(), feature_length_, CV_32FC1);
-		//cout << "Feature Size: " << train_data.mat_.rows << " x " << train_data.mat_.cols << endl << flush;
-
-		// Sequential processing of training samples (up to subspace or classifier module)
-
-		int sample_cnt = 0;
-		sort(filelist.begin(), filelist.end());
-		std::vector<CVisionModule*>::const_iterator mod_it;
-		vector<string>::const_iterator file_it;
-		for(file_it = filelist.begin(); file_it != filelist.end(); ++file_it)
-		{
-			CMat* training_sample_ptr = new CMat();
-			training_sample_ptr->mat_ = cv::imread(params.str_imgset_ + *file_it);
-			//training_sample_ptr->show();
-			vector<CVisionData*> v_seq_data;
-			v_seq_data.push_back(training_sample_ptr);
-
-			// Execute Pipeline exclusive classifier and subspace
-			for (mod_it = v_modules_.begin(); (*mod_it)->getType() & (MOD_TYPE_PREPROC | MOD_TYPE_FEATURE); ++mod_it)
-			{
-				(*mod_it)->exec(v_seq_data);
-//				v_data.back()->show();
-//				waitKey(0);
-//				if((*mod_it)->getType() == MOD_TYPE_PREPROC)
-//				{
-//					imwrite("out.png", reinterpret_cast<CMat*>(v_seq_data.back())->mat_*4);
-//				}
-			}
-			// feature is now at the end of v_seq_data and was created with new
-			// create temporary matrix header with the feature vector data (without copying)
-			Mat temp(((CVector<float>*)v_seq_data.back())->vec_, false);
-			// reshape to row-vector and add feature vector to all samples (with copying data)
-			temp.reshape(0,1).copyTo(parallel_data_mat_ptr->mat_.row(sample_cnt));
-
-			// clean up data of current sample
-			for (std::vector<CVisionData*>::const_iterator data_it = v_seq_data.begin(); data_it != v_seq_data.end(); ++data_it)
-			{
-				delete *data_it;
-			}
-			v_seq_data.clear();
-
-			// collect class label
-			stringstream ss_feature(*file_it);
-			string str_label;
-			getline(ss_feature, str_label, '_');
-			int train_label;
-			stringstream ss_label;
-			ss_label << *(str_label.begin());
-			ss_label >> train_label;
-			train_labels.vec_.push_back(train_label);
-			//cout << *file_it << " : " << train_label << endl << flush; // TODO: check if labels are extracted correctly
-			// waitKey(0);
-
-			sample_cnt++;
-		}
-
-		// mod_it should now be pointing at a subspace or classifier module.
-		// nevertheless, finish training with samples in parallel
-		vector<CVisionData*> v_par_data;
-		v_par_data.push_back(parallel_data_mat_ptr);
-		for (; mod_it != v_modules_.end(); ++mod_it)
-		{
-			switch ((*mod_it)->getType())
-			{
-			case MOD_TYPE_SUBSPACE:
-			{
-				CSubspaceModule* subspace_ptr = reinterpret_cast<CSubspaceModule*>(*mod_it);
-
-				subspace_ptr->train(*parallel_data_mat_ptr, train_labels);
-
-				// execute subspace projection to pass it to the classifier
-				subspace_ptr->exec(v_par_data);
-
-				// delete previous data to free space
-				// clean up data of current sample
-				for (vector<CVisionData*>::const_iterator data_it = v_par_data.begin(); data_it != v_par_data.end()-1; ++data_it)
+				else // reached the module to be trained with the last sample
 				{
-					delete *data_it;
+					// see if there are another paths towards this module
+					CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+					if(!missing_ancestor)
+					{
+						// if not, train the module - all data should be in the buffer
+						cmp->setDataLabels(CVisionData(Mat(data_labels), DATA_TYPE_VECTOR));
+						cmp->train(); // also clears Data Buffer of current Module
+						cmp->setAsTrained();
+						cmp = current_path_root; // restart from root module
+						lmp = NULL;
+					}
+					else // if there is another path: crawl the structure upwards this path to get data using the same sample
+					{
+						while(missing_ancestor)
+						{
+							cmp = missing_ancestor;
+							missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+							lmp = missing_ancestor; // is NULL when reached a root module
+						}
+						// now go the other path
+						current_path_root = cmp;
+					}
+					// load the first sample
+					filename_it = filelist.begin();
+					delete current_data_ptr;
+					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+					continue;
 				}
-				CVisionData* last_data = v_par_data.back();
-				v_par_data.clear();
-				v_par_data.push_back(last_data);
-
-				break;
 			}
 
-			case MOD_TYPE_CLASSIFIER:
-			{
-				CClassifierModule* classifier = reinterpret_cast<CClassifierModule*>(*mod_it);
-
-				// Perform Training of classifier
-				classifier->train(*reinterpret_cast<const CMat*>(v_par_data.back()), train_labels);
-
-				break;
-			}
-
-			default:
-				// TODO: check vision module types
-				throw(PipeConfigExecption());
-
-			}
 		}
 
-		// get number of different classes; train_labels is not needed anymore
-		vector<int>::iterator t_it;
-		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
-		train_labels.vec_.resize(distance(train_labels.vec_.begin(), t_it));
-		sort(train_labels.vec_.begin(), train_labels.vec_.end());
-		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
-		n_object_classes_ = distance(train_labels.vec_.begin(), t_it) - 1; // subtract background class
-
-		cout << "Number of different object classes: " << n_object_classes_ << endl;
+//
+//		// get number of different classes; train_labels is not needed anymore
+//		vector<int>::iterator t_it;
+//		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
+//		train_labels.vec_.resize(distance(train_labels.vec_.begin(), t_it));
+//		sort(train_labels.vec_.begin(), train_labels.vec_.end());
+//		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
+//		n_object_classes_ = distance(train_labels.vec_.begin(), t_it) - 1; // subtract background class
+//
+//		cout << "Number of different object classes: " << n_object_classes_ << endl;
 	}
+}
+
+CVisionData* CPipelineController::createNewVisionDataObjectFromImageFile(const string& filename)
+{
+	Mat image = imread(filename);
+	resize(image, image, Size(SWIN_SIZE, SWIN_SIZE));
+	return new CVisionData(image, DATA_TYPE_IMAGE);
 }
 
 
@@ -639,29 +592,23 @@ void CPipelineController::printConfig()
 	cout << "Vision Pipeline Configuration:" << endl;
 	cout << "------------------------------" << endl;
 
-	int mod_type = 0;
-	for (vector<vector<CVisionModule*> >::iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
-	{
-		cout << "-Feature Channel " << distance(ch_it, v_v_modules_.begin()) << ": " << endl;
-		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			if(mod_type != (*mod_it)->getType())
-			{
-				if((*mod_it)->getType() == MOD_TYPE_PREPROC)
-					cout << " -Preprocessing:" << endl;
-				if((*mod_it)->getType() == MOD_TYPE_FEATURE)
-					cout << " -Feature Descriptor:" << endl;
-				if((*mod_it)->getType() == MOD_TYPE_SUBSPACE)
-					cout << " -Subspace Method:" << endl;
-				if((*mod_it)->getType() == MOD_TYPE_CLASSIFIER)
-					cout << " -Classifier:" << endl;
 
-				mod_type = (*mod_it)->getType();
-			}
-			cout << "   -" << (*mod_it)->getPrintName() << endl;
+	for(vector<vector<string> >::iterator ch_it = params_.vec_vec_channels_.begin(); ch_it != params_.vec_vec_channels_.end(); ++ch_it)
+	{
+		cout << "Channel" << distance(params_.vec_vec_channels_.begin(), ch_it) + 1 << ":" << endl;
+		for(vector<string>::iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
+		{
+			cout << " -" << *mod_it << endl;
 		}
 	}
-	cout << "Final Classifier: " << final_classifier_->getPrintName() << endl;
+
+//	for (vector<CVisionModule*>::iterator mod_it = all_modules_.begin(); mod_it != all_modules_.end(); ++mod_it)
+//	{
+//		cout << "-Feature Channel " << distance(all_modules_.begin(), mod_it) << ": " << endl;
+//		cout << "   -" << (*mod_it)->getPrintName() << endl;
+//	}
+
+	cout << "Final Classifier: " << params_.str_classifier_ << endl;
 	cout << endl;
 
 }
@@ -678,20 +625,30 @@ void CPipelineController::load(const string& filename)
 		exit(-1);
 	}
 
-	fs[CONFIG_NAME_CHANNELS] >> params_.vec_vec_channels_;
-	fs[CONFIG_NAME_CHANNEL_LENGTHS] >> channel_end_data_lengths_;
+
+	// get all channel ids
+	for(int ch_nr = 1; ch_nr <= 5; ++ch_nr)
+	{
+		stringstream ch_nr_ss;
+		ch_nr_ss << "-" << ch_nr;
+		vector<string> channel_ids;
+		fs[CONFIG_NAME_CHANNEL + ch_nr_ss.str()] >> channel_ids;
+		if(channel_ids.empty())
+			break;
+
+		params_.vec_vec_channels_.push_back(channel_ids);
+	}
+
 	fs[CONFIG_NAME_CLASSIFIER] >> params_.str_classifier_;
 
 	initializeFromParameters();
 
 	fs[CONFIG_NAME_NUM_CLASSES] >> n_object_classes_;
 
-	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	for (vector<CVisionModule*>::const_iterator mod_it = all_modules_.begin(); mod_it != all_modules_.end(); ++mod_it)
 	{
-		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			(*mod_it)->load(fs);
-		}
+		(*mod_it)->load(fs);
+		(*mod_it)->setAsTrained();
 	}
 
 	fs.release();
@@ -712,20 +669,21 @@ void CPipelineController::save(const string& filename)
 	}
 
 	// Save Pipeline configuration
+	for(vector<vector<string> >::iterator ch_it = params_.vec_vec_channels_.begin(); ch_it != params_.vec_vec_channels_.end(); ++ch_it)
+	{
+		stringstream ch_nr;
+		ch_nr << "-" << distance(params_.vec_vec_channels_.begin(), ch_it)+1;
+		fs << CONFIG_NAME_CHANNEL + ch_nr.str() << *ch_it;
+	}
 
-	fs << CONFIG_NAME_CHANNELS << params_.vec_vec_channels_;
-	fs << CONFIG_NAME_CHANNEL_LENGTHS << channel_end_data_lengths_;
 	fs << CONFIG_NAME_CLASSIFIER << params_.str_classifier_;
-
 	fs << CONFIG_NAME_NUM_CLASSES << n_object_classes_;
 
-	for (vector<vector<CVisionModule*> >::const_iterator ch_it = v_v_modules_.begin(); ch_it != v_v_modules_.end(); ++ch_it)
+	for (vector<CVisionModule*>::const_iterator mod_it = all_modules_.begin(); mod_it != all_modules_.end(); ++mod_it)
 	{
-		for (vector<CVisionModule*>::const_iterator mod_it = ch_it->begin(); mod_it != ch_it->end(); ++mod_it)
-		{
-			(*mod_it)->save(fs);
-		}
+		(*mod_it)->save(fs);
 	}
+
 
 	fs.release();
 

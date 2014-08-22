@@ -2,20 +2,43 @@
 
 #include <iostream>
 #include <string>
+#include <bitset>
 #include <opencv2/opencv.hpp>
 
+#include "Debug.h"
 
-#define DATA_TYPE_SCALAR        1 << 16
-#define DATA_TYPE_VECTOR        1 << 17
-#define DATA_TYPE_IMAGE         1 << 18
-#define DATA_TYPE_POINT         1 << 19
+#define DATA_TYPE_SCALAR                 1 << 16
+#define DATA_TYPE_WEIGHTED_SCALAR        1 << 17
+#define DATA_TYPE_VECTOR                 1 << 18
+#define DATA_TYPE_IMAGE                  1 << 19
+#define DATA_TYPE_POINT                  1 << 20
 
-#define DATA_ARRAY              1 << 24
+#define DATA_ARRAY              1 << 31
 
-#define DATA_FORMAT_MASK        0x00ff
-#define DATA_TYPE_MASK          0x0f00
+#define DATA_FORMAT_MASK        0x0000ffff
+#define DATA_TYPE_MASK          0x00ff0000
+
+#define SIGNATURE_N_CHANNELS(SIG)    (1 + ((SIG >> CV_CN_SHIFT) & CV_MAT_DEPTH_MASK))
+#define SIGNATURE_IS_UCHAR(SIG)      ((SIG & CV_MAT_DEPTH_MASK) == CV_8U)
+#define SIGNATURE_IS_INT(SIG)        ((SIG & CV_MAT_DEPTH_MASK) == CV_32S)
+#define SIGNATURE_IS_FLOAT(SIG)      ((SIG & CV_MAT_DEPTH_MASK) == CV_32F)
+#define SIGNATURE_IS_IMAGE(SIG)      (SIG & DATA_TYPE_MASK) == DATA_TYPE_IMAGE
+#define SIGNATURE_IS_VECTOR(SIG)     (SIG & DATA_TYPE_MASK) == DATA_TYPE_VECTOR
+#define SIGNATURE_IS_POINT(SIG)      (SIG & DATA_TYPE_MASK) == DATA_TYPE_POINT
+#define SIGNATURE_IS_WSCALAR(SIG)    (SIG & DATA_TYPE_MASK) == DATA_TYPE_WEIGHTED_SCALAR
+#define SIGNATURE_IS_SCALAR(SIG)     (SIG & DATA_TYPE_MASK) == DATA_TYPE_SCALAR
+
 
 #define DISPLAY_WIN_NAME        "VisionData"
+
+/* DATA FORMAT (OpenCV Mat type):
+CV_8UC1:  0   is: 0000000000000000
+CV_8UC3:  16  is: 0000000000010000
+CV_32FC1: 5   is: 0000000000000101
+CV_32FC3: 21  is: 0000000000010101
+CV_32SC1: 4   is: 0000000000000100
+CV_32SC3: 20  is: 0000000000010100
+ */
 
 using namespace std;
 using namespace cv;
@@ -50,6 +73,16 @@ public:
 			data_signature_ |= DATA_ARRAY;
 	}
 
+	void concatenateColumnwise(const CVisionData& other)
+	{
+		hconcat(mat_, other.data(), mat_);
+	}
+
+	void concatenateRowwise(const CVisionData& other)
+	{
+		vconcat(mat_, other.data(), mat_);
+	}
+
 //	Mat& data()
 //	{
 //		return mat_;
@@ -76,18 +109,24 @@ public:
 			break;
 		}
 
-		cout << "Data Type is: " << type2str();
+		cout << "Data Type is: " << signature2str();
 
 	}
 
-	inline string type2str() const
+	inline string signature2str() const
+	{
+		return signature2str(this->data_signature_);
+	}
+
+	static string signature2str(const int& signature)
 	{
 		string r;
 
-		uchar depth = mat_.type() & CV_MAT_DEPTH_MASK;
-		uchar chans = 1 + (mat_.type() >> CV_CN_SHIFT);
+		uchar depth = signature & CV_MAT_DEPTH_MASK;
+		uchar chans = 1 + ((signature & DATA_FORMAT_MASK) >> CV_CN_SHIFT);
 
-		switch ( depth ) {
+		switch (depth)
+		{
 		case CV_8U:  r = "8U"; break;
 		case CV_8S:  r = "8S"; break;
 		case CV_16U: r = "16U"; break;
@@ -102,7 +141,8 @@ public:
 		r += (chans+'0');
 		r+= ":";
 
-		switch ( data_signature_ & DATA_TYPE_MASK ) {
+		switch (signature & DATA_TYPE_MASK)
+		{
 		case DATA_TYPE_SCALAR:       r += "Scalar"; break;
 		case DATA_TYPE_VECTOR:       r += "Vector"; break;
 		case DATA_TYPE_IMAGE:        r += "Image"; break;
@@ -110,7 +150,7 @@ public:
 		default:                     r += "Unknown"; break;
 		}
 
-		if( data_signature_ | DATA_ARRAY )
+		if( signature & DATA_ARRAY )
 			r += "Array";
 
 		return r;
@@ -131,33 +171,37 @@ public:
 		return data_signature_ & DATA_ARRAY;
 	}
 
-	inline int getSignature() const // but without the Array-Flag
+	inline int getSignature() const
 	{
-		return data_signature_ & (DATA_TYPE_MASK | DATA_FORMAT_MASK);
+		return data_signature_;// & (DATA_TYPE_MASK | DATA_FORMAT_MASK);
 	}
 };
 
 
 // DATA CONVERTER Class for automatic data conversion before Vision Modules execute their task
 
-class CDataConverter
+class CVisionDataConverter
 {
 private:
-	CDataConverter();
-	vector<void(*)(CVisionData& data)> convert_functions_;
+	CVisionDataConverter();
+	vector<void(*)(CVisionData& data)> convert_routines_;
 	int expected_input_signature_;
 
-	void convImage2Vector(CVisionData& data)
+	static void convImage2Vector(CVisionData& data)
 	{
 		data.assignData(data.data().reshape(0,1), DATA_TYPE_VECTOR);
 	}
-	void convRGB2Gray(CVisionData& data)
+	static void convScalar2Vector(CVisionData& data)
+	{
+		data.assignData(data.data().reshape(0,1), DATA_TYPE_VECTOR);
+	}
+	static void convRGB2Gray(CVisionData& data)
 	{
 		Mat temp;
-		cvtColor(data.data(), temp, CV_BGR2GRAY, 1);
+		cvtColor(data.data(), temp, CV_BGR2GRAY);
 		data.assignData(temp, data.getType());
 	}
-	void convUChar2Float(CVisionData& data)
+	static void convUChar2Float(CVisionData& data)
 	{
 		Mat temp;
 		data.data().convertTo(temp, CV_32F, 1.0/255.0);
@@ -165,62 +209,72 @@ private:
 	}
 
 public:
-	CDataConverter(const int& input_data_signature, const int& output_data_signature) : expected_input_signature_(input_data_signature)
+	CVisionDataConverter(const int& input_data_signature, const int& output_data_signature) : expected_input_signature_(input_data_signature)
 	{
-		// TYPE conversions
-		int input_data_type = (input_data_signature & DATA_TYPE_MASK);
-		int output_data_type = (output_data_signature & DATA_TYPE_MASK);
-		if(input_data_type != output_data_type)
+		int converted_signature = input_data_signature;
+		if(input_data_signature != output_data_signature)
 		{
-			// Possible Type conversions
+			// Possible TYPE conversions
 			// -------------------------
 
 			// convert image to vector by concatenating all pixels
-			if(input_data_type == DATA_TYPE_IMAGE && output_data_type == DATA_TYPE_VECTOR)
+			if(SIGNATURE_IS_IMAGE(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
 			{
-				convert_functions_.push_back(&convImage2Vector);
+				convert_routines_.push_back(&convImage2Vector);
+				converted_signature &= ~DATA_TYPE_MASK;
+				converted_signature |= DATA_TYPE_VECTOR;
 			}
-		}
+			// convert Scalar Value to Vector (with only one entry; probably needed for channel merging)
+			if(SIGNATURE_IS_SCALAR(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
+			{
+				convert_routines_.push_back(&convScalar2Vector);
+				converted_signature &= ~DATA_TYPE_MASK;
+				converted_signature |= DATA_TYPE_VECTOR;
+			}
 
-		// FORMAT conversions
-		int input_data_format = (input_data_signature & DATA_FORMAT_MASK);
-		int output_data_format = (output_data_signature & DATA_FORMAT_MASK);
-		if(input_data_format != output_data_format)
-		{
-			// Possible format conversions
+
+			// Possible FORMAT conversions
 			// ---------------------------
 
 			// RGB values to Grayscale (3 channel -> 1 channel)
-			if(((1 + (input_data_format >> CV_CN_SHIFT)) == 3) && ((1 + (input_data_format >> CV_CN_SHIFT)) == 1))
+			if(SIGNATURE_N_CHANNELS(input_data_signature) == 3 && SIGNATURE_N_CHANNELS(output_data_signature) == 1)
 			{
-				convert_functions_.push_back(&convRGB2Gray);
+				convert_routines_.push_back(&convRGB2Gray);
+				converted_signature &= ~(CV_MAT_TYPE_MASK << CV_CN_SHIFT); // (remove all bits at 0b111000)
 			}
 
 			// 8bit to floating point (with range scaling from [0..255] -> [0..1])
-			if((input_data_format & CV_MAT_DEPTH_MASK) == CV_8U && (output_data_format & CV_MAT_DEPTH_MASK) == CV_32F)
+			if(SIGNATURE_IS_UCHAR(input_data_signature) && SIGNATURE_IS_FLOAT(output_data_signature))
 			{
-				convert_functions_.push_back(&convUChar2Float);
+				convert_routines_.push_back(&convUChar2Float);
+				converted_signature &= ~CV_MAT_TYPE_MASK;
+				converted_signature |= CV_32F;
 			}
+
 		}
 
-		if(convert_functions_.empty())
+		//bitset<32> from(input_data_signature), target(output_data_signature), achieved(converted_signature);
+		cout << "Conversion result: From: " << CVisionData::signature2str(input_data_signature) << endl;
+		cout << "                     To: " << CVisionData::signature2str(output_data_signature) << endl;
+		cout << "           was achieved: " << CVisionData::signature2str(converted_signature) << endl;
+		if(output_data_signature != converted_signature)
 		{
 			cout << "No suitable conversion found! Throwing PipeConfigException" << endl;
 			exit(-1);
 		}
 	};
 
-	~CDataConverter() { };
+	~CVisionDataConverter() { };
 
 	void convert(CVisionData& data)
 	{
 		if(data.getSignature() != expected_input_signature_)
 		{
-			cout << "Are you kidding me?!" << endl;
+			cout << "Are you kidding me?! I expected a " << CVisionData::signature2str(expected_input_signature_) << " but got a " << data.signature2str() <<" You lied!!!" << endl;
 			exit(-1);
 		}
 		vector<void(*)(CVisionData& data)>::const_iterator convert_routines_it;
-		for(convert_routines_it = convert_functions_.begin(); convert_routines_it != convert_functions_.end(); ++convert_routines_it)
+		for(convert_routines_it = convert_routines_.begin(); convert_routines_it != convert_routines_.end(); ++convert_routines_it)
 		{
 			(*convert_routines_it)(data);
 		}

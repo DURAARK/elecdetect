@@ -8,10 +8,8 @@
 #ifndef PCA_H_
 #define PCA_H_
 
-
-#include "Vector.h"
-#include "Mat.h"
-
+#include "Debug.h"
+#include "VisionData.h"
 #include "VisionModule.h"
 
 #define DEFAULT_NUMBER_OF_EIGENVECTORS  90
@@ -20,21 +18,27 @@
 #define CONFIG_NAME_PCA_EIGENVALUES      "opencv-pca-eigenvalues"
 #define CONFIG_NAME_PCA_EIGENVECTORS     "opencv-pca-eigenvectors"
 #define CONFIG_NAME_PCA_MEANS            "opencv-pca-means"
+#define CONFIG_NAME_PCA_NORM             "opencv-pca-norm"
 
 class CPCA: public CVisionModule
 {
 private:
 	int n_eigenvectors_;
 	PCA* opencv_pca_ptr_;
+	struct afterProjectionNormalization
+	{
+		float mean_;
+		float stddev_;
+	} norm_;
 
 	CPCA();
 
 public:
-	CPCA(int inchain_input_signature);
+	CPCA(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~CPCA();
 
-	void exec(const CVisionData& input_data, CVisionData& output_data);
-	void train(const CVisionData& train_data, const CVisionData& train_labels);
+	CVisionData* exec();
+	void train();
 	void save(FileStorage& fs) const;
 	void load(FileStorage& fs);
 };

@@ -7,17 +7,15 @@
 
 #include "PCA.h"
 
-CPCA::CPCA(int inchain_input_signature) : n_eigenvectors_(DEFAULT_NUMBER_OF_EIGENVECTORS), opencv_pca_ptr_(NULL)
+CPCA::CPCA(MODULE_CONSTRUCTOR_SIGNATURE) : n_eigenvectors_(DEFAULT_NUMBER_OF_EIGENVECTORS), opencv_pca_ptr_(NULL)
 {
 	module_print_name_ = "Principal Component Analysis";
-	needs_training_ = true;
-	required_input_signature_mask_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
-	output_type_ = DATA_TYPE_VECTOR | CV_32FC1;
+	is_trained_ = false;
+	required_input_signature_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
+	output_signature_ = DATA_TYPE_VECTOR | CV_32FC1;
 
-	if(inchain_input_signature != required_input_signature_mask_)
-	{
-		data_converter_ = new CDataConverter(inchain_input_signature, required_input_signature_mask_);
-	}
+	if(is_root)
+		setAsRoot();
 }
 
 CPCA::~CPCA()
@@ -29,13 +27,9 @@ CPCA::~CPCA()
 }
 
 // takes CVector and CMat objects. In case of CMat, the samples are ordered as rows
-void CPCA::exec(const CVisionData& input_data, CVisionData& output_data)
+CVisionData* CPCA::exec()
 {
-	CVisionData working_data(input_data.data(), input_data.getType());
-	if(data_converter_)
-	{
-		data_converter_->convert(working_data);
-	}
+	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
 
 	if(!opencv_pca_ptr_)
 	{
@@ -44,35 +38,42 @@ void CPCA::exec(const CVisionData& input_data, CVisionData& output_data)
 		exit(-1);
 	}
 
-	Mat output;
-	opencv_pca_ptr_->project(working_data.data(), output);
-	output_data.assignData(output, DATA_TYPE_VECTOR);
+//	double min, max;
+//	minMaxLoc(working_data->data(), &min, &max);
+//	cout << "min-max of PCA test data: " << min << " - " << max << endl << flush;
 
+	Mat output;
+	opencv_pca_ptr_->project(working_data->data(), output);
+	return new CVisionData(output, DATA_TYPE_VECTOR);
 }
 
 // train_data contains for each sample one Row and must be already NORMALIZED (value range from 0 to 1)
-void CPCA::train(const CVisionData& train_data, const CVisionData& train_labels)
+void CPCA::train()
 {
-	assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
+	CVisionData* train_data = getConcatenatedDataAndClearBuffer();
+	//assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
 
 	vector<int> non_bg_indices;
-	for(int row_cnt = 0; row_cnt < train_labels.data().rows; ++row_cnt)
-		if(train_labels.data().at<int>(row_cnt, 0))
+	for(int row_cnt = 0; row_cnt < data_labels_->data().rows; ++row_cnt)
+		if(data_labels_->data().at<int>(row_cnt, 0))
 			non_bg_indices.push_back(row_cnt);
 
-	Mat train_data_non_bg = Mat::zeros(non_bg_indices.size(), train_data.mat_.cols, train_data.mat_.type());
+	Mat train_data_non_bg = Mat::zeros(non_bg_indices.size(), train_data->data().cols, train_data->data().type());
 	int cur_row = 0;
 	for(vector<int>::const_iterator non_bg_it = non_bg_indices.begin(); non_bg_it != non_bg_indices.end(); ++non_bg_it, ++cur_row)
 	{
-		train_data.mat_.row(*non_bg_it).copyTo(train_data_non_bg.row(cur_row));
+		train_data->data().row(*non_bg_it).copyTo(train_data_non_bg.row(cur_row));
+		//cout << "Channels: " << train_data->data().channels() << " Type: " << train_data->signature2str() << endl;
+		//Mat temp = train_data->data().row(*non_bg_it).reshape(0,86);
+		//cout << "Channels: " << temp.channels() << " Type: " << CVisionData::signature2str(temp.type()) << endl;
+		//PAUSE_AND_SHOW(temp);
 		//normalize(train_data_non_bg.row(cur_row), train_data_non_bg.row(cur_row), 0.0, 1.0, NORM_MINMAX);
 	}
 
-	normalize(train_data_non_bg, train_data_non_bg, 0.0, 1.0, NORM_MINMAX);
+	//normalize(train_data_non_bg, train_data_non_bg, 0.0, 1.0, NORM_MINMAX);
 	double min, max;
 	minMaxLoc(train_data_non_bg, &min, &max);
 	cout << "min-max of PCA training data: " << min << " - " << max << endl << flush;
-
 
 	cout << "Training PCA... " << flush;
 	opencv_pca_ptr_ = new PCA(train_data_non_bg, Mat(), CV_PCA_DATA_AS_ROW, n_eigenvectors_);
@@ -81,12 +82,10 @@ void CPCA::train(const CVisionData& train_data, const CVisionData& train_labels)
 	cout << "Projection Matrix size: " << opencv_pca_ptr_->eigenvectors.rows << " x " << opencv_pca_ptr_->eigenvectors.cols << endl;
 	cout << "Matrix snapshot: " << opencv_pca_ptr_->eigenvectors(Rect(0,0,10,10)) << endl;
 
-
-
 	cout << "writing eigen images" << endl;
 	for(int v_cnt = 0; v_cnt < opencv_pca_ptr_->eigenvalues.rows; ++v_cnt)
 	{
-		Mat eigen_image = Mat(100, 100, CV_32FC1, opencv_pca_ptr_->eigenvectors.row(v_cnt).data);
+		Mat eigen_image = Mat(86, 86, CV_32FC1, opencv_pca_ptr_->eigenvectors.row(v_cnt).data);
 		normalize(eigen_image, eigen_image, 0.0, 1.0, NORM_MINMAX);
 		Mat eigen_image_uchar;
 		eigen_image.convertTo(eigen_image_uchar, CV_8UC1, 255);
@@ -146,23 +145,26 @@ void CPCA::save(FileStorage& fs) const
 
 	if(opencv_pca_ptr_)
 	{
-		stringstream config_name_vectors, config_name_values, config_name_means;
+		stringstream config_name_vectors, config_name_values, config_name_means, config_name_norm;
 		config_name_vectors << CONFIG_NAME_PCA_EIGENVECTORS << "-" << module_id_;
 		config_name_values << CONFIG_NAME_PCA_EIGENVALUES << "-" << module_id_;
 		config_name_means << CONFIG_NAME_PCA_MEANS << "-" << module_id_;
+		config_name_norm << CONFIG_NAME_PCA_NORM << "-" << module_id_;
 		fs << config_name_vectors.str().c_str() << opencv_pca_ptr_->eigenvectors;
 		fs << config_name_values.str().c_str()  << opencv_pca_ptr_->eigenvalues;
 		fs << config_name_means.str().c_str() << opencv_pca_ptr_->mean;
+		//fs << config_name_norm.str().c_str() << norm_;
 	}
 }
 
 void CPCA::load(FileStorage& fs)
 {
-	stringstream config_name_n_eigenvectors, config_name_vectors, config_name_values, config_name_means;
+	stringstream config_name_n_eigenvectors, config_name_vectors, config_name_values, config_name_means, config_name_norm;
 	config_name_n_eigenvectors << CONFIG_NAME_PCA_N_EIGENVECTORS << "-" << module_id_;
 	config_name_vectors << CONFIG_NAME_PCA_EIGENVECTORS << "-" << module_id_;
 	config_name_values << CONFIG_NAME_PCA_EIGENVALUES << "-" << module_id_;
 	config_name_means << CONFIG_NAME_PCA_MEANS << "-" << module_id_;
+	config_name_norm << CONFIG_NAME_PCA_NORM << "-" << module_id_;
 
 	fs[config_name_n_eigenvectors.str().c_str()] >> n_eigenvectors_;
 	if(opencv_pca_ptr_)
@@ -172,4 +174,5 @@ void CPCA::load(FileStorage& fs)
 	fs[config_name_vectors.str().c_str()] >> opencv_pca_ptr_->eigenvectors;
 	fs[config_name_values.str().c_str()] >> opencv_pca_ptr_->eigenvalues;
 	fs[config_name_means.str().c_str()] >> opencv_pca_ptr_->mean;
+	//fs[config_name_norm.str().c_str()] >> norm_;
 }

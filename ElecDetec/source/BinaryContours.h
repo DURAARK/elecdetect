@@ -13,10 +13,10 @@ private:
 	CBinaryContours();
 
 public:
-	CBinaryContours(int expected_input_signature);
+	CBinaryContours(MODULE_CONSTRUCTOR_SIGNATURE);
 	~CBinaryContours();
 
-	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
+	virtual CVisionData* exec();
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 };

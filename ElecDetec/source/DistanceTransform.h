@@ -20,10 +20,10 @@ private:
 	CDistanceTransform();
 
 public:
-	CDistanceTransform(int expected_input_signature);
+	CDistanceTransform(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~CDistanceTransform();
 
-	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
+	virtual CVisionData* exec();
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 };

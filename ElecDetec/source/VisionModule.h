@@ -7,74 +7,125 @@
 #include "Exceptions.h"
 
 #include <string>
-#include <strstream>
+#include <sstream>
 #include <vector>
 #include <opencv2/opencv.hpp>
 
-//#define  MOD_TYPE_UNKNOWN       0
-//#define  MOD_TYPE_PREPROC       1 << 0
-//#define  MOD_TYPE_FEATURE       1 << 1
-//#define  MOD_TYPE_SUBSPACE      1 << 2
-//#define  MOD_TYPE_CLASSIFIER    1 << 3
-
 #define UNKNOWN_DATA_LENGTH    -1
+
+#define MODULE_CONSTRUCTOR_SIGNATURE  bool is_root
 
 using namespace std;
 using namespace cv;
 
+
 class CVisionModule
 {
+private:
+	void addAncestor(CVisionModule* anchestor); // ONLY called by setSuccessor from an other CVisionModule Instance
+
 protected:
 	CVisionModule();
+
+	void setAsRoot();
+	CVisionData* getConcatenatedDataAndClearBuffer();
 //	int module_type_;
 	string module_print_name_;
 	string module_id_;
-	bool needs_training_;
-	int required_input_signature_mask_;
-	int output_type_;
-	CDataConverter* data_converter_;
+	bool is_trained_;
+
+	int required_input_signature_;
+	int output_signature_;
+
+	// coherent vectors (one element per anchestor)
+	vector<CVisionModule*> ancestors_;
+	vector<CVisionDataConverter*> data_converters_;
+	vector<CVisionData*> data_buffers_;
+
+	CVisionModule* successor_;
+
+	CVisionData* data_labels_;
 
 public:
-	virtual ~CVisionModule()
-	{
-		if(data_converter_)
-			delete data_converter_;
-		data_converter_ = NULL;
-	}
+	virtual ~CVisionModule();
 
 	void setModuleID(const int& module_id);
 
-	inline bool needsTraining()
+	void setSuccessor(CVisionModule*);
+
+	inline bool isTrained() const
 	{
-		return needs_training_;
+		return is_trained_;
 	}
 
-	inline int outputSignature()
+	inline void setAsTrained()
 	{
-		return output_type_;
+		is_trained_ = true;
 	}
 
-//	inline int getType()
-//	{
-//		return module_type_;
-//	}
+	inline CVisionModule* getSuccessor()
+	{
+		return successor_;
+	}
 
-	inline string getPrintName()
+	CVisionModule* getAncestorModuleFromWhichNoDataIsBuffered();
+
+	inline int getOutputSignature() const
+	{
+		return output_signature_;
+	}
+
+	inline string getPrintName() const
 	{
 		return module_print_name_;
 	}
 
+	// converts the data and fills the data buffer in order to train or execute the modules functionality
+	void bufferData(const CVisionData* data, const CVisionModule* from_module);
+	void setDataLabels(const CVisionData& labels);
+	void clearDataBuffers();
 
 	// VIRTUAL Methods
+	// executes the modules functionality with the buffered data
+	virtual CVisionData* exec() = 0;
 
-	virtual void exec(const CVisionData& input_data, CVisionData& output_data) = 0;
-
-	// train_data contains for each sample one row
-	virtual void train(const CVisionData& train_data, const CVisionData& train_labels);
+	// trains the module according to the buffered data and labels
+	virtual void train();
 
 	virtual void save(FileStorage& fs) const = 0;
 
 	virtual void load(FileStorage& fs) = 0;
 };
+
+
+/*
+ * Class CVisionDataMergingModule:
+ * Takes VisionData from different channels and merges it to one VECTOR
+ */
+//class CVisionDataMergingModule
+//{
+//private:
+//	CVisionDataMergingModule();
+//	vector<CVisionDataConverter*> channel_converters_;
+//
+//public:
+//	CVisionDataMergingModule(const vector<int>& channel_end_signatures)
+//    {
+//		for(vector<int>::const_iterator sig_it = channel_end_signatures.begin(); sig_it != channel_end_signatures.end(); ++sig_it)
+//		{
+//			CVisionDataConverter* cur_converter = NULL;
+//			// if data that comes from a channel is not ready for merging i.e. either a float vector of a float scalar
+//			if(!SIGNATURE_IS_FLOAT(*sig_it) || !(SIGNATURE_IS_VECTOR(*sig_it) || SIGNATURE_IS_SCALAR(*sig_it)))
+//			{
+//				cur_converter = new CVisionDataConverter(*sig_it, DATA_TYPE_VECTOR | CV_32FC1);
+//			}
+//		}
+//	}
+//
+//	void merge(const vector<CVisionData>& inputs, CVisionData& output)
+//	{
+//
+//	}
+//};
 
 #endif

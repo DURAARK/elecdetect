@@ -8,7 +8,6 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-#pragma once
 
 #include <string>
 #include <vector>
@@ -161,7 +160,7 @@ inline bool getFileList(string directory, vector<string>& filelist)
     if ((dir = opendir(directory.data())) != NULL)
     {
         // print all the files and directories within directory
-        while ((ent = readdir (dir)) != NULL)
+        while ((ent = readdir(dir)) != NULL)
         {
             std::string filename = directory + ent->d_name;
             if(filename.compare(filename.size()-4,4,".png") == 0 || filename.compare(filename.size()-4,4,".jpg") == 0)

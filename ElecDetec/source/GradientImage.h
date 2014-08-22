@@ -8,8 +8,8 @@
 #ifndef GRADIENTIMAGE_H_
 #define GRADIENTIMAGE_H_
 
+#include "Debug.h"
 #include "VisionModule.h"
-#include "Mat.h"
 
 using namespace std;
 using namespace cv;
@@ -24,10 +24,10 @@ private:
 	int ddepth_;
 
 public:
-	CGradientImage(int inchain_input_signature);
+	CGradientImage(MODULE_CONSTRUCTOR_SIGNATURE);
 	virtual ~CGradientImage();
 
-	virtual void exec(const CVisionData& input_data, CVisionData& output_data);
+	virtual CVisionData* exec();
 	virtual void save(FileStorage& fs) const;
 	virtual void load(FileStorage& fs);
 };
