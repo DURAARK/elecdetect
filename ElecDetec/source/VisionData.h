@@ -48,7 +48,6 @@ class CVisionData
 private:
 	int data_signature_; // data signature is a combination of data type(s) and format (and has a flag if its an array)
 	CVisionData();
-	CVisionData(const CVisionData& other);
 
 	Mat mat_;
 
@@ -58,7 +57,13 @@ public:
 		data_signature_ = type | mat_.type();
     };
 
-	~CVisionData() { };
+	CVisionData(const CVisionData& other)
+	{
+		mat_ = other.mat_;
+		data_signature_ = other.data_signature_;
+	}
+
+	~CVisionData() {  };
 
 //	inline CVisionData& clone()
 //	{
@@ -95,9 +100,12 @@ public:
 
 	inline void show() const
 	{
+		cout << "Data Type is: " << signature2str();
+
 		switch(data_signature_ & DATA_TYPE_MASK)
 		{
 		case DATA_TYPE_IMAGE:
+		{
 			Mat temp;
 			if((mat_.type() & CV_MAT_DEPTH_MASK) == CV_32F)
 				mat_.convertTo(temp, CV_8U, 255);
@@ -109,7 +117,20 @@ public:
 			break;
 		}
 
-		cout << "Data Type is: " << signature2str();
+		case DATA_TYPE_VECTOR:
+		{
+			cout << "Data Vector Show: #elements: " << mat_.cols*mat_.rows << endl;
+			if(SIGNATURE_IS_FLOAT(this->data_signature_))
+				cout << "First elements: " << mat_.at<float>(0) << ", " << mat_.at<float>(1) << ", " << mat_.at<float>(2) << endl;
+			else if(SIGNATURE_IS_INT(this->data_signature_))
+				cout << "First elements: " << mat_.at<int>(0) << ", " << mat_.at<int>(1) << ", " << mat_.at<int>(2) << endl;
+			else
+				cout << "Signature is non float or non integer." << endl;
+			break;
+		}
+		}
+
+
 
 	}
 
@@ -214,25 +235,6 @@ public:
 		int converted_signature = input_data_signature;
 		if(input_data_signature != output_data_signature)
 		{
-			// Possible TYPE conversions
-			// -------------------------
-
-			// convert image to vector by concatenating all pixels
-			if(SIGNATURE_IS_IMAGE(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
-			{
-				convert_routines_.push_back(&convImage2Vector);
-				converted_signature &= ~DATA_TYPE_MASK;
-				converted_signature |= DATA_TYPE_VECTOR;
-			}
-			// convert Scalar Value to Vector (with only one entry; probably needed for channel merging)
-			if(SIGNATURE_IS_SCALAR(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
-			{
-				convert_routines_.push_back(&convScalar2Vector);
-				converted_signature &= ~DATA_TYPE_MASK;
-				converted_signature |= DATA_TYPE_VECTOR;
-			}
-
-
 			// Possible FORMAT conversions
 			// ---------------------------
 
@@ -251,12 +253,32 @@ public:
 				converted_signature |= CV_32F;
 			}
 
+			// Possible TYPE conversions
+			// -------------------------
+
+			// convert image to vector by concatenating all pixels
+			if(SIGNATURE_IS_IMAGE(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
+			{
+				convert_routines_.push_back(&convImage2Vector);
+				converted_signature &= ~DATA_TYPE_MASK;
+				converted_signature |= DATA_TYPE_VECTOR;
+			}
+			// convert Scalar Value to Vector (with only one entry; probably needed for channel merging)
+			if(SIGNATURE_IS_SCALAR(input_data_signature) && SIGNATURE_IS_VECTOR(output_data_signature))
+			{
+				convert_routines_.push_back(&convScalar2Vector);
+				converted_signature &= ~DATA_TYPE_MASK;
+				converted_signature |= DATA_TYPE_VECTOR;
+			}
+
 		}
 
 		//bitset<32> from(input_data_signature), target(output_data_signature), achieved(converted_signature);
-		cout << "Conversion result: From: " << CVisionData::signature2str(input_data_signature) << endl;
-		cout << "                     To: " << CVisionData::signature2str(output_data_signature) << endl;
-		cout << "           was achieved: " << CVisionData::signature2str(converted_signature) << endl;
+
+//		cout << "Conversion result: From: " << CVisionData::signature2str(input_data_signature) << endl;
+//		cout << "                     To: " << CVisionData::signature2str(output_data_signature) << endl;
+//		cout << "           was achieved: " << CVisionData::signature2str(converted_signature) << endl;
+
 		if(output_data_signature != converted_signature)
 		{
 			cout << "No suitable conversion found! Throwing PipeConfigException" << endl;

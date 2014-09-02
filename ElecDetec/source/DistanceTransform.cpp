@@ -24,9 +24,9 @@ CDistanceTransform::~CDistanceTransform()
 
 CVisionData* CDistanceTransform::exec()
 {
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
-	Mat working_img = working_data->data();
+	Mat working_img = working_data.data();
 
 	// check if image is binary, otherwise apply threshold
 	bool is_binary = countNonZero(working_img == 255) + countNonZero(working_img == 0) == working_img.cols * working_img.rows;

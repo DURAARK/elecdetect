@@ -26,6 +26,10 @@ void CVisionModule::bufferData(const CVisionData* data, const CVisionModule* anc
 {
 	// search correct converters and buffers for the ancestor from which the data comes from
 
+//	cout << "CVisionModule Buffered Data in Module: " << module_print_name_ << endl;
+//	data->show();
+//	cout << endl;
+
 	vector<CVisionModule*>::const_iterator anc_it;
 	vector<CVisionDataConverter*>::iterator conv_it;
 	vector<CVisionData*>::iterator buf_it;
@@ -75,7 +79,7 @@ void CVisionModule::bufferData(const CVisionData* data, const CVisionModule* anc
 
 }
 
-CVisionData* CVisionModule::getConcatenatedDataAndClearBuffer()
+CVisionData CVisionModule::getConcatenatedDataAndClearBuffer()
 {
 	if(data_buffers_.empty())
 	{
@@ -90,7 +94,7 @@ CVisionData* CVisionModule::getConcatenatedDataAndClearBuffer()
 			exit(-1);
 		}
 	}
-	CVisionData* concatenated = new CVisionData(data_buffers_.front()->data(), data_buffers_.front()->getType());
+	CVisionData concatenated(data_buffers_.front()->data(), data_buffers_.front()->getType());
 	for(vector<CVisionData*>::iterator buf_it = data_buffers_.begin()+1; buf_it != data_buffers_.end(); ++buf_it)
 	{
 		if(!(*buf_it) || (*buf_it)->data().empty())
@@ -98,7 +102,7 @@ CVisionData* CVisionModule::getConcatenatedDataAndClearBuffer()
 			cerr << "CVisionModule::getConcatenatedDataAndClearBuffer: at least one Buffer is empty!" << endl;
 			exit(-1);
 		}
-		concatenated->concatenateColumnwise(**buf_it);
+		concatenated.concatenateColumnwise(**buf_it);
 	}
 	clearDataBuffers();
 	return concatenated;
@@ -132,6 +136,20 @@ void CVisionModule::setAsRoot()
 		exit(-1);
 	}
 	ancestors_.push_back(NULL); // Root Module has one NULL-ancestor
+}
+
+bool CVisionModule::isRoot() const
+{
+	// Module is Root if it has at least one ancestor that is NULL
+	vector<CVisionModule*>::const_iterator anc_it;
+	for(anc_it = ancestors_.begin(); anc_it != ancestors_.end(); ++anc_it)
+	{
+		if(*anc_it == NULL) // if one ancestor is NULL
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void CVisionModule::addAncestor(CVisionModule* ancestor)
@@ -190,4 +208,9 @@ void CVisionModule::setModuleID(const int& module_id)
 	stringstream ss_mod_id;
 	ss_mod_id << "module-" << module_id;
 	module_id_ = ss_mod_id.str();
+}
+
+string CVisionModule::getModuleID() const
+{
+	return module_id_;
 }

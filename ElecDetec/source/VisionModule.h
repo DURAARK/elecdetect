@@ -18,6 +18,12 @@
 using namespace std;
 using namespace cv;
 
+struct NormVals
+{
+	float mean_;
+	float stddev_;
+};
+
 
 class CVisionModule
 {
@@ -28,7 +34,7 @@ protected:
 	CVisionModule();
 
 	void setAsRoot();
-	CVisionData* getConcatenatedDataAndClearBuffer();
+	CVisionData getConcatenatedDataAndClearBuffer();
 //	int module_type_;
 	string module_print_name_;
 	string module_id_;
@@ -41,6 +47,7 @@ protected:
 	vector<CVisionModule*> ancestors_;
 	vector<CVisionDataConverter*> data_converters_;
 	vector<CVisionData*> data_buffers_;
+	//vector<NormVals> data_norm_vals_;
 
 	CVisionModule* successor_;
 
@@ -50,6 +57,8 @@ public:
 	virtual ~CVisionModule();
 
 	void setModuleID(const int& module_id);
+
+	string getModuleID() const;
 
 	void setSuccessor(CVisionModule*);
 
@@ -67,6 +76,8 @@ public:
 	{
 		return successor_;
 	}
+
+	bool isRoot() const;
 
 	CVisionModule* getAncestorModuleFromWhichNoDataIsBuffered();
 

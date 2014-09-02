@@ -17,10 +17,10 @@ CBinaryContours::~CBinaryContours()
 
 CVisionData* CBinaryContours::exec()
 {
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	Mat working_image;
-	Canny(working_data->data(), working_image, 20.0, 160.0);
+	Canny(working_data.data(), working_image, 20.0, 160.0);
 	return new CVisionData(working_image, DATA_TYPE_IMAGE);
 
 //	Mat rot;

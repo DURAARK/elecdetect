@@ -34,14 +34,6 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 {
 	deletePipe(); // delete Pipe if it's already set up
 
-	bitset<16> x1(CV_8UC1), x2(CV_8UC3), x3(CV_32FC1), x4(CV_32FC2), x5(CV_32SC1), x6(CV_32SC2);
-	cout << "CV_8UC1: " << CV_8UC1 << "    is: " << x1 << endl;
-	cout << "CV_8UC3: " << CV_8UC3 << "   is: " << x2 << endl;
-	cout << "CV_32FC1: " << CV_32FC1 << "   is: " << x3 << endl;
-	cout << "CV_32FC2: " << CV_32FC3 << "  is: " << x4 << endl;
-	cout << "CV_32SC1: " << CV_32SC1 << "   is: " << x5 << endl;
-	cout << "CV_32SC2: " << CV_32SC3 << "  is: " << x6 << endl;
-
 	// Set up Feature Channels for the simple structure
 	bool is_root = true;
 	vector<CVisionModule*> end_modules_of_channels;
@@ -72,7 +64,7 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 			if(*mod_id_it == ID_PCA)
 				cur_mod = new CPCA(is_root);
 
-			// Classifiers: TODO: re-implementation of classifiers needed (not just class label as output)
+			// Classifiers: TODO: re-implementation of classifiers needed (prediction probability)
 			if(*mod_id_it == ID_SVM)
 				cur_mod = new CSVM(is_root);
 			if(*mod_id_it == ID_RF)
@@ -126,6 +118,7 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 {
 	Mat mat_detect_labels = Mat::zeros(input_img.size(), CV_8UC1); // discrete labels
 	Mat mat_detect_prop = Mat::zeros(input_img.size(), CV_32FC1);   // probability map of the detection results
+
 	cout << "Analyzing image...        " << flush;
 	float progress = 0.0;
 
@@ -139,7 +132,7 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 		cout << setfill('0');
 		cout << setw(5) << setiosflags(ios::fixed) << setprecision(2) << progress << "%" << flush;
 
-//#pragma omp parallel for
+//#pragma omp parallel
 		for(win_roi.x = 0; win_roi.x < input_img.cols-SWIN_SIZE; win_roi.x += 1)
 		{
 			//CVisionData window(input_img(win_roi), DATA_TYPE_IMAGE);
@@ -201,8 +194,16 @@ void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_r
 				mat_detect_prop.at<float>(win_center) = current_data_ptr->data().at<float>(0,1);
 			}
 
+			// cleanup
+			if(current_data_ptr)
+				delete current_data_ptr;
+			current_data_ptr = NULL;
+
 		}
 	}
+
+	//cout << "non zero: labels: " << countNonZero(mat_detect_labels) << " probs: " << countNonZero(mat_detect_prop) << endl;
+	//PAUSE_AND_SHOW(mat_detect_prop)
 
 
 	// Postprocessing of detection results
@@ -565,16 +566,16 @@ void CPipelineController::train(const CommandParams& params)
 
 		}
 
-//
-//		// get number of different classes; train_labels is not needed anymore
-//		vector<int>::iterator t_it;
-//		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
-//		train_labels.vec_.resize(distance(train_labels.vec_.begin(), t_it));
-//		sort(train_labels.vec_.begin(), train_labels.vec_.end());
-//		t_it = unique(train_labels.vec_.begin(), train_labels.vec_.end());
-//		n_object_classes_ = distance(train_labels.vec_.begin(), t_it) - 1; // subtract background class
-//
-//		cout << "Number of different object classes: " << n_object_classes_ << endl;
+
+		// get number of different classes; data_labels is not needed anymore
+		vector<int>::iterator t_it;
+		t_it = unique(data_labels.begin(), data_labels.end());
+		data_labels.resize(distance(data_labels.begin(), t_it));
+		sort(data_labels.begin(), data_labels.end());
+		t_it = unique(data_labels.begin(), data_labels.end());
+		n_object_classes_ = distance(data_labels.begin(), t_it) - 1; // subtract background class
+
+		cout << "Number of different object classes: " << n_object_classes_ << endl;
 	}
 }
 
@@ -591,6 +592,43 @@ void CPipelineController::printConfig()
 	cout << endl;
 	cout << "Vision Pipeline Configuration:" << endl;
 	cout << "------------------------------" << endl;
+
+//	CVisionModule* cur_mod = all_modules_[0]; // start with a root module
+//	map<string,CVisionModule*> printed_modules;
+//	while(printed_modules.size() != all_modules_.size())
+//	{
+//		// if module was not already printed, print it
+//		if(printed_modules.find(cur_mod->getModuleID()) == printed_modules.end())
+//		{
+//			printed_modules[cur_mod->getModuleID()] = cur_mod;
+//			cout << "(" << cur_mod->getPrintName() << ")";
+//		}
+//
+//		// go to the successor module
+//		cur_mod = cur_mod->getSuccessor();
+//
+//		// reached the end module
+//		if(cur_mod == NULL)
+//		{
+//			unsigned int root_id_cnt = 0;
+//			cur_mod = all_modules_[0];
+//			// look for next root module that was not printed
+//			while(++root_id_cnt < all_modules_.size())
+//			{
+//				cur_mod = all_modules_[root_id_cnt];
+//				if(printed_modules.find(cur_mod->getModuleID()) == printed_modules.end() && cur_mod->isRoot())
+//				{
+//					break;
+//				}
+//			}
+//			cout << endl;
+//		}
+//		else
+//		{
+//			cout << setw(10);
+//		}
+//	}
+//	cout << endl;
 
 
 	for(vector<vector<string> >::iterator ch_it = params_.vec_vec_channels_.begin(); ch_it != params_.vec_vec_channels_.end(); ++ch_it)

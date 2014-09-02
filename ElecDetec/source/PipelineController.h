@@ -14,7 +14,7 @@
 #include <opencv2/opencv.hpp>
 #include <sstream>
 #include <bitset>
-//#include <omp.h>
+#include <omp.h>
 
 #include "VisionModule.h"
 #include "VectorArray.h"
@@ -29,6 +29,8 @@
 #include "SVM.h"
 #include "RandomForest.h"
 #include "Utils.h"
+
+//#define VERBOSE
 
 #define CONFIG_NAME_CHANNEL             "feature-channel"
 #define CONFIG_NAME_CHANNEL_LENGTHS      "feature-channel-lengths"

@@ -26,8 +26,6 @@
 #define RESULT_DIR_NAME    "results" // without "/" !!!
 
 
-
-
 using namespace std;
 using namespace cv;
 

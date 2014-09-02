@@ -53,12 +53,15 @@ CSVM::~CSVM()
 CVisionData* CSVM::exec()
 {
 	// data-buffer already stores the converted data
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	Mat result_scalar = Mat::zeros(1,2,CV_32FC1); // First Value: Label, second: weight
-	result_scalar.at<float>(0,0) = static_cast<float>(svm_->predict(working_data->data()));
-	//if(class_result->val_ != 0)
-	//	cout << "prediction result is: " << class_result->val_ << endl;
+	result_scalar.at<float>(0,0) = static_cast<float>(svm_->predict(working_data.data()));
+
+	// for now: use probability = 1:
+	result_scalar.at<float>(0,1) = static_cast<float>(1.0);
+//	if(result_scalar.at<float>(0,0) != 0)
+//		cout << "prediction result is: " << result_scalar.at<float>(0,0) << endl;
 
 	return new CVisionData(result_scalar, DATA_TYPE_WEIGHTED_SCALAR);
 }
@@ -68,7 +71,7 @@ void CSVM::train()
 {
 	// train_data contains for each sample a row
 	//assert(train_data.data().rows == static_cast<int>(train_labels.data().rows));
-	CVisionData* train_data = getConcatenatedDataAndClearBuffer();
+	CVisionData train_data = getConcatenatedDataAndClearBuffer();
 
 	//cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	//cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -76,9 +79,10 @@ void CSVM::train()
 //	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
 //	cout << "first value" << train_data_mat.at<float>(0,0) << endl;
 
-	double min, max;
-	minMaxLoc(train_data->data(), &min, &max);
-	cout << "min-max: " << min << " - " << max << endl << flush;
+//	double min, max;
+//	minMaxLoc(train_data.data(), &min, &max);
+//	cout << "min-max: " << min << " - " << max << endl << flush;
+//	cout << "Data Labels: " << endl << data_labels_->data().t() << endl;
 
 //	// constructor for matrix headers pointing to user-allocated data
 //    Mat(int _rows, int _cols, int _type, void* _data, size_t _step=AUTO_STEP);
@@ -94,7 +98,7 @@ void CSVM::train()
 	cout << "Training SVM. Please be patient..." << flush;
 
 	//svm_->train(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_);
-	svm_->train_auto(train_data->data(), data_labels_->data(), Mat(), Mat(), *svm_params_, 5);
+	svm_->train_auto(train_data.data(), data_labels_->data(), Mat(), Mat(), *svm_params_, 5);
 
 	cout << " done. Support Vectors: " << svm_->get_support_vector_count() << endl << flush;
 }
@@ -105,6 +109,7 @@ void CSVM::save(FileStorage& fs) const
 	stringstream config_name;
 	config_name << CONFIG_NAME_SVM << "-" << module_id_;
 	svm_->write(*fs, config_name.str().c_str());
+
 //	cout << "SVM saved." << endl;
 }
 
@@ -117,4 +122,7 @@ void CSVM::load(FileStorage& fs)
 		svm_->clear();
 		svm_->read(*fs, cvGetFileNodeByName(*fs, NULL, config_name.str().c_str()));
 	}
+
+//	cout << "SVM load: Support Vectors: " << svm_->get_support_vector_count() << endl;
+//	cout << *svm_->get_support_vector(0) << ", " << *svm_->get_support_vector(1) << ", " << *svm_->get_support_vector(2) << endl;
 }

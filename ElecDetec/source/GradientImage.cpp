@@ -28,7 +28,7 @@ CGradientImage::~CGradientImage()
 
 CVisionData* CGradientImage::exec()
 {
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	Mat out_img;
 
@@ -36,7 +36,7 @@ CVisionData* CGradientImage::exec()
 	Mat abs_grad_x, abs_grad_y;
 
 	// Blur
-	GaussianBlur(working_data->data(), img0_gray, Size(3,3), 0, 0, BORDER_DEFAULT);
+	GaussianBlur(working_data.data(), img0_gray, Size(3,3), 0, 0, BORDER_DEFAULT);
 	// Gradient X
 	Sobel(img0_gray, grad_x, ddepth_, 1, 0, 3, scale_, delta_, BORDER_DEFAULT);
 	// Gradient Y

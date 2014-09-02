@@ -39,11 +39,11 @@ CHog::~CHog()
 
 CVisionData* CHog::exec()
 {
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	vector<float> hog_features;
 	Mat img_gray;
-	cv::resize(working_data->data(), img_gray, win_size_ );
+	cv::resize(working_data.data(), img_gray, win_size_ );
 
 	hogy_->compute(img_gray, hog_features);
 

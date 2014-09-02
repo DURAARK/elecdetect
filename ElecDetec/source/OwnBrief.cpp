@@ -49,14 +49,14 @@ float COwnBrief::compare(const Mat& img0, const Point2i& pt1, const Point2i& pt2
 
 CVisionData* COwnBrief::exec()
 {
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 	vector<float> brief_features;
 
 //	cout << img_gray_float;
 //	cout << "Should be CV_32FC1: " << CMat(img_gray_float).type2str() << endl;
 
-	int input_img_cols = working_data->data().cols;
-	int input_img_rows = working_data->data().rows;
+	int input_img_cols = working_data.data().cols;
+	int input_img_rows = working_data.data().rows;
 
 	vector<test_pair>::const_iterator test_it;
 	for(test_it = rel_test_pairs_.begin(); test_it != rel_test_pairs_.end(); ++ test_it)
@@ -65,7 +65,7 @@ CVisionData* COwnBrief::exec()
 		const Point2i abs_pt2((*test_it).second.x*input_img_cols, (*test_it).second.y*input_img_rows);
 //		cout << "Testing Point: " << abs_pt1 << " against Point: " << abs_pt2 <<
 //				" (orig: " << (*test_it).first << " and " << (*test_it).second << endl << flush;
-		brief_features.push_back(compare(working_data->data(), abs_pt1, abs_pt2));
+		brief_features.push_back(compare(working_data.data(), abs_pt1, abs_pt2));
 	}
 
 	return new CVisionData(Mat(brief_features).reshape(0,1).clone(), DATA_TYPE_VECTOR);

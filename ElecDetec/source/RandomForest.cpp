@@ -32,10 +32,10 @@ CRandomForest::CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE)
 	int termcrit_type = CV_TERMCRIT_ITER + CV_TERMCRIT_EPS;
 
 	// own configuration:
-	max_depth = 18;
-	min_sample_cnt = 1;
+	max_depth = 15;
+	min_sample_cnt = 2;
 	max_num_of_trees_in_the_forest = 80;
-	termcrit_type = CV_TERMCRIT_ITER | CV_TERMCRIT_EPS;
+	termcrit_type = CV_TERMCRIT_ITER;// | CV_TERMCRIT_EPS;
 
 	rf_params_ = new CvRTParams(max_depth, min_sample_cnt, regression_arruracy, use_surrogates,
 			                    max_categories, priors, calc_var_importance, nactive_vars,
@@ -59,10 +59,10 @@ CVisionData* CRandomForest::exec()
 {
 //	if(data.back()->getType() != TYPE_VECTOR)
 //		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
-	CVisionData* working_data = getConcatenatedDataAndClearBuffer();
+	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	Mat result_scalar = Mat::zeros(1,1,CV_32SC1);
-	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data->data()));
+	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data.data()));
 
 	//if(class_result->val_ != 0)
 	//cout << "prediction result is: " << class_result->val_ << endl;
@@ -74,7 +74,7 @@ CVisionData* CRandomForest::exec()
 void CRandomForest::train()
 {
 	// train_data contains for each sample a row
-	CVisionData* train_data = getConcatenatedDataAndClearBuffer();
+	CVisionData train_data = getConcatenatedDataAndClearBuffer();
 
 //	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 //	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -95,7 +95,7 @@ void CRandomForest::train()
 
 	cout << "Training RandomForest. Please be patient..." << flush;
 	srand(time(NULL)); // to be sure
-	rf_->train(train_data->data(), CV_ROW_SAMPLE, data_labels_->data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
+	rf_->train(train_data.data(), CV_ROW_SAMPLE, data_labels_->data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
 
 	cout << " done. " << rf_->get_tree_count() << " trees trained." << endl << flush;
 }
