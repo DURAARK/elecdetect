@@ -12,7 +12,7 @@
 #include "VisionData.h"
 #include "VisionModule.h"
 
-#define DEFAULT_NUMBER_OF_EIGENVECTORS  90
+#define DEFAULT_NUMBER_OF_EIGENVECTORS  70
 
 #define CONFIG_NAME_PCA_N_EIGENVECTORS   "number-of-pca-eigenvectors"
 #define CONFIG_NAME_PCA_EIGENVALUES      "opencv-pca-eigenvalues"
@@ -25,11 +25,6 @@ class CPCA: public CVisionModule
 private:
 	int n_eigenvectors_;
 	PCA* opencv_pca_ptr_;
-	struct afterProjectionNormalization
-	{
-		float mean_;
-		float stddev_;
-	} norm_;
 
 	CPCA();
 

@@ -72,8 +72,8 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 		TCLAP::ValueArg<std::string> c2Arg("2","channel2","IDs of the vision module(s) for the 2nd feature channel",false,"","string");
 		TCLAP::ValueArg<std::string> c3Arg("3","channel3","IDs of the vision module(s) for the 3rd feature channel",false,"","string");
 		TCLAP::ValueArg<std::string> c4Arg("4","channel4","IDs of the vision module(s) for the 4th feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c5Arg("5","channel5","IDs of the vision module(s) for the 4th feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> fArg("f","final","ID of the final classifier vision module",false,"","string");
+		TCLAP::ValueArg<std::string> c5Arg("5","channel5","IDs of the vision module(s) for the 5th feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> fArg("f","final","ID of the final classifier vision module. If present, training mode is performed.",false,"","string");
 		TCLAP::ValueArg<std::string> dArg("d","dir","Data directory of training- or test-data",true,"","string");
 		TCLAP::ValueArg<std::string> cArg("c","config","Configuration file whether the trained pipeline is stored to or loaded from",true,"","string");
 		cmd.add( c1Arg ); v_ch_args.push_back( &c1Arg );

@@ -407,6 +407,8 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 
 	imshow("detect-result", vis_img);
 	imwrite("detect-result.png", vis_img);
+
+	waitKey(0);
 #endif // VERBOSE
 
 
@@ -523,7 +525,7 @@ void CPipelineController::train(const CommandParams& params)
 				}
 
 				++filename_it;
-				if(filename_it != filelist.end()) // the last there are training samples left
+				if(filename_it != filelist.end()) // if there are training samples left
 				{
 					// load the next sample and go the same path
 					delete current_data_ptr;

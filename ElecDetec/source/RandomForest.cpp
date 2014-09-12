@@ -32,10 +32,10 @@ CRandomForest::CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE)
 	int termcrit_type = CV_TERMCRIT_ITER + CV_TERMCRIT_EPS;
 
 	// own configuration:
-	max_depth = 15;
-	min_sample_cnt = 2;
+	max_depth = 8;
+	min_sample_cnt = 3;
 	max_num_of_trees_in_the_forest = 80;
-	termcrit_type = CV_TERMCRIT_ITER;// | CV_TERMCRIT_EPS;
+	termcrit_type = CV_TERMCRIT_ITER; // CV_TERMCRIT_EPS;
 
 	rf_params_ = new CvRTParams(max_depth, min_sample_cnt, regression_arruracy, use_surrogates,
 			                    max_categories, priors, calc_var_importance, nactive_vars,
@@ -61,8 +61,11 @@ CVisionData* CRandomForest::exec()
 //		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
 	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
-	Mat result_scalar = Mat::zeros(1,1,CV_32SC1);
-	result_scalar.at<int>(0,0) = static_cast<int>(rf_->predict(working_data.data()));
+	Mat result_scalar = Mat::zeros(1,2,CV_32FC1); // First Value: Label, second: weight
+	result_scalar.at<float>(0,0) = static_cast<float>(rf_->predict(working_data.data()));
+
+	// for now: use probability = 1:
+	result_scalar.at<float>(0,1) = static_cast<float>(1.0);
 
 	//if(class_result->val_ != 0)
 	//cout << "prediction result is: " << class_result->val_ << endl;
@@ -82,10 +85,10 @@ void CRandomForest::train()
 //	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
 //	cout << train_data_mat.at<float>(0,0) << endl;
 //
-//	cout << "Type of Train Data Mat: " << train_data.type2str() << endl;
-//	cout << " with size: " << train_data_mat.rows << " x " << train_data_mat.cols << endl;
-//	cout << "Type of Train Label Mat: " << train_labels_mat.type() << " should be " << CV_32SC1 << endl;
-//	cout << " with size: " << train_labels_mat.rows << " x " << train_labels_mat.cols << endl;
+//	cout << "Type of Train Data Mat: " << train_data.signature2str() << endl;
+//	cout << " with size: " << train_data.data().rows << " x " << train_data.data().cols << endl;
+//	cout << "Type of Train Label Mat: " << data_labels_->data().type() << " should be " << CV_32SC1 << endl;
+//	cout << " with size: " << data_labels_->data().rows << " x " << data_labels_->data().cols << endl;
 //	cout << flush;
 
 	const Mat& varIdx = Mat(); // vector: selected feature subset (masks colums of train data)

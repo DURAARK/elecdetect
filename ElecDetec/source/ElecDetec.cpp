@@ -115,11 +115,26 @@ int main(int argc, char* argv[])
 				imshow("RESULT", image);
 #endif
 				// get filename prefix
-				std::size_t extention_pos = f_it->find(".png"); // TODO: also make this work for .jpg files
+				size_t extention_pos_png = f_it->find(".png"); // search for .png string
+				size_t extention_pos_jpg = f_it->find(".jpg"); // search for .jpg string
+
+				size_t extention_pos = f_it->size(); // just append on default
+				string str_extention;
+				if(extention_pos_png == f_it->size()-4) // ".png" was found at the end
+				{
+					extention_pos = extention_pos_png;
+					str_extention = ".png";
+				}
+				else if(extention_pos_jpg == f_it->size()-4) // ".jpg" was found at the end
+				{
+					extention_pos = extention_pos_jpg;
+					str_extention = ".jpg";
+				}
+
 				string str_filename_prefix = f_it->substr(0, extention_pos);
 
 				string xml_filename = params.str_imgset_ + RESULT_DIR_NAME + FOLDER_CHAR + str_filename_prefix + FILENAME_RESULT_POSTFIX + ".xml";
-				string img_filename = params.str_imgset_ + RESULT_DIR_NAME + FOLDER_CHAR + str_filename_prefix + FILENAME_RESULT_POSTFIX + ".png";
+				string img_filename = params.str_imgset_ + RESULT_DIR_NAME + FOLDER_CHAR + str_filename_prefix + FILENAME_RESULT_POSTFIX + str_extention;
 
 				// write detection results to XML file
 				xml_doc.InsertEndChild(xml_image);
