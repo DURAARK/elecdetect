@@ -7,7 +7,6 @@
 #include "CAnnotation.h"
 #include "Utils.h"
 #include "tinyxml2.h"
-#include "tclap/CmdLine.h"
 
 
 using namespace std;
@@ -26,6 +25,8 @@ int main(int argc, char* argv[])
 	// Read unprocessed image files
 	vector<string> file_list;
 	getFileList(c_params.str_dir_, file_list);
+
+	srand(time(NULL));
 
 	switch(c_params.anno_mode_)
 	{
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
 		for(filename_it = file_list.begin(); filename_it != file_list.end(); ++filename_it)
 		{
 			CAnnotation annotation(*filename_it);
-			if(annotation.annotate())
+			if(annotation.isImageLoaded() && annotation.annotate())
 			{
 				annotation.addXMLString(doc);
 				annotations.push_back(annotation);
@@ -77,9 +78,9 @@ int main(int argc, char* argv[])
 
 		break;
 	}
-	case REFINEMENT:
+	case REANNOTATION:
 	{
-		// manually refine the annotated points
+		// redefine already annotated points
 
 		// load existing XML
 		XMLDocument doc;
@@ -90,16 +91,39 @@ int main(int argc, char* argv[])
     		exit(-1);
     	}
 
+    	vector<XMLElement*> to_delete;
     	XMLElement* cur_image_xml;
-    	for(cur_image_xml = doc.FirstChildElement("Annotation"); cur_image_xml != NULL; cur_image_xml = cur_image_xml->NextSiblingElement())
+    	for(cur_image_xml = doc.FirstChildElement("Annotation"); cur_image_xml != NULL; cur_image_xml = cur_image_xml->NextSiblingElement("Annotation"))
     	{
         	string filename = cur_image_xml->Attribute("image");
         	cout << "Annotation: " << filename << endl;
         	CAnnotation cur_image(filename);
-        	cur_image.loadFromXMLElement(cur_image_xml);
+        	if(cur_image.isImageLoaded())
+        	{
+        		cur_image.loadFromXMLElement(cur_image_xml);
+        		if(cur_image.annotate())
+        		{
+        			cout << "replacing information" << endl;
+        			to_delete.push_back(cur_image_xml);
 
+        			// add the new one (at the end)
+        			cur_image.addXMLString(doc);
+        		}
+        		else
+        		{
+        			break;
+        		}
+        	}
     	}
 
+    	// delete old XML Nodes
+    	for(vector<XMLElement*>::const_iterator to_del_it = to_delete.begin(); to_del_it != to_delete.end(); ++ to_del_it)
+    	{
+    		doc.DeleteChild(*to_del_it);
+    	}
+
+    	// save annotations
+    	doc.SaveFile(c_params.str_filename_.c_str());
 
     	break;
 	}
@@ -122,9 +146,30 @@ int main(int argc, char* argv[])
         	string filename = cur_image_xml->Attribute("image");
         	cout << "Annotation: " << filename << endl;
         	CAnnotation cur_image(filename);
-        	cur_image.loadFromXMLElement(cur_image_xml);
-        	cur_image.saveAnnotatedImages(c_params.str_dir_.c_str());
+        	if(cur_image.isImageLoaded())
+        	{
+        		cur_image.loadFromXMLElement(cur_image_xml);
+        		cur_image.saveAnnotatedImages(c_params.str_dir_);
+        	}
     	}
+
+    	// writing strictly negative files
+    	if(!c_params.str_neg_dir_.empty())
+    	{
+    		cout << "writing strictly negative samples..." << endl;
+    		vector<string> neg_file_list;
+    		getFileList(c_params.str_neg_dir_, neg_file_list);
+    		for(vector<string>::const_iterator neg_it = neg_file_list.begin(); neg_it != neg_file_list.end(); ++neg_it)
+    		{
+    			cout << "Negative Image: " << *neg_it << endl;
+    			CAnnotation cur_image(*neg_it);
+    			if(cur_image.isImageLoaded())
+    			{
+    				cur_image.saveAnnotatedImages(c_params.str_dir_);
+    			}
+    		}
+    	}
+
     	break;
 	}
 	}

@@ -19,14 +19,14 @@
 #include "Utils.h"
 
 
-#define SMP_FULL_SIZE_MM     130.0 // how big is the whole sample incl. context
+#define SMP_FULL_SIZE_MM     96.0 // how big is the whole sample incl. context
 #define SOCKET_DIAMETER_MM    38.0 // socket diameter that will be matched for socket annotations
 #define PIXEL_PER_SQ_MM        1.0 // spatial resolution of the samples
 #define SWITCH_SIZE_MM        55.0 // reference switch size
 #define SWITCH_SIZE_MM_FROM   48.0 // generate different sizes of switches (FROM-TO)
 #define SWITCH_SIZE_MM_TO     62.0
-#define POS_SMP_PER_ANNO      10   // how many random samples are generated from one annotation
-#define NEG_SMP_PER_IMG       20   // how many negative examples are extracted from one image
+#define POS_SMP_PER_ANNO      5   // how many random samples are generated from one annotation
+#define NEG_SMP_PER_IMG       6   // how many negative examples are extracted from one image
 
 #define IMG_VIEW_SIZE 1024
 #define IMG_ZOOM_REGION 300
@@ -46,6 +46,7 @@ private:
 
 	vector<vector<Point> > sockets_;
 	vector<vector<Point> > switches_;
+	vector<Point> rect_plane_;
 
 	vector<Point> cur_annotation_;
 
@@ -64,6 +65,8 @@ public:
 	// copy constructor
 	CAnnotation(const CAnnotation& other);
 	virtual ~CAnnotation();
+
+	bool isImageLoaded();
 
 	// annotate: user interaction method (automatically resets previous annotations)
 	bool annotate(); // returns false if the programm needs to be aborted

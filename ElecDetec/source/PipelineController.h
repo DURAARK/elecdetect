@@ -30,7 +30,7 @@
 #include "RandomForest.h"
 #include "Utils.h"
 
-//#define VERBOSE
+#define VERBOSE
 
 #define CONFIG_NAME_CHANNEL             "feature-channel"
 #define CONFIG_NAME_CHANNEL_LENGTHS      "feature-channel-lengths"
@@ -48,8 +48,9 @@
 #define ID_SVM       "svm"
 #define ID_RF        "rf"
 
-#define SWIN_SIZE     86 // Sliding Window size 90 mm
-#define OPENING_SIZE  5  // Kernel Size of morphological opening in non-weihgted results
+#define SWIN_SIZE                 96  //! Change for new testset to 96! also in Hog.cpp!! Sliding Window size in mm
+#define OPENING_SIZE               3  // Kernel Size of morphological opening in non-weihgted results
+#define MAX_NUMBER_BG_SAMPLES  15000  // maximum number of background samples to prevent memory overflow
 
 using namespace std;
 using namespace cv;
@@ -81,6 +82,8 @@ public:
 
 inline bool greaterLabeledWeightedRect (const CLabeledWeightedRect& i,const CLabeledWeightedRect& j) { return (i.weight_ > j.weight_); }
 
+
+struct CommandParams;
 
 /* -------------------------
  * PIPELINE Controller Class

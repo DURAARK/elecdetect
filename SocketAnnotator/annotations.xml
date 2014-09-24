@@ -1,0 +1,5175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Annotation image="../resources/to_annotate/DSCN0012.JPG">
+    <plane>
+        <point x="920" y="596"/>
+        <point x="965" y="880"/>
+        <point x="1093" y="825"/>
+        <point x="1053" y="550"/>
+    </plane>
+    <socket>
+        <point x="1027" y="749"/>
+        <point x="1036" y="818"/>
+        <point x="998" y="798"/>
+        <point x="1062" y="767"/>
+    </socket>
+    <switch>
+        <point x="960" y="619"/>
+        <point x="978" y="716"/>
+        <point x="1060" y="685"/>
+        <point x="1045" y="590"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0013.JPG">
+    <plane>
+        <point x="1872" y="1027"/>
+        <point x="1874" y="1258"/>
+        <point x="1983" y="1286"/>
+        <point x="1983" y="1049"/>
+    </plane>
+    <socket>
+        <point x="1923" y="1184"/>
+        <point x="1923" y="1249"/>
+        <point x="1894" y="1211"/>
+        <point x="1959" y="1226"/>
+    </socket>
+    <switch>
+        <point x="1883" y="1045"/>
+        <point x="1885" y="1133"/>
+        <point x="1968" y="1151"/>
+        <point x="1968" y="1065"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0014.JPG">
+    <plane>
+        <point x="1076" y="312"/>
+        <point x="1111" y="594"/>
+        <point x="1244" y="614"/>
+        <point x="1215" y="323"/>
+    </plane>
+    <socket>
+        <point x="1162" y="501"/>
+        <point x="1173" y="579"/>
+        <point x="1129" y="534"/>
+        <point x="1209" y="548"/>
+    </socket>
+    <switch>
+        <point x="1096" y="332"/>
+        <point x="1107" y="443"/>
+        <point x="1211" y="454"/>
+        <point x="1200" y="341"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0015.JPG">
+    <plane>
+        <point x="1091" y="459"/>
+        <point x="1082" y="911"/>
+        <point x="1300" y="918"/>
+        <point x="1313" y="463"/>
+    </plane>
+    <socket>
+        <point x="1198" y="747"/>
+        <point x="1193" y="871"/>
+        <point x="1127" y="805"/>
+        <point x="1260" y="809"/>
+    </socket>
+    <switch>
+        <point x="1116" y="485"/>
+        <point x="1111" y="658"/>
+        <point x="1284" y="665"/>
+        <point x="1289" y="492"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0016.JPG">
+    <plane>
+        <point x="1131" y="452"/>
+        <point x="1155" y="934"/>
+        <point x="1439" y="942"/>
+        <point x="1473" y="461"/>
+    </plane>
+    <socket>
+        <point x="1297" y="778"/>
+        <point x="1297" y="905"/>
+        <point x="1209" y="840"/>
+        <point x="1386" y="845"/>
+    </socket>
+    <switch>
+        <point x="1171" y="490"/>
+        <point x="1173" y="676"/>
+        <point x="1420" y="690"/>
+        <point x="1428" y="497"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0017.JPG">
+    <plane>
+        <point x="1018" y="594"/>
+        <point x="1036" y="701"/>
+        <point x="1175" y="670"/>
+        <point x="1164" y="563"/>
+    </plane>
+    <socket>
+        <point x="1098" y="619"/>
+        <point x="1107" y="674"/>
+        <point x="1065" y="656"/>
+        <point x="1142" y="639"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0018.JPG">
+    <plane>
+        <point x="581" y="570"/>
+        <point x="603" y="876"/>
+        <point x="856" y="823"/>
+        <point x="847" y="536"/>
+    </plane>
+    <socket>
+        <point x="738" y="625"/>
+        <point x="752" y="792"/>
+        <point x="674" y="718"/>
+        <point x="818" y="692"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0019.JPG">
+    <plane>
+        <point x="461" y="672"/>
+        <point x="481" y="809"/>
+        <point x="587" y="800"/>
+        <point x="572" y="658"/>
+    </plane>
+    <socket>
+        <point x="510" y="681"/>
+        <point x="528" y="792"/>
+        <point x="477" y="738"/>
+        <point x="563" y="729"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0020.JPG">
+    <plane>
+        <point x="769" y="621"/>
+        <point x="796" y="927"/>
+        <point x="920" y="869"/>
+        <point x="903" y="565"/>
+    </plane>
+    <socket>
+        <point x="856" y="787"/>
+        <point x="860" y="871"/>
+        <point x="820" y="845"/>
+        <point x="896" y="809"/>
+    </socket>
+    <switch>
+        <point x="794" y="632"/>
+        <point x="803" y="749"/>
+        <point x="903" y="710"/>
+        <point x="894" y="590"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0021.JPG">
+    <plane>
+        <point x="958" y="432"/>
+        <point x="971" y="758"/>
+        <point x="1557" y="707"/>
+        <point x="1597" y="388"/>
+    </plane>
+    <socket>
+        <point x="1042" y="667"/>
+        <point x="1047" y="729"/>
+        <point x="1009" y="701"/>
+        <point x="1082" y="692"/>
+    </socket>
+    <socket>
+        <point x="1200" y="652"/>
+        <point x="1200" y="714"/>
+        <point x="1167" y="685"/>
+        <point x="1238" y="678"/>
+    </socket>
+    <socket>
+        <point x="1351" y="641"/>
+        <point x="1349" y="701"/>
+        <point x="1315" y="674"/>
+        <point x="1386" y="665"/>
+    </socket>
+    <socket>
+        <point x="1497" y="630"/>
+        <point x="1495" y="690"/>
+        <point x="1464" y="661"/>
+        <point x="1535" y="654"/>
+    </socket>
+    <switch>
+        <point x="1297" y="423"/>
+        <point x="1291" y="541"/>
+        <point x="1426" y="534"/>
+        <point x="1433" y="414"/>
+    </switch>
+    <switch>
+        <point x="1455" y="414"/>
+        <point x="1446" y="530"/>
+        <point x="1577" y="525"/>
+        <point x="1590" y="406"/>
+    </switch>
+    <switch>
+        <point x="1144" y="445"/>
+        <point x="1140" y="548"/>
+        <point x="1258" y="539"/>
+        <point x="1262" y="434"/>
+    </switch>
+    <switch>
+        <point x="982" y="457"/>
+        <point x="987" y="561"/>
+        <point x="1100" y="550"/>
+        <point x="1093" y="448"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0022.JPG">
+    <plane>
+        <point x="889" y="472"/>
+        <point x="883" y="816"/>
+        <point x="1453" y="825"/>
+        <point x="1459" y="479"/>
+    </plane>
+    <socket>
+        <point x="956" y="714"/>
+        <point x="954" y="781"/>
+        <point x="918" y="747"/>
+        <point x="989" y="747"/>
+    </socket>
+    <socket>
+        <point x="1098" y="714"/>
+        <point x="1098" y="783"/>
+        <point x="1062" y="749"/>
+        <point x="1136" y="747"/>
+    </socket>
+    <socket>
+        <point x="1242" y="716"/>
+        <point x="1242" y="787"/>
+        <point x="1207" y="749"/>
+        <point x="1280" y="749"/>
+    </socket>
+    <socket>
+        <point x="1384" y="721"/>
+        <point x="1384" y="787"/>
+        <point x="1351" y="752"/>
+        <point x="1420" y="752"/>
+    </socket>
+    <switch>
+        <point x="1191" y="490"/>
+        <point x="1187" y="607"/>
+        <point x="1309" y="610"/>
+        <point x="1309" y="490"/>
+    </switch>
+    <switch>
+        <point x="1331" y="490"/>
+        <point x="1329" y="610"/>
+        <point x="1448" y="612"/>
+        <point x="1453" y="490"/>
+    </switch>
+    <switch>
+        <point x="1051" y="492"/>
+        <point x="1047" y="596"/>
+        <point x="1153" y="599"/>
+        <point x="1155" y="492"/>
+    </switch>
+    <switch>
+        <point x="907" y="490"/>
+        <point x="905" y="594"/>
+        <point x="1011" y="599"/>
+        <point x="1011" y="492"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0024.JPG">
+    <plane>
+        <point x="994" y="565"/>
+        <point x="976" y="1005"/>
+        <point x="1593" y="814"/>
+        <point x="1657" y="428"/>
+    </plane>
+    <socket>
+        <point x="1082" y="863"/>
+        <point x="1073" y="947"/>
+        <point x="1036" y="920"/>
+        <point x="1118" y="889"/>
+    </socket>
+    <socket>
+        <point x="1251" y="814"/>
+        <point x="1242" y="896"/>
+        <point x="1209" y="867"/>
+        <point x="1286" y="840"/>
+    </socket>
+    <socket>
+        <point x="1408" y="769"/>
+        <point x="1395" y="847"/>
+        <point x="1366" y="818"/>
+        <point x="1439" y="794"/>
+    </socket>
+    <socket>
+        <point x="1555" y="729"/>
+        <point x="1539" y="805"/>
+        <point x="1515" y="778"/>
+        <point x="1581" y="758"/>
+    </socket>
+    <switch>
+        <point x="1033" y="599"/>
+        <point x="1025" y="729"/>
+        <point x="1151" y="698"/>
+        <point x="1160" y="568"/>
+    </switch>
+    <switch>
+        <point x="1211" y="554"/>
+        <point x="1198" y="685"/>
+        <point x="1322" y="658"/>
+        <point x="1335" y="528"/>
+    </switch>
+    <switch>
+        <point x="1380" y="508"/>
+        <point x="1360" y="658"/>
+        <point x="1491" y="627"/>
+        <point x="1513" y="479"/>
+    </switch>
+    <switch>
+        <point x="1535" y="472"/>
+        <point x="1513" y="621"/>
+        <point x="1637" y="594"/>
+        <point x="1664" y="448"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0025.JPG">
+    <plane>
+        <point x="512" y="224"/>
+        <point x="574" y="607"/>
+        <point x="1193" y="869"/>
+        <point x="1207" y="457"/>
+    </plane>
+    <socket>
+        <point x="607" y="532"/>
+        <point x="625" y="610"/>
+        <point x="585" y="554"/>
+        <point x="652" y="585"/>
+    </socket>
+    <socket>
+        <point x="758" y="592"/>
+        <point x="772" y="672"/>
+        <point x="732" y="619"/>
+        <point x="807" y="654"/>
+    </socket>
+    <socket>
+        <point x="923" y="656"/>
+        <point x="934" y="734"/>
+        <point x="889" y="676"/>
+        <point x="967" y="714"/>
+    </socket>
+    <socket>
+        <point x="1091" y="725"/>
+        <point x="1096" y="803"/>
+        <point x="1053" y="745"/>
+        <point x="1136" y="783"/>
+    </socket>
+    <switch>
+        <point x="1018" y="421"/>
+        <point x="1020" y="570"/>
+        <point x="1178" y="630"/>
+        <point x="1178" y="474"/>
+    </switch>
+    <switch>
+        <point x="836" y="355"/>
+        <point x="847" y="508"/>
+        <point x="996" y="563"/>
+        <point x="991" y="406"/>
+    </switch>
+    <switch>
+        <point x="678" y="312"/>
+        <point x="692" y="441"/>
+        <point x="816" y="488"/>
+        <point x="798" y="350"/>
+    </switch>
+    <switch>
+        <point x="516" y="261"/>
+        <point x="536" y="388"/>
+        <point x="656" y="423"/>
+        <point x="634" y="297"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0026.JPG">
+    <plane>
+        <point x="1198" y="599"/>
+        <point x="1215" y="772"/>
+        <point x="1364" y="696"/>
+        <point x="1344" y="528"/>
+    </plane>
+    <switch>
+        <point x="1224" y="612"/>
+        <point x="1240" y="745"/>
+        <point x="1349" y="687"/>
+        <point x="1337" y="559"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0027.JPG">
+    <plane>
+        <point x="1045" y="692"/>
+        <point x="1080" y="923"/>
+        <point x="1342" y="914"/>
+        <point x="1333" y="681"/>
+    </plane>
+    <switch>
+        <point x="1084" y="767"/>
+        <point x="1102" y="903"/>
+        <point x="1304" y="898"/>
+        <point x="1297" y="761"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0028.JPG">
+    <plane>
+        <point x="1193" y="665"/>
+        <point x="1226" y="863"/>
+        <point x="1411" y="800"/>
+        <point x="1373" y="599"/>
+    </plane>
+    <switch>
+        <point x="1222" y="681"/>
+        <point x="1242" y="829"/>
+        <point x="1382" y="781"/>
+        <point x="1355" y="630"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0029.JPG">
+    <plane>
+        <point x="1038" y="394"/>
+        <point x="1036" y="559"/>
+        <point x="1204" y="563"/>
+        <point x="1204" y="397"/>
+    </plane>
+    <switch>
+        <point x="1058" y="410"/>
+        <point x="1053" y="543"/>
+        <point x="1184" y="543"/>
+        <point x="1187" y="412"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0030.JPG">
+    <plane>
+        <point x="856" y="552"/>
+        <point x="934" y="987"/>
+        <point x="1053" y="1020"/>
+        <point x="985" y="574"/>
+    </plane>
+    <switch>
+        <point x="874" y="576"/>
+        <point x="896" y="690"/>
+        <point x="989" y="705"/>
+        <point x="967" y="590"/>
+    </switch>
+    <switch>
+        <point x="900" y="732"/>
+        <point x="925" y="840"/>
+        <point x="1013" y="858"/>
+        <point x="994" y="752"/>
+    </switch>
+    <switch>
+        <point x="927" y="878"/>
+        <point x="942" y="976"/>
+        <point x="1036" y="1002"/>
+        <point x="1020" y="900"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0031.JPG">
+    <plane>
+        <point x="898" y="652"/>
+        <point x="920" y="1180"/>
+        <point x="1098" y="1109"/>
+        <point x="1102" y="587"/>
+    </plane>
+    <switch>
+        <point x="931" y="674"/>
+        <point x="936" y="812"/>
+        <point x="1084" y="761"/>
+        <point x="1084" y="623"/>
+    </switch>
+    <switch>
+        <point x="934" y="867"/>
+        <point x="938" y="994"/>
+        <point x="1080" y="938"/>
+        <point x="1082" y="818"/>
+    </switch>
+    <switch>
+        <point x="942" y="1045"/>
+        <point x="945" y="1158"/>
+        <point x="1080" y="1107"/>
+        <point x="1082" y="991"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0032.JPG">
+    <plane>
+        <point x="1038" y="357"/>
+        <point x="991" y="1224"/>
+        <point x="1335" y="1235"/>
+        <point x="1326" y="372"/>
+    </plane>
+    <switch>
+        <point x="1071" y="379"/>
+        <point x="1062" y="568"/>
+        <point x="1297" y="576"/>
+        <point x="1293" y="388"/>
+    </switch>
+    <switch>
+        <point x="1053" y="643"/>
+        <point x="1045" y="858"/>
+        <point x="1297" y="865"/>
+        <point x="1295" y="650"/>
+    </switch>
+    <switch>
+        <point x="1045" y="940"/>
+        <point x="1031" y="1182"/>
+        <point x="1297" y="1191"/>
+        <point x="1297" y="949"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0033.JPG">
+    <plane>
+        <point x="931" y="461"/>
+        <point x="929" y="1180"/>
+        <point x="1124" y="1136"/>
+        <point x="1109" y="379"/>
+    </plane>
+    <switch>
+        <point x="945" y="470"/>
+        <point x="945" y="632"/>
+        <point x="1087" y="579"/>
+        <point x="1082" y="412"/>
+    </switch>
+    <switch>
+        <point x="942" y="705"/>
+        <point x="945" y="885"/>
+        <point x="1091" y="838"/>
+        <point x="1087" y="650"/>
+    </switch>
+    <switch>
+        <point x="942" y="949"/>
+        <point x="942" y="1144"/>
+        <point x="1096" y="1109"/>
+        <point x="1093" y="907"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0034.JPG">
+    <plane>
+        <point x="834" y="528"/>
+        <point x="931" y="951"/>
+        <point x="1042" y="1022"/>
+        <point x="954" y="585"/>
+    </plane>
+    <switch>
+        <point x="847" y="556"/>
+        <point x="874" y="674"/>
+        <point x="962" y="714"/>
+        <point x="938" y="601"/>
+    </switch>
+    <switch>
+        <point x="885" y="710"/>
+        <point x="909" y="820"/>
+        <point x="994" y="867"/>
+        <point x="971" y="758"/>
+    </switch>
+    <switch>
+        <point x="918" y="856"/>
+        <point x="936" y="949"/>
+        <point x="1022" y="1005"/>
+        <point x="1002" y="905"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0035.JPG">
+    <plane>
+        <point x="335" y="554"/>
+        <point x="326" y="1100"/>
+        <point x="494" y="1109"/>
+        <point x="508" y="561"/>
+    </plane>
+    <switch>
+        <point x="352" y="576"/>
+        <point x="350" y="712"/>
+        <point x="481" y="716"/>
+        <point x="483" y="579"/>
+    </switch>
+    <switch>
+        <point x="346" y="763"/>
+        <point x="343" y="900"/>
+        <point x="477" y="905"/>
+        <point x="479" y="767"/>
+    </switch>
+    <switch>
+        <point x="346" y="949"/>
+        <point x="341" y="1082"/>
+        <point x="474" y="1091"/>
+        <point x="477" y="954"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0036.JPG">
+    <plane>
+        <point x="563" y="465"/>
+        <point x="656" y="800"/>
+        <point x="1317" y="794"/>
+        <point x="1300" y="445"/>
+    </plane>
+    <socket>
+        <point x="705" y="710"/>
+        <point x="723" y="772"/>
+        <point x="674" y="741"/>
+        <point x="756" y="743"/>
+    </socket>
+    <socket>
+        <point x="874" y="707"/>
+        <point x="889" y="772"/>
+        <point x="840" y="738"/>
+        <point x="925" y="741"/>
+    </socket>
+    <socket>
+        <point x="1049" y="703"/>
+        <point x="1060" y="772"/>
+        <point x="1011" y="736"/>
+        <point x="1098" y="736"/>
+    </socket>
+    <socket>
+        <point x="1231" y="703"/>
+        <point x="1238" y="769"/>
+        <point x="1189" y="734"/>
+        <point x="1275" y="732"/>
+    </socket>
+    <switch>
+        <point x="590" y="483"/>
+        <point x="614" y="594"/>
+        <point x="745" y="590"/>
+        <point x="718" y="479"/>
+    </switch>
+    <switch>
+        <point x="765" y="472"/>
+        <point x="789" y="587"/>
+        <point x="916" y="585"/>
+        <point x="898" y="472"/>
+    </switch>
+    <switch>
+        <point x="938" y="461"/>
+        <point x="958" y="594"/>
+        <point x="1116" y="590"/>
+        <point x="1098" y="457"/>
+    </switch>
+    <switch>
+        <point x="1129" y="457"/>
+        <point x="1140" y="596"/>
+        <point x="1302" y="592"/>
+        <point x="1293" y="454"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0037.JPG">
+    <plane>
+        <point x="816" y="931"/>
+        <point x="796" y="1324"/>
+        <point x="1317" y="1346"/>
+        <point x="1333" y="871"/>
+    </plane>
+    <socket>
+        <point x="847" y="1207"/>
+        <point x="847" y="1293"/>
+        <point x="816" y="1246"/>
+        <point x="876" y="1253"/>
+    </socket>
+    <socket>
+        <point x="969" y="1207"/>
+        <point x="967" y="1295"/>
+        <point x="936" y="1251"/>
+        <point x="1000" y="1251"/>
+    </socket>
+    <socket>
+        <point x="1100" y="1207"/>
+        <point x="1096" y="1300"/>
+        <point x="1065" y="1251"/>
+        <point x="1133" y="1258"/>
+    </socket>
+    <socket>
+        <point x="1244" y="1204"/>
+        <point x="1246" y="1306"/>
+        <point x="1209" y="1251"/>
+        <point x="1284" y="1255"/>
+    </socket>
+    <switch>
+        <point x="823" y="945"/>
+        <point x="814" y="1076"/>
+        <point x="900" y="1069"/>
+        <point x="909" y="936"/>
+    </switch>
+    <switch>
+        <point x="936" y="929"/>
+        <point x="931" y="1067"/>
+        <point x="1027" y="1062"/>
+        <point x="1031" y="920"/>
+    </switch>
+    <switch>
+        <point x="1058" y="911"/>
+        <point x="1051" y="1065"/>
+        <point x="1171" y="1060"/>
+        <point x="1175" y="894"/>
+    </switch>
+    <switch>
+        <point x="1198" y="894"/>
+        <point x="1187" y="1056"/>
+        <point x="1322" y="1051"/>
+        <point x="1324" y="880"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0038.JPG">
+    <plane>
+        <point x="521" y="414"/>
+        <point x="525" y="756"/>
+        <point x="1082" y="752"/>
+        <point x="1080" y="410"/>
+    </plane>
+    <socket>
+        <point x="869" y="650"/>
+        <point x="871" y="718"/>
+        <point x="836" y="685"/>
+        <point x="905" y="685"/>
+    </socket>
+    <socket>
+        <point x="1011" y="647"/>
+        <point x="1011" y="718"/>
+        <point x="974" y="683"/>
+        <point x="1045" y="681"/>
+    </socket>
+    <socket>
+        <point x="732" y="650"/>
+        <point x="732" y="718"/>
+        <point x="696" y="683"/>
+        <point x="765" y="683"/>
+    </socket>
+    <socket>
+        <point x="590" y="650"/>
+        <point x="594" y="718"/>
+        <point x="556" y="685"/>
+        <point x="625" y="685"/>
+    </socket>
+    <switch>
+        <point x="539" y="437"/>
+        <point x="536" y="539"/>
+        <point x="643" y="541"/>
+        <point x="639" y="434"/>
+    </switch>
+    <switch>
+        <point x="672" y="428"/>
+        <point x="674" y="539"/>
+        <point x="781" y="536"/>
+        <point x="778" y="432"/>
+    </switch>
+    <switch>
+        <point x="807" y="423"/>
+        <point x="809" y="543"/>
+        <point x="931" y="543"/>
+        <point x="929" y="419"/>
+    </switch>
+    <switch>
+        <point x="949" y="421"/>
+        <point x="949" y="543"/>
+        <point x="1073" y="543"/>
+        <point x="1073" y="421"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0039.JPG">
+    <plane>
+        <point x="299" y="627"/>
+        <point x="417" y="1009"/>
+        <point x="1131" y="676"/>
+        <point x="1133" y="288"/>
+    </plane>
+    <socket>
+        <point x="492" y="874"/>
+        <point x="516" y="940"/>
+        <point x="457" y="934"/>
+        <point x="550" y="878"/>
+    </socket>
+    <socket>
+        <point x="692" y="781"/>
+        <point x="703" y="852"/>
+        <point x="652" y="836"/>
+        <point x="741" y="792"/>
+    </socket>
+    <socket>
+        <point x="883" y="694"/>
+        <point x="885" y="767"/>
+        <point x="840" y="752"/>
+        <point x="927" y="714"/>
+    </socket>
+    <socket>
+        <point x="1062" y="614"/>
+        <point x="1060" y="687"/>
+        <point x="1018" y="672"/>
+        <point x="1102" y="630"/>
+    </socket>
+    <switch>
+        <point x="962" y="377"/>
+        <point x="976" y="528"/>
+        <point x="1136" y="463"/>
+        <point x="1133" y="315"/>
+    </switch>
+    <switch>
+        <point x="767" y="459"/>
+        <point x="783" y="605"/>
+        <point x="949" y="536"/>
+        <point x="940" y="390"/>
+    </switch>
+    <switch>
+        <point x="568" y="552"/>
+        <point x="592" y="683"/>
+        <point x="745" y="616"/>
+        <point x="729" y="485"/>
+    </switch>
+    <switch>
+        <point x="348" y="647"/>
+        <point x="386" y="778"/>
+        <point x="543" y="707"/>
+        <point x="510" y="579"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0040.JPG">
+    <plane>
+        <point x="683" y="610"/>
+        <point x="694" y="1104"/>
+        <point x="1502" y="1140"/>
+        <point x="1499" y="585"/>
+    </plane>
+    <socket>
+        <point x="767" y="956"/>
+        <point x="772" y="1058"/>
+        <point x="725" y="1009"/>
+        <point x="814" y="1011"/>
+    </socket>
+    <socket>
+        <point x="958" y="960"/>
+        <point x="960" y="1067"/>
+        <point x="911" y="1011"/>
+        <point x="1009" y="1013"/>
+    </socket>
+    <socket>
+        <point x="1158" y="965"/>
+        <point x="1162" y="1073"/>
+        <point x="1113" y="1018"/>
+        <point x="1215" y="1025"/>
+    </socket>
+    <socket>
+        <point x="1380" y="969"/>
+        <point x="1382" y="1080"/>
+        <point x="1326" y="1022"/>
+        <point x="1435" y="1025"/>
+    </socket>
+    <switch>
+        <point x="698" y="636"/>
+        <point x="698" y="794"/>
+        <point x="843" y="792"/>
+        <point x="840" y="630"/>
+    </switch>
+    <switch>
+        <point x="887" y="630"/>
+        <point x="887" y="789"/>
+        <point x="1036" y="787"/>
+        <point x="1038" y="621"/>
+    </switch>
+    <switch>
+        <point x="1076" y="610"/>
+        <point x="1076" y="796"/>
+        <point x="1258" y="796"/>
+        <point x="1255" y="603"/>
+    </switch>
+    <switch>
+        <point x="1286" y="601"/>
+        <point x="1289" y="798"/>
+        <point x="1477" y="796"/>
+        <point x="1477" y="596"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0041.JPG">
+    <plane>
+        <point x="548" y="230"/>
+        <point x="601" y="665"/>
+        <point x="1275" y="823"/>
+        <point x="1260" y="350"/>
+    </plane>
+    <socket>
+        <point x="641" y="556"/>
+        <point x="661" y="645"/>
+        <point x="616" y="592"/>
+        <point x="694" y="614"/>
+    </socket>
+    <socket>
+        <point x="807" y="592"/>
+        <point x="825" y="685"/>
+        <point x="778" y="625"/>
+        <point x="860" y="650"/>
+    </socket>
+    <socket>
+        <point x="980" y="630"/>
+        <point x="994" y="725"/>
+        <point x="947" y="667"/>
+        <point x="1033" y="694"/>
+    </socket>
+    <socket>
+        <point x="1155" y="665"/>
+        <point x="1167" y="758"/>
+        <point x="1122" y="698"/>
+        <point x="1211" y="725"/>
+    </socket>
+    <switch>
+        <point x="1093" y="366"/>
+        <point x="1096" y="499"/>
+        <point x="1218" y="519"/>
+        <point x="1211" y="386"/>
+    </switch>
+    <switch>
+        <point x="887" y="306"/>
+        <point x="900" y="474"/>
+        <point x="1056" y="501"/>
+        <point x="1042" y="335"/>
+    </switch>
+    <switch>
+        <point x="723" y="288"/>
+        <point x="736" y="432"/>
+        <point x="865" y="459"/>
+        <point x="852" y="310"/>
+    </switch>
+    <switch>
+        <point x="554" y="259"/>
+        <point x="570" y="397"/>
+        <point x="694" y="423"/>
+        <point x="681" y="279"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0042.JPG">
+    <plane>
+        <point x="206" y="363"/>
+        <point x="264" y="989"/>
+        <point x="1291" y="1093"/>
+        <point x="1297" y="428"/>
+    </plane>
+    <socket>
+        <point x="348" y="820"/>
+        <point x="361" y="942"/>
+        <point x="295" y="876"/>
+        <point x="417" y="887"/>
+    </socket>
+    <socket>
+        <point x="601" y="843"/>
+        <point x="612" y="969"/>
+        <point x="548" y="903"/>
+        <point x="676" y="916"/>
+    </socket>
+    <socket>
+        <point x="863" y="867"/>
+        <point x="878" y="996"/>
+        <point x="812" y="923"/>
+        <point x="942" y="938"/>
+    </socket>
+    <socket>
+        <point x="1138" y="885"/>
+        <point x="1142" y="1013"/>
+        <point x="1078" y="945"/>
+        <point x="1211" y="958"/>
+    </socket>
+    <switch>
+        <point x="1058" y="470"/>
+        <point x="1056" y="652"/>
+        <point x="1240" y="663"/>
+        <point x="1235" y="483"/>
+    </switch>
+    <switch>
+        <point x="745" y="419"/>
+        <point x="754" y="652"/>
+        <point x="987" y="670"/>
+        <point x="980" y="432"/>
+    </switch>
+    <switch>
+        <point x="488" y="421"/>
+        <point x="497" y="625"/>
+        <point x="696" y="639"/>
+        <point x="685" y="432"/>
+    </switch>
+    <switch>
+        <point x="226" y="401"/>
+        <point x="241" y="601"/>
+        <point x="428" y="614"/>
+        <point x="417" y="414"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0044.JPG">
+    <plane>
+        <point x="1129" y="201"/>
+        <point x="1131" y="443"/>
+        <point x="1537" y="441"/>
+        <point x="1542" y="197"/>
+    </plane>
+    <socket>
+        <point x="1182" y="372"/>
+        <point x="1184" y="421"/>
+        <point x="1160" y="397"/>
+        <point x="1207" y="397"/>
+    </socket>
+    <socket>
+        <point x="1286" y="372"/>
+        <point x="1286" y="419"/>
+        <point x="1262" y="397"/>
+        <point x="1311" y="397"/>
+    </socket>
+    <socket>
+        <point x="1388" y="370"/>
+        <point x="1388" y="419"/>
+        <point x="1364" y="394"/>
+        <point x="1413" y="394"/>
+    </socket>
+    <socket>
+        <point x="1491" y="370"/>
+        <point x="1491" y="419"/>
+        <point x="1466" y="394"/>
+        <point x="1517" y="394"/>
+    </socket>
+    <switch>
+        <point x="1448" y="208"/>
+        <point x="1446" y="295"/>
+        <point x="1537" y="295"/>
+        <point x="1539" y="208"/>
+    </switch>
+    <switch>
+        <point x="1344" y="206"/>
+        <point x="1344" y="295"/>
+        <point x="1433" y="295"/>
+        <point x="1433" y="208"/>
+    </switch>
+    <switch>
+        <point x="1246" y="213"/>
+        <point x="1246" y="290"/>
+        <point x="1324" y="292"/>
+        <point x="1322" y="213"/>
+    </switch>
+    <switch>
+        <point x="1144" y="215"/>
+        <point x="1144" y="290"/>
+        <point x="1218" y="290"/>
+        <point x="1218" y="215"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0045.JPG">
+    <plane>
+        <point x="1005" y="561"/>
+        <point x="1025" y="1036"/>
+        <point x="1280" y="929"/>
+        <point x="1304" y="459"/>
+    </plane>
+    <switch>
+        <point x="1073" y="603"/>
+        <point x="1073" y="794"/>
+        <point x="1266" y="718"/>
+        <point x="1275" y="532"/>
+    </switch>
+    <switch>
+        <point x="1076" y="838"/>
+        <point x="1076" y="1005"/>
+        <point x="1260" y="920"/>
+        <point x="1264" y="763"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0046.JPG">
+    <plane>
+        <point x="1271" y="530"/>
+        <point x="1233" y="982"/>
+        <point x="1437" y="874"/>
+        <point x="1502" y="432"/>
+    </plane>
+    <switch>
+        <point x="1326" y="570"/>
+        <point x="1309" y="745"/>
+        <point x="1459" y="674"/>
+        <point x="1484" y="501"/>
+    </switch>
+    <switch>
+        <point x="1304" y="789"/>
+        <point x="1289" y="940"/>
+        <point x="1428" y="867"/>
+        <point x="1451" y="716"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0047.JPG">
+    <plane>
+        <point x="1031" y="634"/>
+        <point x="1038" y="1096"/>
+        <point x="1368" y="1073"/>
+        <point x="1426" y="612"/>
+    </plane>
+    <switch>
+        <point x="1096" y="694"/>
+        <point x="1089" y="887"/>
+        <point x="1349" y="874"/>
+        <point x="1371" y="681"/>
+    </switch>
+    <switch>
+        <point x="1091" y="925"/>
+        <point x="1084" y="1082"/>
+        <point x="1326" y="1065"/>
+        <point x="1342" y="911"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0048.JPG">
+    <plane>
+        <point x="1120" y="310"/>
+        <point x="1118" y="814"/>
+        <point x="1411" y="947"/>
+        <point x="1475" y="448"/>
+    </plane>
+    <switch>
+        <point x="1144" y="394"/>
+        <point x="1147" y="594"/>
+        <point x="1368" y="698"/>
+        <point x="1393" y="494"/>
+    </switch>
+    <switch>
+        <point x="1147" y="641"/>
+        <point x="1138" y="805"/>
+        <point x="1351" y="914"/>
+        <point x="1368" y="743"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0049.JPG">
+    <plane>
+        <point x="1056" y="292"/>
+        <point x="1062" y="1113"/>
+        <point x="1346" y="1045"/>
+        <point x="1353" y="308"/>
+    </plane>
+    <switch>
+        <point x="1138" y="355"/>
+        <point x="1136" y="663"/>
+        <point x="1340" y="650"/>
+        <point x="1342" y="361"/>
+    </switch>
+    <switch>
+        <point x="1140" y="738"/>
+        <point x="1138" y="1038"/>
+        <point x="1342" y="998"/>
+        <point x="1340" y="718"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0050.JPG">
+    <plane>
+        <point x="763" y="443"/>
+        <point x="761" y="1122"/>
+        <point x="1116" y="1127"/>
+        <point x="1133" y="457"/>
+    </plane>
+    <switch>
+        <point x="814" y="501"/>
+        <point x="812" y="769"/>
+        <point x="1073" y="767"/>
+        <point x="1080" y="508"/>
+    </switch>
+    <switch>
+        <point x="816" y="827"/>
+        <point x="809" y="1078"/>
+        <point x="1065" y="1082"/>
+        <point x="1069" y="832"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0051.JPG">
+    <plane>
+        <point x="1295" y="550"/>
+        <point x="1340" y="1439"/>
+        <point x="1757" y="1504"/>
+        <point x="1708" y="492"/>
+    </plane>
+    <switch>
+        <point x="1324" y="612"/>
+        <point x="1342" y="954"/>
+        <point x="1633" y="956"/>
+        <point x="1610" y="579"/>
+    </switch>
+    <switch>
+        <point x="1353" y="1045"/>
+        <point x="1355" y="1382"/>
+        <point x="1652" y="1422"/>
+        <point x="1637" y="1051"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0052.JPG">
+    <plane>
+        <point x="863" y="545"/>
+        <point x="883" y="1076"/>
+        <point x="1091" y="1142"/>
+        <point x="1065" y="645"/>
+    </plane>
+    <switch>
+        <point x="920" y="585"/>
+        <point x="927" y="772"/>
+        <point x="1071" y="834"/>
+        <point x="1060" y="661"/>
+    </switch>
+    <switch>
+        <point x="929" y="825"/>
+        <point x="938" y="1027"/>
+        <point x="1084" y="1078"/>
+        <point x="1069" y="880"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0053.JPG">
+    <plane>
+        <point x="883" y="463"/>
+        <point x="856" y="982"/>
+        <point x="1238" y="985"/>
+        <point x="1211" y="468"/>
+    </plane>
+    <switch>
+        <point x="929" y="483"/>
+        <point x="920" y="650"/>
+        <point x="1169" y="658"/>
+        <point x="1164" y="483"/>
+    </switch>
+    <switch>
+        <point x="920" y="703"/>
+        <point x="911" y="907"/>
+        <point x="1175" y="907"/>
+        <point x="1171" y="707"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0054.JPG">
+    <plane>
+        <point x="1042" y="341"/>
+        <point x="1031" y="800"/>
+        <point x="1335" y="650"/>
+        <point x="1293" y="204"/>
+    </plane>
+    <switch>
+        <point x="1051" y="528"/>
+        <point x="1047" y="710"/>
+        <point x="1260" y="605"/>
+        <point x="1249" y="430"/>
+    </switch>
+    <switch>
+        <point x="1049" y="346"/>
+        <point x="1049" y="490"/>
+        <point x="1244" y="386"/>
+        <point x="1233" y="239"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0055.JPG">
+    <plane>
+        <point x="1013" y="619"/>
+        <point x="1033" y="1047"/>
+        <point x="1309" y="1038"/>
+        <point x="1333" y="614"/>
+    </plane>
+    <socket>
+        <point x="1171" y="903"/>
+        <point x="1173" y="1007"/>
+        <point x="1100" y="951"/>
+        <point x="1242" y="949"/>
+    </socket>
+    <switch>
+        <point x="1076" y="683"/>
+        <point x="1078" y="836"/>
+        <point x="1271" y="834"/>
+        <point x="1275" y="681"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0057.JPG">
+    <plane>
+        <point x="942" y="559"/>
+        <point x="998" y="1053"/>
+        <point x="1371" y="1056"/>
+        <point x="1437" y="563"/>
+    </plane>
+    <socket>
+        <point x="1187" y="911"/>
+        <point x="1189" y="1027"/>
+        <point x="1089" y="967"/>
+        <point x="1289" y="965"/>
+    </socket>
+    <switch>
+        <point x="1036" y="658"/>
+        <point x="1047" y="832"/>
+        <point x="1333" y="838"/>
+        <point x="1342" y="656"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0058.JPG">
+    <plane>
+        <point x="987" y="463"/>
+        <point x="1065" y="905"/>
+        <point x="1271" y="1051"/>
+        <point x="1224" y="594"/>
+    </plane>
+    <socket>
+        <point x="1129" y="818"/>
+        <point x="1160" y="949"/>
+        <point x="1087" y="834"/>
+        <point x="1215" y="934"/>
+    </socket>
+    <switch>
+        <point x="1011" y="512"/>
+        <point x="1036" y="696"/>
+        <point x="1211" y="794"/>
+        <point x="1189" y="607"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0060.JPG">
+    <plane>
+        <point x="898" y="426"/>
+        <point x="914" y="1184"/>
+        <point x="1175" y="1151"/>
+        <point x="1167" y="457"/>
+    </plane>
+    <socket>
+        <point x="1053" y="885"/>
+        <point x="1056" y="1096"/>
+        <point x="971" y="991"/>
+        <point x="1129" y="985"/>
+    </socket>
+    <switch>
+        <point x="940" y="468"/>
+        <point x="942" y="745"/>
+        <point x="1140" y="747"/>
+        <point x="1140" y="488"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0061.JPG">
+    <plane>
+        <point x="958" y="465"/>
+        <point x="967" y="1142"/>
+        <point x="1293" y="1144"/>
+        <point x="1289" y="463"/>
+    </plane>
+    <socket>
+        <point x="1127" y="883"/>
+        <point x="1127" y="1078"/>
+        <point x="1033" y="978"/>
+        <point x="1226" y="978"/>
+    </socket>
+    <switch>
+        <point x="998" y="501"/>
+        <point x="1000" y="754"/>
+        <point x="1253" y="752"/>
+        <point x="1249" y="499"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0062.JPG">
+    <plane>
+        <point x="1073" y="497"/>
+        <point x="1084" y="1078"/>
+        <point x="1293" y="1098"/>
+        <point x="1289" y="463"/>
+    </plane>
+    <socket>
+        <point x="1175" y="852"/>
+        <point x="1175" y="1027"/>
+        <point x="1116" y="934"/>
+        <point x="1240" y="940"/>
+    </socket>
+    <switch>
+        <point x="1089" y="523"/>
+        <point x="1096" y="738"/>
+        <point x="1258" y="727"/>
+        <point x="1251" y="497"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0063.JPG">
+    <plane>
+        <point x="1020" y="548"/>
+        <point x="1060" y="1089"/>
+        <point x="1249" y="1162"/>
+        <point x="1198" y="639"/>
+    </plane>
+    <socket>
+        <point x="1149" y="907"/>
+        <point x="1160" y="1067"/>
+        <point x="1098" y="958"/>
+        <point x="1211" y="1011"/>
+    </socket>
+    <switch>
+        <point x="1051" y="581"/>
+        <point x="1065" y="769"/>
+        <point x="1204" y="834"/>
+        <point x="1189" y="652"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0064.JPG">
+    <plane>
+        <point x="945" y="450"/>
+        <point x="927" y="1065"/>
+        <point x="1302" y="1042"/>
+        <point x="1275" y="430"/>
+    </plane>
+    <socket>
+        <point x="1107" y="789"/>
+        <point x="1109" y="978"/>
+        <point x="998" y="891"/>
+        <point x="1218" y="883"/>
+    </socket>
+    <switch>
+        <point x="980" y="470"/>
+        <point x="971" y="681"/>
+        <point x="1246" y="665"/>
+        <point x="1233" y="457"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0065.JPG">
+    <plane>
+        <point x="1120" y="605"/>
+        <point x="1102" y="1144"/>
+        <point x="1280" y="1051"/>
+        <point x="1280" y="477"/>
+    </plane>
+    <socket>
+        <point x="1182" y="867"/>
+        <point x="1180" y="1040"/>
+        <point x="1133" y="985"/>
+        <point x="1235" y="911"/>
+    </socket>
+    <switch>
+        <point x="1124" y="619"/>
+        <point x="1122" y="809"/>
+        <point x="1253" y="718"/>
+        <point x="1251" y="521"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0066.JPG">
+    <plane>
+        <point x="1007" y="849"/>
+        <point x="1022" y="1073"/>
+        <point x="1226" y="920"/>
+        <point x="1224" y="701"/>
+    </plane>
+    <switch>
+        <point x="1040" y="860"/>
+        <point x="1053" y="1033"/>
+        <point x="1215" y="916"/>
+        <point x="1204" y="747"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0067.JPG">
+    <plane>
+        <point x="936" y="781"/>
+        <point x="969" y="1033"/>
+        <point x="1304" y="1025"/>
+        <point x="1300" y="781"/>
+    </plane>
+    <switch>
+        <point x="980" y="814"/>
+        <point x="1000" y="1007"/>
+        <point x="1264" y="1011"/>
+        <point x="1260" y="812"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0068.JPG">
+    <plane>
+        <point x="1020" y="576"/>
+        <point x="1065" y="809"/>
+        <point x="1273" y="925"/>
+        <point x="1240" y="678"/>
+    </plane>
+    <switch>
+        <point x="1042" y="619"/>
+        <point x="1067" y="796"/>
+        <point x="1233" y="885"/>
+        <point x="1209" y="696"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0069.JPG">
+    <plane>
+        <point x="920" y="505"/>
+        <point x="929" y="891"/>
+        <point x="1149" y="852"/>
+        <point x="1153" y="503"/>
+    </plane>
+    <switch>
+        <point x="958" y="541"/>
+        <point x="962" y="840"/>
+        <point x="1136" y="814"/>
+        <point x="1133" y="541"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0070.JPG">
+    <plane>
+        <point x="936" y="457"/>
+        <point x="940" y="852"/>
+        <point x="1331" y="852"/>
+        <point x="1331" y="454"/>
+    </plane>
+    <switch>
+        <point x="978" y="499"/>
+        <point x="980" y="812"/>
+        <point x="1286" y="805"/>
+        <point x="1289" y="497"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0071.JPG">
+    <plane>
+        <point x="878" y="579"/>
+        <point x="865" y="985"/>
+        <point x="1078" y="1051"/>
+        <point x="1098" y="594"/>
+    </plane>
+    <switch>
+        <point x="867" y="652"/>
+        <point x="856" y="920"/>
+        <point x="1007" y="956"/>
+        <point x="1018" y="670"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0072.JPG">
+    <plane>
+        <point x="942" y="652"/>
+        <point x="978" y="1025"/>
+        <point x="1253" y="1060"/>
+        <point x="1211" y="710"/>
+    </plane>
+    <switch>
+        <point x="985" y="690"/>
+        <point x="1011" y="982"/>
+        <point x="1222" y="1011"/>
+        <point x="1195" y="736"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0073.JPG">
+    <plane>
+        <point x="974" y="574"/>
+        <point x="958" y="900"/>
+        <point x="1371" y="889"/>
+        <point x="1353" y="563"/>
+    </plane>
+    <switch>
+        <point x="1013" y="594"/>
+        <point x="1005" y="845"/>
+        <point x="1320" y="843"/>
+        <point x="1311" y="592"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0077.JPG">
+    <plane>
+        <point x="736" y="847"/>
+        <point x="761" y="1084"/>
+        <point x="1045" y="956"/>
+        <point x="1049" y="729"/>
+    </plane>
+    <switch>
+        <point x="781" y="865"/>
+        <point x="794" y="1045"/>
+        <point x="1022" y="949"/>
+        <point x="1016" y="778"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0079.JPG">
+    <plane>
+        <point x="1129" y="743"/>
+        <point x="1151" y="971"/>
+        <point x="1448" y="967"/>
+        <point x="1464" y="732"/>
+    </plane>
+    <switch>
+        <point x="1193" y="807"/>
+        <point x="1198" y="954"/>
+        <point x="1411" y="949"/>
+        <point x="1413" y="798"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0080.JPG">
+    <plane>
+        <point x="754" y="485"/>
+        <point x="749" y="929"/>
+        <point x="1136" y="918"/>
+        <point x="1149" y="499"/>
+    </plane>
+    <switch>
+        <point x="807" y="525"/>
+        <point x="798" y="878"/>
+        <point x="1091" y="871"/>
+        <point x="1104" y="534"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0082.JPG">
+    <plane>
+        <point x="825" y="439"/>
+        <point x="809" y="754"/>
+        <point x="994" y="772"/>
+        <point x="1007" y="421"/>
+    </plane>
+    <switch>
+        <point x="832" y="470"/>
+        <point x="818" y="716"/>
+        <point x="960" y="727"/>
+        <point x="974" y="457"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0084.JPG">
+    <plane>
+        <point x="1056" y="599"/>
+        <point x="1058" y="856"/>
+        <point x="1375" y="847"/>
+        <point x="1355" y="590"/>
+    </plane>
+    <switch>
+        <point x="1096" y="619"/>
+        <point x="1096" y="820"/>
+        <point x="1337" y="816"/>
+        <point x="1326" y="614"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0085.JPG">
+    <plane>
+        <point x="1067" y="656"/>
+        <point x="1067" y="918"/>
+        <point x="1278" y="823"/>
+        <point x="1271" y="559"/>
+    </plane>
+    <switch>
+        <point x="1084" y="672"/>
+        <point x="1087" y="871"/>
+        <point x="1242" y="803"/>
+        <point x="1240" y="596"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0088.JPG">
+    <plane>
+        <point x="1133" y="732"/>
+        <point x="1151" y="920"/>
+        <point x="1337" y="1007"/>
+        <point x="1317" y="812"/>
+    </plane>
+    <switch>
+        <point x="1149" y="765"/>
+        <point x="1160" y="909"/>
+        <point x="1306" y="974"/>
+        <point x="1291" y="825"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0090.JPG">
+    <plane>
+        <point x="965" y="656"/>
+        <point x="962" y="958"/>
+        <point x="1266" y="960"/>
+        <point x="1264" y="654"/>
+    </plane>
+    <switch>
+        <point x="1009" y="701"/>
+        <point x="1011" y="905"/>
+        <point x="1215" y="905"/>
+        <point x="1213" y="701"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0091.JPG">
+    <plane>
+        <point x="954" y="521"/>
+        <point x="958" y="789"/>
+        <point x="1160" y="783"/>
+        <point x="1162" y="508"/>
+    </plane>
+    <switch>
+        <point x="962" y="548"/>
+        <point x="971" y="754"/>
+        <point x="1127" y="749"/>
+        <point x="1122" y="534"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0092.JPG">
+    <plane>
+        <point x="1087" y="683"/>
+        <point x="1082" y="1082"/>
+        <point x="1411" y="1005"/>
+        <point x="1424" y="639"/>
+    </plane>
+    <switch>
+        <point x="1129" y="732"/>
+        <point x="1122" y="1038"/>
+        <point x="1375" y="976"/>
+        <point x="1388" y="690"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0093.JPG">
+    <plane>
+        <point x="1124" y="465"/>
+        <point x="1122" y="845"/>
+        <point x="1411" y="923"/>
+        <point x="1415" y="574"/>
+    </plane>
+    <switch>
+        <point x="1167" y="516"/>
+        <point x="1155" y="805"/>
+        <point x="1382" y="865"/>
+        <point x="1384" y="596"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0095.JPG">
+    <plane>
+        <point x="1078" y="454"/>
+        <point x="1118" y="1098"/>
+        <point x="1364" y="1084"/>
+        <point x="1368" y="439"/>
+    </plane>
+    <switch>
+        <point x="1113" y="483"/>
+        <point x="1122" y="661"/>
+        <point x="1337" y="654"/>
+        <point x="1337" y="477"/>
+    </switch>
+    <switch>
+        <point x="1124" y="729"/>
+        <point x="1133" y="887"/>
+        <point x="1335" y="878"/>
+        <point x="1333" y="721"/>
+    </switch>
+    <switch>
+        <point x="1138" y="942"/>
+        <point x="1144" y="1084"/>
+        <point x="1331" y="1076"/>
+        <point x="1333" y="934"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0097.JPG">
+    <plane>
+        <point x="965" y="723"/>
+        <point x="987" y="1306"/>
+        <point x="1149" y="1229"/>
+        <point x="1142" y="661"/>
+    </plane>
+    <switch>
+        <point x="991" y="736"/>
+        <point x="996" y="894"/>
+        <point x="1124" y="845"/>
+        <point x="1127" y="696"/>
+    </switch>
+    <switch>
+        <point x="998" y="951"/>
+        <point x="1002" y="1096"/>
+        <point x="1124" y="1040"/>
+        <point x="1129" y="903"/>
+    </switch>
+    <switch>
+        <point x="1007" y="1147"/>
+        <point x="1009" y="1280"/>
+        <point x="1133" y="1226"/>
+        <point x="1131" y="1093"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0098.JPG">
+    <plane>
+        <point x="1124" y="563"/>
+        <point x="1144" y="1351"/>
+        <point x="1346" y="1366"/>
+        <point x="1320" y="516"/>
+    </plane>
+    <switch>
+        <point x="1144" y="579"/>
+        <point x="1151" y="774"/>
+        <point x="1297" y="752"/>
+        <point x="1291" y="554"/>
+    </switch>
+    <switch>
+        <point x="1151" y="847"/>
+        <point x="1153" y="1047"/>
+        <point x="1309" y="1042"/>
+        <point x="1302" y="834"/>
+    </switch>
+    <switch>
+        <point x="1155" y="1120"/>
+        <point x="1158" y="1324"/>
+        <point x="1315" y="1333"/>
+        <point x="1309" y="1120"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0099.JPG">
+    <plane>
+        <point x="1169" y="514"/>
+        <point x="1202" y="1382"/>
+        <point x="1477" y="1386"/>
+        <point x="1437" y="477"/>
+    </plane>
+    <switch>
+        <point x="1198" y="532"/>
+        <point x="1207" y="749"/>
+        <point x="1413" y="729"/>
+        <point x="1404" y="512"/>
+    </switch>
+    <switch>
+        <point x="1207" y="829"/>
+        <point x="1213" y="1053"/>
+        <point x="1426" y="1040"/>
+        <point x="1417" y="814"/>
+    </switch>
+    <switch>
+        <point x="1220" y="1131"/>
+        <point x="1226" y="1351"/>
+        <point x="1437" y="1349"/>
+        <point x="1431" y="1124"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0100.JPG">
+    <plane>
+        <point x="1045" y="374"/>
+        <point x="1033" y="1289"/>
+        <point x="1329" y="1302"/>
+        <point x="1326" y="350"/>
+    </plane>
+    <switch>
+        <point x="1067" y="399"/>
+        <point x="1071" y="625"/>
+        <point x="1291" y="610"/>
+        <point x="1286" y="381"/>
+    </switch>
+    <switch>
+        <point x="1067" y="705"/>
+        <point x="1065" y="938"/>
+        <point x="1289" y="936"/>
+        <point x="1286" y="701"/>
+    </switch>
+    <switch>
+        <point x="1062" y="1025"/>
+        <point x="1062" y="1262"/>
+        <point x="1289" y="1269"/>
+        <point x="1289" y="1025"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0101.JPG">
+    <plane>
+        <point x="960" y="319"/>
+        <point x="907" y="1273"/>
+        <point x="1293" y="1260"/>
+        <point x="1275" y="292"/>
+    </plane>
+    <switch>
+        <point x="996" y="337"/>
+        <point x="985" y="545"/>
+        <point x="1240" y="521"/>
+        <point x="1238" y="315"/>
+    </switch>
+    <switch>
+        <point x="978" y="623"/>
+        <point x="967" y="865"/>
+        <point x="1244" y="845"/>
+        <point x="1242" y="601"/>
+    </switch>
+    <switch>
+        <point x="962" y="954"/>
+        <point x="949" y="1229"/>
+        <point x="1249" y="1218"/>
+        <point x="1246" y="938"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0102.JPG">
+    <plane>
+        <point x="1025" y="479"/>
+        <point x="1202" y="1309"/>
+        <point x="1471" y="1309"/>
+        <point x="1262" y="521"/>
+    </plane>
+    <switch>
+        <point x="1065" y="501"/>
+        <point x="1102" y="678"/>
+        <point x="1293" y="710"/>
+        <point x="1244" y="534"/>
+    </switch>
+    <switch>
+        <point x="1118" y="754"/>
+        <point x="1162" y="958"/>
+        <point x="1360" y="974"/>
+        <point x="1311" y="778"/>
+    </switch>
+    <switch>
+        <point x="1184" y="1038"/>
+        <point x="1229" y="1269"/>
+        <point x="1442" y="1269"/>
+        <point x="1384" y="1049"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0105.JPG">
+    <plane>
+        <point x="971" y="379"/>
+        <point x="909" y="985"/>
+        <point x="1249" y="1027"/>
+        <point x="1271" y="426"/>
+    </plane>
+    <socket>
+        <point x="1102" y="756"/>
+        <point x="1080" y="942"/>
+        <point x="994" y="836"/>
+        <point x="1187" y="863"/>
+    </socket>
+    <switch>
+        <point x="1007" y="408"/>
+        <point x="982" y="619"/>
+        <point x="1226" y="658"/>
+        <point x="1235" y="443"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0108.JPG">
+    <plane>
+        <point x="184" y="587"/>
+        <point x="213" y="1140"/>
+        <point x="1142" y="1167"/>
+        <point x="1147" y="596"/>
+    </plane>
+    <socket>
+        <point x="308" y="982"/>
+        <point x="310" y="1098"/>
+        <point x="255" y="1036"/>
+        <point x="366" y="1042"/>
+    </socket>
+    <socket>
+        <point x="541" y="991"/>
+        <point x="545" y="1104"/>
+        <point x="490" y="1045"/>
+        <point x="596" y="1051"/>
+    </socket>
+    <socket>
+        <point x="774" y="996"/>
+        <point x="776" y="1111"/>
+        <point x="723" y="1053"/>
+        <point x="838" y="1056"/>
+    </socket>
+    <socket>
+        <point x="1016" y="1002"/>
+        <point x="1016" y="1118"/>
+        <point x="956" y="1058"/>
+        <point x="1073" y="1058"/>
+    </socket>
+    <socket>
+        <point x="1808" y="1018"/>
+        <point x="1799" y="1131"/>
+        <point x="1748" y="1071"/>
+        <point x="1861" y="1076"/>
+    </socket>
+    <socket>
+        <point x="2043" y="1022"/>
+        <point x="2034" y="1136"/>
+        <point x="1983" y="1078"/>
+        <point x="2094" y="1082"/>
+    </socket>
+    <switch>
+        <point x="1215" y="991"/>
+        <point x="1211" y="1140"/>
+        <point x="1366" y="1138"/>
+        <point x="1368" y="991"/>
+    </switch>
+    <switch>
+        <point x="210" y="621"/>
+        <point x="215" y="792"/>
+        <point x="381" y="794"/>
+        <point x="377" y="619"/>
+    </switch>
+    <switch>
+        <point x="437" y="619"/>
+        <point x="441" y="796"/>
+        <point x="616" y="800"/>
+        <point x="616" y="621"/>
+    </switch>
+    <switch>
+        <point x="670" y="601"/>
+        <point x="670" y="812"/>
+        <point x="876" y="818"/>
+        <point x="878" y="610"/>
+    </switch>
+    <switch>
+        <point x="914" y="607"/>
+        <point x="911" y="820"/>
+        <point x="1120" y="825"/>
+        <point x="1122" y="612"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0109.JPG">
+    <plane>
+        <point x="481" y="741"/>
+        <point x="492" y="1127"/>
+        <point x="1211" y="1056"/>
+        <point x="1220" y="703"/>
+    </plane>
+    <socket>
+        <point x="690" y="836"/>
+        <point x="696" y="1025"/>
+        <point x="601" y="940"/>
+        <point x="787" y="918"/>
+    </socket>
+    <socket>
+        <point x="1062" y="809"/>
+        <point x="1058" y="994"/>
+        <point x="978" y="909"/>
+        <point x="1144" y="900"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0111.JPG">
+    <plane>
+        <point x="909" y="483"/>
+        <point x="911" y="825"/>
+        <point x="1253" y="761"/>
+        <point x="1271" y="434"/>
+    </plane>
+    <switch>
+        <point x="994" y="552"/>
+        <point x="994" y="772"/>
+        <point x="1195" y="732"/>
+        <point x="1207" y="523"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0113.JPG">
+    <plane>
+        <point x="1076" y="645"/>
+        <point x="1078" y="1058"/>
+        <point x="1539" y="1096"/>
+        <point x="1510" y="692"/>
+    </plane>
+    <switch>
+        <point x="1167" y="696"/>
+        <point x="1175" y="962"/>
+        <point x="1473" y="989"/>
+        <point x="1451" y="723"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0114.JPG">
+    <plane>
+        <point x="1065" y="559"/>
+        <point x="1084" y="836"/>
+        <point x="1291" y="749"/>
+        <point x="1297" y="470"/>
+    </plane>
+    <socket>
+        <point x="1193" y="528"/>
+        <point x="1184" y="658"/>
+        <point x="1104" y="634"/>
+        <point x="1262" y="556"/>
+    </socket>
+    <socket>
+        <point x="1191" y="665"/>
+        <point x="1182" y="781"/>
+        <point x="1113" y="756"/>
+        <point x="1258" y="694"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0115.JPG">
+    <plane>
+        <point x="1155" y="592"/>
+        <point x="1191" y="849"/>
+        <point x="1417" y="843"/>
+        <point x="1413" y="576"/>
+    </plane>
+    <socket>
+        <point x="1286" y="603"/>
+        <point x="1293" y="723"/>
+        <point x="1207" y="670"/>
+        <point x="1375" y="663"/>
+    </socket>
+    <socket>
+        <point x="1297" y="729"/>
+        <point x="1302" y="832"/>
+        <point x="1218" y="789"/>
+        <point x="1382" y="783"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0116.JPG">
+    <plane>
+        <point x="785" y="554"/>
+        <point x="825" y="956"/>
+        <point x="1065" y="1011"/>
+        <point x="1045" y="594"/>
+    </plane>
+    <socket>
+        <point x="907" y="605"/>
+        <point x="920" y="783"/>
+        <point x="836" y="683"/>
+        <point x="1007" y="718"/>
+    </socket>
+    <socket>
+        <point x="920" y="794"/>
+        <point x="938" y="960"/>
+        <point x="849" y="856"/>
+        <point x="1018" y="896"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0118.JPG">
+    <plane>
+        <point x="1040" y="494"/>
+        <point x="1053" y="1158"/>
+        <point x="1393" y="1142"/>
+        <point x="1377" y="514"/>
+    </plane>
+    <socket>
+        <point x="1220" y="550"/>
+        <point x="1226" y="816"/>
+        <point x="1102" y="678"/>
+        <point x="1335" y="692"/>
+    </socket>
+    <socket>
+        <point x="1222" y="834"/>
+        <point x="1220" y="1104"/>
+        <point x="1104" y="969"/>
+        <point x="1342" y="971"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0119.JPG">
+    <plane>
+        <point x="1087" y="264"/>
+        <point x="1127" y="900"/>
+        <point x="1510" y="883"/>
+        <point x="1471" y="230"/>
+    </plane>
+    <socket>
+        <point x="1273" y="290"/>
+        <point x="1291" y="559"/>
+        <point x="1153" y="441"/>
+        <point x="1422" y="419"/>
+    </socket>
+    <socket>
+        <point x="1293" y="579"/>
+        <point x="1311" y="845"/>
+        <point x="1173" y="718"/>
+        <point x="1442" y="705"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0120.JPG">
+    <plane>
+        <point x="849" y="625"/>
+        <point x="809" y="1140"/>
+        <point x="1047" y="1138"/>
+        <point x="1084" y="576"/>
+    </plane>
+    <socket>
+        <point x="954" y="639"/>
+        <point x="931" y="858"/>
+        <point x="876" y="756"/>
+        <point x="1027" y="754"/>
+    </socket>
+    <socket>
+        <point x="936" y="874"/>
+        <point x="916" y="1102"/>
+        <point x="856" y="989"/>
+        <point x="1011" y="994"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0121.JPG">
+    <plane>
+        <point x="1036" y="426"/>
+        <point x="1033" y="956"/>
+        <point x="1486" y="980"/>
+        <point x="1415" y="457"/>
+    </plane>
+    <socket>
+        <point x="1220" y="465"/>
+        <point x="1244" y="670"/>
+        <point x="1098" y="563"/>
+        <point x="1375" y="581"/>
+    </socket>
+    <socket>
+        <point x="1242" y="683"/>
+        <point x="1258" y="925"/>
+        <point x="1100" y="792"/>
+        <point x="1400" y="818"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0122.JPG">
+    <plane>
+        <point x="991" y="654"/>
+        <point x="1011" y="1253"/>
+        <point x="1297" y="1195"/>
+        <point x="1258" y="541"/>
+    </plane>
+    <socket>
+        <point x="1109" y="643"/>
+        <point x="1127" y="889"/>
+        <point x="1033" y="796"/>
+        <point x="1220" y="714"/>
+    </socket>
+    <socket>
+        <point x="1129" y="916"/>
+        <point x="1140" y="1182"/>
+        <point x="1042" y="1067"/>
+        <point x="1235" y="1013"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0123.JPG">
+    <plane>
+        <point x="1058" y="721"/>
+        <point x="1091" y="1167"/>
+        <point x="1548" y="994"/>
+        <point x="1557" y="563"/>
+    </plane>
+    <switch>
+        <point x="1071" y="718"/>
+        <point x="1104" y="1158"/>
+        <point x="1535" y="994"/>
+        <point x="1546" y="583"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0125.JPG">
+    <plane>
+        <point x="918" y="525"/>
+        <point x="927" y="1065"/>
+        <point x="1297" y="1007"/>
+        <point x="1291" y="530"/>
+    </plane>
+    <switch>
+        <point x="920" y="523"/>
+        <point x="931" y="1062"/>
+        <point x="1297" y="1016"/>
+        <point x="1291" y="534"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0126.JPG">
+    <plane>
+        <point x="876" y="843"/>
+        <point x="905" y="1235"/>
+        <point x="1342" y="1251"/>
+        <point x="1275" y="860"/>
+    </plane>
+    <switch>
+        <point x="874" y="840"/>
+        <point x="903" y="1231"/>
+        <point x="1342" y="1246"/>
+        <point x="1275" y="858"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0127.JPG">
+    <plane>
+        <point x="885" y="417"/>
+        <point x="887" y="1169"/>
+        <point x="1710" y="1140"/>
+        <point x="1621" y="381"/>
+    </plane>
+    <switch>
+        <point x="883" y="412"/>
+        <point x="885" y="1167"/>
+        <point x="1706" y="1138"/>
+        <point x="1624" y="381"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0128.JPG">
+    <plane>
+        <point x="978" y="514"/>
+        <point x="987" y="909"/>
+        <point x="1249" y="883"/>
+        <point x="1240" y="532"/>
+    </plane>
+    <switch>
+        <point x="978" y="514"/>
+        <point x="989" y="907"/>
+        <point x="1244" y="891"/>
+        <point x="1240" y="530"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0129.JPG">
+    <plane>
+        <point x="781" y="541"/>
+        <point x="818" y="1226"/>
+        <point x="1198" y="1111"/>
+        <point x="1226" y="448"/>
+    </plane>
+    <socket>
+        <point x="1022" y="936"/>
+        <point x="1020" y="1111"/>
+        <point x="920" y="1045"/>
+        <point x="1127" y="996"/>
+    </socket>
+    <switch>
+        <point x="814" y="568"/>
+        <point x="829" y="889"/>
+        <point x="1193" y="792"/>
+        <point x="1215" y="483"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0130.JPG">
+    <plane>
+        <point x="969" y="634"/>
+        <point x="1016" y="1244"/>
+        <point x="1428" y="1231"/>
+        <point x="1468" y="621"/>
+    </plane>
+    <socket>
+        <point x="1224" y="1042"/>
+        <point x="1229" y="1198"/>
+        <point x="1120" y="1127"/>
+        <point x="1333" y="1124"/>
+    </socket>
+    <switch>
+        <point x="991" y="678"/>
+        <point x="1013" y="956"/>
+        <point x="1426" y="942"/>
+        <point x="1442" y="658"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0131.JPG">
+    <plane>
+        <point x="1049" y="341"/>
+        <point x="1193" y="1049"/>
+        <point x="1522" y="1229"/>
+        <point x="1439" y="472"/>
+    </plane>
+    <socket>
+        <point x="1284" y="883"/>
+        <point x="1324" y="1069"/>
+        <point x="1229" y="934"/>
+        <point x="1400" y="1025"/>
+    </socket>
+    <switch>
+        <point x="1080" y="392"/>
+        <point x="1153" y="734"/>
+        <point x="1462" y="858"/>
+        <point x="1404" y="501"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0132.JPG">
+    <plane>
+        <point x="951" y="448"/>
+        <point x="982" y="1368"/>
+        <point x="1322" y="1459"/>
+        <point x="1282" y="357"/>
+    </plane>
+    <socket>
+        <point x="1104" y="1027"/>
+        <point x="1122" y="1300"/>
+        <point x="1038" y="1136"/>
+        <point x="1202" y="1175"/>
+    </socket>
+    <switch>
+        <point x="960" y="483"/>
+        <point x="980" y="885"/>
+        <point x="1282" y="880"/>
+        <point x="1266" y="421"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0133.JPG">
+    <plane>
+        <point x="951" y="681"/>
+        <point x="1116" y="1484"/>
+        <point x="1462" y="1459"/>
+        <point x="1278" y="732"/>
+    </plane>
+    <socket>
+        <point x="1231" y="1153"/>
+        <point x="1280" y="1368"/>
+        <point x="1171" y="1260"/>
+        <point x="1344" y="1262"/>
+    </socket>
+    <switch>
+        <point x="980" y="716"/>
+        <point x="1040" y="1033"/>
+        <point x="1346" y="1049"/>
+        <point x="1280" y="749"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0134.JPG">
+    <plane>
+        <point x="1096" y="503"/>
+        <point x="1107" y="1104"/>
+        <point x="1548" y="1089"/>
+        <point x="1473" y="494"/>
+    </plane>
+    <socket>
+        <point x="1311" y="832"/>
+        <point x="1322" y="1005"/>
+        <point x="1211" y="920"/>
+        <point x="1426" y="920"/>
+    </socket>
+    <switch>
+        <point x="1111" y="514"/>
+        <point x="1118" y="749"/>
+        <point x="1488" y="747"/>
+        <point x="1459" y="508"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0135.JPG">
+    <plane>
+        <point x="1153" y="596"/>
+        <point x="1213" y="1255"/>
+        <point x="1484" y="1124"/>
+        <point x="1382" y="421"/>
+    </plane>
+    <socket>
+        <point x="1300" y="907"/>
+        <point x="1324" y="1100"/>
+        <point x="1249" y="1031"/>
+        <point x="1375" y="971"/>
+    </socket>
+    <switch>
+        <point x="1164" y="605"/>
+        <point x="1189" y="863"/>
+        <point x="1415" y="714"/>
+        <point x="1382" y="452"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0136.JPG">
+    <plane>
+        <point x="559" y="377"/>
+        <point x="632" y="1191"/>
+        <point x="1067" y="1118"/>
+        <point x="1062" y="310"/>
+    </plane>
+    <switch>
+        <point x="592" y="414"/>
+        <point x="614" y="781"/>
+        <point x="1029" y="714"/>
+        <point x="1047" y="355"/>
+    </switch>
+    <switch>
+        <point x="623" y="847"/>
+        <point x="645" y="1158"/>
+        <point x="1047" y="1082"/>
+        <point x="1040" y="781"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0137.JPG">
+    <plane>
+        <point x="911" y="297"/>
+        <point x="962" y="991"/>
+        <point x="1246" y="1109"/>
+        <point x="1215" y="341"/>
+    </plane>
+    <switch>
+        <point x="927" y="346"/>
+        <point x="947" y="645"/>
+        <point x="1213" y="712"/>
+        <point x="1200" y="377"/>
+    </switch>
+    <switch>
+        <point x="956" y="692"/>
+        <point x="971" y="971"/>
+        <point x="1218" y="1065"/>
+        <point x="1213" y="763"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0138.JPG">
+    <plane>
+        <point x="951" y="579"/>
+        <point x="971" y="1304"/>
+        <point x="1211" y="1304"/>
+        <point x="1173" y="658"/>
+    </plane>
+    <switch>
+        <point x="971" y="612"/>
+        <point x="989" y="911"/>
+        <point x="1173" y="949"/>
+        <point x="1164" y="674"/>
+    </switch>
+    <switch>
+        <point x="987" y="956"/>
+        <point x="991" y="1253"/>
+        <point x="1198" y="1271"/>
+        <point x="1182" y="985"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0139.JPG">
+    <plane>
+        <point x="610" y="399"/>
+        <point x="541" y="1133"/>
+        <point x="1020" y="1093"/>
+        <point x="1018" y="330"/>
+    </plane>
+    <switch>
+        <point x="625" y="417"/>
+        <point x="601" y="698"/>
+        <point x="987" y="654"/>
+        <point x="994" y="361"/>
+    </switch>
+    <switch>
+        <point x="596" y="747"/>
+        <point x="570" y="1091"/>
+        <point x="985" y="1053"/>
+        <point x="991" y="696"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0141.JPG">
+    <plane>
+        <point x="787" y="652"/>
+        <point x="863" y="1249"/>
+        <point x="1178" y="1069"/>
+        <point x="1178" y="472"/>
+    </plane>
+    <switch>
+        <point x="876" y="694"/>
+        <point x="898" y="920"/>
+        <point x="1122" y="800"/>
+        <point x="1124" y="572"/>
+    </switch>
+    <switch>
+        <point x="889" y="1002"/>
+        <point x="907" y="1184"/>
+        <point x="1142" y="1053"/>
+        <point x="1138" y="869"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0144.JPG">
+    <plane>
+        <point x="1133" y="592"/>
+        <point x="1138" y="896"/>
+        <point x="1266" y="858"/>
+        <point x="1262" y="563"/>
+    </plane>
+    <switch>
+        <point x="1160" y="616"/>
+        <point x="1160" y="723"/>
+        <point x="1244" y="703"/>
+        <point x="1238" y="596"/>
+    </switch>
+    <switch>
+        <point x="1153" y="765"/>
+        <point x="1158" y="869"/>
+        <point x="1251" y="836"/>
+        <point x="1251" y="736"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0145.JPG">
+    <plane>
+        <point x="991" y="650"/>
+        <point x="1033" y="960"/>
+        <point x="1195" y="1036"/>
+        <point x="1164" y="714"/>
+    </plane>
+    <switch>
+        <point x="1022" y="696"/>
+        <point x="1033" y="803"/>
+        <point x="1140" y="847"/>
+        <point x="1129" y="738"/>
+    </switch>
+    <switch>
+        <point x="1040" y="843"/>
+        <point x="1049" y="942"/>
+        <point x="1160" y="998"/>
+        <point x="1155" y="896"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0146.JPG">
+    <plane>
+        <point x="1142" y="210"/>
+        <point x="1155" y="414"/>
+        <point x="1246" y="479"/>
+        <point x="1231" y="275"/>
+    </plane>
+    <switch>
+        <point x="1162" y="239"/>
+        <point x="1167" y="308"/>
+        <point x="1224" y="348"/>
+        <point x="1218" y="279"/>
+    </switch>
+    <switch>
+        <point x="1167" y="335"/>
+        <point x="1169" y="399"/>
+        <point x="1233" y="445"/>
+        <point x="1231" y="377"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0147.JPG">
+    <plane>
+        <point x="1033" y="665"/>
+        <point x="1036" y="996"/>
+        <point x="1171" y="1025"/>
+        <point x="1162" y="705"/>
+    </plane>
+    <switch>
+        <point x="1065" y="705"/>
+        <point x="1065" y="814"/>
+        <point x="1147" y="834"/>
+        <point x="1144" y="736"/>
+    </switch>
+    <switch>
+        <point x="1056" y="858"/>
+        <point x="1058" y="967"/>
+        <point x="1153" y="985"/>
+        <point x="1153" y="878"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0148.JPG">
+    <plane>
+        <point x="947" y="550"/>
+        <point x="938" y="1011"/>
+        <point x="1207" y="1011"/>
+        <point x="1202" y="548"/>
+    </plane>
+    <switch>
+        <point x="991" y="590"/>
+        <point x="991" y="741"/>
+        <point x="1158" y="736"/>
+        <point x="1153" y="583"/>
+    </switch>
+    <switch>
+        <point x="978" y="800"/>
+        <point x="976" y="958"/>
+        <point x="1169" y="960"/>
+        <point x="1167" y="800"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0149.JPG">
+    <plane>
+        <point x="1009" y="583"/>
+        <point x="1007" y="1082"/>
+        <point x="1238" y="1076"/>
+        <point x="1242" y="545"/>
+    </plane>
+    <switch>
+        <point x="1042" y="621"/>
+        <point x="1040" y="789"/>
+        <point x="1191" y="774"/>
+        <point x="1187" y="596"/>
+    </switch>
+    <switch>
+        <point x="1033" y="863"/>
+        <point x="1033" y="1029"/>
+        <point x="1198" y="1020"/>
+        <point x="1200" y="847"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0150.JPG">
+    <plane>
+        <point x="1029" y="570"/>
+        <point x="1042" y="1009"/>
+        <point x="1246" y="1002"/>
+        <point x="1229" y="536"/>
+    </plane>
+    <switch>
+        <point x="1065" y="599"/>
+        <point x="1071" y="758"/>
+        <point x="1191" y="738"/>
+        <point x="1182" y="590"/>
+    </switch>
+    <switch>
+        <point x="1065" y="825"/>
+        <point x="1069" y="965"/>
+        <point x="1207" y="958"/>
+        <point x="1200" y="809"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0152.JPG">
+    <plane>
+        <point x="1025" y="603"/>
+        <point x="1069" y="1171"/>
+        <point x="1371" y="1149"/>
+        <point x="1326" y="574"/>
+    </plane>
+    <switch>
+        <point x="1084" y="652"/>
+        <point x="1104" y="840"/>
+        <point x="1295" y="825"/>
+        <point x="1273" y="634"/>
+    </switch>
+    <switch>
+        <point x="1089" y="923"/>
+        <point x="1109" y="1113"/>
+        <point x="1326" y="1098"/>
+        <point x="1311" y="905"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0153.JPG">
+    <plane>
+        <point x="976" y="636"/>
+        <point x="982" y="852"/>
+        <point x="1171" y="909"/>
+        <point x="1169" y="694"/>
+    </plane>
+    <switch>
+        <point x="998" y="672"/>
+        <point x="994" y="838"/>
+        <point x="1140" y="885"/>
+        <point x="1142" y="710"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0154.JPG">
+    <plane>
+        <point x="945" y="639"/>
+        <point x="934" y="907"/>
+        <point x="1204" y="936"/>
+        <point x="1220" y="667"/>
+    </plane>
+    <switch>
+        <point x="974" y="676"/>
+        <point x="965" y="880"/>
+        <point x="1169" y="909"/>
+        <point x="1184" y="698"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0155.JPG">
+    <plane>
+        <point x="1160" y="550"/>
+        <point x="1167" y="796"/>
+        <point x="1411" y="729"/>
+        <point x="1393" y="472"/>
+    </plane>
+    <switch>
+        <point x="1180" y="563"/>
+        <point x="1191" y="761"/>
+        <point x="1380" y="703"/>
+        <point x="1368" y="503"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0156.JPG">
+    <plane>
+        <point x="956" y="477"/>
+        <point x="1007" y="911"/>
+        <point x="1235" y="856"/>
+        <point x="1202" y="421"/>
+    </plane>
+    <socket>
+        <point x="1111" y="729"/>
+        <point x="1124" y="840"/>
+        <point x="1062" y="798"/>
+        <point x="1178" y="769"/>
+    </socket>
+    <switch>
+        <point x="1009" y="516"/>
+        <point x="1027" y="665"/>
+        <point x="1180" y="630"/>
+        <point x="1164" y="479"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0157.JPG">
+    <plane>
+        <point x="1060" y="561"/>
+        <point x="1065" y="974"/>
+        <point x="1282" y="971"/>
+        <point x="1278" y="554"/>
+    </plane>
+    <socket>
+        <point x="1173" y="812"/>
+        <point x="1173" y="920"/>
+        <point x="1118" y="867"/>
+        <point x="1229" y="867"/>
+    </socket>
+    <switch>
+        <point x="1100" y="599"/>
+        <point x="1102" y="736"/>
+        <point x="1240" y="734"/>
+        <point x="1242" y="596"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0158.JPG">
+    <plane>
+        <point x="987" y="499"/>
+        <point x="976" y="820"/>
+        <point x="1118" y="849"/>
+        <point x="1133" y="512"/>
+    </plane>
+    <socket>
+        <point x="1038" y="710"/>
+        <point x="1036" y="794"/>
+        <point x="1005" y="745"/>
+        <point x="1073" y="765"/>
+    </socket>
+    <switch>
+        <point x="1005" y="539"/>
+        <point x="1000" y="643"/>
+        <point x="1089" y="656"/>
+        <point x="1093" y="545"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0159.JPG">
+    <plane>
+        <point x="980" y="594"/>
+        <point x="996" y="1093"/>
+        <point x="1269" y="1096"/>
+        <point x="1235" y="610"/>
+    </plane>
+    <socket>
+        <point x="1133" y="887"/>
+        <point x="1142" y="1020"/>
+        <point x="1071" y="951"/>
+        <point x="1202" y="956"/>
+    </socket>
+    <switch>
+        <point x="1033" y="639"/>
+        <point x="1040" y="800"/>
+        <point x="1204" y="805"/>
+        <point x="1191" y="650"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0160.JPG">
+    <plane>
+        <point x="994" y="481"/>
+        <point x="996" y="974"/>
+        <point x="1282" y="978"/>
+        <point x="1269" y="485"/>
+    </plane>
+    <socket>
+        <point x="1140" y="763"/>
+        <point x="1144" y="898"/>
+        <point x="1071" y="829"/>
+        <point x="1213" y="832"/>
+    </socket>
+    <switch>
+        <point x="1045" y="523"/>
+        <point x="1049" y="676"/>
+        <point x="1218" y="683"/>
+        <point x="1213" y="519"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0162.JPG">
+    <plane>
+        <point x="965" y="752"/>
+        <point x="969" y="929"/>
+        <point x="1102" y="891"/>
+        <point x="1100" y="714"/>
+    </plane>
+    <switch>
+        <point x="974" y="761"/>
+        <point x="976" y="923"/>
+        <point x="1102" y="889"/>
+        <point x="1098" y="725"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0163.JPG">
+    <plane>
+        <point x="1169" y="534"/>
+        <point x="1175" y="832"/>
+        <point x="1524" y="814"/>
+        <point x="1502" y="514"/>
+    </plane>
+    <switch>
+        <point x="1178" y="539"/>
+        <point x="1187" y="816"/>
+        <point x="1515" y="798"/>
+        <point x="1497" y="514"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0164.JPG">
+    <plane>
+        <point x="1100" y="470"/>
+        <point x="1082" y="876"/>
+        <point x="1417" y="942"/>
+        <point x="1435" y="492"/>
+    </plane>
+    <switch>
+        <point x="1111" y="483"/>
+        <point x="1093" y="865"/>
+        <point x="1400" y="920"/>
+        <point x="1424" y="508"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0165.JPG">
+    <plane>
+        <point x="1240" y="989"/>
+        <point x="1262" y="1189"/>
+        <point x="1484" y="1211"/>
+        <point x="1464" y="1005"/>
+    </plane>
+    <switch>
+        <point x="1244" y="1002"/>
+        <point x="1266" y="1178"/>
+        <point x="1477" y="1209"/>
+        <point x="1464" y="1018"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0166.JPG">
+    <plane>
+        <point x="1082" y="616"/>
+        <point x="1109" y="827"/>
+        <point x="1371" y="854"/>
+        <point x="1324" y="650"/>
+    </plane>
+    <switch>
+        <point x="1084" y="619"/>
+        <point x="1111" y="823"/>
+        <point x="1368" y="852"/>
+        <point x="1320" y="656"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0167.JPG">
+    <plane>
+        <point x="962" y="563"/>
+        <point x="962" y="745"/>
+        <point x="1151" y="752"/>
+        <point x="1155" y="568"/>
+    </plane>
+    <switch>
+        <point x="985" y="592"/>
+        <point x="985" y="727"/>
+        <point x="1129" y="734"/>
+        <point x="1136" y="594"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0168.JPG">
+    <plane>
+        <point x="1029" y="783"/>
+        <point x="1005" y="1093"/>
+        <point x="1309" y="1098"/>
+        <point x="1329" y="778"/>
+    </plane>
+    <switch>
+        <point x="1056" y="814"/>
+        <point x="1040" y="1058"/>
+        <point x="1271" y="1060"/>
+        <point x="1284" y="812"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0169.JPG">
+    <plane>
+        <point x="960" y="570"/>
+        <point x="976" y="807"/>
+        <point x="1240" y="736"/>
+        <point x="1240" y="501"/>
+    </plane>
+    <switch>
+        <point x="980" y="581"/>
+        <point x="994" y="785"/>
+        <point x="1233" y="729"/>
+        <point x="1226" y="521"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0170.JPG">
+    <plane>
+        <point x="1042" y="658"/>
+        <point x="1051" y="1002"/>
+        <point x="1411" y="976"/>
+        <point x="1395" y="603"/>
+    </plane>
+    <switch>
+        <point x="1062" y="674"/>
+        <point x="1069" y="976"/>
+        <point x="1384" y="956"/>
+        <point x="1377" y="632"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0172.JPG">
+    <plane>
+        <point x="978" y="426"/>
+        <point x="998" y="1062"/>
+        <point x="1346" y="1089"/>
+        <point x="1346" y="434"/>
+    </plane>
+    <socket>
+        <point x="1160" y="838"/>
+        <point x="1164" y="1007"/>
+        <point x="1080" y="923"/>
+        <point x="1253" y="934"/>
+    </socket>
+    <switch>
+        <point x="1000" y="457"/>
+        <point x="1007" y="743"/>
+        <point x="1331" y="752"/>
+        <point x="1326" y="459"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0173.JPG">
+    <plane>
+        <point x="1009" y="605"/>
+        <point x="960" y="1198"/>
+        <point x="1357" y="1198"/>
+        <point x="1364" y="592"/>
+    </plane>
+    <socket>
+        <point x="1167" y="942"/>
+        <point x="1160" y="1120"/>
+        <point x="1067" y="1027"/>
+        <point x="1262" y="1031"/>
+    </socket>
+    <switch>
+        <point x="1029" y="627"/>
+        <point x="1009" y="856"/>
+        <point x="1342" y="852"/>
+        <point x="1340" y="619"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0174.JPG">
+    <plane>
+        <point x="1129" y="510"/>
+        <point x="1113" y="1073"/>
+        <point x="1337" y="1153"/>
+        <point x="1366" y="536"/>
+    </plane>
+    <socket>
+        <point x="1220" y="887"/>
+        <point x="1215" y="1047"/>
+        <point x="1164" y="951"/>
+        <point x="1278" y="987"/>
+    </socket>
+    <switch>
+        <point x="1144" y="536"/>
+        <point x="1136" y="783"/>
+        <point x="1340" y="827"/>
+        <point x="1344" y="561"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0175.JPG">
+    <plane>
+        <point x="1249" y="392"/>
+        <point x="1313" y="836"/>
+        <point x="1533" y="938"/>
+        <point x="1491" y="472"/>
+    </plane>
+    <socket>
+        <point x="1391" y="723"/>
+        <point x="1413" y="836"/>
+        <point x="1349" y="761"/>
+        <point x="1457" y="814"/>
+    </socket>
+    <switch>
+        <point x="1266" y="423"/>
+        <point x="1295" y="621"/>
+        <point x="1502" y="703"/>
+        <point x="1484" y="492"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0176.JPG">
+    <plane>
+        <point x="1280" y="494"/>
+        <point x="1313" y="994"/>
+        <point x="1515" y="903"/>
+        <point x="1462" y="374"/>
+    </plane>
+    <socket>
+        <point x="1384" y="741"/>
+        <point x="1397" y="883"/>
+        <point x="1344" y="823"/>
+        <point x="1442" y="785"/>
+    </socket>
+    <switch>
+        <point x="1291" y="501"/>
+        <point x="1309" y="705"/>
+        <point x="1477" y="616"/>
+        <point x="1455" y="403"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0177.JPG">
+    <plane>
+        <point x="250" y="530"/>
+        <point x="279" y="1164"/>
+        <point x="656" y="1153"/>
+        <point x="683" y="536"/>
+    </plane>
+    <socket>
+        <point x="463" y="938"/>
+        <point x="468" y="1100"/>
+        <point x="372" y="1025"/>
+        <point x="561" y="1016"/>
+    </socket>
+    <switch>
+        <point x="279" y="552"/>
+        <point x="288" y="854"/>
+        <point x="645" y="843"/>
+        <point x="652" y="559"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0178.JPG">
+    <plane>
+        <point x="803" y="599"/>
+        <point x="854" y="869"/>
+        <point x="1195" y="747"/>
+        <point x="1169" y="479"/>
+    </plane>
+    <switch>
+        <point x="829" y="616"/>
+        <point x="876" y="852"/>
+        <point x="1180" y="741"/>
+        <point x="1153" y="514"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0179.JPG">
+    <plane>
+        <point x="1202" y="421"/>
+        <point x="1215" y="785"/>
+        <point x="1530" y="803"/>
+        <point x="1519" y="397"/>
+    </plane>
+    <switch>
+        <point x="1220" y="441"/>
+        <point x="1233" y="754"/>
+        <point x="1513" y="761"/>
+        <point x="1499" y="430"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0180.JPG">
+    <plane>
+        <point x="1102" y="845"/>
+        <point x="1116" y="1127"/>
+        <point x="1477" y="1087"/>
+        <point x="1444" y="807"/>
+    </plane>
+    <switch>
+        <point x="1124" y="858"/>
+        <point x="1136" y="1093"/>
+        <point x="1457" y="1062"/>
+        <point x="1431" y="827"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0181.JPG">
+    <plane>
+        <point x="978" y="492"/>
+        <point x="1051" y="887"/>
+        <point x="1293" y="927"/>
+        <point x="1233" y="514"/>
+    </plane>
+    <switch>
+        <point x="996" y="508"/>
+        <point x="1033" y="703"/>
+        <point x="1249" y="723"/>
+        <point x="1226" y="534"/>
+    </switch>
+    <switch>
+        <point x="1038" y="723"/>
+        <point x="1065" y="885"/>
+        <point x="1280" y="916"/>
+        <point x="1255" y="749"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0182.JPG">
+    <plane>
+        <point x="925" y="494"/>
+        <point x="971" y="1029"/>
+        <point x="1204" y="923"/>
+        <point x="1175" y="414"/>
+    </plane>
+    <switch>
+        <point x="945" y="521"/>
+        <point x="965" y="756"/>
+        <point x="1171" y="681"/>
+        <point x="1160" y="448"/>
+    </switch>
+    <switch>
+        <point x="971" y="798"/>
+        <point x="991" y="1005"/>
+        <point x="1193" y="918"/>
+        <point x="1182" y="712"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0183.JPG">
+    <plane>
+        <point x="985" y="377"/>
+        <point x="958" y="971"/>
+        <point x="1322" y="969"/>
+        <point x="1322" y="370"/>
+    </plane>
+    <switch>
+        <point x="1002" y="397"/>
+        <point x="996" y="643"/>
+        <point x="1304" y="639"/>
+        <point x="1304" y="394"/>
+    </switch>
+    <switch>
+        <point x="994" y="670"/>
+        <point x="982" y="940"/>
+        <point x="1309" y="940"/>
+        <point x="1309" y="672"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0184.JPG">
+    <plane>
+        <point x="940" y="477"/>
+        <point x="976" y="1109"/>
+        <point x="1275" y="1164"/>
+        <point x="1207" y="572"/>
+    </plane>
+    <switch>
+        <point x="962" y="503"/>
+        <point x="982" y="774"/>
+        <point x="1220" y="836"/>
+        <point x="1195" y="587"/>
+    </switch>
+    <switch>
+        <point x="987" y="812"/>
+        <point x="1009" y="1089"/>
+        <point x="1255" y="1136"/>
+        <point x="1229" y="869"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0185.JPG">
+    <plane>
+        <point x="1013" y="590"/>
+        <point x="980" y="1291"/>
+        <point x="1246" y="1222"/>
+        <point x="1246" y="434"/>
+    </plane>
+    <switch>
+        <point x="1025" y="603"/>
+        <point x="1013" y="894"/>
+        <point x="1233" y="800"/>
+        <point x="1240" y="463"/>
+    </switch>
+    <switch>
+        <point x="1013" y="923"/>
+        <point x="996" y="1253"/>
+        <point x="1229" y="1191"/>
+        <point x="1235" y="832"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0186.JPG">
+    <plane>
+        <point x="1144" y="470"/>
+        <point x="1147" y="998"/>
+        <point x="1473" y="987"/>
+        <point x="1510" y="457"/>
+    </plane>
+    <switch>
+        <point x="1158" y="494"/>
+        <point x="1162" y="745"/>
+        <point x="1477" y="734"/>
+        <point x="1488" y="479"/>
+    </switch>
+    <switch>
+        <point x="1158" y="769"/>
+        <point x="1160" y="980"/>
+        <point x="1459" y="969"/>
+        <point x="1473" y="756"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0187.JPG">
+    <plane>
+        <point x="1005" y="530"/>
+        <point x="1042" y="1116"/>
+        <point x="1346" y="1104"/>
+        <point x="1306" y="483"/>
+    </plane>
+    <switch>
+        <point x="1016" y="550"/>
+        <point x="1038" y="796"/>
+        <point x="1304" y="776"/>
+        <point x="1284" y="512"/>
+    </switch>
+    <switch>
+        <point x="1040" y="834"/>
+        <point x="1053" y="1084"/>
+        <point x="1324" y="1080"/>
+        <point x="1304" y="812"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0188.JPG">
+    <plane>
+        <point x="1000" y="867"/>
+        <point x="1016" y="1087"/>
+        <point x="1226" y="1038"/>
+        <point x="1218" y="823"/>
+    </plane>
+    <socket>
+        <point x="1127" y="914"/>
+        <point x="1131" y="1020"/>
+        <point x="1078" y="974"/>
+        <point x="1182" y="949"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0189.JPG">
+    <plane>
+        <point x="905" y="712"/>
+        <point x="905" y="1022"/>
+        <point x="1142" y="1020"/>
+        <point x="1149" y="727"/>
+    </plane>
+    <socket>
+        <point x="1049" y="794"/>
+        <point x="1056" y="942"/>
+        <point x="994" y="867"/>
+        <point x="1116" y="869"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0190.JPG">
+    <plane>
+        <point x="1062" y="698"/>
+        <point x="1056" y="1045"/>
+        <point x="1380" y="1036"/>
+        <point x="1380" y="665"/>
+    </plane>
+    <socket>
+        <point x="1193" y="763"/>
+        <point x="1189" y="947"/>
+        <point x="1113" y="856"/>
+        <point x="1273" y="847"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0191.JPG">
+    <plane>
+        <point x="1158" y="645"/>
+        <point x="1164" y="991"/>
+        <point x="1568" y="951"/>
+        <point x="1530" y="587"/>
+    </plane>
+    <socket>
+        <point x="1333" y="674"/>
+        <point x="1353" y="858"/>
+        <point x="1242" y="776"/>
+        <point x="1444" y="747"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0192.JPG">
+    <plane>
+        <point x="1031" y="692"/>
+        <point x="1069" y="1018"/>
+        <point x="1349" y="1073"/>
+        <point x="1311" y="721"/>
+    </plane>
+    <socket>
+        <point x="1133" y="812"/>
+        <point x="1155" y="978"/>
+        <point x="1084" y="876"/>
+        <point x="1226" y="907"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0193.JPG">
+    <plane>
+        <point x="1002" y="423"/>
+        <point x="1018" y="938"/>
+        <point x="1253" y="854"/>
+        <point x="1262" y="359"/>
+    </plane>
+    <socket>
+        <point x="1160" y="738"/>
+        <point x="1158" y="867"/>
+        <point x="1093" y="816"/>
+        <point x="1222" y="778"/>
+    </socket>
+    <switch>
+        <point x="1062" y="461"/>
+        <point x="1067" y="672"/>
+        <point x="1240" y="621"/>
+        <point x="1240" y="419"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0194.JPG">
+    <plane>
+        <point x="1073" y="521"/>
+        <point x="1138" y="1213"/>
+        <point x="1528" y="1193"/>
+        <point x="1431" y="508"/>
+    </plane>
+    <socket>
+        <point x="1311" y="896"/>
+        <point x="1340" y="1104"/>
+        <point x="1215" y="996"/>
+        <point x="1428" y="994"/>
+    </socket>
+    <switch>
+        <point x="1136" y="541"/>
+        <point x="1153" y="787"/>
+        <point x="1431" y="778"/>
+        <point x="1400" y="536"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0196.JPG">
+    <plane>
+        <point x="1178" y="488"/>
+        <point x="1231" y="1140"/>
+        <point x="1595" y="1138"/>
+        <point x="1504" y="492"/>
+    </plane>
+    <socket>
+        <point x="1400" y="852"/>
+        <point x="1424" y="1038"/>
+        <point x="1313" y="942"/>
+        <point x="1508" y="945"/>
+    </socket>
+    <switch>
+        <point x="1235" y="514"/>
+        <point x="1258" y="743"/>
+        <point x="1508" y="749"/>
+        <point x="1477" y="523"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0197.JPG">
+    <plane>
+        <point x="805" y="474"/>
+        <point x="814" y="1226"/>
+        <point x="1178" y="1215"/>
+        <point x="1153" y="419"/>
+    </plane>
+    <socket>
+        <point x="954" y="907"/>
+        <point x="956" y="1136"/>
+        <point x="863" y="1022"/>
+        <point x="1058" y="1009"/>
+    </socket>
+    <switch>
+        <point x="836" y="503"/>
+        <point x="840" y="787"/>
+        <point x="1098" y="761"/>
+        <point x="1089" y="470"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0198.JPG">
+    <plane>
+        <point x="665" y="443"/>
+        <point x="641" y="1218"/>
+        <point x="1011" y="1229"/>
+        <point x="1022" y="403"/>
+    </plane>
+    <socket>
+        <point x="798" y="905"/>
+        <point x="794" y="1138"/>
+        <point x="701" y="1016"/>
+        <point x="905" y="1018"/>
+    </socket>
+    <switch>
+        <point x="694" y="479"/>
+        <point x="690" y="776"/>
+        <point x="951" y="761"/>
+        <point x="958" y="454"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0199.JPG">
+    <plane>
+        <point x="1078" y="550"/>
+        <point x="1073" y="1306"/>
+        <point x="1439" y="1317"/>
+        <point x="1439" y="499"/>
+    </plane>
+    <socket>
+        <point x="1233" y="998"/>
+        <point x="1233" y="1222"/>
+        <point x="1136" y="1109"/>
+        <point x="1337" y="1111"/>
+    </socket>
+    <switch>
+        <point x="1113" y="570"/>
+        <point x="1118" y="869"/>
+        <point x="1384" y="847"/>
+        <point x="1375" y="554"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0200.JPG">
+    <plane>
+        <point x="805" y="341"/>
+        <point x="974" y="994"/>
+        <point x="1306" y="1071"/>
+        <point x="1189" y="383"/>
+    </plane>
+    <socket>
+        <point x="1047" y="827"/>
+        <point x="1093" y="996"/>
+        <point x="989" y="898"/>
+        <point x="1178" y="947"/>
+    </socket>
+    <switch>
+        <point x="845" y="419"/>
+        <point x="911" y="692"/>
+        <point x="1169" y="736"/>
+        <point x="1118" y="463"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0201.JPG">
+    <plane>
+        <point x="838" y="656"/>
+        <point x="909" y="1025"/>
+        <point x="1149" y="1051"/>
+        <point x="1109" y="674"/>
+    </plane>
+    <socket>
+        <point x="998" y="923"/>
+        <point x="1013" y="1022"/>
+        <point x="938" y="969"/>
+        <point x="1073" y="976"/>
+    </socket>
+    <switch>
+        <point x="871" y="696"/>
+        <point x="898" y="856"/>
+        <point x="1087" y="865"/>
+        <point x="1069" y="712"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0202.JPG">
+    <plane>
+        <point x="1080" y="563"/>
+        <point x="1058" y="1111"/>
+        <point x="1371" y="1127"/>
+        <point x="1368" y="576"/>
+    </plane>
+    <socket>
+        <point x="1222" y="878"/>
+        <point x="1220" y="1038"/>
+        <point x="1133" y="954"/>
+        <point x="1304" y="962"/>
+    </socket>
+    <switch>
+        <point x="1116" y="579"/>
+        <point x="1111" y="778"/>
+        <point x="1335" y="792"/>
+        <point x="1335" y="590"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0203.JPG">
+    <plane>
+        <point x="1029" y="477"/>
+        <point x="1020" y="1260"/>
+        <point x="1413" y="1266"/>
+        <point x="1437" y="479"/>
+    </plane>
+    <socket>
+        <point x="1231" y="976"/>
+        <point x="1229" y="1193"/>
+        <point x="1120" y="1084"/>
+        <point x="1340" y="1087"/>
+    </socket>
+    <switch>
+        <point x="1084" y="530"/>
+        <point x="1082" y="836"/>
+        <point x="1384" y="836"/>
+        <point x="1391" y="534"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0204.JPG">
+    <plane>
+        <point x="1096" y="443"/>
+        <point x="1082" y="1189"/>
+        <point x="1322" y="1169"/>
+        <point x="1331" y="492"/>
+    </plane>
+    <socket>
+        <point x="1244" y="905"/>
+        <point x="1242" y="1104"/>
+        <point x="1173" y="1000"/>
+        <point x="1309" y="998"/>
+    </socket>
+    <switch>
+        <point x="1144" y="494"/>
+        <point x="1147" y="776"/>
+        <point x="1315" y="794"/>
+        <point x="1324" y="532"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0205.JPG">
+    <plane>
+        <point x="767" y="488"/>
+        <point x="867" y="976"/>
+        <point x="1111" y="1069"/>
+        <point x="1033" y="568"/>
+    </plane>
+    <socket>
+        <point x="925" y="865"/>
+        <point x="951" y="996"/>
+        <point x="874" y="909"/>
+        <point x="1013" y="967"/>
+    </socket>
+    <switch>
+        <point x="794" y="552"/>
+        <point x="829" y="749"/>
+        <point x="1020" y="816"/>
+        <point x="989" y="621"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0206.JPG">
+    <plane>
+        <point x="1027" y="508"/>
+        <point x="1027" y="1180"/>
+        <point x="1437" y="1171"/>
+        <point x="1388" y="497"/>
+    </plane>
+    <socket>
+        <point x="1220" y="863"/>
+        <point x="1229" y="1065"/>
+        <point x="1111" y="956"/>
+        <point x="1342" y="949"/>
+    </socket>
+    <switch>
+        <point x="1069" y="536"/>
+        <point x="1073" y="749"/>
+        <point x="1362" y="749"/>
+        <point x="1349" y="528"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0207.JPG">
+    <plane>
+        <point x="951" y="603"/>
+        <point x="934" y="1045"/>
+        <point x="1211" y="931"/>
+        <point x="1278" y="490"/>
+    </plane>
+    <socket>
+        <point x="1120" y="860"/>
+        <point x="1104" y="976"/>
+        <point x="1025" y="949"/>
+        <point x="1184" y="878"/>
+    </socket>
+    <switch>
+        <point x="1009" y="641"/>
+        <point x="996" y="829"/>
+        <point x="1215" y="734"/>
+        <point x="1249" y="556"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0208.JPG">
+    <plane>
+        <point x="942" y="634"/>
+        <point x="965" y="1056"/>
+        <point x="1180" y="1025"/>
+        <point x="1173" y="607"/>
+    </plane>
+    <socket>
+        <point x="1078" y="894"/>
+        <point x="1082" y="1009"/>
+        <point x="1016" y="960"/>
+        <point x="1142" y="942"/>
+    </socket>
+    <switch>
+        <point x="978" y="667"/>
+        <point x="989" y="836"/>
+        <point x="1158" y="809"/>
+        <point x="1155" y="643"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0209.JPG">
+    <plane>
+        <point x="889" y="512"/>
+        <point x="956" y="1078"/>
+        <point x="1262" y="1124"/>
+        <point x="1224" y="534"/>
+    </plane>
+    <switch>
+        <point x="929" y="552"/>
+        <point x="960" y="792"/>
+        <point x="1204" y="823"/>
+        <point x="1189" y="570"/>
+    </switch>
+    <switch>
+        <point x="958" y="825"/>
+        <point x="987" y="1049"/>
+        <point x="1220" y="1084"/>
+        <point x="1207" y="847"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0210.JPG">
+    <plane>
+        <point x="856" y="359"/>
+        <point x="845" y="1173"/>
+        <point x="1144" y="1251"/>
+        <point x="1169" y="326"/>
+    </plane>
+    <switch>
+        <point x="883" y="401"/>
+        <point x="880" y="749"/>
+        <point x="1120" y="765"/>
+        <point x="1127" y="386"/>
+    </switch>
+    <switch>
+        <point x="878" y="783"/>
+        <point x="869" y="1129"/>
+        <point x="1109" y="1180"/>
+        <point x="1118" y="814"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0211.JPG">
+    <plane>
+        <point x="1020" y="563"/>
+        <point x="1080" y="1289"/>
+        <point x="1406" y="1189"/>
+        <point x="1373" y="494"/>
+    </plane>
+    <switch>
+        <point x="1067" y="596"/>
+        <point x="1087" y="911"/>
+        <point x="1346" y="852"/>
+        <point x="1337" y="550"/>
+    </switch>
+    <switch>
+        <point x="1091" y="949"/>
+        <point x="1113" y="1238"/>
+        <point x="1368" y="1155"/>
+        <point x="1353" y="880"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0212.JPG">
+    <plane>
+        <point x="1031" y="463"/>
+        <point x="1065" y="1258"/>
+        <point x="1553" y="1242"/>
+        <point x="1466" y="461"/>
+    </plane>
+    <switch>
+        <point x="1084" y="503"/>
+        <point x="1096" y="812"/>
+        <point x="1457" y="800"/>
+        <point x="1420" y="494"/>
+    </switch>
+    <switch>
+        <point x="1100" y="849"/>
+        <point x="1116" y="1198"/>
+        <point x="1497" y="1180"/>
+        <point x="1462" y="836"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0213.JPG">
+    <plane>
+        <point x="1042" y="565"/>
+        <point x="1053" y="1133"/>
+        <point x="1309" y="1062"/>
+        <point x="1278" y="463"/>
+    </plane>
+    <switch>
+        <point x="1065" y="585"/>
+        <point x="1076" y="809"/>
+        <point x="1264" y="752"/>
+        <point x="1249" y="508"/>
+    </switch>
+    <switch>
+        <point x="1080" y="840"/>
+        <point x="1080" y="1080"/>
+        <point x="1273" y="1031"/>
+        <point x="1266" y="774"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0214.JPG">
+    <plane>
+        <point x="1005" y="568"/>
+        <point x="1013" y="1167"/>
+        <point x="1340" y="1164"/>
+        <point x="1326" y="559"/>
+    </plane>
+    <switch>
+        <point x="1040" y="601"/>
+        <point x="1047" y="849"/>
+        <point x="1291" y="847"/>
+        <point x="1291" y="592"/>
+    </switch>
+    <switch>
+        <point x="1049" y="878"/>
+        <point x="1053" y="1131"/>
+        <point x="1304" y="1124"/>
+        <point x="1295" y="876"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0215.JPG">
+    <plane>
+        <point x="763" y="297"/>
+        <point x="863" y="1136"/>
+        <point x="1258" y="1002"/>
+        <point x="1226" y="208"/>
+    </plane>
+    <socket>
+        <point x="1058" y="774"/>
+        <point x="1067" y="974"/>
+        <point x="958" y="907"/>
+        <point x="1162" y="849"/>
+    </socket>
+    <switch>
+        <point x="825" y="348"/>
+        <point x="863" y="718"/>
+        <point x="1193" y="634"/>
+        <point x="1180" y="272"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0217.JPG">
+    <plane>
+        <point x="852" y="330"/>
+        <point x="845" y="1207"/>
+        <point x="1246" y="1229"/>
+        <point x="1220" y="423"/>
+    </plane>
+    <socket>
+        <point x="1060" y="865"/>
+        <point x="1062" y="1093"/>
+        <point x="960" y="960"/>
+        <point x="1155" y="991"/>
+    </socket>
+    <switch>
+        <point x="896" y="388"/>
+        <point x="887" y="729"/>
+        <point x="1198" y="792"/>
+        <point x="1189" y="457"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0218.JPG">
+    <plane>
+        <point x="998" y="523"/>
+        <point x="1007" y="1244"/>
+        <point x="1191" y="1184"/>
+        <point x="1187" y="541"/>
+    </plane>
+    <socket>
+        <point x="1118" y="940"/>
+        <point x="1122" y="1124"/>
+        <point x="1069" y="1042"/>
+        <point x="1160" y="1020"/>
+    </socket>
+    <switch>
+        <point x="1025" y="565"/>
+        <point x="1031" y="858"/>
+        <point x="1162" y="849"/>
+        <point x="1169" y="572"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0219.JPG">
+    <plane>
+        <point x="1022" y="239"/>
+        <point x="1175" y="1311"/>
+        <point x="1712" y="1411"/>
+        <point x="1637" y="210"/>
+    </plane>
+    <socket>
+        <point x="1373" y="958"/>
+        <point x="1397" y="1238"/>
+        <point x="1266" y="1080"/>
+        <point x="1530" y="1124"/>
+    </socket>
+    <switch>
+        <point x="1089" y="299"/>
+        <point x="1160" y="794"/>
+        <point x="1610" y="829"/>
+        <point x="1573" y="290"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0220.JPG">
+    <plane>
+        <point x="809" y="390"/>
+        <point x="785" y="1382"/>
+        <point x="1519" y="1388"/>
+        <point x="1375" y="441"/>
+    </plane>
+    <socket>
+        <point x="1140" y="920"/>
+        <point x="1153" y="1209"/>
+        <point x="978" y="1053"/>
+        <point x="1313" y="1067"/>
+    </socket>
+    <switch>
+        <point x="874" y="439"/>
+        <point x="871" y="796"/>
+        <point x="1364" y="825"/>
+        <point x="1317" y="472"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0221.JPG">
+    <plane>
+        <point x="1027" y="650"/>
+        <point x="1051" y="1158"/>
+        <point x="1351" y="1160"/>
+        <point x="1360" y="645"/>
+    </plane>
+    <socket>
+        <point x="1195" y="969"/>
+        <point x="1195" y="1096"/>
+        <point x="1124" y="1031"/>
+        <point x="1273" y="1029"/>
+    </socket>
+    <switch>
+        <point x="1069" y="681"/>
+        <point x="1078" y="905"/>
+        <point x="1320" y="900"/>
+        <point x="1317" y="676"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0222.JPG">
+    <plane>
+        <point x="940" y="525"/>
+        <point x="947" y="954"/>
+        <point x="1377" y="951"/>
+        <point x="1377" y="521"/>
+    </plane>
+    <switch>
+        <point x="989" y="572"/>
+        <point x="994" y="911"/>
+        <point x="1333" y="909"/>
+        <point x="1331" y="568"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0225.JPG">
+    <plane>
+        <point x="1053" y="574"/>
+        <point x="1038" y="889"/>
+        <point x="1393" y="776"/>
+        <point x="1375" y="450"/>
+    </plane>
+    <switch>
+        <point x="1091" y="587"/>
+        <point x="1078" y="829"/>
+        <point x="1342" y="749"/>
+        <point x="1340" y="499"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0228.JPG">
+    <plane>
+        <point x="938" y="672"/>
+        <point x="958" y="978"/>
+        <point x="1144" y="849"/>
+        <point x="1133" y="574"/>
+    </plane>
+    <switch>
+        <point x="965" y="694"/>
+        <point x="980" y="927"/>
+        <point x="1124" y="832"/>
+        <point x="1111" y="610"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0229.JPG">
+    <plane>
+        <point x="958" y="736"/>
+        <point x="956" y="985"/>
+        <point x="1202" y="985"/>
+        <point x="1207" y="738"/>
+    </plane>
+    <switch>
+        <point x="985" y="763"/>
+        <point x="982" y="951"/>
+        <point x="1180" y="954"/>
+        <point x="1178" y="763"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0230.JPG">
+    <plane>
+        <point x="989" y="658"/>
+        <point x="1025" y="1091"/>
+        <point x="1477" y="1131"/>
+        <point x="1406" y="721"/>
+    </plane>
+    <switch>
+        <point x="1042" y="705"/>
+        <point x="1078" y="1042"/>
+        <point x="1426" y="1071"/>
+        <point x="1382" y="752"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0233.JPG">
+    <plane>
+        <point x="994" y="645"/>
+        <point x="1013" y="891"/>
+        <point x="1191" y="1025"/>
+        <point x="1180" y="772"/>
+    </plane>
+    <socket>
+        <point x="1071" y="772"/>
+        <point x="1087" y="889"/>
+        <point x="1047" y="807"/>
+        <point x="1129" y="871"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0234.JPG">
+    <plane>
+        <point x="971" y="701"/>
+        <point x="1016" y="871"/>
+        <point x="1309" y="885"/>
+        <point x="1242" y="714"/>
+    </plane>
+    <socket>
+        <point x="1122" y="743"/>
+        <point x="1144" y="825"/>
+        <point x="1067" y="776"/>
+        <point x="1200" y="792"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0235.JPG">
+    <plane>
+        <point x="725" y="550"/>
+        <point x="754" y="763"/>
+        <point x="1009" y="767"/>
+        <point x="971" y="556"/>
+    </plane>
+    <socket>
+        <point x="858" y="603"/>
+        <point x="874" y="707"/>
+        <point x="809" y="650"/>
+        <point x="925" y="658"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0236.JPG">
+    <plane>
+        <point x="792" y="465"/>
+        <point x="843" y="942"/>
+        <point x="1060" y="845"/>
+        <point x="1033" y="388"/>
+    </plane>
+    <socket>
+        <point x="947" y="721"/>
+        <point x="954" y="832"/>
+        <point x="898" y="796"/>
+        <point x="1000" y="756"/>
+    </socket>
+    <switch>
+        <point x="825" y="485"/>
+        <point x="840" y="692"/>
+        <point x="1025" y="627"/>
+        <point x="1013" y="426"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0237.JPG">
+    <plane>
+        <point x="938" y="470"/>
+        <point x="971" y="1020"/>
+        <point x="1213" y="998"/>
+        <point x="1169" y="401"/>
+    </plane>
+    <socket>
+        <point x="1065" y="774"/>
+        <point x="1080" y="927"/>
+        <point x="1016" y="858"/>
+        <point x="1129" y="838"/>
+    </socket>
+    <switch>
+        <point x="965" y="494"/>
+        <point x="978" y="718"/>
+        <point x="1160" y="683"/>
+        <point x="1142" y="450"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0238.JPG">
+    <plane>
+        <point x="967" y="445"/>
+        <point x="958" y="1020"/>
+        <point x="1355" y="1022"/>
+        <point x="1315" y="457"/>
+    </plane>
+    <socket>
+        <point x="1151" y="769"/>
+        <point x="1155" y="927"/>
+        <point x="1060" y="843"/>
+        <point x="1246" y="852"/>
+    </socket>
+    <switch>
+        <point x="1007" y="490"/>
+        <point x="1002" y="698"/>
+        <point x="1291" y="710"/>
+        <point x="1278" y="499"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_0044.jpg">
+    <plane>
+        <point x="207" y="77"/>
+        <point x="206" y="244"/>
+        <point x="291" y="246"/>
+        <point x="292" y="79"/>
+    </plane>
+    <socket>
+        <point x="62" y="178"/>
+        <point x="63" y="223"/>
+        <point x="43" y="198"/>
+        <point x="85" y="200"/>
+    </socket>
+    <socket>
+        <point x="247" y="179"/>
+        <point x="247" y="226"/>
+        <point x="225" y="201"/>
+        <point x="270" y="202"/>
+    </socket>
+    <socket>
+        <point x="437" y="181"/>
+        <point x="437" y="228"/>
+        <point x="415" y="203"/>
+        <point x="459" y="203"/>
+    </socket>
+    <switch>
+        <point x="38" y="90"/>
+        <point x="38" y="150"/>
+        <point x="96" y="149"/>
+        <point x="96" y="89"/>
+    </switch>
+    <switch>
+        <point x="218" y="88"/>
+        <point x="217" y="149"/>
+        <point x="279" y="150"/>
+        <point x="279" y="88"/>
+    </switch>
+    <switch>
+        <point x="406" y="91"/>
+        <point x="407" y="153"/>
+        <point x="466" y="154"/>
+        <point x="465" y="92"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182234.jpg">
+    <plane>
+        <point x="1177" y="1374"/>
+        <point x="1314" y="1369"/>
+        <point x="1304" y="1222"/>
+        <point x="1169" y="1227"/>
+    </plane>
+    <switch>
+        <point x="1202" y="1349"/>
+        <point x="1297" y="1344"/>
+        <point x="1294" y="1244"/>
+        <point x="1199" y="1247"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182245.jpg">
+    <plane>
+        <point x="1199" y="1029"/>
+        <point x="1317" y="1029"/>
+        <point x="1332" y="934"/>
+        <point x="1212" y="937"/>
+    </plane>
+    <switch>
+        <point x="1219" y="1029"/>
+        <point x="1304" y="1027"/>
+        <point x="1312" y="962"/>
+        <point x="1227" y="962"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182257.jpg">
+    <plane>
+        <point x="487" y="1487"/>
+        <point x="582" y="1479"/>
+        <point x="577" y="1384"/>
+        <point x="482" y="1392"/>
+    </plane>
+    <switch>
+        <point x="502" y="1467"/>
+        <point x="567" y="1464"/>
+        <point x="567" y="1402"/>
+        <point x="499" y="1404"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182322.jpg">
+    <plane>
+        <point x="1079" y="1199"/>
+        <point x="1314" y="1184"/>
+        <point x="1334" y="1099"/>
+        <point x="1099" y="1112"/>
+    </plane>
+    <socket>
+        <point x="1237" y="1149"/>
+        <point x="1302" y="1149"/>
+        <point x="1279" y="1119"/>
+        <point x="1262" y="1174"/>
+    </socket>
+    <switch>
+        <point x="1099" y="1194"/>
+        <point x="1184" y="1192"/>
+        <point x="1202" y="1119"/>
+        <point x="1112" y="1122"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182328.jpg">
+    <plane>
+        <point x="462" y="1429"/>
+        <point x="789" y="1387"/>
+        <point x="799" y="1239"/>
+        <point x="472" y="1269"/>
+    </plane>
+    <socket>
+        <point x="677" y="1327"/>
+        <point x="767" y="1317"/>
+        <point x="717" y="1372"/>
+        <point x="732" y="1279"/>
+    </socket>
+    <switch>
+        <point x="482" y="1414"/>
+        <point x="609" y="1404"/>
+        <point x="619" y="1277"/>
+        <point x="492" y="1287"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182340.jpg">
+    <plane>
+        <point x="944" y="1219"/>
+        <point x="1324" y="1174"/>
+        <point x="1232" y="1019"/>
+        <point x="867" y="1049"/>
+    </plane>
+    <socket>
+        <point x="1144" y="1104"/>
+        <point x="1247" y="1094"/>
+        <point x="1227" y="1144"/>
+        <point x="1169" y="1054"/>
+    </socket>
+    <switch>
+        <point x="962" y="1189"/>
+        <point x="1104" y="1174"/>
+        <point x="1044" y="1052"/>
+        <point x="902" y="1064"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182348.jpg">
+    <plane>
+        <point x="1094" y="1252"/>
+        <point x="1432" y="1269"/>
+        <point x="1457" y="1099"/>
+        <point x="1114" y="1077"/>
+    </plane>
+    <socket>
+        <point x="1319" y="1172"/>
+        <point x="1412" y="1182"/>
+        <point x="1359" y="1229"/>
+        <point x="1374" y="1127"/>
+    </socket>
+    <switch>
+        <point x="1117" y="1229"/>
+        <point x="1247" y="1237"/>
+        <point x="1262" y="1109"/>
+        <point x="1132" y="1099"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182353.jpg">
+    <plane>
+        <point x="819" y="1044"/>
+        <point x="1077" y="1047"/>
+        <point x="1052" y="904"/>
+        <point x="792" y="889"/>
+    </plane>
+    <socket>
+        <point x="972" y="972"/>
+        <point x="1042" y="974"/>
+        <point x="1017" y="1009"/>
+        <point x="999" y="929"/>
+    </socket>
+    <switch>
+        <point x="832" y="1024"/>
+        <point x="934" y="1024"/>
+        <point x="914" y="912"/>
+        <point x="814" y="907"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182406.jpg">
+    <plane>
+        <point x="967" y="1142"/>
+        <point x="1262" y="1107"/>
+        <point x="1194" y="1022"/>
+        <point x="909" y="1049"/>
+    </plane>
+    <socket>
+        <point x="1124" y="1064"/>
+        <point x="1202" y="1062"/>
+        <point x="1187" y="1092"/>
+        <point x="1144" y="1039"/>
+    </socket>
+    <switch>
+        <point x="979" y="1124"/>
+        <point x="1089" y="1109"/>
+        <point x="1047" y="1047"/>
+        <point x="934" y="1057"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182416.jpg">
+    <plane>
+        <point x="817" y="577"/>
+        <point x="564" y="572"/>
+        <point x="564" y="644"/>
+        <point x="834" y="652"/>
+    </plane>
+    <socket>
+        <point x="664" y="607"/>
+        <point x="594" y="604"/>
+        <point x="629" y="584"/>
+        <point x="627" y="627"/>
+    </socket>
+    <switch>
+        <point x="812" y="584"/>
+        <point x="717" y="577"/>
+        <point x="719" y="637"/>
+        <point x="814" y="634"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_20140623_182423.jpg">
+    <plane>
+        <point x="1129" y="1347"/>
+        <point x="1347" y="1302"/>
+        <point x="1377" y="1217"/>
+        <point x="1159" y="1262"/>
+    </plane>
+    <socket>
+        <point x="1284" y="1279"/>
+        <point x="1342" y="1267"/>
+        <point x="1302" y="1297"/>
+        <point x="1324" y="1247"/>
+    </socket>
+    <switch>
+        <point x="1149" y="1339"/>
+        <point x="1227" y="1324"/>
+        <point x="1252" y="1259"/>
+        <point x="1167" y="1277"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/IMG_2401.JPG">
+    <plane>
+        <point x="517" y="266"/>
+        <point x="514" y="362"/>
+        <point x="718" y="389"/>
+        <point x="725" y="275"/>
+    </plane>
+    <socket>
+        <point x="562" y="290"/>
+        <point x="558" y="344"/>
+        <point x="536" y="316"/>
+        <point x="587" y="319"/>
+    </socket>
+    <socket>
+        <point x="665" y="297"/>
+        <point x="662" y="357"/>
+        <point x="635" y="325"/>
+        <point x="694" y="330"/>
+    </socket>
+    <switch>
+        <point x="115" y="282"/>
+        <point x="116" y="355"/>
+        <point x="172" y="348"/>
+        <point x="174" y="278"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Lichtschalter 1.jpg">
+    <plane>
+        <point x="108" y="64"/>
+        <point x="106" y="294"/>
+        <point x="343" y="298"/>
+        <point x="344" y="64"/>
+    </plane>
+    <switch>
+        <point x="103" y="59"/>
+        <point x="106" y="303"/>
+        <point x="348" y="305"/>
+        <point x="348" y="62"/>
+    </switch>
+    <switch>
+        <point x="107" y="317"/>
+        <point x="109" y="548"/>
+        <point x="343" y="548"/>
+        <point x="346" y="318"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Lichtschalter.jpg">
+    <plane>
+        <point x="164" y="116"/>
+        <point x="169" y="458"/>
+        <point x="478" y="437"/>
+        <point x="479" y="113"/>
+    </plane>
+    <switch>
+        <point x="215" y="168"/>
+        <point x="219" y="405"/>
+        <point x="435" y="394"/>
+        <point x="437" y="164"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Picture008.png">
+    <plane>
+        <point x="1386" y="890"/>
+        <point x="1534" y="1088"/>
+        <point x="1894" y="842"/>
+        <point x="1732" y="636"/>
+    </plane>
+    <socket>
+        <point x="1528" y="998"/>
+        <point x="1560" y="1044"/>
+        <point x="1522" y="1038"/>
+        <point x="1564" y="1006"/>
+    </socket>
+    <socket>
+        <point x="1620" y="936"/>
+        <point x="1652" y="984"/>
+        <point x="1614" y="976"/>
+        <point x="1658" y="946"/>
+    </socket>
+    <socket>
+        <point x="1710" y="874"/>
+        <point x="1746" y="918"/>
+        <point x="1708" y="912"/>
+        <point x="1750" y="880"/>
+    </socket>
+    <socket>
+        <point x="1808" y="808"/>
+        <point x="1840" y="854"/>
+        <point x="1800" y="846"/>
+        <point x="1844" y="814"/>
+    </socket>
+    <switch>
+        <point x="1386" y="888"/>
+        <point x="1440" y="962"/>
+        <point x="1516" y="910"/>
+        <point x="1460" y="834"/>
+    </switch>
+    <switch>
+        <point x="1474" y="824"/>
+        <point x="1528" y="898"/>
+        <point x="1604" y="844"/>
+        <point x="1548" y="770"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Picture009.png">
+    <plane>
+        <point x="194" y="556"/>
+        <point x="426" y="666"/>
+        <point x="668" y="176"/>
+        <point x="432" y="52"/>
+    </plane>
+    <socket>
+        <point x="576" y="186"/>
+        <point x="624" y="210"/>
+        <point x="584" y="224"/>
+        <point x="610" y="178"/>
+    </socket>
+    <socket>
+        <point x="624" y="88"/>
+        <point x="672" y="114"/>
+        <point x="638" y="126"/>
+        <point x="660" y="78"/>
+    </socket>
+    <switch>
+        <point x="394" y="146"/>
+        <point x="482" y="192"/>
+        <point x="522" y="106"/>
+        <point x="436" y="62"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Picture063.png">
+    <plane>
+        <point x="1330" y="830"/>
+        <point x="1494" y="936"/>
+        <point x="1608" y="738"/>
+        <point x="1452" y="650"/>
+    </plane>
+    <socket>
+        <point x="1462" y="870"/>
+        <point x="1494" y="896"/>
+        <point x="1470" y="894"/>
+        <point x="1486" y="870"/>
+    </socket>
+    <socket>
+        <point x="1494" y="820"/>
+        <point x="1526" y="842"/>
+        <point x="1502" y="842"/>
+        <point x="1518" y="820"/>
+    </socket>
+    <socket>
+        <point x="1524" y="772"/>
+        <point x="1554" y="796"/>
+        <point x="1532" y="796"/>
+        <point x="1542" y="774"/>
+    </socket>
+    <socket>
+        <point x="1552" y="728"/>
+        <point x="1580" y="750"/>
+        <point x="1558" y="750"/>
+        <point x="1572" y="728"/>
+    </socket>
+    <switch>
+        <point x="1338" y="828"/>
+        <point x="1396" y="862"/>
+        <point x="1424" y="822"/>
+        <point x="1366" y="786"/>
+    </switch>
+    <switch>
+        <point x="1372" y="778"/>
+        <point x="1428" y="812"/>
+        <point x="1454" y="776"/>
+        <point x="1396" y="738"/>
+    </switch>
+    <switch>
+        <point x="1404" y="728"/>
+        <point x="1460" y="764"/>
+        <point x="1482" y="730"/>
+        <point x="1428" y="696"/>
+    </switch>
+    <switch>
+        <point x="1434" y="684"/>
+        <point x="1486" y="718"/>
+        <point x="1510" y="684"/>
+        <point x="1458" y="652"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Picture074.png">
+    <plane>
+        <point x="10" y="332"/>
+        <point x="160" y="568"/>
+        <point x="452" y="402"/>
+        <point x="310" y="168"/>
+    </plane>
+    <socket>
+        <point x="268" y="414"/>
+        <point x="294" y="460"/>
+        <point x="258" y="450"/>
+        <point x="304" y="422"/>
+    </socket>
+    <socket>
+        <point x="364" y="358"/>
+        <point x="390" y="406"/>
+        <point x="354" y="394"/>
+        <point x="400" y="370"/>
+    </socket>
+    <socket>
+        <point x="168" y="470"/>
+        <point x="198" y="516"/>
+        <point x="158" y="506"/>
+        <point x="206" y="480"/>
+    </socket>
+    <socket>
+        <point x="68" y="524"/>
+        <point x="94" y="572"/>
+        <point x="60" y="562"/>
+        <point x="106" y="538"/>
+    </socket>
+    <switch>
+        <point x="26" y="334"/>
+        <point x="78" y="418"/>
+        <point x="162" y="372"/>
+        <point x="108" y="290"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Picture075.png">
+    <plane>
+        <point x="972" y="1372"/>
+        <point x="1194" y="1526"/>
+        <point x="1308" y="1334"/>
+        <point x="1088" y="1186"/>
+    </plane>
+    <socket>
+        <point x="1214" y="1332"/>
+        <point x="1258" y="1368"/>
+        <point x="1224" y="1368"/>
+        <point x="1252" y="1328"/>
+    </socket>
+    <socket>
+        <point x="1156" y="1430"/>
+        <point x="1198" y="1460"/>
+        <point x="1162" y="1464"/>
+        <point x="1190" y="1422"/>
+    </socket>
+    <switch>
+        <point x="922" y="1462"/>
+        <point x="998" y="1518"/>
+        <point x="1050" y="1438"/>
+        <point x="972" y="1382"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/Siemens_Lichtschalter_Steckdosen_Light_Switches_Socket_Outlets.jpg">
+    <plane>
+        <point x="317" y="71"/>
+        <point x="319" y="311"/>
+        <point x="559" y="313"/>
+        <point x="561" y="71"/>
+    </plane>
+    <switch>
+        <point x="333" y="85"/>
+        <point x="335" y="297"/>
+        <point x="543" y="295"/>
+        <point x="542" y="85"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/buschjaegerlichtschaltermontieren.jpg">
+    <plane>
+        <point x="124" y="105"/>
+        <point x="138" y="389"/>
+        <point x="358" y="322"/>
+        <point x="356" y="71"/>
+    </plane>
+    <switch>
+        <point x="181" y="145"/>
+        <point x="189" y="357"/>
+        <point x="348" y="310"/>
+        <point x="347" y="114"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/buschjaegersteckdosenmontieren.jpg">
+    <plane>
+        <point x="107" y="91"/>
+        <point x="122" y="428"/>
+        <point x="401" y="383"/>
+        <point x="405" y="73"/>
+    </plane>
+    <socket>
+        <point x="279" y="162"/>
+        <point x="285" y="343"/>
+        <point x="201" y="263"/>
+        <point x="365" y="240"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/flaechenschalter_5167_1334424733.jpg">
+    <plane>
+        <point x="394" y="64"/>
+        <point x="395" y="416"/>
+        <point x="522" y="410"/>
+        <point x="522" y="82"/>
+    </plane>
+    <socket>
+        <point x="462" y="279"/>
+        <point x="460" y="366"/>
+        <point x="429" y="322"/>
+        <point x="493" y="321"/>
+    </socket>
+    <switch>
+        <point x="404" y="75"/>
+        <point x="404" y="239"/>
+        <point x="513" y="246"/>
+        <point x="515" y="91"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/gira2-multimedia537.jpg">
+    <plane>
+        <point x="144" y="33"/>
+        <point x="141" y="252"/>
+        <point x="224" y="248"/>
+        <point x="225" y="38"/>
+    </plane>
+    <socket>
+        <point x="187" y="164"/>
+        <point x="187" y="216"/>
+        <point x="170" y="191"/>
+        <point x="202" y="188"/>
+    </socket>
+    <switch>
+        <point x="162" y="59"/>
+        <point x="162" y="134"/>
+        <point x="211" y="134"/>
+        <point x="212" y="61"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/lichtschalter-moderne-50417-4678505.jpg">
+    <plane>
+        <point x="124" y="124"/>
+        <point x="123" y="1130"/>
+        <point x="1130" y="1125"/>
+        <point x="1130" y="126"/>
+    </plane>
+    <switch>
+        <point x="286" y="284"/>
+        <point x="284" y="970"/>
+        <point x="970" y="969"/>
+        <point x="965" y="285"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/lichtschalter-tauschen-t1.jpg">
+    <plane>
+        <point x="204" y="24"/>
+        <point x="207" y="264"/>
+        <point x="329" y="271"/>
+        <point x="324" y="22"/>
+    </plane>
+    <socket>
+        <point x="263" y="168"/>
+        <point x="264" y="231"/>
+        <point x="237" y="197"/>
+        <point x="292" y="199"/>
+    </socket>
+    <switch>
+        <point x="226" y="48"/>
+        <point x="231" y="131"/>
+        <point x="301" y="132"/>
+        <point x="299" y="48"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/lichtschalter_09.jpg">
+    <plane>
+        <point x="183" y="26"/>
+        <point x="182" y="149"/>
+        <point x="304" y="149"/>
+        <point x="305" y="25"/>
+    </plane>
+    <switch>
+        <point x="37" y="40"/>
+        <point x="37" y="125"/>
+        <point x="120" y="125"/>
+        <point x="121" y="40"/>
+    </switch>
+    <switch>
+        <point x="201" y="45"/>
+        <point x="200" y="131"/>
+        <point x="287" y="131"/>
+        <point x="288" y="44"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/trennwand-lichtschalter.jpg">
+    <plane>
+        <point x="277" y="29"/>
+        <point x="279" y="310"/>
+        <point x="384" y="337"/>
+        <point x="383" y="12"/>
+    </plane>
+    <socket>
+        <point x="326" y="204"/>
+        <point x="325" y="286"/>
+        <point x="302" y="242"/>
+        <point x="356" y="256"/>
+    </socket>
+    <switch>
+        <point x="280" y="33"/>
+        <point x="284" y="174"/>
+        <point x="378" y="176"/>
+        <point x="378" y="23"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0231.JPG">
+    <plane>
+        <point x="945" y="605"/>
+        <point x="976" y="940"/>
+        <point x="1293" y="1033"/>
+        <point x="1280" y="678"/>
+    </plane>
+    <socket>
+        <point x="1104" y="734"/>
+        <point x="1118" y="905"/>
+        <point x="1036" y="800"/>
+        <point x="1193" y="845"/>
+    </socket>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/03_1914_10103_488_336-1.jpg">
+    <plane>
+        <point x="254" y="20"/>
+        <point x="255" y="318"/>
+        <point x="420" y="318"/>
+        <point x="419" y="21"/>
+    </plane>
+    <socket>
+        <point x="338" y="201"/>
+        <point x="339" y="279"/>
+        <point x="300" y="239"/>
+        <point x="376" y="237"/>
+    </socket>
+    <switch>
+        <point x="283" y="46"/>
+        <point x="283" y="153"/>
+        <point x="393" y="154"/>
+        <point x="392" y="45"/>
+    </switch>
+    <switch>
+        <point x="93" y="184"/>
+        <point x="93" y="293"/>
+        <point x="203" y="293"/>
+        <point x="203" y="183"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/0911-gira1.jpg">
+    <plane>
+        <point x="40" y="31"/>
+        <point x="41" y="251"/>
+        <point x="137" y="246"/>
+        <point x="137" y="38"/>
+    </plane>
+    <socket>
+        <point x="89" y="164"/>
+        <point x="89" y="219"/>
+        <point x="67" y="191"/>
+        <point x="114" y="189"/>
+    </socket>
+    <switch>
+        <point x="48" y="40"/>
+        <point x="47" y="141"/>
+        <point x="130" y="141"/>
+        <point x="131" y="44"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/11612009_doppelwippe.jpg">
+    <plane>
+        <point x="171" y="100"/>
+        <point x="170" y="500"/>
+        <point x="510" y="486"/>
+        <point x="513" y="112"/>
+    </plane>
+    <switch>
+        <point x="172" y="101"/>
+        <point x="170" y="499"/>
+        <point x="508" y="492"/>
+        <point x="513" y="111"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/220px-Lichtschalter.jpg">
+    <plane>
+        <point x="49" y="36"/>
+        <point x="50" y="163"/>
+        <point x="168" y="155"/>
+        <point x="167" y="34"/>
+    </plane>
+    <switch>
+        <point x="74" y="58"/>
+        <point x="75" y="140"/>
+        <point x="152" y="135"/>
+        <point x="152" y="56"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/282686174297134.preview.jpg">
+    <plane>
+        <point x="49" y="20"/>
+        <point x="50" y="156"/>
+        <point x="186" y="156"/>
+        <point x="185" y="20"/>
+    </plane>
+    <switch>
+        <point x="69" y="40"/>
+        <point x="68" y="134"/>
+        <point x="166" y="134"/>
+        <point x="166" y="39"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/770_773-Gira_Esprit_Glas_C_38bc0.jpg">
+    <plane>
+        <point x="78" y="12"/>
+        <point x="76" y="721"/>
+        <point x="334" y="701"/>
+        <point x="334" y="29"/>
+    </plane>
+    <socket>
+        <point x="213" y="431"/>
+        <point x="214" y="594"/>
+        <point x="163" y="512"/>
+        <point x="268" y="506"/>
+    </socket>
+    <socket>
+        <point x="630" y="431"/>
+        <point x="630" y="591"/>
+        <point x="581" y="508"/>
+        <point x="687" y="506"/>
+    </socket>
+    <switch>
+        <point x="136" y="94"/>
+        <point x="131" y="336"/>
+        <point x="288" y="334"/>
+        <point x="291" y="103"/>
+    </switch>
+    <switch>
+        <point x="547" y="102"/>
+        <point x="551" y="339"/>
+        <point x="709" y="339"/>
+        <point x="709" y="111"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0001.JPG">
+    <plane>
+        <point x="1009" y="749"/>
+        <point x="1016" y="974"/>
+        <point x="1269" y="958"/>
+        <point x="1278" y="736"/>
+    </plane>
+    <switch>
+        <point x="1056" y="794"/>
+        <point x="1056" y="954"/>
+        <point x="1238" y="945"/>
+        <point x="1242" y="785"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0002.JPG">
+    <plane>
+        <point x="772" y="796"/>
+        <point x="778" y="1155"/>
+        <point x="1020" y="1047"/>
+        <point x="1025" y="723"/>
+    </plane>
+    <switch>
+        <point x="845" y="847"/>
+        <point x="847" y="1096"/>
+        <point x="1011" y="1027"/>
+        <point x="1011" y="792"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0003.JPG">
+    <plane>
+        <point x="923" y="556"/>
+        <point x="936" y="832"/>
+        <point x="1136" y="852"/>
+        <point x="1120" y="552"/>
+    </plane>
+    <switch>
+        <point x="931" y="599"/>
+        <point x="942" y="800"/>
+        <point x="1076" y="803"/>
+        <point x="1069" y="599"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0004.JPG">
+    <plane>
+        <point x="954" y="303"/>
+        <point x="925" y="612"/>
+        <point x="1322" y="627"/>
+        <point x="1322" y="317"/>
+    </plane>
+    <switch>
+        <point x="1000" y="323"/>
+        <point x="985" y="534"/>
+        <point x="1266" y="545"/>
+        <point x="1273" y="335"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0006.JPG">
+    <plane>
+        <point x="1202" y="605"/>
+        <point x="1215" y="1089"/>
+        <point x="1415" y="1149"/>
+        <point x="1413" y="654"/>
+    </plane>
+    <socket>
+        <point x="1302" y="945"/>
+        <point x="1304" y="1071"/>
+        <point x="1249" y="989"/>
+        <point x="1368" y="1029"/>
+    </socket>
+    <switch>
+        <point x="1222" y="639"/>
+        <point x="1226" y="827"/>
+        <point x="1382" y="869"/>
+        <point x="1384" y="681"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0008.JPG">
+    <plane>
+        <point x="880" y="406"/>
+        <point x="863" y="800"/>
+        <point x="1313" y="803"/>
+        <point x="1302" y="410"/>
+    </plane>
+    <socket>
+        <point x="1089" y="481"/>
+        <point x="1091" y="714"/>
+        <point x="960" y="603"/>
+        <point x="1222" y="599"/>
+    </socket>
+    <switch>
+        <point x="942" y="48"/>
+        <point x="931" y="323"/>
+        <point x="1262" y="319"/>
+        <point x="1258" y="53"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0009.JPG">
+    <plane>
+        <point x="705" y="452"/>
+        <point x="836" y="900"/>
+        <point x="1173" y="698"/>
+        <point x="1060" y="272"/>
+    </plane>
+    <socket>
+        <point x="1051" y="918"/>
+        <point x="1124" y="1144"/>
+        <point x="987" y="1091"/>
+        <point x="1178" y="962"/>
+    </socket>
+    <switch>
+        <point x="783" y="485"/>
+        <point x="883" y="820"/>
+        <point x="1140" y="670"/>
+        <point x="1047" y="343"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0010.JPG">
+    <plane>
+        <point x="1071" y="472"/>
+        <point x="1082" y="754"/>
+        <point x="1222" y="772"/>
+        <point x="1215" y="485"/>
+    </plane>
+    <socket>
+        <point x="1140" y="656"/>
+        <point x="1142" y="729"/>
+        <point x="1109" y="685"/>
+        <point x="1175" y="696"/>
+    </socket>
+    <switch>
+        <point x="1091" y="505"/>
+        <point x="1093" y="603"/>
+        <point x="1184" y="612"/>
+        <point x="1182" y="516"/>
+    </switch>
+</Annotation>
+
+<Annotation image="../resources/to_annotate/DSCN0011.JPG">
+    <plane>
+        <point x="1022" y="288"/>
+        <point x="1036" y="630"/>
+        <point x="1258" y="634"/>
+        <point x="1251" y="277"/>
+    </plane>
+    <socket>
+        <point x="636" y="1053"/>
+        <point x="641" y="1091"/>
+        <point x="623" y="1071"/>
+        <point x="654" y="1076"/>
+    </socket>
+    <switch>
+        <point x="605" y="969"/>
+        <point x="610" y="1025"/>
+        <point x="656" y="1027"/>
+        <point x="654" y="971"/>
+    </switch>
+</Annotation>

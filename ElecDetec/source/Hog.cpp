@@ -12,7 +12,12 @@ CHog::CHog(MODULE_CONSTRUCTOR_SIGNATURE)
 		setAsRoot();
 
 
-	win_size_ = cv::Size(80, 80); //(128,128)winSize
+//	win_size_ = cv::Size(130, 130); //(128,128)winSize
+//	cell_size_ = cv::Size(13, 13); //cellSize,
+//	block_size_ = cv::Size(26, 26);
+//	block_stride_ = cv::Size(13, 13);
+
+	win_size_ = cv::Size(96, 96); // for new testsamples: win_size_ = cv::Size(96, 96); //(128,128)winSize
 	cell_size_ = cv::Size(8, 8); //cellSize,
 	block_size_ = cv::Size(16, 16);
 	block_stride_ = cv::Size(8, 8);
@@ -42,10 +47,14 @@ CVisionData* CHog::exec()
 	CVisionData working_data = getConcatenatedDataAndClearBuffer();
 
 	vector<float> hog_features;
-	Mat img_gray;
-	cv::resize(working_data.data(), img_gray, win_size_ );
+	Mat resized_img;
+	cv::resize(working_data.data(), resized_img, win_size_ );
+	if(working_data.data().size() != win_size_)
+		cv::resize(working_data.data(), resized_img, win_size_ );
+	else
+		resized_img = working_data.data();
 
-	hogy_->compute(img_gray, hog_features);
+	hogy_->compute(resized_img, hog_features);
 
 	//visualize(img_gray, hog_features);
 

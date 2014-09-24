@@ -42,11 +42,11 @@ using namespace cv;
 
 
 
-enum AnnoMode {ANNOTATION, REFINEMENT, CUTTING};
+enum AnnoMode {ANNOTATION, REANNOTATION, CUTTING};
 
 struct CommandParams
 {
-	string str_dir_, str_filename_;
+	string str_dir_, str_filename_, str_neg_dir_;
 	AnnoMode anno_mode_;
 };
 
@@ -54,15 +54,18 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params)
 {
 	try {
 		// Command Line
-		TCLAP::CmdLine cmd("Usage: SocketAnnotator -d [directory] -m [mode] -f [filename]", ' ', "1.0");
+		TCLAP::CmdLine cmd("Usage: SocketAnnotator -d [directory] -m [mode] -f [filename] [-n directory]", ' ', "1.0");
 
 		// Command Arguments
-		TCLAP::ValueArg<std::string> mArg("m","mode","Annotation Mode: either 'anno' or 'cut'",true,"","string");
+		TCLAP::ValueArg<std::string> mArg("m","mode","Annotation Mode: either 'anno', 'reanno', or 'cut'",true,"","string");
 		TCLAP::ValueArg<std::string> dArg("d","dir","Directory of the unprocessed input images",true,"","string");
 		TCLAP::ValueArg<std::string> fArg("f","file","Annotation file which should be generated or to be read from (depends on the mode)",true,"","string");
+		TCLAP::ValueArg<std::string> nArg("n","neg","Directory where additional strictly negative images are stored (optional)",false,"","string");
+
 		cmd.add( mArg );
 		cmd.add( dArg );
 		cmd.add( fArg );
+		cmd.add( nArg );
 
 		// Command switches
 		//TCLAP::SwitchArg trainSwitch("t","train","Train the pipeline", cmd, false);
@@ -72,6 +75,7 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params)
 
 		// Get the values parsed by each arg.
 
+		params.str_neg_dir_ = nArg.getValue();
 		params.str_dir_ = dArg.getValue();
 		params.str_filename_  = fArg.getValue();
 		string anno_mode;
@@ -80,10 +84,10 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params)
 			params.anno_mode_ = ANNOTATION;
 			anno_mode = "Annotation";
 		}
-		else if(mArg.getValue() == "refine")
+		else if(mArg.getValue() == "reanno")
 		{
-			params.anno_mode_ = REFINEMENT;
-			anno_mode = "Refinement";
+			params.anno_mode_ = REANNOTATION;
+			anno_mode = "Re-Annotation";
 		}
 		else if(mArg.getValue() == "cut")
 		{
@@ -121,6 +125,49 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params)
 }
 
 
+inline bool getRecursiveDirContent(const string& directory, vector<string>& filelist)
+{
+    DIR *dir;
+    struct dirent *entry;
+
+    if (!(dir = opendir(directory.c_str())))
+    {
+        /* could not open directory */
+        std::cerr << "ERROR: Image directory doesn't exist!" << std::endl;
+        return false;
+    }
+    if (!(entry = readdir(dir)))
+    {
+        /* could not open directory */
+        std::cerr << "ERROR: Image directory doesn't exist!" << std::endl;
+        return false;
+    }
+
+    do {
+        if (entry->d_type == DT_DIR)
+        {
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+                continue;
+
+        	string path = directory + entry->d_name;
+            if(path.compare(path.size()-1,1,"/") != 0)
+            	path += "/";
+            //filelist.push_back(entry->d_name); //printf("%*s[%s]\n", level*2, "", entry->d_name);
+            getRecursiveDirContent(path, filelist);
+        }
+        else
+        {
+        	string adder;
+            if(directory.compare(directory.size()-1,1,"/") != 0)
+            	adder += "/";
+        	filelist.push_back(directory + adder + entry->d_name);  //printf("%*s- %s\n", level*2, "", entry->d_name)
+        }
+    } while ((entry = readdir(dir)) != NULL);
+    closedir(dir);
+
+    return true;
+}
+
 inline bool getFileList(string directory, vector<string>& filelist)
 {
 	//--------------------------------------------
@@ -130,29 +177,46 @@ inline bool getFileList(string directory, vector<string>& filelist)
     	directory += "/";
 
     filelist.clear();
-    DIR *dir;
-    struct dirent *ent;
-    if ((dir = opendir(directory.data())) != NULL)
+
+    vector<string> full_filelist;
+
+    if(getRecursiveDirContent(directory.c_str(), full_filelist))
     {
-        // print all the files and directories within directory
-        while ((ent = readdir(dir)) != NULL)
-        {
-            std::string filename = directory + ent->d_name;
-            if(filename.compare(filename.size()-4,4,".png") == 0 || filename.compare(filename.size()-4,4,".jpg") == 0 ||
-               filename.compare(filename.size()-4,4,".PNG") == 0 || filename.compare(filename.size()-4,4,".JPG") == 0)
-            {
-            	filelist.push_back(directory + ent->d_name);
-//                std::cout << "File: " << ent->d_name << std::endl << flush;
-            }
-        }
-        closedir(dir);
+    	for(vector<string>::const_iterator f_it = full_filelist.begin(); f_it != full_filelist.end(); ++f_it)
+    	{
+    		if(f_it->compare(f_it->size()-4,4,".png") == 0 || f_it->compare(f_it->size()-4,4,".jpg") == 0 ||
+    				f_it->compare(f_it->size()-4,4,".PNG") == 0 || f_it->compare(f_it->size()-4,4,".JPG") == 0)
+    		{
+    			//std::cout << "File: " << *f_it << std::endl << flush;
+    			filelist.push_back(*f_it);
+    		}
+    	}
     }
-    else
-    {
-        /* could not open directory */
-        std::cerr << "ERROR: Image directory doesn't exist!" << std::endl;
-        return false;
-    }
+
+//    DIR *dir;
+//    struct dirent *ent;
+//    if ((dir = opendir(directory.c_str())) != NULL)
+//    {
+//        // print all the files and directories within directory
+//        while ((ent = readdir(dir)) != NULL)
+//        {
+//            std::string filename = directory + ent->d_name;
+//            std::cout << "File: " << ent->d_name << std::endl << flush;
+//            if(filename.compare(filename.size()-4,4,".png") == 0 || filename.compare(filename.size()-4,4,".jpg") == 0 ||
+//               filename.compare(filename.size()-4,4,".PNG") == 0 || filename.compare(filename.size()-4,4,".JPG") == 0)
+//            {
+//            	filelist.push_back(directory + ent->d_name);
+////                std::cout << "File: " << ent->d_name << std::endl << flush;
+//            }
+//        }
+//        closedir(dir);
+//    }
+//    else
+//    {
+//        /* could not open directory */
+//        std::cerr << "ERROR: Image directory doesn't exist!" << std::endl;
+//        return false;
+//    }
 
     sort(filelist.begin(), filelist.end());
 
