@@ -50,18 +50,19 @@ private:
 	CVisionData();
 
 	Mat mat_;
-	int internal_row_cnt_;
+
+	//int internal_row_cnt_;
 
 public:
-	CVisionData(const Mat& data, const int& type) : mat_(data), internal_row_cnt_(0)
-    {
+	CVisionData(const Mat& data, const int& type) : mat_(data)//, internal_row_cnt_(0)
+	{
 		data_signature_ = type | mat_.type();
-    };
+	};
 
 	CVisionData(const CVisionData& other)
 	{
 		mat_ = other.mat_;
-		internal_row_cnt_ = other.internal_row_cnt_;
+		//internal_row_cnt_ = other.internal_row_cnt_;
 		data_signature_ = other.data_signature_;
 	}
 

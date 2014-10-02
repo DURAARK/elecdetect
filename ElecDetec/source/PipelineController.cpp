@@ -67,6 +67,8 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 			// Classifiers: TODO: re-implementation of classifiers needed (prediction probability)
 			if(*mod_id_it == ID_SVM)
 				cur_mod = new CSVM(is_root);
+			if(*mod_id_it == ID_LIN_SVM)
+				cur_mod = new CLinSVM(is_root);
 			if(*mod_id_it == ID_RF)
 				cur_mod = new CRandomForest(is_root);
 
@@ -89,6 +91,8 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 
 	if(params_.str_classifier_ == ID_SVM)
 		final_classifier = new CSVM(is_root);
+	if(params_.str_classifier_ == ID_LIN_SVM)
+			final_classifier = new CLinSVM(is_root);
 	if(params_.str_classifier_ == ID_RF)
 		final_classifier = new CRandomForest(is_root);
 
