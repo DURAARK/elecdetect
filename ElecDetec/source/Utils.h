@@ -53,6 +53,35 @@ inline vector<vector<Scalar> > getColors(const int& nclasses)
 	return ret_colors;
 }
 
+template <typename T>
+inline void linspace(std::vector<T>& result, T start, T end, int N)
+{
+    result.clear();
+
+    if(N <= 1)
+    {
+        result.push_back(start);
+        return;
+    }
+
+    for(int i = 0; i <= N-2; i++)
+    {
+        T cur_val = start + i*(end-start)/((T)N - 1.0);
+        result.push_back(cur_val);
+    }
+    result.push_back(end);
+}
+
+inline float rand_FloatRange(float low, float high)
+{
+	return ((high-low)*((float)rand()/RAND_MAX))+low;
+}
+
+inline int rand_IntRange(int low, int high)
+{
+	return (int)(  ( ( (float)(high-low) ) *( (float)rand()/RAND_MAX) )  )  +  low;
+}
+
 
 struct CommandParams
 {

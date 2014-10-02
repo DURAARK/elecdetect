@@ -50,9 +50,10 @@ private:
 	CVisionData();
 
 	Mat mat_;
+	//int internal_row_cnt_;
 
 public:
-	CVisionData(const Mat& data, const int& type) : mat_(data)
+	CVisionData(const Mat& data, const int& type) : mat_(data)//, internal_row_cnt_(0)
     {
 		data_signature_ = type | mat_.type();
     };
@@ -60,6 +61,7 @@ public:
 	CVisionData(const CVisionData& other)
 	{
 		mat_ = other.mat_;
+		//internal_row_cnt_ = other.internal_row_cnt_;
 		data_signature_ = other.data_signature_;
 	}
 
@@ -86,6 +88,24 @@ public:
 	void concatenateRowwise(const CVisionData& other)
 	{
 		vconcat(mat_, other.data(), mat_);
+	}
+
+//	void pushbackRow(const CVisionData& other)
+//	{
+//		if(other.data().rows + internal_row_cnt_ > mat_.rows)
+//		{
+//			cerr << "ERROR: Row Pushback not possible, no space left. Call convervativeResizeRows before!" << endl;
+//			exit(-2);
+//		}
+//		other.data().copyTo(mat_.rowRange(internal_row_cnt_, internal_row_cnt_ + other.data().rows));
+//		internal_row_cnt_ += other.data().rows;
+//	}
+
+	void convervativeResizeRows(const int n_rows)
+	{
+		Mat temp = Mat::zeros(n_rows, mat_.cols, mat_.type());
+		mat_.copyTo(temp.rowRange(0, mat_.rows));
+		mat_ = temp;
 	}
 
 //	Mat& data()

@@ -11,6 +11,7 @@
 #include "Debug.h"
 #include "VisionData.h"
 #include "VisionModule.h"
+#include "Utils.h"
 
 #define DEFAULT_NUMBER_OF_EIGENVECTORS  70
 

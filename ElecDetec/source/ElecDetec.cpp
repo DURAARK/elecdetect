@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 				imwrite(img_filename.c_str(), image);
 
 #ifdef VERBOSE
-				waitKey(0);
+				waitKey(1000);
 #endif
 			}
 

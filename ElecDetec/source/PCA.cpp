@@ -80,21 +80,29 @@ void CPCA::train()
 	opencv_pca_ptr_ = new PCA(train_data_non_bg, Mat(), CV_PCA_DATA_AS_ROW, n_eigenvectors_);
 	cout << "done!" << endl << flush;
 
-//	cout << n_eigenvectors_ << " eigenvectors calculated from " << train_data_non_bg.rows << " samples." << endl;
+	cout << n_eigenvectors_ << " eigenvectors calculated from " << train_data_non_bg.rows << " samples." << endl;
 //	cout << "Projection Matrix size: " << opencv_pca_ptr_->eigenvectors.rows << " x " << opencv_pca_ptr_->eigenvectors.cols << endl;
 //	cout << "Matrix snapshot: " << opencv_pca_ptr_->eigenvectors(Rect(0,0,10,10)) << endl;
 //
-	cout << "writing eigen images" << endl;
-	for(int v_cnt = 0; v_cnt < opencv_pca_ptr_->eigenvalues.rows; ++v_cnt)
-	{
-		Mat eigen_image = Mat(86, 86, CV_32FC1, opencv_pca_ptr_->eigenvectors.row(v_cnt).data);
-		normalize(eigen_image, eigen_image, 0.0, 1.0, NORM_MINMAX);
-		Mat eigen_image_uchar;
-		eigen_image.convertTo(eigen_image_uchar, CV_8UC1, 255);
-		stringstream im_name;
-		im_name << "eigen_image_" << v_cnt << ".jpg";
-		imwrite(im_name.str(), eigen_image_uchar);
-	}
+//	cout << "writing eigen images" << endl;
+//	for(int v_cnt = 0; v_cnt < opencv_pca_ptr_->eigenvalues.rows; ++v_cnt)
+//	{
+//		float eigenval = opencv_pca_ptr_->eigenvalues.at<float>(v_cnt);
+//		float val_start = -sqrt(eigenval);
+//		float val_end = sqrt(eigenval);
+//		vector<float> values;
+//		linspace<float>(values, val_start, val_end, 1);
+//		for(vector<float>::iterator val_it = values.begin(); val_it != values.end(); ++val_it)
+//		{
+//			Mat eigen_image = Mat(SWIN_SIZE, SWIN_SIZE, CV_32FC1, opencv_pca_ptr_->eigenvectors.row(v_cnt).data) * *val_it;
+//			normalize(eigen_image, eigen_image, 0.0, 1.0, NORM_MINMAX);
+//			Mat eigen_image_uchar;
+//			eigen_image.convertTo(eigen_image_uchar, CV_8UC1, 255);
+//			stringstream im_name;
+//			im_name << "eigen_image_" << v_cnt << "_" << distance(values.begin(), val_it) << ".jpg";
+//			imwrite(im_name.str(), eigen_image_uchar);
+//		}
+//	}
 
 
 //	cout << "EigenValues are: " << endl;

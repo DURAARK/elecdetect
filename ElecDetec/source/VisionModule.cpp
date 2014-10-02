@@ -76,8 +76,8 @@ void CVisionModule::bufferData(const CVisionData* data, const CVisionModule* anc
 		delete temp_buffer;
 	}
 	temp_buffer = NULL;
-
 }
+
 
 CVisionData CVisionModule::getConcatenatedDataAndClearBuffer()
 {

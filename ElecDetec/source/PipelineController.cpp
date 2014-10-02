@@ -67,6 +67,8 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 			// Classifiers: TODO: re-implementation of classifiers needed (prediction probability)
 			if(*mod_id_it == ID_SVM)
 				cur_mod = new CSVM(is_root);
+			if(*mod_id_it == ID_LIN_SVM)
+				cur_mod = new CLinSVM(is_root);
 			if(*mod_id_it == ID_RF)
 				cur_mod = new CRandomForest(is_root);
 
@@ -89,6 +91,8 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 
 	if(params_.str_classifier_ == ID_SVM)
 		final_classifier = new CSVM(is_root);
+	if(params_.str_classifier_ == ID_LIN_SVM)
+			final_classifier = new CLinSVM(is_root);
 	if(params_.str_classifier_ == ID_RF)
 		final_classifier = new CRandomForest(is_root);
 
@@ -222,7 +226,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 
 	// some fiixed parameters for post-processing
 	const float ms_kernel_radius = (float)SWIN_SIZE/10.0;
-	const float max_object_overlap = 0.1;
+	const float max_object_overlap = 0.3;
 
 	// copy input for editing
 	Mat labels = labels0.clone();
@@ -260,12 +264,14 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 		vis_img.setTo(Scalar(0,0,255), labels0 == 2);
 
 		imshow("Original Labels", vis_img);
+		imwrite("original_labels.jpg", vis_img);
 
 		vis_img = Mat::zeros(labels0.size(), CV_8UC3);
 		vis_img.setTo(Scalar(255,0,0), labels == 1);
 		vis_img.setTo(Scalar(0,0,255), labels == 2);
 
 		imshow("Closed Labels", vis_img);
+		imwrite("closed_labels.jpg", vis_img);
 
 		// - visualization ------------------------
 		Mat prop_map_vis = Mat::zeros(probability_map.size(), CV_32FC1);
@@ -273,6 +279,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 		vis_img = Mat::zeros(labels0.size(), CV_8UC3);
 		prop_map_vis.convertTo(vis_img, CV_8UC3, 255.0);
 		imshow("Probabilities of Labels", vis_img);
+		imwrite("prop_map.jpg", vis_img);
 		// ----------------------------------------
 #endif
 
@@ -406,9 +413,9 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 	}
 
 	imshow("detect-result", vis_img);
-	imwrite("detect-result.png", vis_img);
+	imwrite("detect_result.jpg", vis_img);
 
-	waitKey(0);
+	//waitKey(0);
 #endif // VERBOSE
 
 
@@ -463,39 +470,142 @@ void CPipelineController::train(const CommandParams& params)
 	initializeFromParameters();
 
 	vector<string> filelist;
-	if(getFileList(params.str_imgset_, filelist))
+	if(!getFileList(params.str_imgset_, filelist))
 	{
+		exit(-1);
+	}
+
+	sort(filelist.begin(), filelist.end());
+	vector<int> data_labels;
+
+	int n_neg_samples = 0;
+	int n_pos_samples = 0;
+
+	// extract labels from filenames
+	for(vector<string>::const_iterator f_it = filelist.begin(); f_it != filelist.end(); ++f_it)
+	{
+		stringstream ss_feature(*f_it);
+		string str_label;
+		getline(ss_feature, str_label, '_');
+		int train_label;
+		stringstream ss_label;
+		ss_label << *(str_label.begin());
+		ss_label >> train_label;
+		data_labels.push_back(train_label);
+		if(train_label == 0)
+			++n_neg_samples;
+		else
+			++n_pos_samples;
+	}
+
+	//cout << "Expecting " << n_pos_samples + MAX_NUMBER_BG_SAMPLES << " samples" << endl;
+	// if there are too many files: only take a subset of background patches (without duplicates)
+	if(n_neg_samples > MAX_NUMBER_BG_SAMPLES)
+	{
+		cout << "Too many negative samples to fit in RAM. Rearranging to match " << MAX_NUMBER_BG_SAMPLES << " negative samples ..." << flush;
+		srand(time(NULL));
+		int n_removed_bg_samples = 0;
+		int last_neg_idx_in_list = n_neg_samples-1;
+		while(n_removed_bg_samples < n_neg_samples-MAX_NUMBER_BG_SAMPLES)
+		{
+			// random background sample index in list
+			int rand_neg_idx = rand_IntRange(0, last_neg_idx_in_list);
+
+			// delete sample from list
+			filelist.erase(filelist.begin()+rand_neg_idx);
+
+			last_neg_idx_in_list--;
+			n_removed_bg_samples++;
+		}
 		sort(filelist.begin(), filelist.end());
 
-		CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
-		CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
-		vector<string>::const_iterator filename_it = filelist.begin();
-		CVisionModule* current_path_root = cmp;
-		//CVisionData* origin_sample = new CVisionData(imread(params.str_imgset_ + *filename_it), DATA_TYPE_IMAGE);
-		CVisionData* current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
-		vector<int> data_labels;
+		// also remove labels
+		data_labels.erase(data_labels.begin(), data_labels.begin() + n_removed_bg_samples);
 
-		bool finishedTraining = false;
-		while(!finishedTraining)
+		cout << " done!" << endl;
+
+//		cout << "Got " << filelist.size() << " samples and " << data_labels.size() << " labels." << endl;
+//
+//		cout << "last data label: " << data_labels[MAX_NUMBER_BG_SAMPLES-1] << " next data label: " << data_labels[MAX_NUMBER_BG_SAMPLES] << endl;
+//		cout << "last file name: " << filelist[MAX_NUMBER_BG_SAMPLES-1] << endl;
+//		cout << "next file name: " << filelist[MAX_NUMBER_BG_SAMPLES] << endl;
+		cout << flush;
+	}
+
+	cout << "Evaluating Pipeline... " << endl;
+
+	CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
+	CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
+	vector<string>::const_iterator filename_it = filelist.begin();
+	CVisionModule* current_path_root = cmp;
+	//CVisionData* origin_sample = new CVisionData(imread(params.str_imgset_ + *filename_it), DATA_TYPE_IMAGE);
+	CVisionData* current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+
+	bool finishedTraining = false;
+	while(!finishedTraining)
+	{
+		cmp->bufferData(current_data_ptr, lmp);
+		delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
+		current_data_ptr = NULL;
+		if(cmp->isTrained())
 		{
-			cmp->bufferData(current_data_ptr, lmp);
-			delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
-			current_data_ptr = NULL;
-			if(cmp->isTrained())
+			CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+			if(!missing_ancestor)
 			{
+				current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
+				lmp = cmp;
+				cmp = cmp->getSuccessor();
+
+				if(cmp == NULL) // reached the final module
+					finishedTraining = true;
+
+				continue;
+			}
+			else // if there is data missing: crawl the structure upwards the path to get data
+			{
+				while(missing_ancestor)
+				{
+					cmp = missing_ancestor;
+					missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+					lmp = missing_ancestor; // is NULL when reached a root module
+				}
+				current_path_root = cmp;
+				delete current_data_ptr;
+				current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+				continue;
+			}
+		}
+		else // reached a module that needs training: redo the same last path with each training sample
+		{
+			++filename_it;
+			if(filename_it != filelist.end()) // if there are training samples left
+			{
+				for(int backspace_cnt = 0; backspace_cnt < 1024; ++backspace_cnt)
+					cout << '\b';
+				cout << "processing file: " << params.str_imgset_ + *filename_it << flush;
+
+				// load the next sample and go the same path
+				delete current_data_ptr;
+				current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+				cmp = current_path_root; // (will alternate if the path contains merging modules)
+				lmp = NULL;
+				continue;
+			}
+			else // reached the module to be trained with the last sample
+			{
+				cout << endl;
+				// see if there are another paths towards this module
 				CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
 				if(!missing_ancestor)
 				{
-					current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
-					lmp = cmp;
-					cmp = cmp->getSuccessor();
-
-					if(cmp == NULL) // reached the final module
-						finishedTraining = true;
-
-					continue;
+					// if not, train the module - all data should be in the buffer
+					cmp->setDataLabels(CVisionData(Mat(data_labels), DATA_TYPE_VECTOR));
+					cmp->train(); // also clears Data Buffer of current Module
+					cmp->setAsTrained();
+					cmp = current_path_root; // restart from root module
+					lmp = NULL;
 				}
-				else // if there is data missing: crawl the structure upwards the path to get data
+				else // if there is another path: crawl the structure upwards this path to get data using the same sample
 				{
 					while(missing_ancestor)
 					{
@@ -503,82 +613,28 @@ void CPipelineController::train(const CommandParams& params)
 						missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
 						lmp = missing_ancestor; // is NULL when reached a root module
 					}
+					// now go the other path
 					current_path_root = cmp;
-					delete current_data_ptr;
-					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
-					continue;
 				}
+				// load the first sample
+				filename_it = filelist.begin();
+				delete current_data_ptr;
+				current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
+				continue;
 			}
-			else // reached a module that needs training: redo the same last path with each training sample
-			{
-				// first: collect the class label during the first iteration through the training data
-				if(data_labels.size() != filelist.size())
-				{
-					stringstream ss_feature(*filename_it);
-					string str_label;
-					getline(ss_feature, str_label, '_');
-					int train_label;
-					stringstream ss_label;
-					ss_label << *(str_label.begin());
-					ss_label >> train_label;
-					data_labels.push_back(train_label);
-				}
-
-				++filename_it;
-				if(filename_it != filelist.end()) // if there are training samples left
-				{
-					// load the next sample and go the same path
-					delete current_data_ptr;
-					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
-					cmp = current_path_root; // (will alternate if the path contains merging modules)
-					lmp = NULL;
-					continue;
-				}
-				else // reached the module to be trained with the last sample
-				{
-					// see if there are another paths towards this module
-					CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
-					if(!missing_ancestor)
-					{
-						// if not, train the module - all data should be in the buffer
-						cmp->setDataLabels(CVisionData(Mat(data_labels), DATA_TYPE_VECTOR));
-						cmp->train(); // also clears Data Buffer of current Module
-						cmp->setAsTrained();
-						cmp = current_path_root; // restart from root module
-						lmp = NULL;
-					}
-					else // if there is another path: crawl the structure upwards this path to get data using the same sample
-					{
-						while(missing_ancestor)
-						{
-							cmp = missing_ancestor;
-							missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
-							lmp = missing_ancestor; // is NULL when reached a root module
-						}
-						// now go the other path
-						current_path_root = cmp;
-					}
-					// load the first sample
-					filename_it = filelist.begin();
-					delete current_data_ptr;
-					current_data_ptr = createNewVisionDataObjectFromImageFile(params.str_imgset_ + *filename_it);
-					continue;
-				}
-			}
-
 		}
-
-
-		// get number of different classes; data_labels is not needed anymore
-		vector<int>::iterator t_it;
-		t_it = unique(data_labels.begin(), data_labels.end());
-		data_labels.resize(distance(data_labels.begin(), t_it));
-		sort(data_labels.begin(), data_labels.end());
-		t_it = unique(data_labels.begin(), data_labels.end());
-		n_object_classes_ = distance(data_labels.begin(), t_it) - 1; // subtract background class
-
-		cout << "Number of different object classes: " << n_object_classes_ << endl;
 	}
+
+	// get number of different classes; data_labels is not needed anymore
+	vector<int>::iterator t_it;
+	t_it = unique(data_labels.begin(), data_labels.end());
+	data_labels.resize(distance(data_labels.begin(), t_it));
+	sort(data_labels.begin(), data_labels.end());
+	t_it = unique(data_labels.begin(), data_labels.end());
+	n_object_classes_ = distance(data_labels.begin(), t_it) - 1; // subtract background class
+
+	cout << "Number of different object classes: " << n_object_classes_ << endl;
+
 }
 
 CVisionData* CPipelineController::createNewVisionDataObjectFromImageFile(const string& filename)
