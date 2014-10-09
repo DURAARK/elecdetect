@@ -13,7 +13,13 @@
 
 #define UNKNOWN_DATA_LENGTH    -1
 
-#define MODULE_CONSTRUCTOR_SIGNATURE  bool is_root
+#define MODULE_CONSTRUCTOR_SIGNATURE  bool is_root, string module_params
+
+#define MODULE_CTOR_INIT(print_name, required_sig, output_sig) \
+	module_print_name_ = print_name; \
+	required_input_signature_ = required_sig; \
+	output_signature_ = output_sig; \
+	if(is_root)	setAsRoot();
 
 using namespace std;
 using namespace cv;

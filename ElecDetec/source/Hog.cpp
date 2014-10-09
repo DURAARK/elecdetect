@@ -17,7 +17,7 @@ CHog::CHog(MODULE_CONSTRUCTOR_SIGNATURE)
 //	block_size_ = cv::Size(26, 26);
 //	block_stride_ = cv::Size(13, 13);
 
-	win_size_ = cv::Size(96, 96); // for new testsamples: win_size_ = cv::Size(96, 96); //(128,128)winSize
+	win_size_ = cv::Size(128, 128); // for new testsamples: win_size_ = cv::Size(96, 96); //(128,128)winSize
 	cell_size_ = cv::Size(8, 8); //cellSize,
 	block_size_ = cv::Size(16, 16);
 	block_stride_ = cv::Size(8, 8);

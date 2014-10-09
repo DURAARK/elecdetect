@@ -1,6 +1,8 @@
 #ifndef _LIBSVM_H
 #define _LIBSVM_H
 
+#include "Debug.h"
+
 #define _DENSE_REP
 
 #define LIBSVM_VERSION 318

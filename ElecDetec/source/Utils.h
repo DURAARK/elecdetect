@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 #include <dirent.h>
-
+#include <opencv2/opencv.hpp>
 
 #include "tclap/CmdLine.h"
 #include "Exceptions.h"
@@ -21,7 +21,7 @@
 #if defined _WIN32
   #include <conio.h>
   #include <direct.h>
-  #define MKDIR(path) _mkdir(path); // TODO: check if wondows makes directory
+  #define MKDIR(path) _mkdir(path); // TODO: check if windows makes directory
   #define FOLDER_CHAR  "\\"
 #elif defined __linux__
   #include <sys/types.h>
@@ -31,8 +31,7 @@
 #endif
 
 using namespace std;
-
-
+using namespace cv;
 
 inline vector<vector<Scalar> > getColors(const int& nclasses)
 {
@@ -51,6 +50,24 @@ inline vector<vector<Scalar> > getColors(const int& nclasses)
 		ret_colors.push_back(colors);
 	}
 	return ret_colors;
+}
+
+inline vector<string> splitStringByDelimiter(const string& src0, const string& delimiter)
+{
+	vector<string> output;
+
+	string src = src0; // make a non-const copy
+	size_t pos = 0;
+	string token;
+	while ((pos = src.find(delimiter)) != string::npos)
+	{
+	    token = src.substr(0, pos);
+	    output.push_back(token);
+	    src.erase(0, pos + delimiter.length());
+	}
+	output.push_back(src);
+
+	return output;
 }
 
 template <typename T>
@@ -72,15 +89,75 @@ inline void linspace(std::vector<T>& result, T start, T end, int N)
     result.push_back(end);
 }
 
-inline float rand_FloatRange(float low, float high)
+template <typename T>
+inline T randRange(T low, T high)
 {
-	return ((high-low)*((float)rand()/RAND_MAX))+low;
+	return (T)((((float)(high-low))*((float)rand()/RAND_MAX)))+low;
 }
 
-inline int rand_IntRange(int low, int high)
+template <typename T>
+class ValueGrid
 {
-	return (int)(  ( ( (float)(high-low) ) *( (float)rand()/RAND_MAX) )  )  +  low;
-}
+public:
+	enum GrowthType {LIN, EXP};
+private:
+	T min_;
+	T max_;
+	T step_;
+	T val_;
+	GrowthType gtype_;
+
+	ValueGrid();
+public:
+	ValueGrid(T min, T max, T step, GrowthType gtype) : min_(min), max_(max), step_(step), val_(min), gtype_(gtype)
+    {
+		switch(gtype_)
+		{
+		case LIN:
+			if(max_ < min_)
+				if(step_ > 0)
+					step_ = -step_;
+			break;
+		case EXP:
+			if(step_ < 0)
+				step_ = -step_ ;
+			if(step_ < 1.0)
+				if(max_ > min_)
+					step_ = static_cast<T>(1)+step_;
+		}
+
+    }
+
+	inline T getMin()
+	{
+		return min_;
+	}
+
+	// returns false if the value would exceed its limit. In this case, 'value' is unchanged
+	inline bool getNextValue(T& value)
+	{
+		T old_val = val_;
+		switch(gtype_)
+		{
+		case LIN:
+			val_ += step_;
+			break;
+		case EXP:
+			val_ *= step_;
+			break;
+		}
+		if(val_ <= max_)
+		{
+			value = val_;
+			return true;
+		}
+		else
+		{
+			val_ = old_val;
+			return false;
+		}
+	}
+};
 
 
 struct CommandParams
@@ -93,7 +170,7 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 {
 	try {
 		// Command Line
-		TCLAP::CmdLine cmd("Usage: [-1 IDs [-2 IDs .. -5 IDs]] -f final_classifier -d directory -c filename. For training mode -f must be specified, testing is performed otherwise", ' ', "1.0");
+		TCLAP::CmdLine cmd("Usage: [-1 IDs [-2 IDs .. -6 IDs]] -f final_classifier -d directory -c filename. For training mode -f must be specified, testing is performed otherwise", ' ', "1.0");
 
 		// Command Arguments
 		vector<TCLAP::ValueArg<std::string>*> v_ch_args;
@@ -102,6 +179,7 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 		TCLAP::ValueArg<std::string> c3Arg("3","channel3","IDs of the vision module(s) for the 3rd feature channel",false,"","string");
 		TCLAP::ValueArg<std::string> c4Arg("4","channel4","IDs of the vision module(s) for the 4th feature channel",false,"","string");
 		TCLAP::ValueArg<std::string> c5Arg("5","channel5","IDs of the vision module(s) for the 5th feature channel",false,"","string");
+		TCLAP::ValueArg<std::string> c6Arg("6","channel6","IDs of the vision module(s) for the 6th feature channel",false,"","string");
 		TCLAP::ValueArg<std::string> fArg("f","final","ID of the final classifier vision module. If present, training mode is performed.",false,"","string");
 		TCLAP::ValueArg<std::string> dArg("d","dir","Data directory of training- or test-data",true,"","string");
 		TCLAP::ValueArg<std::string> cArg("c","config","Configuration file whether the trained pipeline is stored to or loaded from",true,"","string");
@@ -110,6 +188,7 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (Param
 		cmd.add( c3Arg ); v_ch_args.push_back( &c3Arg );
 		cmd.add( c4Arg ); v_ch_args.push_back( &c4Arg );
 		cmd.add( c5Arg ); v_ch_args.push_back( &c5Arg );
+		cmd.add( c6Arg ); v_ch_args.push_back( &c6Arg );
 		cmd.add( fArg );
 		cmd.add( dArg );
 		cmd.add( cArg );

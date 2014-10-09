@@ -13,6 +13,10 @@
 #include "Scalar.h"
 #include "Vector.h"
 #include "VectorArray.h"
+#include "Utils.h"
+#include "Debug.h"
+
+#include "libsvm-dense/svm.h"
 
 #define CONFIG_NAME_SVM  "SVM"
 
@@ -22,8 +26,15 @@ using namespace cv;
 class CSVM: public CVisionModule
 {
 private:
-	CvSVM* svm_;
-	CvSVMParams* svm_params_;
+	svm_parameter* svm_params_;
+	svm_problem* svm_problem_;
+	svm_model* svm_model_;
+
+	bool auto_train_;
+
+	static const char* svm_type_table_[];
+	static const char* kernel_type_table_[];
+
 	CSVM();
 
 public:

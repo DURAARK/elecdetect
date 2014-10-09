@@ -72,9 +72,12 @@ void CVisionModule::bufferData(const CVisionData* data, const CVisionModule* anc
 			cerr << "Different feature dimension when concatenating samples! Exiting..." << endl;
 			exit(-1);
 		}
-		(*buf_it)->concatenateRowwise(*temp_buffer);
+//		(*buf_it)->concatenateRowwise(*temp_buffer);
+//		delete temp_buffer;
+		(*buf_it)->addRows(*temp_buffer);
 		delete temp_buffer;
 	}
+
 	temp_buffer = NULL;
 }
 
@@ -102,7 +105,7 @@ CVisionData CVisionModule::getConcatenatedDataAndClearBuffer()
 			cerr << "CVisionModule::getConcatenatedDataAndClearBuffer: at least one Buffer is empty!" << endl;
 			exit(-1);
 		}
-		concatenated.concatenateColumnwise(**buf_it);
+		concatenated.addCols(**buf_it);
 	}
 	clearDataBuffers();
 	return concatenated;

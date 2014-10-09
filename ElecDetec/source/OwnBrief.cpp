@@ -7,15 +7,10 @@
 
 #include "OwnBrief.h"
 
-COwnBrief::COwnBrief(MODULE_CONSTRUCTOR_SIGNATURE) : feature_length_(DEFAULT_FEATURE_LENGTH)
+COwnBrief::COwnBrief(MODULE_CONSTRUCTOR_SIGNATURE) : feature_length_(BRIEF_FEATURE_LENGTH)
 {
-	module_print_name_ = "Brief";
-	
-	required_input_signature_ = DATA_TYPE_IMAGE | CV_32FC1; // needs float image as input TODO: implement conversion when input data is a vector
-	output_signature_ = DATA_TYPE_VECTOR | CV_32FC1;
-
-	if(is_root)
-		setAsRoot();
+	// needs float image as input TODO: implement conversion when input data is a vector
+	MODULE_CTOR_INIT("Brief", DATA_TYPE_IMAGE | CV_32FC1, DATA_TYPE_VECTOR | CV_32FC1);
 
 	initTestPairs();
 }
@@ -74,7 +69,7 @@ CVisionData* COwnBrief::exec()
 void COwnBrief::save(FileStorage& fs) const
 {
 	stringstream config_name;
-	config_name << CONFIG_NAME_TESTPAIRS << "-" << module_id_;
+	config_name << BRIEF_CONFIG_NAME_TESTPAIRS << "-" << module_id_;
 	//fs << CONFIG_NAME_TESTPAIRS << rel_test_pairs_;
     fs << config_name.str().c_str() << "[";
 	vector<test_pair>::const_iterator t_it;
@@ -90,7 +85,7 @@ void COwnBrief::load(FileStorage& fs)
 {
 	rel_test_pairs_.clear();
 	stringstream config_name;
-	config_name << CONFIG_NAME_TESTPAIRS << "-" << module_id_;
+	config_name << BRIEF_CONFIG_NAME_TESTPAIRS << "-" << module_id_;
 
 	FileNode config_tests = fs[config_name.str().c_str()];
 	for(FileNodeIterator t_it = config_tests.begin(); t_it != config_tests.end(); ++t_it)

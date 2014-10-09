@@ -16,43 +16,25 @@
 #include <bitset>
 #include <omp.h>
 
+#include "Defines.h"
+#include "Utils.h"
 #include "VisionModule.h"
 #include "VectorArray.h"
 #include "Scalar.h"
 #include "BinaryContours.h"
 #include "GradientImage.h"
+#include "QGradient.h"
+#include "OrientationFilter.h"
+#include "ColorChannel.h"
+#include "GradientOrientationFeatures.h"
 #include "DistanceTransform.h"
 #include "Hog.h"
 #include "OwnBrief.h"
-#include "DummyFeature.h"
+#include "HaarWavelets.h"
 #include "PCA.h"
 #include "SVM.h"
 #include "LinSVM.h"
 #include "RandomForest.h"
-#include "Utils.h"
-
-#define VERBOSE
-
-#define CONFIG_NAME_CHANNEL              "feature-channel"
-#define CONFIG_NAME_CHANNEL_LENGTHS      "feature-channel-lengths"
-#define CONFIG_NAME_CLASSIFIER           "classifier-module"
-#define CONFIG_NAME_NUM_CLASSES          "number-of-classes"
-
-#define FILENAME_RESULT_POSTFIX      "-result"
-
-#define ID_CANNY     "canny"
-#define ID_GRADIENT  "grad"
-#define ID_DISTTR    "dist"
-#define ID_HOG       "hog"
-#define ID_BRIEF     "brief"
-#define ID_PCA       "pca"
-#define ID_SVM       "svm"
-#define ID_LIN_SVM   "linsvm"
-#define ID_RF        "rf"
-
-#define SWIN_SIZE                 96  //! Change for new testset to 96! also in Hog.cpp!! Sliding Window size in mm
-#define OPENING_SIZE               3  // Kernel Size of morphological opening in non-weihgted results
-#define MAX_NUMBER_BG_SAMPLES  15000  // maximum number of background samples to prevent memory overflow
 
 using namespace std;
 using namespace cv;

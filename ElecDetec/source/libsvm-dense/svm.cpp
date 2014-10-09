@@ -44,7 +44,7 @@ static void print_string_stdout(const char *s)
 	fflush(stdout);
 }
 static void (*svm_print_string) (const char *) = &print_string_stdout;
-#if 1
+#if 0
 static void info(const char *fmt,...)
 {
 	char buf[BUFSIZ];
@@ -2493,6 +2493,7 @@ void svm_cross_validation(const svm_problem *prob, const svm_parameter *param, i
 		for(i=0;i<=nr_fold;i++)
 			fold_start[i]=i*l/nr_fold;
 	}
+
 
 	for(i=0;i<nr_fold;i++)
 	{

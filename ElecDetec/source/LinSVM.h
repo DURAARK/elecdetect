@@ -8,11 +8,15 @@
 #ifndef LIN_SVM_H_
 #define LIN_SVM_H_
 
+#include <omp.h>
+
 #include "VisionModule.h"
 #include "VisionData.h"
 #include "Scalar.h"
 #include "Vector.h"
 #include "VectorArray.h"
+#include "Utils.h"
+#include "Debug.h"
 
 #include "libsvm-dense/svm.h"
 
@@ -27,6 +31,8 @@ private:
 	svm_parameter* svm_params_;
 	svm_problem* svm_problem_;
 	svm_model* svm_model_;
+
+	bool auto_train_;
 
 	static const char* svm_type_table_[];
 	static const char* kernel_type_table_[];

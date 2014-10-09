@@ -36,7 +36,8 @@ CVisionData* CGradientImage::exec()
 	Mat abs_grad_x, abs_grad_y;
 
 	// Blur
-	GaussianBlur(working_data.data(), img0_gray, Size(3,3), 0, 0, BORDER_DEFAULT);
+	//GaussianBlur(working_data.data(), img0_gray, Size(3,3), 0, 0, BORDER_DEFAULT);
+	img0_gray = working_data.data();
 	// Gradient X
 	Sobel(img0_gray, grad_x, ddepth_, 1, 0, 3, scale_, delta_, BORDER_DEFAULT);
 	// Gradient Y
@@ -48,6 +49,9 @@ CVisionData* CGradientImage::exec()
 
 	// superposition of both directions
 	addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, out_img);
+
+//	imshow("orig", working_data.data());
+//	PAUSE_AND_SHOW(out_img);
 
 	//normalize(out_img->mat_, out_img->mat_, 0, 255, NORM_MINMAX);
 	return new CVisionData(out_img, DATA_TYPE_IMAGE);

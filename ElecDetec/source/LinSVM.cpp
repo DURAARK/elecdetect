@@ -26,15 +26,15 @@ CLinSVM::CLinSVM(MODULE_CONSTRUCTOR_SIGNATURE)
 
 	//defaults:
 	int svm_type = C_SVC;
-	int kernel_type = RBF; // LINEAR;
+	int kernel_type = LINEAR; // LINEAR;
 	int degree = 0;	/* for poly */
-	double gamma = 3.3750000000000002e-02;//1.0;	/* for poly/rbf/sigmoid */
+	double gamma = 1.0; // 3.3750000000000002e-02;	/* for poly/rbf/sigmoid */
 	double coef0 = 0.0;	/* for poly/sigmoid */
 
 	/* these are for training only */
 	double cache_size = 512; /* in MB */
 	double eps = 1.2e-7;//0.001;	/* stopping criteria */
-	double C = 2.5;//1.0;	/* for C_SVC, EPSILON_SVR and NU_SVR */
+	double C = 1.0; //2.5;	/* for C_SVC, EPSILON_SVR and NU_SVR */
 	int nr_weight = 0;		/* for C_SVC */
 	int *weight_label = NULL;	/* for C_SVC */
 	double* weight = NULL;		/* for C_SVC */
@@ -63,6 +63,8 @@ CLinSVM::CLinSVM(MODULE_CONSTRUCTOR_SIGNATURE)
 	svm_params_->p = p;
 	svm_params_->shrinking = shrinking;
 	svm_params_->probability = probability;
+
+	auto_train_ = true;
 
 	svm_problem_ = NULL;
 	svm_model_ = NULL;
@@ -126,21 +128,18 @@ void CLinSVM::train()
 	delete svm_problem_;
 	svm_problem_ = new svm_problem();
 
-	//const int k_fold = 5;
+	cout << "Training SVM. Please be patient..." << flush;
 
-
+	// prepare training data
 	const int n_samples = train_data.data().rows;
 	const int n_features = train_data.data().cols;
-
 
 	double* problem_y = Malloc(double, n_samples);//(double*)malloc(n_samples*sizeof(double));
 	svm_node* problem_x = Malloc(svm_node, n_samples);//(svm_node*)malloc(n_samples*sizeof(struct svm_node));
 
-
 	svm_problem_->l = n_samples; // data length
 	// problem.y = int* data labels (beginning from 1)
 	// SPARSE: problem.x = svm_node**, x[sample_nr] = [ (f_index, value), (f_index,value), ...] ; f_index must be ASCENDING
-
 
 	for(int sample_cnt = 0; sample_cnt < n_samples; ++sample_cnt)
 	{
@@ -157,6 +156,108 @@ void CLinSVM::train()
 	svm_problem_->y = problem_y;
 	svm_problem_->x = problem_x;
 
+	//cout << "LinSVM: " << n_samples << " samples copied. Feature size is " << n_features << endl << flush;
+
+
+	// find best params by parameter grid search
+	if(auto_train_)
+	{
+		cout << " parameter search started... " << flush;
+		const int k_fold = 5;
+
+		ValueGrid<double> C_grid(5e-1, 1e1, 1.5, ValueGrid<double>::EXP);
+		ValueGrid<double> gamma_grid(5e-3, 1e0, 2.5, ValueGrid<double>::EXP);
+		ValueGrid<int> degree_grid(1, 10, 1, ValueGrid<int>::LIN);
+		ValueGrid<double> coef_grid(1e-2, 1e2, 5.0, ValueGrid<double>::EXP);
+		ValueGrid<double> nu_grid(1e-6, 1e1, 3.0, ValueGrid<double>::EXP);
+		ValueGrid<double> p_grid(1e-6, 1e1, 3.0, ValueGrid<double>::EXP);
+		svm_parameter working_params;
+		svm_parameter best_params;
+		double best_error = 1.0;
+
+	    // if some parameters are not used by the SVM type and kernel, make their grids static:
+	    if( svm_params_->kernel_type != POLY )
+	        degree_grid = ValueGrid<int>(svm_params_->degree, svm_params_->degree, 1, ValueGrid<int>::LIN);
+	    if( svm_params_->kernel_type == LINEAR )
+	        gamma_grid = ValueGrid<double>(svm_params_->gamma, svm_params_->gamma, 1, ValueGrid<double>::LIN);
+	    if( svm_params_->kernel_type != POLY && svm_params_->kernel_type != CvSVM::SIGMOID )
+	        coef_grid = ValueGrid<double>(svm_params_->coef0, svm_params_->coef0, 1, ValueGrid<double>::LIN);
+	    if( svm_params_->svm_type == NU_SVC || svm_params_->svm_type == ONE_CLASS )
+	        C_grid = ValueGrid<double>(svm_params_->C, svm_params_->C, 1, ValueGrid<double>::LIN);
+	    if( svm_params_->svm_type == C_SVC || svm_params_->svm_type == EPSILON_SVR )
+	        nu_grid = ValueGrid<double>(svm_params_->nu, svm_params_->nu, 1, ValueGrid<double>::LIN);
+	    if( svm_params_->svm_type != EPSILON_SVR )
+	        p_grid = ValueGrid<double>(svm_params_->p, svm_params_->p, 1, ValueGrid<double>::LIN);
+
+		working_params = *svm_params_;
+
+		working_params.C = C_grid.getMin();
+		working_params.gamma = gamma_grid.getMin();
+		working_params.degree = degree_grid.getMin();
+		working_params.coef0 = coef_grid.getMin();
+		working_params.nu = nu_grid.getMin();
+		working_params.p = p_grid.getMin();
+
+#pragma omp parallel
+		for(bool C_reached_lim = false; !C_reached_lim; C_reached_lim = !C_grid.getNextValue(working_params.C))
+		{
+			for(bool gamma_reached_lim = false; !gamma_reached_lim; gamma_reached_lim = !gamma_grid.getNextValue(working_params.gamma))
+			{
+				for(bool degree_reached_lim = false; !degree_reached_lim; degree_reached_lim = !degree_grid.getNextValue(working_params.degree))
+				{
+					for(bool coef_reached_lim = false; !coef_reached_lim; coef_reached_lim = !coef_grid.getNextValue(working_params.coef0))
+					{
+						for(bool nu_reached_lim = false; !nu_reached_lim; nu_reached_lim = !nu_grid.getNextValue(working_params.nu))
+						{
+							for(bool p_reached_lim = false; !p_reached_lim; p_reached_lim = !p_grid.getNextValue(working_params.p))
+							{
+								double* target = Malloc(double, svm_problem_->l);
+
+								const char* check_result = svm_check_parameter(svm_problem_, &working_params);
+								if(check_result)
+								{
+									cerr << "SVM Auto-Training ERROR occurred. Parameter check failed: " << check_result << endl;
+									exit(-1);
+								}
+
+								svm_cross_validation(svm_problem_, &working_params, k_fold, target);
+
+								int error_cnt = 0;
+								for(int i = 0; i < svm_problem_->l; ++i)
+								{
+									if(target[i] != svm_problem_->y[i])
+									{
+										++error_cnt;
+									}
+									//cout << " " << target[i] << svm_problem_->y[i];
+								}
+								double error = (double)error_cnt / (double)svm_problem_->l;
+
+								if(error < best_error)
+								{
+									best_params = working_params;
+									best_error = error;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		*svm_params_ = best_params;
+
+		cout << endl;
+
+		cout << "Finished auto training with C:" << svm_params_->C <<
+				" gamma:" << svm_params_->gamma <<
+				" degree:" << svm_params_->degree <<
+				" coef0:" << svm_params_->coef0 <<
+				" nu:" << svm_params_->nu <<
+				" p:" << svm_params_->p <<
+				endl;
+		cout << "Error is: " << best_error << "(" << best_error*(svm_problem_->l) << " samples)";
+	}
 
 	//cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
 	//cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
@@ -187,10 +288,8 @@ void CLinSVM::train()
 		exit(-1);
 	}
 
-	cout << "Training SVM. Please be patient..." << flush;
-
+	// train the SVM with svm_params_
 	svm_model_ = svm_train(svm_problem_, svm_params_);
-
 
 
 	//svm_->train(train_data_mat, train_labels_mat, Mat(), Mat(), *svm_params_);
@@ -213,7 +312,7 @@ void CLinSVM::save(FileStorage& fs) const
 {
 	cout << "saving LinSVM..." << endl << flush;
 
-	svm_save_model("libsvm.txt", svm_model_);
+	//svm_save_model("libsvm.txt", svm_model_);
 
 	stringstream config_name;
 	config_name << CONFIG_NAME_LIN_SVM << "-" << module_id_;

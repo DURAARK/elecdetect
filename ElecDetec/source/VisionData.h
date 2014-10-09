@@ -50,11 +50,18 @@ private:
 	CVisionData();
 
 	Mat mat_;
+	Rect used_roi_;
+	//int next_free_allocated_row_cnt_;
 
-	//int internal_row_cnt_;
+	void convervativeResize(const int& rows, const int& cols)
+	{
+		Mat new_mat = Mat::zeros(rows, cols, mat_.type());
+		mat_(used_roi_).copyTo(new_mat(used_roi_));
+		mat_ = new_mat;
+	}
 
 public:
-	CVisionData(const Mat& data, const int& type) : mat_(data)//, internal_row_cnt_(0)
+	CVisionData(const Mat& data, const int& type) : mat_(data), used_roi_(Rect(0,0,data.cols,data.rows))
 	{
 		data_signature_ = type | mat_.type();
 	};
@@ -62,7 +69,7 @@ public:
 	CVisionData(const CVisionData& other)
 	{
 		mat_ = other.mat_;
-		//internal_row_cnt_ = other.internal_row_cnt_;
+		used_roi_ = other.used_roi_;
 		data_signature_ = other.data_signature_;
 	}
 
@@ -76,19 +83,82 @@ public:
 	void assignData(const Mat& data, const int& type)
 	{
 		mat_ = data;
+		used_roi_ = Rect(0,0,data.cols,data.rows);
 		data_signature_ = type | mat_.type();
 		if((data_signature_ & DATA_TYPE_VECTOR) && (mat_.rows > 1))
 			data_signature_ |= DATA_ARRAY;
 	}
+//
+//	void concatenateColumnwise(const CVisionData& other)
+//	{
+//		hconcat(mat_, other.data(), mat_);
+//	}
+//
+//	void concatenateRowwise(const CVisionData& other)
+//	{
+//		vconcat(mat_, other.data(), mat_);
+//	}
 
-	void concatenateColumnwise(const CVisionData& other)
+	void addCols(const CVisionData& other)
 	{
-		hconcat(mat_, other.data(), mat_);
+		if(other.data().rows != used_roi_.height)
+		{
+			cerr << "CVisionData::addCols: Trying to add column with different amount of rows!" << endl;
+			exit(-1);
+		}
+		const int n_needed_cols = other.data().cols + used_roi_.width;
+		if(n_needed_cols > mat_.cols)
+		{
+			int col_capacity = 1;
+			while(n_needed_cols > col_capacity)
+				col_capacity *= 2; // exponential growth of preallocated rows
+
+			//cout << "CVisionData::addCols: Trying to add data to full Matrix! new col capacity: " << col_capacity << endl;
+			convervativeResize(mat_.rows, col_capacity);
+		}
+		if(other.getSignature() != data_signature_)
+		{
+			cerr << "CVisionData::addCols: Trying to add data with different signature!" << endl;
+			exit(-1);
+		}
+		//cout << "before roi: " << used_roi_ << " new mat size: " << mat_.rows << " x " << mat_.cols << endl << flush;
+		Rect new_data_roi = Rect(used_roi_.width, 0, other.data().cols, other.data().rows);
+		//cout << "new data roi: " << new_data_roi << endl << flush;
+		other.data().copyTo(mat_(new_data_roi));
+
+		used_roi_.width += other.data().cols;
+		//cout << "after roi: " << used_roi_ << endl << flush;
 	}
 
-	void concatenateRowwise(const CVisionData& other)
+	void addRows(const CVisionData& other)
 	{
-		vconcat(mat_, other.data(), mat_);
+		if(other.data().cols != used_roi_.width)
+		{
+			cerr << "CVisionData::addRows: Trying to add row with different amount of columns!" << endl;
+			exit(-1);
+		}
+		const int n_needed_rows = other.data().rows + used_roi_.height;
+		if(n_needed_rows > mat_.rows)
+		{
+			int row_capacity = 1;
+			while(n_needed_rows > row_capacity)
+				row_capacity *= 2; // exponential growth of preallocated rows
+
+			//cout << "CVisionData::addRows: Trying to add data to full Matrix! new row capacity: " << row_capacity << endl;
+			convervativeResize(row_capacity, mat_.cols);
+		}
+		if(other.getSignature() != data_signature_)
+		{
+			cerr << "CVisionData::addRow: Trying to add data with different signature!" << endl;
+			exit(-1);
+		}
+		//cout << "before roi: " << used_roi_ << " new mat size: " << mat_.rows << " x " << mat_.cols << endl << flush;
+		Rect new_data_roi = Rect(0, used_roi_.height, other.data().cols, other.data().rows);
+		//cout << "new data roi: " << new_data_roi << endl << flush;
+		other.data().copyTo(mat_(new_data_roi));
+
+		used_roi_.height += other.data().rows;
+		//cout << "after roi: " << used_roi_ << endl << flush;
 	}
 
 //	void pushbackRow(const CVisionData& other)
@@ -102,21 +172,14 @@ public:
 //		internal_row_cnt_ += other.data().rows;
 //	}
 
-	void convervativeResizeRows(const int n_rows)
-	{
-		Mat temp = Mat::zeros(n_rows, mat_.cols, mat_.type());
-		mat_.copyTo(temp.rowRange(0, mat_.rows));
-		mat_ = temp;
-	}
-
 //	Mat& data()
 //	{
 //		return mat_;
 //	}
 
-	const Mat& data() const
+	const Mat data() const
 	{
-		return mat_;
+		return mat_(used_roi_); // return only the useful matrix data
 	}
 
 	inline void show() const

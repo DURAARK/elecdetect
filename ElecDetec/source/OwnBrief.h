@@ -11,13 +11,10 @@
 #include <time.h>
 #include <opencv2/opencv.hpp>
 
+#include "Defines.h"
 #include "VisionModule.h"
 #include "VisionData.h"
 #include "Exceptions.h"
-
-#define DEFAULT_FEATURE_LENGTH 512
-
-#define CONFIG_NAME_TESTPAIRS         "brief-testpairs"
 
 using namespace std;
 using namespace cv;

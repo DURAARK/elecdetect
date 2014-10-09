@@ -33,13 +33,16 @@ public:
 // is thrown if something went wrong on pipeline setup
 class PipeConfigExecption : public exception
 {
+private:
+	const char* msg_;
 public:
 	PipeConfigExecption() { };
+	PipeConfigExecption(const char* msg) : msg_(msg) { };
 
 	virtual const char* what() const throw()
 	{
 		stringstream msg;
-		msg << "Pipe config exception happened! Reason: " << endl;
+		msg << "Pipe config exception happened! Reason: " << msg_ << endl;
 		return msg.str().c_str();
 	}
 };

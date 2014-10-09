@@ -42,35 +42,62 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 	{
 		is_root = true;
 		CVisionModule* ancestor_mod = NULL;
-		vector<string>::const_iterator mod_id_it;
-		for(mod_id_it = ch_str_it->begin(); mod_id_it != ch_str_it->end(); ++mod_id_it)
+		vector<string>::const_iterator mod_str_it;
+		for(mod_str_it = ch_str_it->begin(); mod_str_it != ch_str_it->end(); ++mod_str_it)
 		{
 			CVisionModule* cur_mod = NULL;
+
+			string mod_id;
+			string mod_param;
+			size_t param_pos = mod_str_it->find(MODULE_PARAM_PRELUDE);
+			if(param_pos != string::npos)
+			{
+				if(mod_str_it->find(MODULE_PARAM_ENDING) != mod_str_it->size()-1)
+				{
+					throw(PipeConfigExecption("Parameter sequence ending character not found at the end.")); // Param-Ending is not at the end
+				}
+				mod_param = mod_str_it->substr(param_pos+1, mod_str_it->size()-param_pos-2);
+			}
+
+			mod_id = mod_str_it->substr(0,param_pos);
+
+			//cout << "Mod-ID: " << mod_id << " Params: " << mod_param << endl;
+
 			// Pre-processing Methods
-			if(*mod_id_it == ID_CANNY)
-				cur_mod = new CBinaryContours(is_root);
-			if(*mod_id_it == ID_GRADIENT)
-				cur_mod = new CGradientImage(is_root);
-			if(*mod_id_it == ID_DISTTR)
-				cur_mod = new CDistanceTransform(is_root);
+			if(mod_id == ID_CANNY)
+				cur_mod = new CBinaryContours(is_root, mod_param);
+			if(mod_id == ID_GRADIENT)
+				cur_mod = new CGradientImage(is_root, mod_param);
+			if(mod_id == ID_DISTTR)
+				cur_mod = new CDistanceTransform(is_root, mod_param);
+			if(mod_id == ID_QGRAD)
+				cur_mod = new CQuantizedGradient(is_root, mod_param);
+			if(mod_id == ID_ORI)
+				cur_mod = new COrientationFilter(is_root, mod_param);
+			if(mod_id == ID_CCHAN)
+				cur_mod = new CColorChannel(is_root, mod_param);
 
 			// Feature Extractor Methods
-			if(*mod_id_it == ID_HOG)
-				cur_mod = new CHog(is_root);
-			if(*mod_id_it == ID_BRIEF)
-				cur_mod = new COwnBrief(is_root);
+			if(mod_id == ID_HOG)
+				cur_mod = new CHog(is_root, mod_param);
+			if(mod_id == ID_BRIEF)
+				cur_mod = new COwnBrief(is_root, mod_param);
+			if(mod_id == ID_HAAR_FEAT)
+				cur_mod = new CHaarWavelets(is_root, mod_param);
+			if(mod_id == ID_GOF)
+				cur_mod = new CGradientOrientationFeatures(is_root, mod_param);
 
 			// Subspace methods
-			if(*mod_id_it == ID_PCA)
-				cur_mod = new CPCA(is_root);
+			if(mod_id == ID_PCA)
+				cur_mod = new CPCA(is_root, mod_param);
 
 			// Classifiers: TODO: re-implementation of classifiers needed (prediction probability)
-			if(*mod_id_it == ID_SVM)
-				cur_mod = new CSVM(is_root);
-			if(*mod_id_it == ID_LIN_SVM)
-				cur_mod = new CLinSVM(is_root);
-			if(*mod_id_it == ID_RF)
-				cur_mod = new CRandomForest(is_root);
+			if(mod_id == ID_SVM)
+				cur_mod = new CSVM(is_root, mod_param);
+			if(mod_id == ID_LIN_SVM)
+				cur_mod = new CLinSVM(is_root, mod_param);
+			if(mod_id == ID_RF)
+				cur_mod = new CRandomForest(is_root, mod_param);
 
 			if(!cur_mod)
 				throw(PipeConfigExecption()); // unknown ID given!!!
@@ -89,15 +116,22 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 	// Create final classifier
 	CVisionModule* final_classifier = NULL;
 
-	if(params_.str_classifier_ == ID_SVM)
-		final_classifier = new CSVM(is_root);
-	if(params_.str_classifier_ == ID_LIN_SVM)
-			final_classifier = new CLinSVM(is_root);
-	if(params_.str_classifier_ == ID_RF)
-		final_classifier = new CRandomForest(is_root);
+	string mod_id;
+	string mod_param;
+	size_t param_pos = params_.str_classifier_.find(MODULE_PARAM_DELIMITER);
+	if(param_pos != string::npos)
+		mod_param = params_.str_classifier_.substr(param_pos+1);
+	mod_id = params_.str_classifier_.substr(0,param_pos);
+
+	if(mod_id == ID_SVM)
+		final_classifier = new CSVM(is_root, mod_param);
+	if(mod_id == ID_LIN_SVM)
+		final_classifier = new CLinSVM(is_root, mod_param);
+	if(mod_id == ID_RF)
+		final_classifier = new CRandomForest(is_root, mod_param);
 
 	if(!final_classifier)
-		throw(PipeConfigExecption()); // unknown ID given!!!
+		throw(PipeConfigExecption("Final classifier not specified or unknown ID given.")); // unknown ID given!!!
 
 	// set successor of the last modules of the channels
 	for (vector<CVisionModule*>::const_iterator mod_it = end_modules_of_channels.begin(); mod_it != end_modules_of_channels.end(); ++mod_it)
@@ -116,95 +150,173 @@ void CPipelineController::initializeFromParameters() throw (PipeConfigExecption)
 
 
 	printConfig();
+
+	waitKey(0);
 }
 
 void CPipelineController::test(const Mat& input_img, vector<vector<Rect> >& bb_results)
 {
-	Mat mat_detect_labels = Mat::zeros(input_img.size(), CV_8UC1); // discrete labels
+	Mat mat_detect_labels = Mat::zeros(input_img.size(), CV_8UC1);  // discrete labels
 	Mat mat_detect_prop = Mat::zeros(input_img.size(), CV_32FC1);   // probability map of the detection results
+	Mat mat_to_analyze = Mat::zeros(input_img.size(), CV_8UC1);     // Binary image that codes which pixels (BB-top-left points)
+	                                                                // are going to be analyzed
 
 	cout << "Analyzing image...        " << flush;
 	float progress = 0.0;
 
-	// Sliding window
+	// Scan Grid 'sg'
 	Rect win_roi(0, 0, SWIN_SIZE, SWIN_SIZE);
-	for(win_roi.y = 0; win_roi.y < input_img.rows-SWIN_SIZE; win_roi.y += 1)
+	vector<int> sg_x, sg_y;
+	linspace<int>(sg_x, 0, input_img.cols-SWIN_SIZE-1, ceil(((float)input_img.cols-SWIN_SIZE)/(float)OPENING_SIZE)+2);
+	linspace<int>(sg_y, 0, input_img.rows-SWIN_SIZE-1, ceil(((float)input_img.rows-SWIN_SIZE)/(float)OPENING_SIZE)+2);
+//	cout << "image is " << input_img.cols << " x " << input_img.rows << endl;
+//	cout << "linspace x n_elements: " << sg_x.size() << " and y: " << sg_y.size() << endl;
+
+	vector<Point> tl_scan_points;
+	for(vector<int>::const_iterator y_it = sg_y.begin(); y_it != sg_y.end(); ++y_it)
 	{
-		progress = 100.0f*win_roi.y/(input_img.rows-SWIN_SIZE);
-		for(int backspace_cnt = 0; backspace_cnt < 6; ++backspace_cnt)
-			cout << '\b';
-		cout << setfill('0');
-		cout << setw(5) << setiosflags(ios::fixed) << setprecision(2) << progress << "%" << flush;
-
-//#pragma omp parallel
-		for(win_roi.x = 0; win_roi.x < input_img.cols-SWIN_SIZE; win_roi.x += 1)
+		for(vector<int>::const_iterator x_it = sg_x.begin(); x_it != sg_x.end(); ++x_it)
 		{
-			//CVisionData window(input_img(win_roi), DATA_TYPE_IMAGE);
-			//			window->show();
-			//			waitKey(3);
-
-			// Execute each Pipeline and concatenate results
-			CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
-			CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
-			CVisionData* current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
-			while(cmp)
-			{
-				cmp->bufferData(current_data_ptr, lmp);
-				delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
-				current_data_ptr = NULL;
-				if(cmp->isTrained())
-				{
-					CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
-					if(!missing_ancestor)
-					{
-						current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
-						lmp = cmp;
-						cmp = cmp->getSuccessor();
-
-						continue;
-					}
-					else // if there is data missing: crawl the structure upwards the path to get data
-					{
-						while(missing_ancestor)
-						{
-							cmp = missing_ancestor;
-							missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
-							lmp = missing_ancestor; // is NULL when reached a root module
-						}
-						delete current_data_ptr;
-						current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
-						continue;
-					}
-				}
-				else
-				{
-					cerr << "Testing untrained modules?" << endl;
-					exit(-1);
-				}
-			}
-
-			// Classify with final classifier
-			if(!SIGNATURE_IS_WSCALAR(current_data_ptr->getSignature()))
-			{
-				cerr << "Final Module has produced a not weighed scalar as result" << endl;
-				exit(-1);
-			}
-
-			uchar result_class = static_cast<uchar>(current_data_ptr->data().at<float>(0,0));
-			if(result_class)
-			{
-				Point2i win_center(win_roi.x + win_roi.width/2, win_roi.y + win_roi.height/2);
-				mat_detect_labels.at<uchar>(win_center) = result_class;
-				mat_detect_prop.at<float>(win_center) = current_data_ptr->data().at<float>(0,1);
-			}
-
-			// cleanup
-			if(current_data_ptr)
-				delete current_data_ptr;
-			current_data_ptr = NULL;
-
+			tl_scan_points.push_back(Point(*x_it, *y_it));
+			mat_to_analyze.at<uchar>(Point(*x_it, *y_it)) = true;
 		}
 	}
+
+//	cout << "x: ";
+//	for(int i = 0; i < sg_x.size(); ++i)
+//		cout << " " << sg_x[i];
+//	cout << endl;
+//
+//	cout << "y: ";
+//	for(int i = 0; i < sg_y.size(); ++i)
+//		cout << " " << sg_y[i];
+//	cout << endl;
+//
+
+	int progress_refresh_cnt = 0;
+	for(unsigned int scan_pt_cnt = 0; scan_pt_cnt < tl_scan_points.size(); ++scan_pt_cnt)
+	{
+		win_roi.x = tl_scan_points[scan_pt_cnt].x;
+		win_roi.y = tl_scan_points[scan_pt_cnt].y;
+
+		if(progress_refresh_cnt++ == 100)
+		{
+			progress = 100.0f*(float)scan_pt_cnt/tl_scan_points.size();
+
+			for(int backspace_cnt = 0; backspace_cnt < 6; ++backspace_cnt)
+				cout << '\b';
+
+			cout << setfill('0');
+			cout << setw(5) << setiosflags(ios::fixed) << setprecision(2) << progress << "%" << flush;
+			progress_refresh_cnt = 0;
+		}
+
+		// Execute each Pipeline and save results
+		CVisionModule* cmp = all_modules_[0]; // Current Module Ptr: grab a root module
+		CVisionModule* lmp = NULL;            // Last Vision Module Pointer: used to identify correct buffer and converter inside a module
+		CVisionData* current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
+		while(cmp)
+		{
+			cmp->bufferData(current_data_ptr, lmp);
+			delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
+			current_data_ptr = NULL;
+			if(cmp->isTrained())
+			{
+				CVisionModule* missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+				if(!missing_ancestor)
+				{
+					current_data_ptr = cmp->exec(); // also clears Data Buffer of current Module
+					lmp = cmp;
+					cmp = cmp->getSuccessor();
+
+					continue;
+				}
+				else // if there is data missing: crawl the structure upwards the path to get data
+				{
+					while(missing_ancestor)
+					{
+						cmp = missing_ancestor;
+						missing_ancestor = cmp->getAncestorModuleFromWhichNoDataIsBuffered();
+						lmp = missing_ancestor; // is NULL when reached a root module
+					}
+					delete current_data_ptr;
+					current_data_ptr = new CVisionData(input_img(win_roi), DATA_TYPE_IMAGE);
+					continue;
+				}
+			}
+			else
+			{
+				cerr << "Testing untrained modules?" << endl;
+				exit(-1);
+			}
+		}
+
+		// Classify with final classifier
+		if(!SIGNATURE_IS_WSCALAR(current_data_ptr->getSignature()))
+		{
+			cerr << "Final Module has produced a not weighed scalar as result" << endl;
+			exit(-1);
+		}
+
+		uchar result_class = static_cast<uchar>(current_data_ptr->data().at<float>(0,0));
+
+		// if an object was found on this position
+		if(result_class)
+		{
+			Point2i win_center(win_roi.x + win_roi.width/2, win_roi.y + win_roi.height/2);
+			mat_detect_labels.at<uchar>(win_center) = result_class;
+			mat_detect_prop.at<float>(win_center) = current_data_ptr->data().at<float>(0,1);
+
+			// add surrounding TOP LEFT points to analyze
+			Point from(win_roi.x - OPENING_SIZE, win_roi.y - OPENING_SIZE);
+			from.x = from.x >= 0 ? from.x : 0;
+			from.y = from.y >= 0 ? from.y : 0;
+
+			Point to(win_roi.x + OPENING_SIZE, win_roi.y + OPENING_SIZE);
+			to.x = to.x <= input_img.cols - SWIN_SIZE - 1 ? to.x : input_img.cols - SWIN_SIZE - 1;
+			to.y = to.y <= input_img.rows - SWIN_SIZE - 1 ? to.y : input_img.rows - SWIN_SIZE - 1;
+
+			for(int x = from.x; x <= to.x; ++x)
+			{
+				for(int y = from.y; y <= to.y; ++y)
+				{
+					Point cur_pt(x,y);
+					if(!mat_to_analyze.at<uchar>(cur_pt)) // add the points just once
+					{
+						tl_scan_points.push_back(cur_pt);
+						mat_to_analyze.at<uchar>(cur_pt) = true;
+					}
+				}
+			}
+
+		}
+
+		// cleanup
+		if(current_data_ptr)
+			delete current_data_ptr;
+		current_data_ptr = NULL;
+	}
+
+//	int step_xy = 1;
+//	for(win_roi.y = 0; win_roi.y < input_img.rows-SWIN_SIZE; win_roi.y += step_xy)
+//	{
+//		progress = 100.0f*win_roi.y/(input_img.rows-SWIN_SIZE);
+//		for(int backspace_cnt = 0; backspace_cnt < 6; ++backspace_cnt)
+//			cout << '\b';
+//		cout << setfill('0');
+//		cout << setw(5) << setiosflags(ios::fixed) << setprecision(2) << progress << "%" << flush;
+//
+////#pragma omp parallel
+//		for(win_roi.x = 0; win_roi.x < input_img.cols-SWIN_SIZE; win_roi.x += step_xy)
+//		{
+//			//CVisionData window(input_img(win_roi), DATA_TYPE_IMAGE);
+//			//			window->show();
+//			//			waitKey(3);
+//
+//
+//
+//		}
+//	}
 
 	//cout << "non zero: labels: " << countNonZero(mat_detect_labels) << " probs: " << countNonZero(mat_detect_prop) << endl;
 	//PAUSE_AND_SHOW(mat_detect_prop)
@@ -226,7 +338,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 
 	// some fiixed parameters for post-processing
 	const float ms_kernel_radius = (float)SWIN_SIZE/10.0;
-	const float max_object_overlap = 0.3;
+	const float max_object_overlap = 0.4;
 
 	// copy input for editing
 	Mat labels = labels0.clone();
@@ -243,7 +355,7 @@ void CPipelineController::postProcessResults(const Mat& labels0, const Mat& prob
 		{
 			Mat closed_mask = Mat::zeros(labels0.size(), CV_8UC1);
 			morphologyEx(labels0 == label_it, closed_mask, MORPH_OPEN,
-					getStructuringElement(MORPH_ELLIPSE, Size(OPENING_SIZE, OPENING_SIZE) ) );
+					getStructuringElement(MORPH_RECT, Size(OPENING_SIZE, OPENING_SIZE) ) ); // Rect due to SW stepsize = OPENING_SIZE
 
 			labels0.copyTo(labels, closed_mask); // aware that higher labels may replace lower labels
 
@@ -467,7 +579,15 @@ void CPipelineController::train(const CommandParams& params)
 	// initialize untrained pipe
 	params_.str_classifier_   = params.str_classifier_;
 	params_.vec_vec_channels_ = params.vec_vec_channels_;
-	initializeFromParameters();
+
+	try{
+		initializeFromParameters();
+	}
+	catch(PipeConfigExecption &e)
+	{
+		cout << e.what();
+		exit(-1);
+	}
 
 	vector<string> filelist;
 	if(!getFileList(params.str_imgset_, filelist))
@@ -509,7 +629,7 @@ void CPipelineController::train(const CommandParams& params)
 		while(n_removed_bg_samples < n_neg_samples-MAX_NUMBER_BG_SAMPLES)
 		{
 			// random background sample index in list
-			int rand_neg_idx = rand_IntRange(0, last_neg_idx_in_list);
+			int rand_neg_idx = randRange<int>(0, last_neg_idx_in_list);
 
 			// delete sample from list
 			filelist.erase(filelist.begin()+rand_neg_idx);
@@ -545,6 +665,7 @@ void CPipelineController::train(const CommandParams& params)
 	while(!finishedTraining)
 	{
 		cmp->bufferData(current_data_ptr, lmp);
+
 		delete current_data_ptr; // cleanup old data should be OK, since it is buffered in the module and cv::Mat data is not deleted
 		current_data_ptr = NULL;
 		if(cmp->isTrained())
@@ -580,7 +701,7 @@ void CPipelineController::train(const CommandParams& params)
 			++filename_it;
 			if(filename_it != filelist.end()) // if there are training samples left
 			{
-				for(int backspace_cnt = 0; backspace_cnt < 1024; ++backspace_cnt)
+				for(int backspace_cnt = 0; backspace_cnt < 512; ++backspace_cnt)
 					cout << '\b';
 				cout << "processing file: " << params.str_imgset_ + *filename_it << flush;
 
@@ -721,9 +842,18 @@ void CPipelineController::load(const string& filename)
 		exit(-1);
 	}
 
+	int swin_size;
+	fs[CONFIG_NAME_SWIN_SIZE] >> swin_size;
+	if(swin_size != SWIN_SIZE)
+	{
+		cerr << "ERROR: Loaded config file was trained with different Sliding Window size!" << endl;
+		exit(-1);
+	}
+
 
 	// get all channel ids
-	for(int ch_nr = 1; ch_nr <= 5; ++ch_nr)
+	// TODO: change to FileNode Iterator!!!
+	for(int ch_nr = 1; ch_nr <= 6; ++ch_nr)
 	{
 		stringstream ch_nr_ss;
 		ch_nr_ss << "-" << ch_nr;
@@ -737,7 +867,14 @@ void CPipelineController::load(const string& filename)
 
 	fs[CONFIG_NAME_CLASSIFIER] >> params_.str_classifier_;
 
-	initializeFromParameters();
+	try{
+		initializeFromParameters();
+	}
+	catch(PipeConfigExecption &e)
+	{
+		cout << e.what();
+		exit(-1);
+	}
 
 	fs[CONFIG_NAME_NUM_CLASSES] >> n_object_classes_;
 
@@ -763,6 +900,8 @@ void CPipelineController::save(const string& filename)
 		cerr << "Failed to access file \"" << filename << "\". Check write permissions." << endl;
 		exit(-1);
 	}
+
+	fs << CONFIG_NAME_SWIN_SIZE << SWIN_SIZE;
 
 	// Save Pipeline configuration
 	for(vector<vector<string> >::iterator ch_it = params_.vec_vec_channels_.begin(); ch_it != params_.vec_vec_channels_.end(); ++ch_it)

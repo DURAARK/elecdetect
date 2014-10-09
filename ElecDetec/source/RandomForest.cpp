@@ -32,7 +32,7 @@ CRandomForest::CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE)
 	int termcrit_type = CV_TERMCRIT_ITER + CV_TERMCRIT_EPS;
 
 	// own configuration:
-	max_depth = 8;
+	max_depth = 20;
 	min_sample_cnt = 3;
 	max_num_of_trees_in_the_forest = 80;
 	termcrit_type = CV_TERMCRIT_ITER; // CV_TERMCRIT_EPS;
