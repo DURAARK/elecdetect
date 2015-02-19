@@ -58,7 +58,7 @@ inline void parseCmd(int argc, char* argv[], CommandParams& params)
 
 		// Command Arguments
 		TCLAP::ValueArg<std::string> mArg("m","mode","Annotation Mode: either 'anno', 'reanno', or 'cut'",true,"","string");
-		TCLAP::ValueArg<std::string> dArg("d","dir","Directory of the unprocessed input images",true,"","string");
+        TCLAP::ValueArg<std::string> dArg("d","dir","Directory of the unprocessed input images or output directory when cutting",true,"","string");
 		TCLAP::ValueArg<std::string> fArg("f","file","Annotation file which should be generated or to be read from (depends on the mode)",true,"","string");
 		TCLAP::ValueArg<std::string> nArg("n","neg","Directory where additional strictly negative images are stored (optional)",false,"","string");
 

@@ -25,8 +25,8 @@
 #define SWITCH_SIZE_MM        55.0 // reference switch size
 #define SWITCH_SIZE_MM_FROM   50.0 // generate different sizes of switches (FROM-TO)
 #define SWITCH_SIZE_MM_TO     60.0
-#define POS_SMP_PER_ANNO      1   // how many random samples are generated from one annotation
-#define NEG_SMP_PER_IMG       3   // how many negative examples are extracted from one image
+#define POS_SMP_PER_ANNO       5   // how many random samples are generated from one annotation
+#define NEG_SMP_PER_IMG       10   // how many negative examples are extracted from one image
 
 #define IMG_VIEW_SIZE 1024
 #define IMG_ZOOM_REGION 300
@@ -39,7 +39,7 @@ void onMouse(int event, int x, int y, int flag, void* gui_ptr_arg);
 
 class CAnnotation {
 private:
-	CAnnotation() : img_filename_(""), exit_annotation_(false), rescale_view_factor_(0) { };
+    CAnnotation() : img_filename_(""), exit_annotation_(false), rescale_view_factor_(0) { }
 
 	string img_filename_;
 	Mat img_;

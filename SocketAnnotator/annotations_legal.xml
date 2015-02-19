@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Annotation image="resources/to_annotate/DSCN0014.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0014.JPG">
     <plane>
         <point x="1076" y="312"/>
         <point x="1111" y="594"/>
@@ -20,7 +20,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0015.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0015.JPG">
     <plane>
         <point x="1091" y="459"/>
         <point x="1082" y="911"/>
@@ -41,7 +41,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0016.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0016.JPG">
     <plane>
         <point x="1131" y="452"/>
         <point x="1155" y="934"/>
@@ -62,7 +62,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0017.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0017.JPG">
     <plane>
         <point x="1018" y="594"/>
         <point x="1036" y="701"/>
@@ -77,7 +77,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0018.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0018.JPG">
     <plane>
         <point x="581" y="570"/>
         <point x="603" y="876"/>
@@ -92,7 +92,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0019.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0019.JPG">
     <plane>
         <point x="461" y="672"/>
         <point x="481" y="809"/>
@@ -107,7 +107,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0020.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0020.JPG">
     <plane>
         <point x="769" y="621"/>
         <point x="796" y="927"/>
@@ -128,7 +128,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0021.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0021.JPG">
     <plane>
         <point x="958" y="432"/>
         <point x="971" y="758"/>
@@ -185,7 +185,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0022.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0022.JPG">
     <plane>
         <point x="889" y="472"/>
         <point x="883" y="816"/>
@@ -242,7 +242,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0024.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0024.JPG">
     <plane>
         <point x="994" y="565"/>
         <point x="976" y="1005"/>
@@ -299,7 +299,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0025.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0025.JPG">
     <plane>
         <point x="512" y="224"/>
         <point x="574" y="607"/>
@@ -356,7 +356,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0026.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0026.JPG">
     <plane>
         <point x="1198" y="599"/>
         <point x="1215" y="772"/>
@@ -371,7 +371,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0027.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0027.JPG">
     <plane>
         <point x="1045" y="692"/>
         <point x="1080" y="923"/>
@@ -386,7 +386,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0028.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0028.JPG">
     <plane>
         <point x="1193" y="665"/>
         <point x="1226" y="863"/>
@@ -401,7 +401,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0029.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0029.JPG">
     <plane>
         <point x="1038" y="394"/>
         <point x="1036" y="559"/>
@@ -416,7 +416,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0030.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0030.JPG">
     <plane>
         <point x="856" y="552"/>
         <point x="934" y="987"/>
@@ -443,7 +443,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0031.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0031.JPG">
     <plane>
         <point x="898" y="652"/>
         <point x="920" y="1180"/>
@@ -470,7 +470,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0032.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0032.JPG">
     <plane>
         <point x="1038" y="357"/>
         <point x="991" y="1224"/>
@@ -497,7 +497,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0033.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0033.JPG">
     <plane>
         <point x="931" y="461"/>
         <point x="929" y="1180"/>
@@ -524,7 +524,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0034.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0034.JPG">
     <plane>
         <point x="834" y="528"/>
         <point x="931" y="951"/>
@@ -551,7 +551,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0035.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0035.JPG">
     <plane>
         <point x="335" y="554"/>
         <point x="326" y="1100"/>
@@ -578,7 +578,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0036.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0036.JPG">
     <plane>
         <point x="563" y="465"/>
         <point x="656" y="800"/>
@@ -635,7 +635,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0037.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0037.JPG">
     <plane>
         <point x="816" y="931"/>
         <point x="796" y="1324"/>
@@ -692,7 +692,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0038.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0038.JPG">
     <plane>
         <point x="521" y="414"/>
         <point x="525" y="756"/>
@@ -749,7 +749,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0039.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0039.JPG">
     <plane>
         <point x="299" y="627"/>
         <point x="417" y="1009"/>
@@ -806,7 +806,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0040.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0040.JPG">
     <plane>
         <point x="683" y="610"/>
         <point x="694" y="1104"/>
@@ -863,7 +863,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0041.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0041.JPG">
     <plane>
         <point x="548" y="230"/>
         <point x="601" y="665"/>
@@ -920,7 +920,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0042.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0042.JPG">
     <plane>
         <point x="206" y="363"/>
         <point x="264" y="989"/>
@@ -977,7 +977,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0044.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0044.JPG">
     <plane>
         <point x="1129" y="201"/>
         <point x="1131" y="443"/>
@@ -1034,7 +1034,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0045.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0045.JPG">
     <plane>
         <point x="1005" y="561"/>
         <point x="1025" y="1036"/>
@@ -1055,7 +1055,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0046.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0046.JPG">
     <plane>
         <point x="1271" y="530"/>
         <point x="1233" y="982"/>
@@ -1076,7 +1076,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0047.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0047.JPG">
     <plane>
         <point x="1031" y="634"/>
         <point x="1038" y="1096"/>
@@ -1097,7 +1097,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0048.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0048.JPG">
     <plane>
         <point x="1120" y="310"/>
         <point x="1118" y="814"/>
@@ -1118,7 +1118,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0049.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0049.JPG">
     <plane>
         <point x="1056" y="292"/>
         <point x="1062" y="1113"/>
@@ -1139,7 +1139,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0050.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0050.JPG">
     <plane>
         <point x="763" y="443"/>
         <point x="761" y="1122"/>
@@ -1160,7 +1160,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0051.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0051.JPG">
     <plane>
         <point x="1295" y="550"/>
         <point x="1340" y="1439"/>
@@ -1181,7 +1181,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0052.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0052.JPG">
     <plane>
         <point x="863" y="545"/>
         <point x="883" y="1076"/>
@@ -1202,7 +1202,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0053.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0053.JPG">
     <plane>
         <point x="883" y="463"/>
         <point x="856" y="982"/>
@@ -1223,7 +1223,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0054.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0054.JPG">
     <plane>
         <point x="1042" y="341"/>
         <point x="1031" y="800"/>
@@ -1244,7 +1244,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0055.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0055.JPG">
     <plane>
         <point x="1013" y="619"/>
         <point x="1033" y="1047"/>
@@ -1265,7 +1265,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0057.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0057.JPG">
     <plane>
         <point x="942" y="559"/>
         <point x="998" y="1053"/>
@@ -1286,7 +1286,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0058.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0058.JPG">
     <plane>
         <point x="987" y="463"/>
         <point x="1065" y="905"/>
@@ -1307,7 +1307,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0060.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0060.JPG">
     <plane>
         <point x="898" y="426"/>
         <point x="914" y="1184"/>
@@ -1328,7 +1328,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0061.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0061.JPG">
     <plane>
         <point x="958" y="465"/>
         <point x="967" y="1142"/>
@@ -1349,7 +1349,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0062.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0062.JPG">
     <plane>
         <point x="1073" y="497"/>
         <point x="1084" y="1078"/>
@@ -1370,7 +1370,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0063.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0063.JPG">
     <plane>
         <point x="1020" y="548"/>
         <point x="1060" y="1089"/>
@@ -1391,7 +1391,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0064.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0064.JPG">
     <plane>
         <point x="945" y="450"/>
         <point x="927" y="1065"/>
@@ -1412,7 +1412,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0065.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0065.JPG">
     <plane>
         <point x="1120" y="605"/>
         <point x="1102" y="1144"/>
@@ -1433,7 +1433,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0066.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0066.JPG">
     <plane>
         <point x="1007" y="849"/>
         <point x="1022" y="1073"/>
@@ -1448,7 +1448,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0067.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0067.JPG">
     <plane>
         <point x="936" y="781"/>
         <point x="969" y="1033"/>
@@ -1463,7 +1463,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0068.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0068.JPG">
     <plane>
         <point x="1020" y="576"/>
         <point x="1065" y="809"/>
@@ -1478,7 +1478,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0069.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0069.JPG">
     <plane>
         <point x="920" y="505"/>
         <point x="929" y="891"/>
@@ -1493,7 +1493,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0070.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0070.JPG">
     <plane>
         <point x="936" y="457"/>
         <point x="940" y="852"/>
@@ -1508,7 +1508,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0071.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0071.JPG">
     <plane>
         <point x="878" y="579"/>
         <point x="865" y="985"/>
@@ -1523,7 +1523,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0072.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0072.JPG">
     <plane>
         <point x="942" y="652"/>
         <point x="978" y="1025"/>
@@ -1538,7 +1538,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0073.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0073.JPG">
     <plane>
         <point x="974" y="574"/>
         <point x="958" y="900"/>
@@ -1553,7 +1553,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0077.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0077.JPG">
     <plane>
         <point x="736" y="847"/>
         <point x="761" y="1084"/>
@@ -1568,7 +1568,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0079.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0079.JPG">
     <plane>
         <point x="1129" y="743"/>
         <point x="1151" y="971"/>
@@ -1583,7 +1583,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0080.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0080.JPG">
     <plane>
         <point x="754" y="485"/>
         <point x="749" y="929"/>
@@ -1598,7 +1598,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0082.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0082.JPG">
     <plane>
         <point x="825" y="439"/>
         <point x="809" y="754"/>
@@ -1613,7 +1613,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0084.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0084.JPG">
     <plane>
         <point x="1056" y="599"/>
         <point x="1058" y="856"/>
@@ -1628,7 +1628,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0085.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0085.JPG">
     <plane>
         <point x="1067" y="656"/>
         <point x="1067" y="918"/>
@@ -1643,7 +1643,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0088.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0088.JPG">
     <plane>
         <point x="1133" y="732"/>
         <point x="1151" y="920"/>
@@ -1658,7 +1658,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0090.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0090.JPG">
     <plane>
         <point x="965" y="656"/>
         <point x="962" y="958"/>
@@ -1673,7 +1673,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0091.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0091.JPG">
     <plane>
         <point x="954" y="521"/>
         <point x="958" y="789"/>
@@ -1688,7 +1688,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0092.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0092.JPG">
     <plane>
         <point x="1087" y="683"/>
         <point x="1082" y="1082"/>
@@ -1703,7 +1703,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0093.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0093.JPG">
     <plane>
         <point x="1124" y="465"/>
         <point x="1122" y="845"/>
@@ -1718,7 +1718,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0095.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0095.JPG">
     <plane>
         <point x="1078" y="454"/>
         <point x="1118" y="1098"/>
@@ -1745,7 +1745,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0097.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0097.JPG">
     <plane>
         <point x="965" y="723"/>
         <point x="987" y="1306"/>
@@ -1772,7 +1772,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0098.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0098.JPG">
     <plane>
         <point x="1124" y="563"/>
         <point x="1144" y="1351"/>
@@ -1799,7 +1799,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0099.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0099.JPG">
     <plane>
         <point x="1169" y="514"/>
         <point x="1202" y="1382"/>
@@ -1826,7 +1826,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0100.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0100.JPG">
     <plane>
         <point x="1045" y="374"/>
         <point x="1033" y="1289"/>
@@ -1853,7 +1853,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0101.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0101.JPG">
     <plane>
         <point x="960" y="319"/>
         <point x="907" y="1273"/>
@@ -1880,7 +1880,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0102.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0102.JPG">
     <plane>
         <point x="1025" y="479"/>
         <point x="1202" y="1309"/>
@@ -1907,7 +1907,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0105.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0105.JPG">
     <plane>
         <point x="971" y="379"/>
         <point x="909" y="985"/>
@@ -1928,7 +1928,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0108.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0108.JPG">
     <plane>
         <point x="184" y="587"/>
         <point x="213" y="1140"/>
@@ -2003,7 +2003,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0109.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0109.JPG">
     <plane>
         <point x="481" y="741"/>
         <point x="492" y="1127"/>
@@ -2024,7 +2024,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0111.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0111.JPG">
     <plane>
         <point x="909" y="483"/>
         <point x="911" y="825"/>
@@ -2039,7 +2039,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0113.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0113.JPG">
     <plane>
         <point x="1076" y="645"/>
         <point x="1078" y="1058"/>
@@ -2054,7 +2054,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0114.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0114.JPG">
     <plane>
         <point x="1065" y="559"/>
         <point x="1084" y="836"/>
@@ -2075,7 +2075,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0115.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0115.JPG">
     <plane>
         <point x="1155" y="592"/>
         <point x="1191" y="849"/>
@@ -2096,7 +2096,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0116.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0116.JPG">
     <plane>
         <point x="785" y="554"/>
         <point x="825" y="956"/>
@@ -2117,7 +2117,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0118.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0118.JPG">
     <plane>
         <point x="1040" y="494"/>
         <point x="1053" y="1158"/>
@@ -2138,7 +2138,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0119.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0119.JPG">
     <plane>
         <point x="1087" y="264"/>
         <point x="1127" y="900"/>
@@ -2159,7 +2159,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0120.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0120.JPG">
     <plane>
         <point x="849" y="625"/>
         <point x="809" y="1140"/>
@@ -2180,7 +2180,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0121.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0121.JPG">
     <plane>
         <point x="1036" y="426"/>
         <point x="1033" y="956"/>
@@ -2201,7 +2201,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0122.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0122.JPG">
     <plane>
         <point x="991" y="654"/>
         <point x="1011" y="1253"/>
@@ -2222,7 +2222,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0123.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0123.JPG">
     <plane>
         <point x="1058" y="721"/>
         <point x="1091" y="1167"/>
@@ -2237,7 +2237,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0125.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0125.JPG">
     <plane>
         <point x="918" y="525"/>
         <point x="927" y="1065"/>
@@ -2252,7 +2252,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0126.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0126.JPG">
     <plane>
         <point x="876" y="843"/>
         <point x="905" y="1235"/>
@@ -2267,7 +2267,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0127.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0127.JPG">
     <plane>
         <point x="885" y="417"/>
         <point x="887" y="1169"/>
@@ -2282,7 +2282,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0128.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0128.JPG">
     <plane>
         <point x="978" y="514"/>
         <point x="987" y="909"/>
@@ -2297,7 +2297,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0129.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0129.JPG">
     <plane>
         <point x="781" y="541"/>
         <point x="818" y="1226"/>
@@ -2318,7 +2318,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0130.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0130.JPG">
     <plane>
         <point x="969" y="634"/>
         <point x="1016" y="1244"/>
@@ -2339,7 +2339,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0131.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0131.JPG">
     <plane>
         <point x="1049" y="341"/>
         <point x="1193" y="1049"/>
@@ -2360,7 +2360,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0132.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0132.JPG">
     <plane>
         <point x="951" y="448"/>
         <point x="982" y="1368"/>
@@ -2381,7 +2381,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0133.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0133.JPG">
     <plane>
         <point x="951" y="681"/>
         <point x="1116" y="1484"/>
@@ -2402,7 +2402,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0134.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0134.JPG">
     <plane>
         <point x="1096" y="503"/>
         <point x="1107" y="1104"/>
@@ -2423,7 +2423,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0135.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0135.JPG">
     <plane>
         <point x="1153" y="596"/>
         <point x="1213" y="1255"/>
@@ -2444,7 +2444,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0136.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0136.JPG">
     <plane>
         <point x="559" y="377"/>
         <point x="632" y="1191"/>
@@ -2465,7 +2465,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0137.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0137.JPG">
     <plane>
         <point x="911" y="297"/>
         <point x="962" y="991"/>
@@ -2486,7 +2486,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0138.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0138.JPG">
     <plane>
         <point x="951" y="579"/>
         <point x="971" y="1304"/>
@@ -2507,7 +2507,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0139.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0139.JPG">
     <plane>
         <point x="610" y="399"/>
         <point x="541" y="1133"/>
@@ -2528,7 +2528,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0141.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0141.JPG">
     <plane>
         <point x="787" y="652"/>
         <point x="863" y="1249"/>
@@ -2549,7 +2549,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0144.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0144.JPG">
     <plane>
         <point x="1133" y="592"/>
         <point x="1138" y="896"/>
@@ -2570,7 +2570,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0145.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0145.JPG">
     <plane>
         <point x="991" y="650"/>
         <point x="1033" y="960"/>
@@ -2591,7 +2591,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0146.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0146.JPG">
     <plane>
         <point x="1142" y="210"/>
         <point x="1155" y="414"/>
@@ -2612,7 +2612,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0147.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0147.JPG">
     <plane>
         <point x="1033" y="665"/>
         <point x="1036" y="996"/>
@@ -2633,7 +2633,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0148.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0148.JPG">
     <plane>
         <point x="947" y="550"/>
         <point x="938" y="1011"/>
@@ -2654,7 +2654,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0149.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0149.JPG">
     <plane>
         <point x="1009" y="583"/>
         <point x="1007" y="1082"/>
@@ -2675,7 +2675,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0150.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0150.JPG">
     <plane>
         <point x="1029" y="570"/>
         <point x="1042" y="1009"/>
@@ -2696,7 +2696,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0152.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0152.JPG">
     <plane>
         <point x="1025" y="603"/>
         <point x="1069" y="1171"/>
@@ -2717,7 +2717,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0153.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0153.JPG">
     <plane>
         <point x="976" y="636"/>
         <point x="982" y="852"/>
@@ -2732,7 +2732,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0154.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0154.JPG">
     <plane>
         <point x="945" y="639"/>
         <point x="934" y="907"/>
@@ -2747,7 +2747,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0155.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0155.JPG">
     <plane>
         <point x="1160" y="550"/>
         <point x="1167" y="796"/>
@@ -2762,7 +2762,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0156.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0156.JPG">
     <plane>
         <point x="956" y="477"/>
         <point x="1007" y="911"/>
@@ -2783,7 +2783,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0157.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0157.JPG">
     <plane>
         <point x="1060" y="561"/>
         <point x="1065" y="974"/>
@@ -2804,7 +2804,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0158.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0158.JPG">
     <plane>
         <point x="987" y="499"/>
         <point x="976" y="820"/>
@@ -2825,7 +2825,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0159.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0159.JPG">
     <plane>
         <point x="980" y="594"/>
         <point x="996" y="1093"/>
@@ -2846,7 +2846,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0160.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0160.JPG">
     <plane>
         <point x="994" y="481"/>
         <point x="996" y="974"/>
@@ -2867,7 +2867,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0162.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0162.JPG">
     <plane>
         <point x="965" y="752"/>
         <point x="969" y="929"/>
@@ -2882,7 +2882,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0163.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0163.JPG">
     <plane>
         <point x="1169" y="534"/>
         <point x="1175" y="832"/>
@@ -2897,7 +2897,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0164.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0164.JPG">
     <plane>
         <point x="1100" y="470"/>
         <point x="1082" y="876"/>
@@ -2912,7 +2912,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0165.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0165.JPG">
     <plane>
         <point x="1240" y="989"/>
         <point x="1262" y="1189"/>
@@ -2927,7 +2927,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0166.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0166.JPG">
     <plane>
         <point x="1082" y="616"/>
         <point x="1109" y="827"/>
@@ -2942,7 +2942,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0167.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0167.JPG">
     <plane>
         <point x="962" y="563"/>
         <point x="962" y="745"/>
@@ -2957,7 +2957,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0168.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0168.JPG">
     <plane>
         <point x="1029" y="783"/>
         <point x="1005" y="1093"/>
@@ -2972,7 +2972,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0169.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0169.JPG">
     <plane>
         <point x="960" y="570"/>
         <point x="976" y="807"/>
@@ -2987,7 +2987,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0170.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0170.JPG">
     <plane>
         <point x="1042" y="658"/>
         <point x="1051" y="1002"/>
@@ -3002,7 +3002,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0172.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0172.JPG">
     <plane>
         <point x="978" y="426"/>
         <point x="998" y="1062"/>
@@ -3023,7 +3023,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0173.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0173.JPG">
     <plane>
         <point x="1009" y="605"/>
         <point x="960" y="1198"/>
@@ -3044,7 +3044,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0174.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0174.JPG">
     <plane>
         <point x="1129" y="510"/>
         <point x="1113" y="1073"/>
@@ -3065,7 +3065,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0175.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0175.JPG">
     <plane>
         <point x="1249" y="392"/>
         <point x="1313" y="836"/>
@@ -3086,7 +3086,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0176.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0176.JPG">
     <plane>
         <point x="1280" y="494"/>
         <point x="1313" y="994"/>
@@ -3107,7 +3107,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0177.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0177.JPG">
     <plane>
         <point x="250" y="530"/>
         <point x="279" y="1164"/>
@@ -3128,7 +3128,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0178.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0178.JPG">
     <plane>
         <point x="803" y="599"/>
         <point x="854" y="869"/>
@@ -3143,7 +3143,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0179.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0179.JPG">
     <plane>
         <point x="1202" y="421"/>
         <point x="1215" y="785"/>
@@ -3158,7 +3158,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0180.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0180.JPG">
     <plane>
         <point x="1102" y="845"/>
         <point x="1116" y="1127"/>
@@ -3173,7 +3173,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0181.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0181.JPG">
     <plane>
         <point x="978" y="492"/>
         <point x="1051" y="887"/>
@@ -3194,7 +3194,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0182.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0182.JPG">
     <plane>
         <point x="925" y="494"/>
         <point x="971" y="1029"/>
@@ -3215,7 +3215,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0183.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0183.JPG">
     <plane>
         <point x="985" y="377"/>
         <point x="958" y="971"/>
@@ -3236,7 +3236,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0184.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0184.JPG">
     <plane>
         <point x="940" y="477"/>
         <point x="976" y="1109"/>
@@ -3257,7 +3257,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0185.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0185.JPG">
     <plane>
         <point x="1013" y="590"/>
         <point x="980" y="1291"/>
@@ -3278,7 +3278,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0186.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0186.JPG">
     <plane>
         <point x="1144" y="470"/>
         <point x="1147" y="998"/>
@@ -3299,7 +3299,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0187.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0187.JPG">
     <plane>
         <point x="1005" y="530"/>
         <point x="1042" y="1116"/>
@@ -3320,7 +3320,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0188.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0188.JPG">
     <plane>
         <point x="1000" y="867"/>
         <point x="1016" y="1087"/>
@@ -3335,7 +3335,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0189.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0189.JPG">
     <plane>
         <point x="905" y="712"/>
         <point x="905" y="1022"/>
@@ -3350,7 +3350,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0190.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0190.JPG">
     <plane>
         <point x="1062" y="698"/>
         <point x="1056" y="1045"/>
@@ -3365,7 +3365,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0191.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0191.JPG">
     <plane>
         <point x="1158" y="645"/>
         <point x="1164" y="991"/>
@@ -3380,7 +3380,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0192.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0192.JPG">
     <plane>
         <point x="1031" y="692"/>
         <point x="1069" y="1018"/>
@@ -3395,7 +3395,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0193.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0193.JPG">
     <plane>
         <point x="1002" y="423"/>
         <point x="1018" y="938"/>
@@ -3416,7 +3416,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0194.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0194.JPG">
     <plane>
         <point x="1073" y="521"/>
         <point x="1138" y="1213"/>
@@ -3437,7 +3437,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0196.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0196.JPG">
     <plane>
         <point x="1178" y="488"/>
         <point x="1231" y="1140"/>
@@ -3458,7 +3458,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0197.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0197.JPG">
     <plane>
         <point x="805" y="474"/>
         <point x="814" y="1226"/>
@@ -3479,7 +3479,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0198.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0198.JPG">
     <plane>
         <point x="665" y="443"/>
         <point x="641" y="1218"/>
@@ -3500,7 +3500,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0199.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0199.JPG">
     <plane>
         <point x="1078" y="550"/>
         <point x="1073" y="1306"/>
@@ -3521,7 +3521,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0200.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0200.JPG">
     <plane>
         <point x="805" y="341"/>
         <point x="974" y="994"/>
@@ -3542,7 +3542,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0201.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0201.JPG">
     <plane>
         <point x="838" y="656"/>
         <point x="909" y="1025"/>
@@ -3563,7 +3563,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0202.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0202.JPG">
     <plane>
         <point x="1080" y="563"/>
         <point x="1058" y="1111"/>
@@ -3584,7 +3584,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0203.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0203.JPG">
     <plane>
         <point x="1029" y="477"/>
         <point x="1020" y="1260"/>
@@ -3605,7 +3605,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0204.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0204.JPG">
     <plane>
         <point x="1096" y="443"/>
         <point x="1082" y="1189"/>
@@ -3626,7 +3626,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0205.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0205.JPG">
     <plane>
         <point x="767" y="488"/>
         <point x="867" y="976"/>
@@ -3647,7 +3647,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0206.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0206.JPG">
     <plane>
         <point x="1027" y="508"/>
         <point x="1027" y="1180"/>
@@ -3668,7 +3668,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0207.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0207.JPG">
     <plane>
         <point x="951" y="603"/>
         <point x="934" y="1045"/>
@@ -3689,7 +3689,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0208.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0208.JPG">
     <plane>
         <point x="942" y="634"/>
         <point x="965" y="1056"/>
@@ -3710,7 +3710,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0209.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0209.JPG">
     <plane>
         <point x="889" y="512"/>
         <point x="956" y="1078"/>
@@ -3731,7 +3731,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0210.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0210.JPG">
     <plane>
         <point x="856" y="359"/>
         <point x="845" y="1173"/>
@@ -3752,7 +3752,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0211.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0211.JPG">
     <plane>
         <point x="1020" y="563"/>
         <point x="1080" y="1289"/>
@@ -3773,7 +3773,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0212.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0212.JPG">
     <plane>
         <point x="1031" y="463"/>
         <point x="1065" y="1258"/>
@@ -3794,7 +3794,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0213.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0213.JPG">
     <plane>
         <point x="1042" y="565"/>
         <point x="1053" y="1133"/>
@@ -3815,7 +3815,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0214.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0214.JPG">
     <plane>
         <point x="1005" y="568"/>
         <point x="1013" y="1167"/>
@@ -3836,7 +3836,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0215.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0215.JPG">
     <plane>
         <point x="763" y="297"/>
         <point x="863" y="1136"/>
@@ -3857,7 +3857,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0217.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0217.JPG">
     <plane>
         <point x="852" y="330"/>
         <point x="845" y="1207"/>
@@ -3878,7 +3878,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0218.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0218.JPG">
     <plane>
         <point x="998" y="523"/>
         <point x="1007" y="1244"/>
@@ -3899,7 +3899,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0219.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0219.JPG">
     <plane>
         <point x="1022" y="239"/>
         <point x="1175" y="1311"/>
@@ -3920,7 +3920,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0220.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0220.JPG">
     <plane>
         <point x="809" y="390"/>
         <point x="785" y="1382"/>
@@ -3941,7 +3941,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0221.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0221.JPG">
     <plane>
         <point x="1027" y="650"/>
         <point x="1051" y="1158"/>
@@ -3962,7 +3962,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0222.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0222.JPG">
     <plane>
         <point x="940" y="525"/>
         <point x="947" y="954"/>
@@ -3977,7 +3977,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0225.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0225.JPG">
     <plane>
         <point x="1053" y="574"/>
         <point x="1038" y="889"/>
@@ -3992,7 +3992,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0228.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0228.JPG">
     <plane>
         <point x="938" y="672"/>
         <point x="958" y="978"/>
@@ -4007,7 +4007,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0229.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0229.JPG">
     <plane>
         <point x="958" y="736"/>
         <point x="956" y="985"/>
@@ -4022,7 +4022,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0230.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0230.JPG">
     <plane>
         <point x="989" y="658"/>
         <point x="1025" y="1091"/>
@@ -4037,7 +4037,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0233.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0233.JPG">
     <plane>
         <point x="994" y="645"/>
         <point x="1013" y="891"/>
@@ -4052,7 +4052,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0234.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0234.JPG">
     <plane>
         <point x="971" y="701"/>
         <point x="1016" y="871"/>
@@ -4067,7 +4067,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0235.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0235.JPG">
     <plane>
         <point x="725" y="550"/>
         <point x="754" y="763"/>
@@ -4082,7 +4082,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0236.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0236.JPG">
     <plane>
         <point x="792" y="465"/>
         <point x="843" y="942"/>
@@ -4103,7 +4103,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0237.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0237.JPG">
     <plane>
         <point x="938" y="470"/>
         <point x="971" y="1020"/>
@@ -4124,7 +4124,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0238.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0238.JPG">
     <plane>
         <point x="967" y="445"/>
         <point x="958" y="1020"/>
@@ -4145,52 +4145,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_0044.jpg">
-    <plane>
-        <point x="207" y="77"/>
-        <point x="206" y="244"/>
-        <point x="291" y="246"/>
-        <point x="292" y="79"/>
-    </plane>
-    <socket>
-        <point x="62" y="178"/>
-        <point x="63" y="223"/>
-        <point x="43" y="198"/>
-        <point x="85" y="200"/>
-    </socket>
-    <socket>
-        <point x="247" y="179"/>
-        <point x="247" y="226"/>
-        <point x="225" y="201"/>
-        <point x="270" y="202"/>
-    </socket>
-    <socket>
-        <point x="437" y="181"/>
-        <point x="437" y="228"/>
-        <point x="415" y="203"/>
-        <point x="459" y="203"/>
-    </socket>
-    <switch>
-        <point x="38" y="90"/>
-        <point x="38" y="150"/>
-        <point x="96" y="149"/>
-        <point x="96" y="89"/>
-    </switch>
-    <switch>
-        <point x="218" y="88"/>
-        <point x="217" y="149"/>
-        <point x="279" y="150"/>
-        <point x="279" y="88"/>
-    </switch>
-    <switch>
-        <point x="406" y="91"/>
-        <point x="407" y="153"/>
-        <point x="466" y="154"/>
-        <point x="465" y="92"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/IMG_20140623_182234.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182234.jpg">
     <plane>
         <point x="1177" y="1374"/>
         <point x="1314" y="1369"/>
@@ -4205,7 +4160,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182245.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182245.jpg">
     <plane>
         <point x="1199" y="1029"/>
         <point x="1317" y="1029"/>
@@ -4220,7 +4175,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182257.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182257.jpg">
     <plane>
         <point x="487" y="1487"/>
         <point x="582" y="1479"/>
@@ -4235,7 +4190,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182322.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182322.jpg">
     <plane>
         <point x="1079" y="1199"/>
         <point x="1314" y="1184"/>
@@ -4256,7 +4211,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182328.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182328.jpg">
     <plane>
         <point x="462" y="1429"/>
         <point x="789" y="1387"/>
@@ -4277,7 +4232,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182340.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182340.jpg">
     <plane>
         <point x="944" y="1219"/>
         <point x="1324" y="1174"/>
@@ -4298,7 +4253,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182348.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182348.jpg">
     <plane>
         <point x="1094" y="1252"/>
         <point x="1432" y="1269"/>
@@ -4319,7 +4274,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182353.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182353.jpg">
     <plane>
         <point x="819" y="1044"/>
         <point x="1077" y="1047"/>
@@ -4340,7 +4295,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182406.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182406.jpg">
     <plane>
         <point x="967" y="1142"/>
         <point x="1262" y="1107"/>
@@ -4361,7 +4316,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182416.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182416.jpg">
     <plane>
         <point x="817" y="577"/>
         <point x="564" y="572"/>
@@ -4382,7 +4337,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_20140623_182423.jpg">
+<Annotation image="resources/to_annotate_legal/IMG_20140623_182423.jpg">
     <plane>
         <point x="1129" y="1347"/>
         <point x="1347" y="1302"/>
@@ -4403,70 +4358,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_2401.JPG">
-    <plane>
-        <point x="517" y="266"/>
-        <point x="514" y="362"/>
-        <point x="718" y="389"/>
-        <point x="725" y="275"/>
-    </plane>
-    <socket>
-        <point x="562" y="290"/>
-        <point x="558" y="344"/>
-        <point x="536" y="316"/>
-        <point x="587" y="319"/>
-    </socket>
-    <socket>
-        <point x="665" y="297"/>
-        <point x="662" y="357"/>
-        <point x="635" y="325"/>
-        <point x="694" y="330"/>
-    </socket>
-    <switch>
-        <point x="115" y="282"/>
-        <point x="116" y="355"/>
-        <point x="172" y="348"/>
-        <point x="174" y="278"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/Lichtschalter 1.jpg">
-    <plane>
-        <point x="108" y="64"/>
-        <point x="106" y="294"/>
-        <point x="343" y="298"/>
-        <point x="344" y="64"/>
-    </plane>
-    <switch>
-        <point x="103" y="59"/>
-        <point x="106" y="303"/>
-        <point x="348" y="305"/>
-        <point x="348" y="62"/>
-    </switch>
-    <switch>
-        <point x="107" y="317"/>
-        <point x="109" y="548"/>
-        <point x="343" y="548"/>
-        <point x="346" y="318"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/Lichtschalter.jpg">
-    <plane>
-        <point x="164" y="116"/>
-        <point x="169" y="458"/>
-        <point x="478" y="437"/>
-        <point x="479" y="113"/>
-    </plane>
-    <switch>
-        <point x="215" y="168"/>
-        <point x="219" y="405"/>
-        <point x="435" y="394"/>
-        <point x="437" y="164"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/Picture008.png">
+<Annotation image="resources/to_annotate_legal/Picture008.png">
     <plane>
         <point x="1386" y="890"/>
         <point x="1534" y="1088"/>
@@ -4511,7 +4403,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/Picture009.png">
+<Annotation image="resources/to_annotate_legal/Picture009.png">
     <plane>
         <point x="194" y="556"/>
         <point x="426" y="666"/>
@@ -4538,7 +4430,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/Picture063.png">
+<Annotation image="resources/to_annotate_legal/Picture063.png">
     <plane>
         <point x="1330" y="830"/>
         <point x="1494" y="936"/>
@@ -4595,7 +4487,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/Picture074.png">
+<Annotation image="resources/to_annotate_legal/Picture074.png">
     <plane>
         <point x="10" y="332"/>
         <point x="160" y="568"/>
@@ -4634,7 +4526,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/Picture075.png">
+<Annotation image="resources/to_annotate_legal/Picture075.png">
     <plane>
         <point x="972" y="1372"/>
         <point x="1194" y="1526"/>
@@ -4661,172 +4553,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/Siemens_Lichtschalter_Steckdosen_Light_Switches_Socket_Outlets.jpg">
-    <plane>
-        <point x="317" y="71"/>
-        <point x="319" y="311"/>
-        <point x="559" y="313"/>
-        <point x="561" y="71"/>
-    </plane>
-    <switch>
-        <point x="333" y="85"/>
-        <point x="335" y="297"/>
-        <point x="543" y="295"/>
-        <point x="542" y="85"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/buschjaegerlichtschaltermontieren.jpg">
-    <plane>
-        <point x="124" y="105"/>
-        <point x="138" y="389"/>
-        <point x="358" y="322"/>
-        <point x="356" y="71"/>
-    </plane>
-    <switch>
-        <point x="181" y="145"/>
-        <point x="189" y="357"/>
-        <point x="348" y="310"/>
-        <point x="347" y="114"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/buschjaegersteckdosenmontieren.jpg">
-    <plane>
-        <point x="107" y="91"/>
-        <point x="122" y="428"/>
-        <point x="401" y="383"/>
-        <point x="405" y="73"/>
-    </plane>
-    <socket>
-        <point x="279" y="162"/>
-        <point x="285" y="343"/>
-        <point x="201" y="263"/>
-        <point x="365" y="240"/>
-    </socket>
-</Annotation>
-
-<Annotation image="resources/to_annotate/flaechenschalter_5167_1334424733.jpg">
-    <plane>
-        <point x="394" y="64"/>
-        <point x="395" y="416"/>
-        <point x="522" y="410"/>
-        <point x="522" y="82"/>
-    </plane>
-    <socket>
-        <point x="462" y="279"/>
-        <point x="460" y="366"/>
-        <point x="429" y="322"/>
-        <point x="493" y="321"/>
-    </socket>
-    <switch>
-        <point x="404" y="75"/>
-        <point x="404" y="239"/>
-        <point x="513" y="246"/>
-        <point x="515" y="91"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/gira2-multimedia537.jpg">
-    <plane>
-        <point x="144" y="33"/>
-        <point x="141" y="252"/>
-        <point x="224" y="248"/>
-        <point x="225" y="38"/>
-    </plane>
-    <socket>
-        <point x="187" y="164"/>
-        <point x="187" y="216"/>
-        <point x="170" y="191"/>
-        <point x="202" y="188"/>
-    </socket>
-    <switch>
-        <point x="162" y="59"/>
-        <point x="162" y="134"/>
-        <point x="211" y="134"/>
-        <point x="212" y="61"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/lichtschalter-moderne-50417-4678505.jpg">
-    <plane>
-        <point x="124" y="124"/>
-        <point x="123" y="1130"/>
-        <point x="1130" y="1125"/>
-        <point x="1130" y="126"/>
-    </plane>
-    <switch>
-        <point x="286" y="284"/>
-        <point x="284" y="970"/>
-        <point x="970" y="969"/>
-        <point x="965" y="285"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/lichtschalter-tauschen-t1.jpg">
-    <plane>
-        <point x="204" y="24"/>
-        <point x="207" y="264"/>
-        <point x="329" y="271"/>
-        <point x="324" y="22"/>
-    </plane>
-    <socket>
-        <point x="263" y="168"/>
-        <point x="264" y="231"/>
-        <point x="237" y="197"/>
-        <point x="292" y="199"/>
-    </socket>
-    <switch>
-        <point x="226" y="48"/>
-        <point x="231" y="131"/>
-        <point x="301" y="132"/>
-        <point x="299" y="48"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/lichtschalter_09.jpg">
-    <plane>
-        <point x="183" y="26"/>
-        <point x="182" y="149"/>
-        <point x="304" y="149"/>
-        <point x="305" y="25"/>
-    </plane>
-    <switch>
-        <point x="37" y="40"/>
-        <point x="37" y="125"/>
-        <point x="120" y="125"/>
-        <point x="121" y="40"/>
-    </switch>
-    <switch>
-        <point x="201" y="45"/>
-        <point x="200" y="131"/>
-        <point x="287" y="131"/>
-        <point x="288" y="44"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/trennwand-lichtschalter.jpg">
-    <plane>
-        <point x="277" y="29"/>
-        <point x="279" y="310"/>
-        <point x="384" y="337"/>
-        <point x="383" y="12"/>
-    </plane>
-    <socket>
-        <point x="326" y="204"/>
-        <point x="325" y="286"/>
-        <point x="302" y="242"/>
-        <point x="356" y="256"/>
-    </socket>
-    <switch>
-        <point x="280" y="33"/>
-        <point x="284" y="174"/>
-        <point x="378" y="176"/>
-        <point x="378" y="23"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/DSCN0231.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0231.JPG">
     <plane>
         <point x="945" y="605"/>
         <point x="976" y="940"/>
@@ -4841,133 +4568,7 @@
     </socket>
 </Annotation>
 
-<Annotation image="resources/to_annotate/03_1914_10103_488_336-1.jpg">
-    <plane>
-        <point x="254" y="20"/>
-        <point x="255" y="318"/>
-        <point x="420" y="318"/>
-        <point x="419" y="21"/>
-    </plane>
-    <socket>
-        <point x="338" y="201"/>
-        <point x="339" y="279"/>
-        <point x="300" y="239"/>
-        <point x="376" y="237"/>
-    </socket>
-    <switch>
-        <point x="283" y="46"/>
-        <point x="283" y="153"/>
-        <point x="393" y="154"/>
-        <point x="392" y="45"/>
-    </switch>
-    <switch>
-        <point x="93" y="184"/>
-        <point x="93" y="293"/>
-        <point x="203" y="293"/>
-        <point x="203" y="183"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/0911-gira1.jpg">
-    <plane>
-        <point x="40" y="31"/>
-        <point x="41" y="251"/>
-        <point x="137" y="246"/>
-        <point x="137" y="38"/>
-    </plane>
-    <socket>
-        <point x="89" y="164"/>
-        <point x="89" y="219"/>
-        <point x="67" y="191"/>
-        <point x="114" y="189"/>
-    </socket>
-    <switch>
-        <point x="48" y="40"/>
-        <point x="47" y="141"/>
-        <point x="130" y="141"/>
-        <point x="131" y="44"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/11612009_doppelwippe.jpg">
-    <plane>
-        <point x="171" y="100"/>
-        <point x="170" y="500"/>
-        <point x="510" y="486"/>
-        <point x="513" y="112"/>
-    </plane>
-    <switch>
-        <point x="172" y="101"/>
-        <point x="170" y="499"/>
-        <point x="508" y="492"/>
-        <point x="513" y="111"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/220px-Lichtschalter.jpg">
-    <plane>
-        <point x="49" y="36"/>
-        <point x="50" y="163"/>
-        <point x="168" y="155"/>
-        <point x="167" y="34"/>
-    </plane>
-    <switch>
-        <point x="74" y="58"/>
-        <point x="75" y="140"/>
-        <point x="152" y="135"/>
-        <point x="152" y="56"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/282686174297134.preview.jpg">
-    <plane>
-        <point x="49" y="20"/>
-        <point x="50" y="156"/>
-        <point x="186" y="156"/>
-        <point x="185" y="20"/>
-    </plane>
-    <switch>
-        <point x="69" y="40"/>
-        <point x="68" y="134"/>
-        <point x="166" y="134"/>
-        <point x="166" y="39"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/770_773-Gira_Esprit_Glas_C_38bc0.jpg">
-    <plane>
-        <point x="78" y="12"/>
-        <point x="76" y="721"/>
-        <point x="334" y="701"/>
-        <point x="334" y="29"/>
-    </plane>
-    <socket>
-        <point x="213" y="431"/>
-        <point x="214" y="594"/>
-        <point x="163" y="512"/>
-        <point x="268" y="506"/>
-    </socket>
-    <socket>
-        <point x="630" y="431"/>
-        <point x="630" y="591"/>
-        <point x="581" y="508"/>
-        <point x="687" y="506"/>
-    </socket>
-    <switch>
-        <point x="136" y="94"/>
-        <point x="131" y="336"/>
-        <point x="288" y="334"/>
-        <point x="291" y="103"/>
-    </switch>
-    <switch>
-        <point x="547" y="102"/>
-        <point x="551" y="339"/>
-        <point x="709" y="339"/>
-        <point x="709" y="111"/>
-    </switch>
-</Annotation>
-
-<Annotation image="resources/to_annotate/DSCN0001.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0001.JPG">
     <plane>
         <point x="1009" y="749"/>
         <point x="1016" y="974"/>
@@ -4982,7 +4583,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0002.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0002.JPG">
     <plane>
         <point x="772" y="796"/>
         <point x="778" y="1155"/>
@@ -4997,7 +4598,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0003.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0003.JPG">
     <plane>
         <point x="923" y="556"/>
         <point x="936" y="832"/>
@@ -5012,7 +4613,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0004.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0004.JPG">
     <plane>
         <point x="954" y="303"/>
         <point x="925" y="612"/>
@@ -5027,7 +4628,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0006.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0006.JPG">
     <plane>
         <point x="1202" y="605"/>
         <point x="1215" y="1089"/>
@@ -5048,7 +4649,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0008.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0008.JPG">
     <plane>
         <point x="880" y="406"/>
         <point x="863" y="800"/>
@@ -5069,7 +4670,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0009.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0009.JPG">
     <plane>
         <point x="705" y="452"/>
         <point x="836" y="900"/>
@@ -5090,7 +4691,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0010.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0010.JPG">
     <plane>
         <point x="1071" y="472"/>
         <point x="1082" y="754"/>
@@ -5111,7 +4712,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0011.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0011.JPG">
     <plane>
         <point x="1022" y="288"/>
         <point x="1036" y="630"/>
@@ -5132,7 +4733,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/sphere1.jpg">
+<Annotation image="resources/to_annotate_legal/sphere1.jpg">
     <plane>
         <point x="288" y="218"/>
         <point x="289" y="256"/>
@@ -5153,7 +4754,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/sphere2.jpg">
+<Annotation image="resources/to_annotate_legal/sphere2.jpg">
     <plane>
         <point x="236" y="135"/>
         <point x="236" y="214"/>
@@ -5168,7 +4769,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/sphere3.jpg">
+<Annotation image="resources/to_annotate_legal/sphere3.jpg">
     <plane>
         <point x="249" y="1357"/>
         <point x="250" y="1397"/>
@@ -5195,7 +4796,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4520.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4520.JPG">
     <plane>
         <point x="2171" y="1023"/>
         <point x="2167" y="1441"/>
@@ -5210,7 +4811,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4521.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4521.JPG">
     <plane>
         <point x="2144" y="1277"/>
         <point x="2144" y="1414"/>
@@ -5225,7 +4826,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4522.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4522.JPG">
     <plane>
         <point x="2203" y="1183"/>
         <point x="2207" y="1339"/>
@@ -5240,7 +4841,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4523.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4523.JPG">
     <plane>
         <point x="2164" y="1234"/>
         <point x="2167" y="1378"/>
@@ -5255,7 +4856,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4524.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4524.JPG">
     <plane>
         <point x="2050" y="1195"/>
         <point x="2058" y="1386"/>
@@ -5270,7 +4871,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4525.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4525.JPG">
     <plane>
         <point x="1999" y="1246"/>
         <point x="1999" y="1425"/>
@@ -5285,7 +4886,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4526.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4526.JPG">
     <plane>
         <point x="1941" y="1222"/>
         <point x="1949" y="1402"/>
@@ -5300,7 +4901,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4527.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4527.JPG">
     <plane>
         <point x="2003" y="1238"/>
         <point x="1999" y="1382"/>
@@ -5315,7 +4916,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4528.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4528.JPG">
     <plane>
         <point x="2156" y="1210"/>
         <point x="2160" y="1355"/>
@@ -5330,7 +4931,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4529.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4529.JPG">
     <plane>
         <point x="2015" y="1015"/>
         <point x="2019" y="1152"/>
@@ -5345,7 +4946,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4530.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4530.JPG">
     <plane>
         <point x="2164" y="1156"/>
         <point x="2191" y="1324"/>
@@ -5366,7 +4967,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4531.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4531.JPG">
     <plane>
         <point x="2093" y="1148"/>
         <point x="2093" y="1312"/>
@@ -5387,7 +4988,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4532.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4532.JPG">
     <plane>
         <point x="2105" y="1046"/>
         <point x="2105" y="1199"/>
@@ -5408,7 +5009,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4533.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4533.JPG">
     <plane>
         <point x="2273" y="1464"/>
         <point x="2269" y="1613"/>
@@ -5423,7 +5024,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4534.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4534.JPG">
     <plane>
         <point x="1929" y="1335"/>
         <point x="1933" y="1480"/>
@@ -5438,7 +5039,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4535.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4535.JPG">
     <plane>
         <point x="2019" y="1277"/>
         <point x="2023" y="1417"/>
@@ -5453,7 +5054,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4536.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4536.JPG">
     <plane>
         <point x="1800" y="1171"/>
         <point x="1792" y="1402"/>
@@ -5468,7 +5069,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4537.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4537.JPG">
     <plane>
         <point x="1937" y="1183"/>
         <point x="1933" y="1386"/>
@@ -5483,7 +5084,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4538.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4538.JPG">
     <plane>
         <point x="1765" y="1222"/>
         <point x="1761" y="1464"/>
@@ -5498,7 +5099,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4539.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4539.JPG">
     <plane>
         <point x="1882" y="1343"/>
         <point x="1894" y="1492"/>
@@ -5519,7 +5120,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0012.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0012.JPG">
     <plane>
         <point x="920" y="596"/>
         <point x="965" y="880"/>
@@ -5540,7 +5141,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/DSCN0013.JPG">
+<Annotation image="resources/to_annotate_legal/DSCN0013.JPG">
     <plane>
         <point x="1872" y="1027"/>
         <point x="1874" y="1258"/>
@@ -5561,7 +5162,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4540.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4540.JPG">
     <plane>
         <point x="1902" y="1023"/>
         <point x="1902" y="1433"/>
@@ -5588,7 +5189,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4541.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4541.JPG">
     <plane>
         <point x="1941" y="753"/>
         <point x="1941" y="1152"/>
@@ -5615,7 +5216,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4542.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4542.JPG">
     <plane>
         <point x="2082" y="882"/>
         <point x="2093" y="1328"/>
@@ -5642,7 +5243,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4543.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4543.JPG">
     <plane>
         <point x="1890" y="812"/>
         <point x="1910" y="1929"/>
@@ -5669,7 +5270,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4544.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4544.JPG">
     <plane>
         <point x="1832" y="765"/>
         <point x="1832" y="1257"/>
@@ -5696,7 +5297,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4545.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4545.JPG">
     <plane>
         <point x="1796" y="582"/>
         <point x="1863" y="1624"/>
@@ -5723,7 +5324,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4546.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4546.JPG">
     <plane>
         <point x="1796" y="671"/>
         <point x="1777" y="1246"/>
@@ -5750,7 +5351,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4547.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4547.JPG">
     <plane>
         <point x="2195" y="1164"/>
         <point x="2144" y="1843"/>
@@ -5777,7 +5378,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4548.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4548.JPG">
     <plane>
         <point x="1968" y="1316"/>
         <point x="1972" y="1457"/>
@@ -5798,7 +5399,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4549.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4549.JPG">
     <plane>
         <point x="1929" y="1296"/>
         <point x="1937" y="1437"/>
@@ -5819,7 +5420,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4550.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4550.JPG">
     <plane>
         <point x="1999" y="1332"/>
         <point x="2007" y="1468"/>
@@ -5840,7 +5441,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4551.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4551.JPG">
     <plane>
         <point x="1945" y="1234"/>
         <point x="1949" y="1457"/>
@@ -5861,7 +5462,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4552.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4552.JPG">
     <plane>
         <point x="1929" y="1718"/>
         <point x="1925" y="1953"/>
@@ -5882,7 +5483,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4553.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4553.JPG">
     <plane>
         <point x="2109" y="1507"/>
         <point x="2121" y="1734"/>
@@ -5903,7 +5504,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4554.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4554.JPG">
     <plane>
         <point x="1988" y="1285"/>
         <point x="1992" y="1433"/>
@@ -5918,7 +5519,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4555.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4555.JPG">
     <plane>
         <point x="1964" y="1292"/>
         <point x="1972" y="1437"/>
@@ -5933,7 +5534,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4557.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4557.JPG">
     <plane>
         <point x="1945" y="1164"/>
         <point x="1937" y="1386"/>
@@ -5948,7 +5549,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4558.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4558.JPG">
     <plane>
         <point x="1980" y="1253"/>
         <point x="1980" y="1476"/>
@@ -5963,7 +5564,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4559.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4559.JPG">
     <plane>
         <point x="2066" y="1316"/>
         <point x="2078" y="1542"/>
@@ -5978,7 +5579,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4560.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4560.JPG">
     <plane>
         <point x="1804" y="1128"/>
         <point x="1820" y="1300"/>
@@ -5993,7 +5594,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4561.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4561.JPG">
     <plane>
         <point x="1886" y="1249"/>
         <point x="1890" y="1390"/>
@@ -6008,7 +5609,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4562.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4562.JPG">
     <plane>
         <point x="1757" y="1253"/>
         <point x="1761" y="1390"/>
@@ -6023,7 +5624,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4563.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4563.JPG">
     <plane>
         <point x="1972" y="1273"/>
         <point x="1968" y="1464"/>
@@ -6038,7 +5639,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4564.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4564.JPG">
     <plane>
         <point x="1828" y="1261"/>
         <point x="1832" y="1464"/>
@@ -6053,7 +5654,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4565.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4565.JPG">
     <plane>
         <point x="1511" y="1105"/>
         <point x="1507" y="1292"/>
@@ -6068,7 +5669,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4566.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4566.JPG">
     <plane>
         <point x="2343" y="796"/>
         <point x="2355" y="937"/>
@@ -6083,7 +5684,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4567.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4567.JPG">
     <plane>
         <point x="1937" y="664"/>
         <point x="1937" y="820"/>
@@ -6098,7 +5699,7 @@
     </switch>
 </Annotation>
 
-<Annotation image="resources/to_annotate/IMG_4568.JPG">
+<Annotation image="resources/to_annotate_legal/IMG_4568.JPG">
     <plane>
         <point x="2003" y="1515"/>
         <point x="1996" y="1628"/>

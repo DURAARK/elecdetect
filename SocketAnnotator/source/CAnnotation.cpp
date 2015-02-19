@@ -240,8 +240,8 @@ void CAnnotation::saveAnnotatedImages(const string& prefix)
 
 	cout << "Cutting: Sockets: " << sockets_.size() << ", Switches: " << switches_.size() << endl;
 
-	const float random_fluct_socket_px = 1.5;
-	const float random_fluct_switch_px = 3.0;
+    const float random_fluct_socket_px = 1.0;
+    const float random_fluct_switch_px = 2.0;
 	const float random_scale_range_socket_low = 1.0;
 	const float random_scale_range_socket_high = 1.0;
 	const float random_scale_range_switch_low = SWITCH_SIZE_MM_FROM / SWITCH_SIZE_MM;
