@@ -1,79 +1,86 @@
 /*
- * Utils.h
+ * ElecDetec: Utils.h
  *
- *  Created on: Jul 3, 2014
- *      Author: test
+ *  Created on: Feb, 2015
+ *      Author: Robert Viehauser
  */
+
 
 #ifndef UTILS_H_
 #define UTILS_H_
 
 
 #include <string>
+#include <sstream>
 #include <vector>
-#include <dirent.h>
+#include <exception>
 #include <opencv2/opencv.hpp>
 
-#include "tclap/CmdLine.h"
-#include "Exceptions.h"
-#include "PipelineController.h"
-
-#if defined _WIN32
-  #include <conio.h>
-  #include <direct.h>
-  #define MKDIR(path) _mkdir(path); // TODO: check if windows makes directory
-  #define FOLDER_CHAR  "\\"
-#elif defined __linux__
-  #include <sys/types.h>
-  #include <sys/stat.h>
-  #define MKDIR(path) mkdir(path, 0777); // notice that 777 is different than 0777
-  #define FOLDER_CHAR  "/"
-#endif
 
 using namespace std;
 using namespace cv;
 
-inline vector<vector<Scalar> > getColors(const int& nclasses)
-{
-	const int colors_per_class = 1;
-	const Scalar_<uchar> color_model(80,240,0);
-	vector< vector<Scalar> > ret_colors;
-	for(int class_cnt = 0; class_cnt < nclasses; ++class_cnt)
-	{
-		vector<Scalar> colors;
-		for(int color_cnt = 0; color_cnt < colors_per_class; ++color_cnt)
-		{
-			Scalar color(color_model[2*class_cnt%3], color_model[(2*class_cnt+1)%3], color_model[(2*class_cnt+2)%3]);
-			//color[0] = color[0] + color[0] * ((color_cnt - colors_per_class/2)*10);
-			colors.push_back(color);
-		}
-		ret_colors.push_back(colors);
-	}
-	return ret_colors;
-}
+typedef unsigned int uint;
 
+//--------------------------------------------
+// split a string into parts according to a delimiter
 inline vector<string> splitStringByDelimiter(const string& src0, const string& delimiter)
 {
-	vector<string> output;
+    vector<string> output;
 
-	string src = src0; // make a non-const copy
-	size_t pos = 0;
-	string token;
-	while ((pos = src.find(delimiter)) != string::npos)
-	{
-	    token = src.substr(0, pos);
-	    output.push_back(token);
-	    src.erase(0, pos + delimiter.length());
-	}
-	output.push_back(src);
+    string src = src0; // make a non-const copy
+    size_t pos = 0;
+    string token;
+    while ((pos = src.find(delimiter)) != string::npos)
+    {
+        token = src.substr(0, pos);
+        output.push_back(token);
+        src.erase(0, pos + delimiter.length());
+    }
+    output.push_back(src);
 
-	return output;
+    return output;
+}
+//--------------------------------------------
+
+
+// - Internal Assert -----------------------------------------
+#define ELECDETEC_ASSERT(condition, msg) \
+    if(!(condition)) \
+    { \
+    cerr << "ElecDetec Assert failed: " << #condition \
+         << " exiting with code -1 (in file:" << __FILE__ << " line:" << __LINE__ << " function:" << __func__ << ")" << endl; \
+    cerr << "Message: " << msg << endl; \
+    exit(-1); \
+    }
+//------------------------------------------------------------
+
+
+
+
+#define Malloc(type,n) (type *)malloc((n)*sizeof(type))
+
+
+
+template <typename T>
+inline T randRange(T low = 0, T high = 1)
+{
+    return (T)((((double)(high-low))*((double)rand()/RAND_MAX)))+low;
 }
 
+
+#define LINSPACE_DENSE -1
 template <typename T>
 inline void linspace(std::vector<T>& result, T start, T end, int N)
 {
     result.clear();
+
+    if(N == LINSPACE_DENSE)
+    {
+        for(T val = start; val <= end; val++)
+            result.push_back(val);
+        return;
+    }
 
     if(N <= 1)
     {
@@ -89,209 +96,74 @@ inline void linspace(std::vector<T>& result, T start, T end, int N)
     result.push_back(end);
 }
 
-template <typename T>
-inline T randRange(T low, T high)
+
+
+
+inline Scalar getColorByIndex(const int& index)
 {
-	return (T)((((float)(high-low))*((float)rand()/RAND_MAX)))+low;
-}
-
-template <typename T>
-class ValueGrid
-{
-public:
-	enum GrowthType {LIN, EXP};
-private:
-	T min_;
-	T max_;
-	T step_;
-	T val_;
-	GrowthType gtype_;
-
-	ValueGrid();
-public:
-	ValueGrid(T min, T max, T step, GrowthType gtype) : min_(min), max_(max), step_(step), val_(min), gtype_(gtype)
-    {
-		switch(gtype_)
-		{
-		case LIN:
-			if(max_ < min_)
-				if(step_ > 0)
-					step_ = -step_;
-			break;
-		case EXP:
-			if(step_ < 0)
-				step_ = -step_ ;
-			if(step_ < 1.0)
-				if(max_ > min_)
-					step_ = static_cast<T>(1)+step_;
-		}
-
-    }
-
-	inline T getMin()
-	{
-		return min_;
-	}
-
-	// returns false if the value would exceed its limit. In this case, 'value' is unchanged
-	inline bool getNextValue(T& value)
-	{
-		T old_val = val_;
-		switch(gtype_)
-		{
-		case LIN:
-			val_ += step_;
-			break;
-		case EXP:
-			val_ *= step_;
-			break;
-		}
-		if(val_ <= max_)
-		{
-			value = val_;
-			return true;
-		}
-		else
-		{
-			val_ = old_val;
-			return false;
-		}
-	}
-};
-
-
-struct CommandParams
-{
-	vector<vector<string> > vec_vec_channels_;
-	string str_classifier_, str_imgset_, str_configfile_;
-};
-
-inline void parseCmd(int argc, char* argv[], CommandParams& params) throw (ParamExecption)
-{
-	try {
-		// Command Line
-		TCLAP::CmdLine cmd("Usage: [-1 IDs [-2 IDs .. -6 IDs]] -f final_classifier -d directory -c filename. For training mode -f must be specified, testing is performed otherwise", ' ', "1.0");
-
-		// Command Arguments
-		vector<TCLAP::ValueArg<std::string>*> v_ch_args;
-		TCLAP::ValueArg<std::string> c1Arg("1","channel1","IDs of the vision module(s) for the 1st feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c2Arg("2","channel2","IDs of the vision module(s) for the 2nd feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c3Arg("3","channel3","IDs of the vision module(s) for the 3rd feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c4Arg("4","channel4","IDs of the vision module(s) for the 4th feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c5Arg("5","channel5","IDs of the vision module(s) for the 5th feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> c6Arg("6","channel6","IDs of the vision module(s) for the 6th feature channel",false,"","string");
-		TCLAP::ValueArg<std::string> fArg("f","final","ID of the final classifier vision module. If present, training mode is performed.",false,"","string");
-		TCLAP::ValueArg<std::string> dArg("d","dir","Data directory of training- or test-data",true,"","string");
-		TCLAP::ValueArg<std::string> cArg("c","config","Configuration file whether the trained pipeline is stored to or loaded from",true,"","string");
-		cmd.add( c1Arg ); v_ch_args.push_back( &c1Arg );
-		cmd.add( c2Arg ); v_ch_args.push_back( &c2Arg );
-		cmd.add( c3Arg ); v_ch_args.push_back( &c3Arg );
-		cmd.add( c4Arg ); v_ch_args.push_back( &c4Arg );
-		cmd.add( c5Arg ); v_ch_args.push_back( &c5Arg );
-		cmd.add( c6Arg ); v_ch_args.push_back( &c6Arg );
-		cmd.add( fArg );
-		cmd.add( dArg );
-		cmd.add( cArg );
-
-		// Command switches
-		//TCLAP::SwitchArg trainSwitch("t","train","Train the pipeline", cmd, false);
-
-		// Parse the argv array.
-		cmd.parse( argc, argv );
-
-		// Get the values parsed by each arg.
-
-		// for each feature channel
-		vector<TCLAP::ValueArg<std::string>*>::iterator ch_arg_ptr_it;
-		for(ch_arg_ptr_it = v_ch_args.begin(); ch_arg_ptr_it != v_ch_args.end(); ++ ch_arg_ptr_it)
-		{
-			TCLAP::ValueArg<std::string>* cur_ch_arg = *ch_arg_ptr_it;
-			stringstream ss_args(cur_ch_arg->getValue());
-
-			if(!ss_args.str().empty())
-			{
-				vector<string> vec_cur_ch_str;
-				string item;
-				while(getline(ss_args, item, ','))
-					vec_cur_ch_str.push_back(item);
-
-				params.vec_vec_channels_.push_back(vec_cur_ch_str);
-			}
-		}
-
-		params.str_classifier_ = fArg.getValue();
-		params.str_imgset_     = dArg.getValue();
-		params.str_configfile_ = cArg.getValue();
-
-		// append .xml if missing
-		if(params.str_configfile_.compare(params.str_configfile_.size()-4, 4, ".xml"))
-			params.str_configfile_ += ".xml";
-
-		// append '/' if missing
-		if(params.str_imgset_.compare(params.str_imgset_.size()-1,1,FOLDER_CHAR) != 0)
-			params.str_imgset_ += FOLDER_CHAR;
-
-		//train_switch = trainSwitch.getValue();
-		std::cout << "Command line:" << endl <<
-				     "-------------" << endl;
-
-		for(ch_arg_ptr_it = v_ch_args.begin(); ch_arg_ptr_it != v_ch_args.end(); ++ ch_arg_ptr_it)
-		{
-			TCLAP::ValueArg<std::string>* cur_ch_arg = *ch_arg_ptr_it;
-			if(!cur_ch_arg->getValue().empty())
-				cout << " channel " << distance(v_ch_args.begin(), ch_arg_ptr_it) << ": " << cur_ch_arg->getValue() << endl;
-		}
-		cout <<
-				    " final-classifier: " << params.str_classifier_ << endl <<
-				    " data-folder:      " << params.str_imgset_ << endl <<
-				    " config-file:      " << params.str_configfile_ << endl << endl;
-	}
-	catch (TCLAP::ArgException &e)  // catch any exceptions
-	{
-		std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl;
-		throw(ParamExecption("parsing failed. call --help to view parameter specifications"));
-	}
+    const Scalar_<uchar> color_model(80,240,0);
+    return Scalar(color_model[2*index%3], color_model[(2*index+1)%3], color_model[(2*index+2)%3]);
 }
 
 
-inline bool getFileList(string directory, vector<string>& filelist)
+
+
+template <typename T>
+void quicksort_iterative(T* array, uint len)
 {
-	//--------------------------------------------
-	// READ IMAGE DIRECTORY FILELIST and filter *.jpg *.png
+   static const uint MAX = 64; /* stack size for max 2^(64/2) array elements  */
+   uint left = 0, stack[MAX], pos = 0;
+   for ( ; ; ) {                                           /* outer loop */
+      for (; left+1 < len; len++) {                /* sort left to len-1 */
+         if (pos == MAX) len = stack[pos = 0];  /* stack overflow, reset */
+         uint rand_idx = randRange<uint>(left, len-1); /* pick random pivot */
+         T pivot = array[rand_idx];
+         stack[pos++] = len;                    /* sort right part later */
+         for (unsigned right = left-1; ; ) { /* inner loop: partitioning */
+            while (array[++right] < pivot);  /* look for greater element */
+            while (pivot < array[--len]);    /* look for smaller element */
+            if (right >= len) break;           /* partition point found? */
+            T temp = array[right];
+            array[right] = array[len];                  /* the only swap */
+            array[len] = temp;
+         }                            /* partitioned, continue left part */
+      }
+      if (pos == 0) break;                               /* stack empty? */
+      left = len;                             /* left to right is sorted */
+      len = stack[--pos];                      /* get next range to sort */
+   }
+}
 
-    if(directory.compare(directory.size()-1,1,"/") != 0)
-    	directory += "/";
+// Unique: extract from a given array all different elements
+template <typename T>
+inline void uniqueSortedElements(const T* const input_vec, const uint& input_vec_length, T* &unique_vec, uint& unique_vec_length)
+{
+    // sort the input vector
+    T* sorted_vec = Malloc(T, input_vec_length);
+    memcpy(sorted_vec, input_vec, sizeof(T)*input_vec_length);
+    quicksort_iterative<T>(sorted_vec, input_vec_length);
 
-    filelist.clear();
-    DIR *dir;
-    struct dirent *ent;
-    if ((dir = opendir(directory.data())) != NULL)
+    // get enough space for the worst case, i.e. all elements are different
+    T* u_vec = Malloc(T, input_vec_length);
+    uint u_idx = 0;
+    // get the unique elements
+    T last_element = sorted_vec[0];
+    u_vec[0] = last_element;
+    for(uint i = 1; i < input_vec_length; i++)
     {
-        // print all the files and directories within directory
-        while ((ent = readdir(dir)) != NULL)
+        if(last_element != sorted_vec[i])
         {
-            std::string filename = directory + ent->d_name;
-            if(filename.compare(filename.size()-4,4,".png") == 0 || filename.compare(filename.size()-4,4,".jpg") == 0)
-            {
-            	filelist.push_back(ent->d_name);
-//                std::cout << "File: " << ent->d_name << std::endl << flush;
-            }
+            u_vec[++u_idx] = sorted_vec[i];
+            last_element = sorted_vec[i];
         }
-        closedir(dir);
     }
-    else
-    {
-        /* could not open directory */
-        std::cerr << "ERROR: Image directory doesn't exist!" << std::endl;
-        return false;
-    }
+    free(sorted_vec);
+    sorted_vec = NULL;
 
-    sort(filelist.begin(), filelist.end());
-
-    return true;
+    // resize memory and return
+    unique_vec = (T*)realloc(u_vec, sizeof(T)*(u_idx+1));
+    unique_vec_length = u_idx+1;
 }
-
-
 
 
 #endif /* UTILS_H_ */

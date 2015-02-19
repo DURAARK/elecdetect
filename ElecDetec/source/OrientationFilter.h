@@ -1,31 +1,27 @@
 /*
- * OrientationFilter.h
+ * ElecDetec: OrientationFilter.h
  *
- *  Created on: Oct 6, 2014
- *      Author: test
+ *  Created on: Feb, 2015
+ *      Author: Robert Viehauser
  */
 
 #ifndef ORIENTATIONFILTER_H_
 #define ORIENTATIONFILTER_H_
 
 #include <opencv2/opencv.hpp>
-
-#include "Defines.h"
-#include "Utils.h"
-#include "VisionModule.h"
-#include "VisionData.h"
+#include <Defines.h>
+#include <Utils.h>
 
 using namespace std;
 using namespace cv;
 
-class COrientationFilter: public CVisionModule
+class COrientationFilter
 {
-private:
-	int orientation_bin_idx_;
-	int n_orientation_bins_;
+public:
+    enum Direction { HORIZ, VERT };
 
-	float x_weight_; // resulting weight for x-gradient-component
-	float y_weight_; // resulting weight for y-gradient-component (x^2+y^2=1)
+private:
+    Direction direction_;
 
 	float to_zero_threshold_;
 
@@ -36,12 +32,10 @@ private:
 
 	COrientationFilter();
 public:
-	COrientationFilter(MODULE_CONSTRUCTOR_SIGNATURE);
-	virtual ~COrientationFilter();
+    COrientationFilter(const Direction& direction);
+    ~COrientationFilter();
 
-	virtual CVisionData* exec();
-	virtual void save(FileStorage& fs) const;
-	virtual void load(FileStorage& fs);
+    void filterImage(const Mat& input_img, Mat& filtered_img);
 };
 
 #endif /* ORIENTATIONFILTER_H_ */

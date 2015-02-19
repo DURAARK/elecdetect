@@ -1,8 +1,8 @@
 /*
- * RandomForest.h
+ * ElecDetec: RandomForest.h
  *
- *  Created on: Jul 8, 2014
- *      Author: test
+ *  Created on: Feb, 2015
+ *      Author: Robert Viehauser
  */
 
 #ifndef RANDOMFOREST_H_
@@ -10,29 +10,43 @@
 
 #include <opencv2/opencv.hpp>
 #include <time.h>
+#include <fstream>
 
-#include "VisionModule.h"
+#include <rf/RandomForest.h>
+#include <rf/Params.h>
 
-#define CONFIG_NAME_RF  "RandomForest"
+#include <Defines.h>
+#include <Utils.h>
+
+// Random Forest Parameter:
+#define RF_N_TREES         250
+#define RF_MAX_DEPTH        22
 
 using namespace std;
 using namespace cv;
 
-class CRandomForest: public CVisionModule
+class CRandomForest
 {
+public:
+    struct WeightedLabel
+    {
+        CLASS_LABEL_TYPE label_;
+        float weight_;
+    };
+
 private:
-	CvRTrees* rf_;
-	CvRTParams* rf_params_;
-	CRandomForest();
+
+    RF::RandomForest<float,int>* rf_;
+    RF::Params* rf_params_;
 
 public:
-	CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE);
+    CRandomForest();
 	virtual ~CRandomForest();
 
-	CVisionData* exec();
-	void train();
+    void predict(const vector<float>& feature_vec, vector<WeightedLabel>& result);
+    void train(const vector<vector<float> >& feature_vecs, const vector<CLASS_LABEL_TYPE>& labels);
 	void save(FileStorage& fs) const;
-	void load(FileStorage& fs);
+    void load(FileNode& node);
 };
 
 #endif /* RANDOMFOREST_H_ */

@@ -1,124 +1,131 @@
 /*
- * RandomForest.cpp
+ * ElecDetec: RandomForest.cpp
  *
- *  Created on: Jul 8, 2014
- *      Author: test
+ *  Created on: Feb, 2015
+ *      Author: Robert Viehauser
  */
 
 #include "RandomForest.h"
 
-CRandomForest::CRandomForest(MODULE_CONSTRUCTOR_SIGNATURE)
+
+CRandomForest::CRandomForest()
 {
-	module_print_name_ = "RandomForest";
-	is_trained_ = false;
+    // Random Forest Parameters
+    uint max_depth = RF_MAX_DEPTH;  // maximum depth of a tree in the forest
+    uint num_of_trees_in_the_forest = RF_N_TREES;  // number of trees in the forest
+    int termcrit_type = RF_TERM_CRIT_NSAMPLES;     // stops node splitting when reaching a minimum of samples
+    uint min_sample_cnt = 10;                      // number of samples at which no splitting is performed (has only effect with RF_TERM_CRIT_NSAMPES)
+    bool calc_train_error = true;  // calculate the training error from out-of-bag samples (just for information)
+    bool store_true_probs = false; // store true probabililty distributions in the leaf nodes
 
-	required_input_signature_ = DATA_TYPE_VECTOR | CV_32FC1; // takes float vector
-	output_signature_ = DATA_TYPE_SCALAR | CV_32SC1;
-
-	if(is_root)
-		setAsRoot();
-
-	//Default values:
-	int max_depth = 5;
-	int min_sample_cnt = 10;
-	float regression_arruracy = 0;
-	bool use_surrogates = false;
-	int max_categories = 10;
-	const float* priors = 0;
-	bool calc_var_importance = false;
-	int nactive_vars = 0;
-	int max_num_of_trees_in_the_forest = 50;
-	float forest_accuracy = 0.1;
-	int termcrit_type = CV_TERMCRIT_ITER + CV_TERMCRIT_EPS;
-
-	// own configuration:
-	max_depth = 20;
-	min_sample_cnt = 3;
-	max_num_of_trees_in_the_forest = 80;
-	termcrit_type = CV_TERMCRIT_ITER; // CV_TERMCRIT_EPS;
-
-	rf_params_ = new CvRTParams(max_depth, min_sample_cnt, regression_arruracy, use_surrogates,
-			                    max_categories, priors, calc_var_importance, nactive_vars,
-			                    max_num_of_trees_in_the_forest, forest_accuracy, termcrit_type);
-
-	rf_ = new CvRTrees();
+    rf_params_ = new RF::Params(max_depth, num_of_trees_in_the_forest, termcrit_type, min_sample_cnt, calc_train_error, store_true_probs);
+    rf_ = new RF::RandomForest<float, CLASS_LABEL_TYPE>(*rf_params_);
 }
 
 CRandomForest::~CRandomForest()
 {
-	if(rf_)
-		delete rf_;
-	rf_ = NULL;
+    if(rf_)
+        delete rf_;
+    rf_ = NULL;
 
 	if(rf_params_)
 		delete rf_params_;
 	rf_params_ = NULL;
 }
 
-CVisionData* CRandomForest::exec()
+void CRandomForest::predict(const vector<float>& feature_vec, vector<WeightedLabel>& result)
 {
-//	if(data.back()->getType() != TYPE_VECTOR)
-//		throw(VisionDataTypeException(data.back()->getType(), TYPE_VECTOR));
-	CVisionData working_data = getConcatenatedDataAndClearBuffer();
+    CLASS_LABEL_TYPE* labels = NULL;
+    float* prop = NULL;
+    uint prop_length;
 
-	Mat result_scalar = Mat::zeros(1,2,CV_32FC1); // First Value: Label, second: weight
-	result_scalar.at<float>(0,0) = static_cast<float>(rf_->predict(working_data.data()));
+    rf_->predict(&feature_vec[0], labels, prop, prop_length, RF::CUMULATIVE_HIST);
 
-	// for now: use probability = 1:
-	result_scalar.at<float>(0,1) = static_cast<float>(1.0);
+    result.clear();
+    for(uint j = 0; j < prop_length; ++j)
+    {
+        WeightedLabel class_prediction;
+        class_prediction.label_ = labels[j];
+        class_prediction.weight_ = prop[j];
+        result.push_back(class_prediction);
+    }
 
-	//if(class_result->val_ != 0)
-	//cout << "prediction result is: " << class_result->val_ << endl;
-
-	return new CVisionData(result_scalar, DATA_TYPE_SCALAR);
+    free(labels); labels = NULL;
+    free(prop); prop = NULL;
 }
 
 // train_data contains for each sample one CVisionData and train_labels a CVisionData-Label
-void CRandomForest::train()
+void CRandomForest::train(const vector<vector<float> >& feature_vecs, const vector<CLASS_LABEL_TYPE>& labels)
 {
-	// train_data contains for each sample a row
-	CVisionData train_data = getConcatenatedDataAndClearBuffer();
+    ELECDETEC_ASSERT((feature_vecs.size() == labels.size()), "RandomForest: Amount of samples is different to amount of labels!");
 
-//	cv::Mat train_data_mat = train_data.mat_; // generate cvMat without copying the data. need CV_32FC1 cv::Mat as train data
-//	cv::Mat train_labels_mat(train_labels.vec_, false); // generate cvMat without copying the data. need CV_32SC1 as train labels
+    cout << "Training RandomForest (" << rf_params_->num_of_trees_in_the_forest_ << " trees). Please be patient... " << flush;
 
-//	cout << "Matrix: " << train_data_mat.rows << "x" << train_data_mat.cols << endl;
-//	cout << train_data_mat.at<float>(0,0) << endl;
-//
-//	cout << "Type of Train Data Mat: " << train_data.signature2str() << endl;
-//	cout << " with size: " << train_data.data().rows << " x " << train_data.data().cols << endl;
-//	cout << "Type of Train Label Mat: " << data_labels_->data().type() << " should be " << CV_32SC1 << endl;
-//	cout << " with size: " << data_labels_->data().rows << " x " << data_labels_->data().cols << endl;
-//	cout << flush;
+    // prepare training data
+    const int n_samples = feature_vecs.size();
+    const int n_features = feature_vecs[0].size();
 
-	const Mat& varIdx = Mat(); // vector: selected feature subset (masks colums of train data)
-	const Mat& sampleIdx = Mat(); // vector: selected sample subset (masks rows of train data)
-	const Mat& varType = Mat(); // vector: for regression
-	const Mat& missingDataMask = Mat(); // vector: identifies missing labels of train data
+    //cout << "Data dimensions are: samples:" << n_samples << " dimensions:" << n_features << endl;
 
-	cout << "Training RandomForest. Please be patient..." << flush;
-	srand(time(NULL)); // to be sure
-	rf_->train(train_data.data(), CV_ROW_SAMPLE, data_labels_->data(), varIdx, sampleIdx, varType, missingDataMask, *rf_params_);
+    RF::RandomForest<float, CLASS_LABEL_TYPE>::TrainData rf_train_data;
 
-	cout << " done. " << rf_->get_tree_count() << " trees trained." << endl << flush;
+    rf_train_data.f_length_ = static_cast<uint>(n_features);
+    rf_train_data.nsamples_ = static_cast<uint>(n_samples);
+
+    rf_train_data.x_data_ = Malloc(const float*, n_samples);//(float**)malloc((n_samples)*sizeof(float*));
+
+    // take care of probably not contiuous stored xdata mat:
+    for(int sample_cnt = 0; sample_cnt < n_samples; ++sample_cnt)
+    {
+        rf_train_data.x_data_[sample_cnt] = &(feature_vecs[sample_cnt][0]);
+    }
+    rf_train_data.y_data_ = &(labels[0]);
+
+    //cout << "Data:" << endl << rf_train_data.x_data_[0][0] << ", " << rf_train_data.x_data_[0][1] << ", " << rf_train_data.x_data_[0][2] << endl;
+    //cout << rf_train_data.x_data_[0][n_features-3] << ", " << rf_train_data.x_data_[0][n_features-2] << ", " << rf_train_data.x_data_[0][n_features-1] << endl;
+
+    rf_->train(rf_train_data);
+
+    // cleanup
+    free(rf_train_data.x_data_);
+
+    cout << "done." << endl << flush;
 }
 
 void CRandomForest::save(FileStorage& fs) const
 {
 //	cout << "saving RandomForest..." << endl << flush;
-	stringstream config_name;
-	config_name << CONFIG_NAME_RF << "-" << module_id_;
-	rf_->write(*fs, config_name.str().c_str());
+    fs << "Params" << "{";
+    fs << "max-depth" << (int)rf_params_->max_depth_;
+    fs << "min-sample-cnt" << (int)rf_params_->min_sample_cnt_;
+    fs << "ntrees" << (int)rf_params_->num_of_trees_in_the_forest_;
+    fs << "termcrit" << rf_params_->termcrit_type_;
+    fs << "calc-train-error" << rf_params_->calc_train_error_;
+    fs << "store-true-probs" << rf_params_->store_real_probs_in_lnodes_;
+    fs << "}";
+    rf_->save(fs, "Forest");
 //	cout << "RandomForest saved." << endl;
 }
 
-void CRandomForest::load(FileStorage& fs)
+void CRandomForest::load(FileNode& node)
 {
-	if(rf_)
-	{
-		rf_->clear();
-		stringstream config_name;
-		config_name << CONFIG_NAME_RF << "-" << module_id_;
-		rf_->read(*fs, cvGetFileNodeByName(*fs, NULL, config_name.str().c_str()));
-	}
+    if(rf_)
+        delete rf_;
+    if(rf_params_)
+        delete rf_params_;
+
+    rf_params_ = new RF::Params;
+    FileNode params = node["Params"];
+    params["calc-train-error"] >> rf_params_->calc_train_error_;
+    int temp_int; // temp int for cast to uint
+    params["max-depth"] >> temp_int; rf_params_->max_depth_ = temp_int;
+    params["min-sample-cnt"] >> temp_int; rf_params_->min_sample_cnt_ = temp_int;
+    params["ntrees"] >> temp_int; rf_params_->num_of_trees_in_the_forest_ = temp_int;
+    params["termcrit"] >> rf_params_->termcrit_type_;
+    params["store-true-probs"] >> rf_params_->store_real_probs_in_lnodes_;
+
+    rf_ = new RF::RandomForest<float,CLASS_LABEL_TYPE>(*rf_params_);
+
+    FileNode rf_node = node["Forest"];
+    rf_->load(rf_node);
 }
