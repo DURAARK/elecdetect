@@ -16,7 +16,7 @@
 #include <time.h>
 #include <omp.h>
 #include <opencv2/opencv.hpp>
-
+#include <cassert>
 #include "Params.h"
 
 //#define RF_VERBOSE                     // enables verbose mode: print training status

@@ -13,7 +13,11 @@
 #include <exception>
 #include <sstream>
 #include <opencv2/opencv.hpp>
-#include <dirent.h>
+#ifdef _MSC_VER
+  #include "msvc_dirent.h"
+#else
+  #include <dirent.h>
+#endif
 
 #include <tclap/CmdLine.h>
 #include <tinyxml2.h>

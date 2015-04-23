@@ -101,7 +101,7 @@ throw(FileAccessExecption)
 #ifdef _OPENMP
 #pragma omp parallel for schedule(dynamic)
 #endif
-    for(unsigned int scan_pt_cnt = 0; scan_pt_cnt < tl_scan_points.size(); ++scan_pt_cnt)
+    for(int scan_pt_cnt = 0; scan_pt_cnt < tl_scan_points.size(); ++scan_pt_cnt)
     {
 
 #ifdef _OPENMP
@@ -308,7 +308,7 @@ void CAlgorithmController::train(const vector<string>& trainfiles) throw(FileAcc
         training_labels.reserve(selected_samples_indxes.size());
 
         uint progess_cnt = 0;
-        uint sel_cnt = 0;
+        int sel_cnt = 0;
 #ifdef _OPENMP
  #pragma omp parallel for
 #endif
@@ -366,7 +366,7 @@ void CAlgorithmController::train(const vector<string>& trainfiles) throw(FileAcc
 #ifdef _OPENMP
  #pragma omp parallel for
 #endif
-        for(uint sample_cnt = 0; sample_cnt < nsamples; ++sample_cnt)
+        for(int sample_cnt = 0; sample_cnt < nsamples; ++sample_cnt)
         {
             Mat training_patch = imread(filelist[sample_cnt]);
             if(training_patch.empty())
